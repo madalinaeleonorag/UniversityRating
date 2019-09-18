@@ -1,5 +1,12 @@
+@import "../../variables.scss";
 
 app-header {
-    // background-color: $white;
+  .custom-toolbar {
+    background-color: $white;
+  }
+  .custom-title {
+      color: $darkBlue;
+  }
 }
+
 // TODO add style for header 

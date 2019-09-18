@@ -9,9 +9,35 @@ export class FooterComponent implements OnInit {
 
   constructor() { }
 
+  // TODO links
+  items = [
+    {
+      text: 'Ajutor',
+      value: '#'
+    },
+    {
+      text: 'Termeni si conditii',
+      value: '#'
+    },
+    {
+      text: 'Confidentialitate',
+      value: '#'
+    },
+    {
+      text: 'ANPC',
+      value: '#'
+    },
+    {
+      text: 'GDPR',
+      value: '#'
+    }
+  ]
+
   ngOnInit() {
   }
 
-  // TODO array with info to show and links/ object for 'for'
+  onNavigate(link: string) {
+    window.open(link, "_blank");
+  }
 
 }

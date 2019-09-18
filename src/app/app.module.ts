@@ -78,6 +78,7 @@ export function createTranslateLoader(http: HttpClient) {
     HomepageComponent
   ],
   imports: [
+    FlexLayoutModule,
     HttpClientModule,
     // Angular material imports
     BrowserAnimationsModule,

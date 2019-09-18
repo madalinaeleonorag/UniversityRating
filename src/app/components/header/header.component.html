@@ -1,8 +1,15 @@
-<mat-toolbar>
-    <div>
-    <div>{{ 'header.title' | translate }}</div>
-    <div>{{ 'header.subtitle' | translate }}</div>
-</div>
+<mat-toolbar fxLayout="row" fxLayoutAlign="space-between center" class="custom-toolbar">
+  <div>
+  </div>
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <div class="custom-title">{{ 'header.title' | translate | uppercase }}</div>
+    <div>{{ 'header.subtitle' | translate | uppercase}}</div>
+  </div>
+  <div fxLayout="row">
+    <button mat-button>{{ 'header.login' | translate | uppercase }}</button>
+    <button mat-button>{{ 'header.signup' | translate | uppercase}}</button>
+  </div>
 </mat-toolbar>
 
 <!-- TODO design -->
+<!-- TODO functionality for login/signup/signout -->

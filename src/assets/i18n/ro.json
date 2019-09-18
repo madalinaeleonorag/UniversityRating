@@ -1,6 +1,8 @@
 {
     "header" : {
-        "title": "UniversityRating",
-        "subtitle": "Cauta-ti optiunea potrivita" 
+        "title": "University Rating",
+        "subtitle": "Search your best option",
+        "login": "login",
+        "signup": "signup"
     }
 }
