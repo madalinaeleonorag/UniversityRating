@@ -1,1 +1,19 @@
-<p>homepage works!</p>
+<!-- banner -->
+<div fxLayout="row" fxLayoutAlign="space-around center" class="custom-banner">
+  <!-- text -->
+  <div fxLayout="column">
+    <div class="white-bold-text large-font">{{ 'banner.first_text1' | translate | uppercase}}</div>
+    <div class="white-bold-text large-font">{{ 'banner.first_text2' | translate | uppercase}}</div>
+    <div class="white-text">{{ 'banner.second_text' | translate | uppercase}}</div>
+    <button mat-raised-button class="gradient-background white-text-button" (click)="goToSearch()">{{ 'buttons.search' | translate | uppercase}}</button>
+  </div>
+  <!-- logo -->
+  <div>
+        <img class="banner-logo" src="assets/logos/logo.png">
+  </div>
+</div>
+
+
+
+
+<app-footer></app-footer>

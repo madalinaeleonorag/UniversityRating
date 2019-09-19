@@ -1,8 +1,17 @@
 {
-    "header" : {
-        "title": "University Rating",
-        "subtitle": "Search your best option",
-        "login": "login",
-        "signup": "signup"
-    }
+  "header": {
+    "title": "University Rating",
+    "subtitle": "Search your best option"
+  },
+  "banner": {
+    "first_text1": "Descopera universitatile",
+    "first_text2": "din romania",
+    "second_text": "Noi te ajutam sa faci cea mai buna alegere pentru viitorul tau"
+  },
+  "buttons": {
+    "search": "Cauta",
+    "login": "Login",
+    "signup": "Signup",
+    "logout": "Logout"
+  }
 }

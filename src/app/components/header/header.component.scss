@@ -3,10 +3,9 @@
 app-header {
   .custom-toolbar {
     background-color: $white;
+    height: 75px;
   }
   .custom-title {
-      color: $darkBlue;
+    font-size: 3vw;
   }
 }
-
-// TODO add style for header 

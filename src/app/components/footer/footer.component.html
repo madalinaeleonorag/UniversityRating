@@ -1,8 +1,5 @@
-<div fxLayout="row" fxLayoutAlign="space-around center">
+<div fxLayout="row" fxLayoutAlign="space-around center" class="gradient-background">
     <div *ngFor="let item of items">
-            <button mat-button (click)="onNavigate(item.value)">{{ item.text | uppercase }}</button>
+            <button mat-button (click)="onNavigate(item.value)" class="white-text-button">{{ item.text | uppercase }}</button>
     </div>
 </div>
-
-
-<!-- TODO design -->

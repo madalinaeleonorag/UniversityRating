@@ -47,6 +47,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { SearchComponent } from './pages/search/search.component';
 
 
 
@@ -75,7 +76,8 @@ export function createTranslateLoader(http: HttpClient) {
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    HomepageComponent
+    HomepageComponent,
+    SearchComponent
   ],
   imports: [
     FlexLayoutModule,

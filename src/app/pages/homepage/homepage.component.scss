@@ -1,0 +1,16 @@
+@import "../../variables.scss";
+
+app-homepage {
+  .banner-logo {
+    max-width: 250px;
+    margin-left: 10px;
+  }
+  .custom-banner {
+    height: 350px;
+    background-color: $darkBlue;
+    padding: 50px;  
+  }
+  .mat-raised-button {
+    margin-top: 10px;
+  }
+}

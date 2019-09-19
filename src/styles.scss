@@ -1,7 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 @import './app/variables.scss';
-// @import "../node_modules/bootstrap/scss/bootstrap.scss";
-// TODO why is this not working
 
 html,
 body {
@@ -12,4 +10,34 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   background-color: $background;
+}
+
+button {
+  max-width: fit-content;
+}
+
+.white-bold-text {
+  color: $white;
+  font-weight: bold;
+}
+
+.dark-blue-bold-text {
+  color: $darkBlue;
+  font-weight: bold;
+}
+
+.white-text {
+  color: $white;
+}
+
+.gradient-background {
+  background: linear-gradient(90deg, rgba(149,91,7,1) 0%, rgba(201,138,25,1) 35%, rgba(223,162,54,1) 100%);
+}
+
+.large-font {
+  font-size: 5vw;
+}
+
+.white-text-button {
+  color: $white;
 }
