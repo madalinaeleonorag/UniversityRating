@@ -13,5 +13,21 @@
     "login": "Login",
     "signup": "Signup",
     "logout": "Logout"
+  },
+  "filters": {
+    "keywords": {
+      "label": "Cauta dupa cuvinte cheie",
+      "name": "Denumire",
+      "description": "Descriere",
+      "location": "Locatie",
+      "facilities": "Facilitati"
+    },
+    "study_level": "Cauta dupa nivelul de studii",
+    "sort_rating": "Sorteaza dupa recenzii",
+    "institution_type": {
+      "label": "Tipul institutiei",
+      "state": "Stat",
+      "private": "Privat"
+    }
   }
 }

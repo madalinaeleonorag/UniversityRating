@@ -1,0 +1,16 @@
+@import "../../variables.scss";
+
+app-search {
+  .container {
+    padding: 20px;
+  }
+
+  .categories-chips {
+    padding-bottom: 20px;
+  }
+
+  mat-card-subtitle {
+    font-weight: bold;
+    color: $black !important;
+  }
+}
