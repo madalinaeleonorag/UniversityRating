@@ -8,47 +8,47 @@ import { AngularFirestore } from '@angular/fire/firestore';
 export class FirebaseService {
 
   fb = firebase.firestore();
-  bachelorsCollection = this.afs.collection('Bachelors')
-  commentsCollection = this.afs.collection('Comments')
-  doctoralsCollection = this.afs.collection('Doctorals')
-  facultiesCollection = this.afs.collection('Faculties')
-  mastersCollection = this.afs.collection('Masters')
-  requestsCollection = this.afs.collection('Requests')
-  universityCollection = this.afs.collection('University')
-  usersCollection = this.afs.collection('Users')
+  bachelorsCollection = this.afs.collection('Bachelors');
+  commentsCollection = this.afs.collection('Comments');
+  doctoralsCollection = this.afs.collection('Doctorals');
+  facultiesCollection = this.afs.collection('Faculties');
+  mastersCollection = this.afs.collection('Masters');
+  requestsCollection = this.afs.collection('Requests');
+  universityCollection = this.afs.collection('University');
+  usersCollection = this.afs.collection('Users');
 
   constructor(private afs: AngularFirestore) {
   }
 
-  getBachelorsData() { 
+  getBachelorsData() {
     return this.bachelorsCollection.valueChanges();
   }
 
-  getCommentsData() { 
+  getCommentsData() {
     return this.commentsCollection.valueChanges();
   }
 
-  getDoctoralsData() { 
+  getDoctoralsData() {
     return this.doctoralsCollection.valueChanges();
   }
 
-  getFacultiesData() { 
+  getFacultiesData() {
     return this.facultiesCollection.valueChanges();
   }
 
-  getMastersData() { 
+  getMastersData() {
     return this.mastersCollection.valueChanges();
   }
 
-  getRequestsData() { 
+  getRequestsData() {
     return this.requestsCollection.valueChanges();
   }
 
-  getUniversitiesData() { 
+  getUniversitiesData() {
     return this.universityCollection.valueChanges();
   }
 
-  getUsersData() { 
+  getUsersData() {
     return this.usersCollection.valueChanges();
   }
 

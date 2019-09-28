@@ -48,6 +48,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { SearchComponent } from './pages/search/search.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 
 
@@ -80,6 +81,8 @@ export function createTranslateLoader(http: HttpClient) {
     SearchComponent
   ],
   imports: [
+    ReactiveFormsModule,
+    FormsModule,
     FlexLayoutModule,
     HttpClientModule,
     // Angular material imports
