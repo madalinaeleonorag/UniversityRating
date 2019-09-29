@@ -1,7 +1,7 @@
 <div class="container">
   <div fxLayout="row">
     <div fxLayout="column" fxFlex="30">
-      <mat-card>
+      <mat-card class="custom-filters">
         <!-- study level -->
         <mat-card-subtitle>{{ 'filters.study_level' | translate }}</mat-card-subtitle>
         <mat-card-content>
@@ -68,23 +68,50 @@
         </mat-card-content>
       </mat-card>
     </div>
-    <div fxLayout="column" fxFlex="70">
 
-      <mat-card *ngFor="let result of resultforCards">
-        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-        <mat-card-content>
-          <p>
-            The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-            A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-            bred for hunting.
-          </p>
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-button>LIKE</button>
-          <button mat-button>SHARE</button>
-        </mat-card-actions>
-      </mat-card>
 
+
+
+    <div fxFlex="70">
+      <div class="grey-text">{{ getData().length }} {{ 'filters.result_counter' | translate }}</div>
+      <div class="results-cards">
+        <div *ngFor="let result of getData()">
+          <!-- university results -->
+          <mat-card class="custom-card" fxLayout="column" fxLayoutAlign="center center"
+            *ngIf="studyLevel === 'University'">
+            <img mat-card-image src="{{ result.logoUniversity }}" *ngIf="result.logoUniversity">
+            <mat-card-content>
+              <p class="dark-blue-bold-text">{{ result.nameUniversity | uppercase }}</p>
+              <p class="grey-text">{{ result.locationUniversity[0] }}</p>
+              <p>{{ result.rating ? result.rating : 0 }} ★</p>
+              <p>
+                {{ result.facultiesUniversity.length }} {{ 'filters.faculties_counter' | translate }}
+              </p>
+            </mat-card-content>
+            <button mat-button fxFlexFill>{{ 'buttons.more_details' | translate | uppercase }}</button>
+          </mat-card>
+          <!-- faculty results -->
+          <mat-card class="custom-card" fxLayout="column" fxLayoutAlign="center center"
+            *ngIf="studyLevel === 'Faculty'">
+            <img mat-card-image src="{{ result.logoFaculty }}" *ngIf="result.logoFaculty">
+            <mat-card-content>
+              <p class="dark-blue-bold-text">{{ result.nameFaculty | uppercase }}</p>
+              <p class="grey-text">{{ result.locationFaculty | location }}</p>
+              <p>{{ result.ratingFaculty ? result.ratingFaculty : 0 }} ★</p>
+              <p *ngIf="result.bachelors">
+                {{ result.bachelors.length }} {{ 'filters.counter_bachelors' | translate }}
+              </p>
+              <p *ngIf="result.masters">
+                {{ result.masters.length }} {{ 'filters.counter_masters' | translate }}
+              </p>
+              <p *ngIf="result.doctorals">
+                {{ result.doctorals.length }} {{ 'filters.counter_doctorals' | translate }}
+              </p>
+            </mat-card-content>
+            <button mat-button fxFlexFill>{{ 'buttons.more_details' | translate | uppercase }}</button>
+          </mat-card>
+        </div>
+      </div>
     </div>
   </div>
 </div>

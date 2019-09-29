@@ -30,6 +30,18 @@ button {
   color: $white;
 }
 
+.mat-card {
+  border-radius: 0px !important;
+}
+
+.grey-text {
+  color: $lightGrey;
+}
+
+.app-title-cursor {
+  cursor: pointer;
+}
+
 .gradient-background {
   background: linear-gradient(90deg, rgba(149,91,7,1) 0%, rgba(201,138,25,1) 35%, rgba(223,162,54,1) 100%);
 }

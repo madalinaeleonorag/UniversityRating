@@ -21,13 +21,12 @@ export class SearchComponent implements OnInit, OnDestroy {
   descriptionSearch = new FormControl();
   locations = new FormControl();
   facilities = new FormControl();
-  locationsListList: string[] = [];
+  locationsList: string[] = [];
   facilitiesList: string[] = [];
   studyLevel = 'University';
   ratingType = 'NoSorting';
   institutionState = true;
   institutionPrivate = true;
-  resultforCards = [];
   bachelorSubscription: Subscription;
   bachelorData = [];
   doctoralSubscription: Subscription;
@@ -42,7 +41,6 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   constructor(private firebaseService: FirebaseService) {
     this.categories = Object.keys(Categories);
-    console.log(this.categories);
     this.sortTypes = Object.keys(Sorting);
     this.typeOfInstitution = Object.keys(InstitutionType);
 
@@ -58,7 +56,38 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   getData() {
+    switch (this.studyLevel) {
+      case 'University': return this.getUniversitiesDataFiltered();
+      case 'Faculty': return this.getFacultiesDataFiltered();
+      case 'Bachelor': return this.getBachelorsDataFiltered();
+      case 'Master': return this.getMastersDataFiltered();
+      case 'Doctoral': return this.getDoctoralsDataFiltered();
+    }
+  }
 
+  getUniversitiesDataFiltered() {
+    console.log(this.universitiesData);
+    return this.universitiesData;
+  }
+
+  getFacultiesDataFiltered() {
+    console.log(this.facultiesData);
+    return this.facultiesData;
+  }
+
+  getBachelorsDataFiltered() {
+    console.log(this.bachelorData);
+    return this.bachelorData;
+  }
+
+  getMastersDataFiltered() {
+    console.log(this.mastersData);
+    return this.mastersData;
+  }
+
+  getDoctoralsDataFiltered() {
+    console.log(this.doctoralData);
+    return this.doctoralData;
   }
 
   ngOnDestroy() {

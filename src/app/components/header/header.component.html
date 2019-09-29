@@ -1,7 +1,7 @@
 <mat-toolbar fxLayout="row" fxLayoutAlign="space-between center" class="custom-toolbar">
   <div>
   </div>
-  <div fxLayout="column" fxLayoutAlign="center center">
+  <div fxLayout="column" fxLayoutAlign="center center" (click)="goToHomepage()" class="app-title-cursor">
     <div class="dark-blue-bold-text custom-title">{{ 'header.title' | translate | uppercase }}</div>
     <div>{{ 'header.subtitle' | translate | uppercase}}</div>
   </div>

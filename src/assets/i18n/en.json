@@ -1,7 +1,7 @@
 {
   "header": {
     "title": "University Rating",
-    "subtitle": "Search your best option"
+    "subtitle": "Cauta cea mai buna optiune"
   },
   "banner": {
     "first_text1": "Descopera universitatile",
@@ -12,13 +12,28 @@
     "search": "Cauta",
     "login": "Login",
     "signup": "Signup",
-    "logout": "Logout"
+    "logout": "Logout",
+    "more_details": "Vezi detalii"
   },
-  "categories-chips": {
-    "universities": "Universitati",
-    "faculties": "Facultati",
-    "bachelors": "Licente",
-    "masters": "Masterate",
-    "doctorals": "Doctorate"
+  "filters": {
+    "keywords": {
+      "label": "Cauta dupa cuvinte cheie",
+      "name": "Denumire",
+      "description": "Descriere",
+      "location": "Locatie",
+      "facilities": "Facilitati"
+    },
+    "study_level": "Cauta dupa nivelul de studii",
+    "sort_rating": "Sorteaza dupa recenzii",
+    "institution_type": {
+      "label": "Tipul institutiei",
+      "state": "Stat",
+      "private": "Privat"
+    },
+    "result_counter": "rezultate pe pagina",
+    "faculties_counter": "facultati",
+    "counter_bachelors": "licente",
+    "counter_masters": "masterate",
+    "counter_doctorals": "doctorate"
   }
 }

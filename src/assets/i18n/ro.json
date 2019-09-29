@@ -1,7 +1,7 @@
 {
   "header": {
     "title": "University Rating",
-    "subtitle": "Search your best option"
+    "subtitle": "Cauta cea mai buna optiune"
   },
   "banner": {
     "first_text1": "Descopera universitatile",
@@ -12,7 +12,8 @@
     "search": "Cauta",
     "login": "Login",
     "signup": "Signup",
-    "logout": "Logout"
+    "logout": "Logout",
+    "more_details": "Vezi detalii"
   },
   "filters": {
     "keywords": {

@@ -49,6 +49,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { SearchComponent } from './pages/search/search.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { LocationPipe } from './pipes/location.pipe';
 
 
 
@@ -78,7 +79,8 @@ export function createTranslateLoader(http: HttpClient) {
     HeaderComponent,
     FooterComponent,
     HomepageComponent,
-    SearchComponent
+    SearchComponent,
+    LocationPipe
   ],
   imports: [
     ReactiveFormsModule,

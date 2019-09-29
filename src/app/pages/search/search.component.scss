@@ -14,7 +14,38 @@ app-search {
     color: $black !important;
   }
 
-  mat-card { 
+  mat-card.custom-card { 
     max-width: 200px;
+    margin-top: 50px;
+    padding: 0px;
+    margin-right: 20px;
+
+    .mat-button {
+      background-color: $darkBlue;
+      color: $white;
+      border-radius: 0;
+    }
+
+    .mat-card-content {
+      text-align: center;
+      padding: 16px;
+      margin-bottom: 0px;
+    }
+
   }
+
+  .mat-card-image {
+    width: 80%;
+    margin-top: -46px !important;
+  }
+
+  mat-card.custom-filters {
+    margin-right: 20px;
+  }
+
+  .results-cards {
+    display: flex;
+    flex-flow: wrap;
+  }
+
 }
