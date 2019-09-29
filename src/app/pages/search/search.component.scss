@@ -13,4 +13,8 @@ app-search {
     font-weight: bold;
     color: $black !important;
   }
+
+  mat-card { 
+    max-width: 200px;
+  }
 }
