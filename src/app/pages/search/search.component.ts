@@ -4,7 +4,7 @@ import { FirebaseService } from 'src/app/firebase/firebase-service.service';
 import { Categories } from 'src/app/enums/Categories';
 import { Sorting } from 'src/app/enums/Sorting';
 import { InstitutionType } from 'src/app/enums/InstitutionType';
-import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-search',
@@ -27,15 +27,15 @@ export class SearchComponent implements OnInit, OnDestroy {
   ratingType = 'NoSorting';
   institutionState = true;
   institutionPrivate = true;
-  bachelorSubscription: Subscription;
+  bachelorSubscription = [];
   bachelorData = [];
-  doctoralSubscription: Subscription;
+  doctoralSubscription = [];
   doctoralData = [];
-  facultiesSubscription: Subscription;
+  facultiesSubscription = [];
   facultiesData = [];
-  mastersSubscription: Subscription;
+  mastersSubscription = [];
   mastersData = [];
-  universitiesSubscription: Subscription;
+  universitiesSubscription = [];
   universitiesData = [];
 
 
@@ -48,11 +48,11 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.bachelorSubscription = this.firebaseService.getBachelorsData().subscribe(result => this.bachelorData = result);
-    this.doctoralSubscription = this.firebaseService.getDoctoralsData().subscribe(result => this.doctoralData = result);
-    this.facultiesSubscription = this.firebaseService.getFacultiesData().subscribe(result => this.facultiesData = result);
-    this.mastersSubscription = this.firebaseService.getMastersData().subscribe(result => this.mastersData = result);
-    this.universitiesSubscription = this.firebaseService.getUniversitiesData().subscribe(result => this.universitiesData = result);
+    console.log('meh ', this.firebaseService.getBachelorsData());
+    // this.doctoralSubscription = this.firebaseService.getDoctoralsData();
+    // this.facultiesSubscription = this.firebaseService.getFacultiesData();
+    // this.mastersSubscription = this.firebaseService.getMastersData();
+    // this.universitiesSubscription = this.firebaseService.getUniversitiesData();
   }
 
   getData() {
@@ -66,46 +66,26 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   getUniversitiesDataFiltered() {
-    console.log(this.universitiesData);
     return this.universitiesData;
   }
 
   getFacultiesDataFiltered() {
-    console.log(this.facultiesData);
     return this.facultiesData;
   }
 
   getBachelorsDataFiltered() {
-    console.log(this.bachelorData);
     return this.bachelorData;
   }
 
   getMastersDataFiltered() {
-    console.log(this.mastersData);
     return this.mastersData;
   }
 
   getDoctoralsDataFiltered() {
-    console.log(this.doctoralData);
     return this.doctoralData;
   }
 
   ngOnDestroy() {
-    if (this.bachelorSubscription) {
-      this.bachelorSubscription.unsubscribe();
-    }
-    if (this.doctoralSubscription) {
-      this.doctoralSubscription.unsubscribe();
-    }
-    if (this.facultiesSubscription) {
-      this.facultiesSubscription.unsubscribe();
-    }
-    if (this.mastersSubscription) {
-      this.mastersSubscription.unsubscribe();
-    }
-    if (this.universitiesSubscription) {
-      this.universitiesSubscription.unsubscribe();
-    }
   }
 
   // universityName() {

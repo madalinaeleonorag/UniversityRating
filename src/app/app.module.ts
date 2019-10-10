@@ -1,17 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { AngularFireStorageModule } from '@angular/fire/storage';
-import { AngularFireAuthModule } from '@angular/fire/auth';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HomepageComponent } from './pages/homepage/homepage.component';
 import { Routes, RouterModule } from '@angular/router';
-import { FlexLayoutModule } from "@angular/flex-layout";
+import { FlexLayoutModule } from '@angular/flex-layout';
 // Angular Material Components
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCheckboxModule } from '@angular/material';
@@ -50,18 +45,23 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { SearchComponent } from './pages/search/search.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { LocationPipe } from './pipes/location.pipe';
+// Firebase
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import * as firebase from 'firebase';
 
-
-
-// Firestore config
+// Firebase config
 const config = {
-  apiKey: 'AIzaSyCcTEDMXl2kbpnzoF_x5rwdnKJQP_rwD1U',
-  authDomain: 'universityraking.firebaseapp.com',
-  databaseURL: 'https://universityraking.firebaseio.com',
-  projectId: 'universityraking',
-  storageBucket: 'universityraking.appspot.com',
-  messagingSenderId: '709054246209'
+  apiKey: 'AIzaSyAF64g_pXS5OFwYviZQB0cA6D0o9ppSbbQ',
+  authDomain: 'universityratingdatabase.firebaseapp.com',
+  databaseURL: 'https://universityratingdatabase.firebaseio.com',
+  projectId: 'universityratingdatabase',
+  storageBucket: 'universityratingdatabase.appspot.com',
+  messagingSenderId: '593257065643',
+  appId: '1:593257065643:web:b1a409eaa52d596d265bee',
+  measurementId: 'G-R6M6BGSMS9'
 };
+firebase.initializeApp(config);
 
 
 // Routes config
@@ -124,10 +124,8 @@ export function createTranslateLoader(http: HttpClient) {
     AppRoutingModule,
     BrowserAnimationsModule,
     // Firestore imports
-    AngularFireModule.initializeApp(config),
-    AngularFirestoreModule, // firestore
-    AngularFireAuthModule, // auth
-    AngularFireStorageModule, // storage
+    AngularFireModule.initializeApp(config, 'fcc-book-trading'),
+    AngularFireDatabaseModule,
     // Router imports
     RouterModule.forRoot(
       appRoutes
