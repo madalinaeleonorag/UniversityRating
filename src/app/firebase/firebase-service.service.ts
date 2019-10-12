@@ -53,11 +53,8 @@ export class FirebaseService {
   }
 
   getBachelorsByFacultyId(id: string) {
-    // return this.fb.collection('Bachelors').where('facultyId', '==', id).valueChanges()
-
-    // TODO: how the fuck is this working?
+    return this.fb.collection('Faculties').doc(id).get().then(doc => doc.data());
   }
-
 
   // TODO: move all of the functions which includes firebase there from the old project
 }

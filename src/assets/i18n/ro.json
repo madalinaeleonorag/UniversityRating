@@ -20,8 +20,28 @@
       "label": "Cauta dupa cuvinte cheie",
       "name": "Denumire",
       "description": "Descriere",
-      "location": "Locatie",
-      "facilities": "Facilitati"
+      "location": {
+        "label": "Locatie",
+        "all_locations": "Toate locatiile"
+      },
+      "facilities": { 
+        "label": "Facilitati",
+        "copy_center": "Copy-center",
+        "cafe": "Cafenea",
+        "canteen": "Cantina",
+        "gym": "Sala de sport",
+        "chapel": "Capela",
+        "bank_branch": "Sucursala bancara",
+        "home": "Camin",
+        "bookstore": "Librarie",
+        "medical_office": "Cabinet medical",
+        "library": "Biblioteca",
+        "erasmus_office": "Birou Erasmus",
+        "student_club": "Club al strudentilor",
+        "places_without_tax": "Locuri fara taxa",
+        "career_counseling_and_guidance_center": "Centru de consiliere si orientare in cariera",
+        "courses_in_foreign_languages": "Cursuri in limbi straine"
+      }
     },
     "study_level": "Cauta dupa nivelul de studii",
     "sort_rating": "Sorteaza dupa recenzii",
@@ -29,6 +49,13 @@
       "label": "Tipul institutiei",
       "state": "Stat",
       "private": "Privat"
-    }
+    },
+    "result_counter": "rezultate pe pagina",
+    "faculties_counter": "facultati",
+    "counter_bachelors": "licente",
+    "counter_masters": "masterate",
+    "counter_doctorals": "doctorate",
+    "counter_semesters": "semestre",
+    "counter_years": "ani"
   }
 }

@@ -4,7 +4,10 @@ import { FirebaseService } from 'src/app/firebase/firebase-service.service';
 import { Categories } from 'src/app/enums/Categories';
 import { Sorting } from 'src/app/enums/Sorting';
 import { InstitutionType } from 'src/app/enums/InstitutionType';
+import { Facilities } from 'src/app/enums/Facilities';
 import { Subscription } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
+import * as _ from 'underscore';
 
 @Component({
   selector: 'app-search',
@@ -21,7 +24,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   descriptionSearch = new FormControl();
   locations = new FormControl();
   facilities = new FormControl();
-  locationsList: string[] = [];
+  locationsList: any[] = [];
   facilitiesList: string[] = [];
   studyLevel = 'University';
   ratingType = 'NoSorting';
@@ -39,11 +42,10 @@ export class SearchComponent implements OnInit, OnDestroy {
   universitiesData = [];
 
 
-  constructor(private firebaseService: FirebaseService) {
+  constructor(private firebaseService: FirebaseService, private translate: TranslateService) {
     this.categories = Object.keys(Categories);
     this.sortTypes = Object.keys(Sorting);
     this.typeOfInstitution = Object.keys(InstitutionType);
-
     this.getData();
   }
 
@@ -52,42 +54,193 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.doctoralSubscription = this.firebaseService.getDoctoralsData().subscribe(result => this.doctoralData = result);
     this.facultiesSubscription = this.firebaseService.getFacultiesData().subscribe(result => this.facultiesData = result);
     this.mastersSubscription = this.firebaseService.getMastersData().subscribe(result => this.mastersData = result);
-    this.universitiesSubscription = this.firebaseService.getUniversitiesData().subscribe(result => this.universitiesData = result);
+    this.universitiesSubscription = this.firebaseService.getUniversitiesData().subscribe(result => {
+      this.universitiesData = result;
+      this.getUniversityLocations(result);
+    });
+    this.getFacilities(Object.keys(Facilities));
+    // this.firebaseService.getBachelorsByFacultyId('6EtosXDnyAoc6gu3JoLb').then(data => console.log(data));
   }
 
   getData() {
     switch (this.studyLevel) {
-      case 'University': return this.getUniversitiesDataFiltered();
-      case 'Faculty': return this.getFacultiesDataFiltered();
-      case 'Bachelor': return this.getBachelorsDataFiltered();
-      case 'Master': return this.getMastersDataFiltered();
-      case 'Doctoral': return this.getDoctoralsDataFiltered();
+      case 'University': return this.getUniversitiesData();
+      case 'Faculty': return this.getFacultiesData();
+      case 'Bachelor': return this.getBachelorsData();
+      case 'Master': return this.getMastersData();
+      case 'Doctoral': return this.getDoctoralsData();
     }
   }
 
-  getUniversitiesDataFiltered() {
-    console.log(this.universitiesData);
-    return this.universitiesData;
+  private getUniversitiesData() {
+    const result = this.universitiesData.filter(university => {
+      return this.matchingNames(university.nameUniversity) && this.matchingLocations(university.locationUniversity)
+        && this.matchingType(university.typeUniversity) && this.matchingFacilities(university.facilitiesUniversity)
+        && this.matchingDescription(university.descriptionUniversity);
+    });
+    return this.sortByRatings(result);
   }
 
-  getFacultiesDataFiltered() {
-    console.log(this.facultiesData);
-    return this.facultiesData;
+  private getFacultiesData() {
+    const result = this.facultiesData.filter(faculty => {
+      return this.matchingNames(faculty.nameFaculty) && this.matchingLocations(faculty.locationFaculty)
+        && this.matchingDescription(faculty.descriptionFaculty);
+    });
+    return this.sortByRatings(result);
   }
 
-  getBachelorsDataFiltered() {
-    console.log(this.bachelorData);
-    return this.bachelorData;
+  private getBachelorsData() {
+    const dataWithFaculties = [];
+    this.bachelorData.forEach(bachelor => {
+      if (bachelor.facultyId) {
+        const facultyData = this.facultiesData.filter(faculty => faculty.facultyId === bachelor.facultyId);
+        dataWithFaculties.push(Object.assign({}, bachelor, facultyData[0]));
+      } else {
+        dataWithFaculties.push(bachelor);
+      }
+    });
+    const result = dataWithFaculties.filter(bachelor => {
+      return this.matchingNames(bachelor.name) && this.matchingLocations(bachelor.locationFaculty)
+        && this.matchingDescription(bachelor.descriptionFaculty);
+    });
+    return this.sortByRatings(result);
   }
 
-  getMastersDataFiltered() {
-    console.log(this.mastersData);
-    return this.mastersData;
+  private getMastersData() {
+    const dataWithFaculties = [];
+    this.mastersData.forEach(master => {
+      if (master.facultyId) {
+        const facultyData = this.facultiesData.filter(faculty => faculty.facultyId === master.facultyId);
+        dataWithFaculties.push(Object.assign({}, master, facultyData[0]));
+      } else {
+        dataWithFaculties.push(master);
+      }
+    });
+    const result = dataWithFaculties.filter(master => {
+      return this.matchingNames(master.name) && this.matchingLocations(master.locationFaculty)
+        && this.matchingDescription(master.descriptionFaculty);
+    });
+    return this.sortByRatings(result);
   }
 
-  getDoctoralsDataFiltered() {
-    console.log(this.doctoralData);
-    return this.doctoralData;
+  private getDoctoralsData() {
+    const dataWithFaculties = [];
+    this.doctoralData.forEach(doctoral => {
+      if (doctoral.facultyId) {
+        const facultyData = this.facultiesData.filter(faculty => faculty.facultyId === doctoral.facultyId);
+        dataWithFaculties.push(Object.assign({}, doctoral, facultyData[0]));
+      } else {
+        dataWithFaculties.push(doctoral);
+      }
+    });
+    const result = dataWithFaculties.filter(doctoral => {
+      return this.matchingNames(doctoral.name) && this.matchingLocations(doctoral.locationFaculty)
+        && this.matchingDescription(doctoral.descriptionFaculty);
+    });
+    return this.sortByRatings(result);
+  }
+
+  private getFacilities(facilities: Array<string>) {
+    facilities.forEach(facility => {
+      this.facilitiesList.push(
+        this.translate.instant(`filters.keywords.facilities.${facility}`)
+      );
+    });
+  }
+
+  private getUniversityLocations(universities: Array<any>) {
+    const locations = [];
+    universities.forEach(university => {
+      locations.push(this.getLocationIfArray(university.locationUniversity));
+    });
+    this.locationsList = _.uniq(locations);
+  }
+
+  private getLocationIfArray(value: any) {
+    return Array.isArray(value) ? value[0] : value;
+  }
+
+  private matchingNames(name: string) {
+    return this.keywordsSearch.value ? name.toLowerCase().includes(this.keywordsSearch.value.toLowerCase()) : true;
+  }
+
+  private matchingLocations(location: string) {
+    const locationValue = this.getLocationIfArray(location);
+    return this.locations.value ? this.locations.value.includes(locationValue) || this.locations.value.includes('all_locations') : true;
+  }
+
+  private matchingType(type: string) {
+    if (this.institutionState === true && this.institutionPrivate === true) {
+      return true;
+    } else if (this.institutionState === true) {
+      return this.institutionState ? this.institutionState === true && type === 'Stat' : true;
+    } else if (this.institutionPrivate === true) {
+      return this.institutionPrivate ? this.institutionPrivate === true && type === 'Privat' : true;
+    } else {
+      return false;
+    }
+  }
+
+  private matchingFacilities(facilities: Array<string>) {
+    if (this.facilities.value) {
+      if (facilities) {
+        return this.facilities.value
+          ? facilities.filter(elem => {
+            return this.facilities.value.indexOf(elem) > -1;
+          }).length === this.facilities.value.length
+          : true;
+      } else {
+        return false;
+      }
+    } else {
+      return true;
+    }
+  }
+
+  private matchingDescription(description: string) {
+    if (this.descriptionSearch.value) {
+      const splittedDescription = this.descriptionSearch.value.split(' ');
+      const splittedDescriptionLength = splittedDescription.length;
+      const results = [];
+      let counter = 0;
+      if (this.descriptionSearch.value && this.descriptionSearch.value !== '') {
+        splittedDescription.forEach(item => {
+          results.push(
+            item ? description.toLowerCase().includes(item.toLowerCase()) : true
+          );
+        });
+        results.forEach(result => {
+          if (result === true) {
+            counter = counter + 1;
+          }
+        });
+        if (counter === splittedDescriptionLength) {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        return true;
+      }
+    } else {
+      return true;
+    }
+  }
+
+  sortByRatings(data) {
+    let sortedData = data;
+    switch (this.ratingType) {
+      case 'Ascending':
+        sortedData.sort((a: any, b: any) => a.rating - b.rating);
+        break;
+      case 'Descending':
+        sortedData.sort((a: any, b: any) => {
+          return b.rating - a.rating;
+        });
+        break;
+      case 'NoSorting': sortedData = data;
+    }
+    return sortedData;
   }
 
   ngOnDestroy() {
@@ -107,210 +260,5 @@ export class SearchComponent implements OnInit, OnDestroy {
       this.universitiesSubscription.unsubscribe();
     }
   }
-
-  // universityName() {
-  //   const universityName = [];
-  //   this.firebaseService.getUniversitiesData().subscribe(result => {
-  //     // todo for keywords autocomplete
-  //     result.forEach(university => {
-  //       console.log(university)
-  //     });
-  //   });
-  //   return universityName;
-  // }
-
-  //    // return facilities
-  //    facilities() {
-  //     return this.$store.getters.facilities;
-  //   },
-  // return universities names
-
-  //   // return universities locations
-  //   universityLocation() {
-  //     var universityLocation = ["Toate locatiile"];
-  //     this.$store.getters.universityData.forEach(university => {
-  //       universityLocation.push(university.locationUniversity[0]);
-  //     });
-  //     return universityLocation;
-  //   },
-  //   // return faculties names
-  //   facultyName() {
-  //     var facultyName = [];
-  //     this.$store.getters.facultyData.forEach(faculty => {
-  //       facultyName.push(faculty.nameFaculty);
-  //     });
-  //     return facultyName;
-  //   },
-  //   // FILTERS
-  //   dataFilter() {
-  //     var filteredData;
-  //     if (this.selectSearch === "university") {
-  //       // FILTER UNIVERSITY
-  //       filteredData = this.$store.getters.universityData.filter(university => {
-  //         return (
-  //           this.matchingLocations(
-  //             university.locationUniversity[0],
-  //             this.selectedLocation
-  //           ) &
-  //           this.matchingType(
-  //             university.typeUniversity,
-  //             this.typeStat,
-  //             this.typePrivat
-  //           ) &
-  //           this.matchingNames(university.nameUniversity, this.selectedName) &
-  //           this.matchingRatings(university.rating, this.selectedRatings) &
-  //           this.matchingFacilities(
-  //             university.facilitiesUniversity,
-  //             this.selectedFacilities
-  //           ) &
-  //           this.matchingDescription(
-  //             university.descriptionUniversity,
-  //             this.selectedDescription
-  //           )
-  //         );
-  //       });
-  //     } else if (this.selectSearch === "faculty") {
-  //       // FILTER FACULTY
-  //       filteredData = this.$store.getters.facultyData.filter(faculty => {
-  //         var universityIDs = [];
-  //         this.$store.getters.universityData.forEach(university => {
-  //           universityIDs.push(university.id);
-  //         });
-  //         var universityDetails = this.$store.getters.universityData[
-  //           universityIDs.indexOf(faculty.universityId)
-  //         ];
-  //         return (
-  //           this.matchingLocations(
-  //             faculty.locationFaculty,
-  //             this.selectedLocation
-  //           ) &
-  //           this.matchingType(
-  //             universityDetails.typeUniversity,
-  //             this.typeStat,
-  //             this.typePrivat
-  //           ) &
-  //           this.matchingNames(faculty.nameFaculty, this.selectedName) &
-  //           this.matchingRatings(faculty.rating, this.selectedRatings) &
-  //           this.matchingFacilities(
-  //             universityDetails.Facilities,
-  //             this.selectedFacilities
-  //           ) &
-  //           this.matchingDescription(
-  //             faculty.descriptionFaculty,
-  //             this.selectedDescription
-  //           )
-  //         );
-  //       });
-  //       // FILTER BACHELOR
-  //     } else if (this.selectSearch === "bachelor") {
-  //       return this.$store.getters.bachelorsData;
-  //       // FILTER MASTER
-  //     } else if (this.selectSearch === "master") {
-  //       return this.$store.getters.mastersData;
-  //     }
-  //     console.log(filteredData);
-  //     return this.sortByRatings(filteredData, this.selectedSort);
-  //   }
-  // },
-  // methods: {
-  //   roundgreen(value) {
-  //     return Math.round(value);
-  //   },
-  //   roundred(value) {
-  //     return 5 - Math.round(value);
-  //   },
-  //   matchingNames(name, selectedName) {
-  //     return selectedName
-  //       ? name.toLowerCase().includes(selectedName.toLowerCase())
-  //       : true;
-  //   },
-  //   matchingLocations(location, selectedLocation) {
-  //     return selectedLocation
-  //       ? selectedLocation === location ||
-  //           selectedLocation === "Toate locatiile"
-  //       : true;
-  //   },
-  //   matchingRatings(rating, selectedRatings) {
-  //     if (selectedRatings) {
-  //       if (selectedRatings === "6") {
-  //         return true;
-  //       } else {
-  //         return selectedRatings
-  //           ? selectedRatings <= Math.round(rating).toString()
-  //           : true;
-  //       }
-  //     } else {
-  //       return true;
-  //     }
-  //   },
-  //   matchingType(type, selectedStat, selectedPrivat) {
-  //     if (selectedStat === true && selectedPrivat === true) {
-  //       return true;
-  //     } else if (selectedStat === true) {
-  //       return selectedStat ? selectedStat === true && type === "Stat" : true;
-  //     } else if (selectedPrivat === true) {
-  //       return selectedPrivat
-  //         ? selectedPrivat === true && type === "Privat"
-  //         : true;
-  //     } else {
-  //       return false;
-  //     }
-  //   },
-  //   matchingFacilities(facilities, selectedFacilities) {
-  //     if (selectedFacilities) {
-  //       if (facilities) {
-  //         return selectedFacilities
-  //           ? facilities.filter(elem => {
-  //               return selectedFacilities.indexOf(elem) > -1;
-  //             }).length === selectedFacilities.length
-  //           : true;
-  //       } else {
-  //         return false;
-  //       }
-  //     } else {
-  //       return true;
-  //     }
-  //   },
-  //   matchingDescription(description, selectedDescription) {
-  //     let splittedDescription = selectedDescription.split(" ");
-  //     let splittedDescriptionLength = splittedDescription.length;
-  //     let results = [];
-  //     let counter = 0;
-  //     if (selectedDescription && selectedDescription !== "") {
-  //       splittedDescription.forEach(item => {
-  //         results.push(
-  //           item ? description.toLowerCase().includes(item.toLowerCase()) : true
-  //         );
-  //       });
-  //       results.forEach(result => {
-  //         if (result === true) {
-  //           counter = counter + 1;
-  //         }
-  //       });
-  //       if (counter === splittedDescriptionLength) {
-  //         return true;
-  //       } else {
-  //         return false;
-  //       }
-  //     } else {
-  //       return true;
-  //     }
-  //   },
-  //   sortByRatings(data, sortType) {
-  //     let sortedData = data;
-  //     switch (sortType) {
-  //       case "Crescator":
-  //         sortedData.sort((a, b) => {
-  //           return a.rating - b.rating;
-  //         });
-  //         break;
-  //       case "Descrescator":
-  //         sortedData.sort((a, b) => {
-  //           return b.rating - a.rating;
-  //         });
-  //         break;
-  //     }
-  //     return sortedData;
-  //   }
 
 }
