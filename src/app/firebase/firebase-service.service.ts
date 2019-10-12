@@ -1,70 +1,59 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app';
-import { AngularFireDatabase } from 'angularfire2/database';
-import { BachelorData } from '../models/BachelorData';
-
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseService {
 
-  bachelorsCollection = firebase.database().ref('Bachelors');
-  commentsCollection = firebase.database().ref('Comments');
-  doctoralsCollection = firebase.database().ref('Doctorals');
-  facultiesCollection = firebase.database().ref('Faculties');
-  mastersCollection = firebase.database().ref('Masters');
-  requestsCollection = firebase.database().ref('Requests');
-  universityCollection = firebase.database().ref('Universities');
-  usersCollection = firebase.database().ref('Users');
+  fb = firebase.firestore();
+  bachelorsCollection = this.afs.collection('Bachelors');
+  commentsCollection = this.afs.collection('Comments');
+  doctoralsCollection = this.afs.collection('Doctorals');
+  facultiesCollection = this.afs.collection('Faculties');
+  mastersCollection = this.afs.collection('Masters');
+  requestsCollection = this.afs.collection('Requests');
+  universityCollection = this.afs.collection('University');
+  usersCollection = this.afs.collection('Users');
 
-  constructor() {
+  constructor(private afs: AngularFirestore) {
   }
 
-  async getBachelorsData() {
-    return this.bachelorsCollection.on('value', snap => {
-      const myObj = snap.val();
-      const alluserdetails = [];
-      const keysUsers = Object.keys(snap.val());
-      keysUsers.forEach(key => {
-        const userdetails: BachelorData = new BachelorData(myObj[key], key);
-        alluserdetails.push(userdetails);
-      });
-    }, error => {
-      console.log('Error: ' + error.message);
-    });
+  getBachelorsData() {
+    return this.bachelorsCollection.valueChanges();
   }
 
   getCommentsData() {
-    return this.commentsCollection;
+    return this.commentsCollection.valueChanges();
   }
 
   getDoctoralsData() {
-    return this.doctoralsCollection;
+    return this.doctoralsCollection.valueChanges();
   }
 
   getFacultiesData() {
-    return this.facultiesCollection;
+    return this.facultiesCollection.valueChanges();
   }
 
   getMastersData() {
-    return this.mastersCollection;
+    return this.mastersCollection.valueChanges();
   }
 
   getRequestsData() {
-    return this.requestsCollection;
+    return this.requestsCollection.valueChanges();
   }
 
   getUniversitiesData() {
-    return this.universityCollection;
+    return this.universityCollection.valueChanges();
   }
 
   getUsersData() {
-    return this.usersCollection;
+    return this.usersCollection.valueChanges();
   }
 
   getBachelorsByFacultyId(id: string) {
-    // return this.fb.collection('Bachelors').where('facultyId', '==', id)
+    // return this.fb.collection('Bachelors').where('facultyId', '==', id).valueChanges()
 
     // TODO: how the fuck is this working?
   }
