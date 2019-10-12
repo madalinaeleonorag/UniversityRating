@@ -2,10 +2,26 @@
 
 app-header {
   .custom-toolbar {
-    background-color: $white;
     height: 75px;
+    top: 0;
+    position: sticky;
+    z-index: 1;
+  }
+  .custom-white-toolbar {
+    background-color: $white;
+  }
+  .custom-dark-toolbar {
+    background-color: $darkBlue;
+    box-shadow: 0 8px 6px -6px black;
   }
   .custom-title {
     font-size: 3vw;
   }
+  .dark-text {
+    color: $black;
+  }
+  .white-text {
+    color: $white;
+  }
+
 }
