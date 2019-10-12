@@ -15,10 +15,11 @@ app-search {
   }
 
   mat-card.custom-card { 
-    max-width: 200px;
+    width: 200px;
     margin-top: 50px;
     padding: 0px;
     margin-right: 20px;
+    margin-bottom: 20px;
 
     .mat-button {
       background-color: $darkBlue;
@@ -30,13 +31,15 @@ app-search {
       text-align: center;
       padding: 16px;
       margin-bottom: 0px;
+      height: 130px;
     }
 
   }
 
   .mat-card-image {
-    width: 80%;
+    width: 160px;
     margin-top: -46px !important;
+    height: 160px;
   }
 
   mat-card.custom-filters {

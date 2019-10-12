@@ -44,7 +44,8 @@
                   (+{{facilities.value.length - 1}} {{facilities.value?.length === 2 ? 'other' : 'others'}})
                 </span>
               </mat-select-trigger>
-              <mat-option *ngFor="let facility of facilitiesList" [value]="facility | translate">{{ facility | translate }}</mat-option>
+              <mat-option *ngFor="let facility of facilitiesList" [value]="facility | translate">
+                {{ facility | translate }}</mat-option>
             </mat-select>
           </mat-form-field>
         </mat-card-content>
@@ -58,7 +59,8 @@
           </mat-radio-group>
         </mat-card-content>
         <!-- type -->
-        <mat-card-subtitle *ngIf="studyLevel === 'University'">{{ 'filters.institution_type.label' | translate }}</mat-card-subtitle>
+        <mat-card-subtitle *ngIf="studyLevel === 'University'">{{ 'filters.institution_type.label' | translate }}
+        </mat-card-subtitle>
         <mat-card-content fxLayout="column" *ngIf="studyLevel === 'University'">
           <mat-checkbox [(ngModel)]="institutionState">{{ 'filters.institution_type.state' | translate }}</mat-checkbox>
           <mat-checkbox [(ngModel)]="institutionPrivate">{{ 'filters.institution_type.private' | translate }}
@@ -66,9 +68,6 @@
         </mat-card-content>
       </mat-card>
     </div>
-
-
-
 
     <div fxFlex="70">
       <div class="grey-text">{{ getData().length }} {{ 'filters.result_counter' | translate }}</div>
@@ -78,6 +77,7 @@
           <mat-card class="custom-card" fxLayout="column" fxLayoutAlign="center center"
             *ngIf="studyLevel === 'University'">
             <img mat-card-image src="{{ result.logoUniversity }}" *ngIf="result.logoUniversity">
+            <img mat-card-image src="assets/university.png" *ngIf="!result.logoUniversity">
             <mat-card-content>
               <p class="dark-blue-bold-text">{{ result.nameUniversity | uppercase }}</p>
               <p class="grey-text" *ngIf="result.locationUniversity[0]">{{ result.locationUniversity[0] }}</p>
@@ -92,6 +92,7 @@
           <mat-card class="custom-card" fxLayout="column" fxLayoutAlign="center center"
             *ngIf="studyLevel === 'Faculty'">
             <img mat-card-image src="{{ result.logoFaculty }}" *ngIf="result.logoFaculty">
+            <img mat-card-image src="assets/university.png" *ngIf="!result.logoFaculty">
             <mat-card-content>
               <p class="dark-blue-bold-text">{{ result.nameFaculty | uppercase }}</p>
               <p class="grey-text" *ngIf="result.locationFaculty">{{ result.locationFaculty | location }}</p>
@@ -112,6 +113,7 @@
           <mat-card class="custom-card" fxLayout="column" fxLayoutAlign="center center"
             *ngIf="studyLevel === 'Bachelor'">
             <img mat-card-image src="{{ result.logoFaculty }}" *ngIf="result.logoFaculty">
+            <img mat-card-image src="assets/university.png" *ngIf="!result.logoFaculty">
             <mat-card-content>
               <p class="dark-blue-bold-text">{{ result.name | uppercase }}</p>
               <p class="grey-text" *ngIf="result.locationFaculty">{{ result.locationFaculty | location }}</p>
@@ -126,9 +128,9 @@
             <button mat-button fxFlexFill>{{ 'buttons.more_details' | translate | uppercase }}</button>
           </mat-card>
           <!-- masters results -->
-          <mat-card class="custom-card" fxLayout="column" fxLayoutAlign="center center"
-            *ngIf="studyLevel === 'Master'">
+          <mat-card class="custom-card" fxLayout="column" fxLayoutAlign="center center" *ngIf="studyLevel === 'Master'">
             <img mat-card-image src="{{ result.logoFaculty }}" *ngIf="result.logoFaculty">
+            <img mat-card-image src="assets/university.png" *ngIf="!result.logoFaculty">
             <mat-card-content>
               <p class="dark-blue-bold-text">{{ result.name | uppercase }}</p>
               <p class="grey-text" *ngIf="result.locationFaculty">{{ result.locationFaculty | location }}</p>
@@ -146,6 +148,7 @@
           <mat-card class="custom-card" fxLayout="column" fxLayoutAlign="center center"
             *ngIf="studyLevel === 'Doctoral'">
             <img mat-card-image src="{{ result.logoFaculty }}" *ngIf="result.logoFaculty">
+            <img mat-card-image src="assets/university.png" *ngIf="!result.logoFaculty">
             <mat-card-content>
               <p class="dark-blue-bold-text">{{ result.name | uppercase }}</p>
               <p class="grey-text" *ngIf="result.locationFaculty">{{ result.locationFaculty | location }}</p>
