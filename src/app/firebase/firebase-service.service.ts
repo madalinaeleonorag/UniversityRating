@@ -52,8 +52,24 @@ export class FirebaseService {
     return this.usersCollection.valueChanges();
   }
 
-  getBachelorsByFacultyId(id: string) {
+  getUniversityById(id: string) {
+    return this.fb.collection('University').doc(id).get().then(doc => doc.data());
+  }
+
+  getFacultyById(id: string) {
     return this.fb.collection('Faculties').doc(id).get().then(doc => doc.data());
+  }
+
+  getBacheloryById(id: string) {
+    return this.fb.collection('Bachelors').doc(id).get().then(doc => doc.data());
+  }
+
+  getMasterById(id: string) {
+    return this.fb.collection('Masters').doc(id).get().then(doc => doc.data());
+  }
+
+  getDoctoralById(id: string) {
+    return this.fb.collection('Doctorals').doc(id).get().then(doc => doc.data());
   }
 
   // TODO: move all of the functions which includes firebase there from the old project

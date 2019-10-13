@@ -54,8 +54,9 @@ import { FacultyComponent } from './pages/detailsPages/faculty/faculty.component
 import { BachelorComponent } from './pages/detailsPages/bachelor/bachelor.component';
 import { MasterComponent } from './pages/detailsPages/master/master.component';
 import { DoctoralComponent } from './pages/detailsPages/doctoral/doctoral.component';
-
-
+import { InstantFacilityTranslatePipe } from './pipes/instant-facility-translate.pipe';
+import { AngularSvgIconModule } from 'angular-svg-icon';
+import { FacilityIconsPipe } from './pipes/facility-icons.pipe';
 
 // Firestore config
 const config = {
@@ -66,7 +67,6 @@ const config = {
   storageBucket: 'universityraking.appspot.com',
   messagingSenderId: '709054246209'
 };
-
 
 // Routes config
 const appRoutes: Routes = [
@@ -89,7 +89,9 @@ export function createTranslateLoader(http: HttpClient) {
     FacultyComponent,
     BachelorComponent,
     MasterComponent,
-    DoctoralComponent
+    DoctoralComponent,
+    InstantFacilityTranslatePipe,
+    FacilityIconsPipe
   ],
   imports: [
     ReactiveFormsModule,
@@ -148,7 +150,8 @@ export function createTranslateLoader(http: HttpClient) {
         useFactory: (createTranslateLoader),
         deps: [HttpClient]
       }
-    })
+    }),
+    AngularSvgIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,1 +1,11 @@
-<p>university works!</p>
+<mat-grid-list cols="4" rowHeight="2:1">
+  <mat-grid-tile *ngFor="let facility of universityDetails.facilitiesUniversity">
+    <mat-card fxLayout="column" fxLayoutAlign="center center">
+        <!-- TODO put icons -->
+      <svg-icon src="{{ facility | facilityIcons }}" [svgStyle]="{ 'max-width.px':50, 'max-height.px':50 }"></svg-icon>
+      <mat-card-subtitle>
+        {{ facility | instantFacilityTranslate }}
+      </mat-card-subtitle>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>

@@ -17,13 +17,13 @@ export class BachelorData {
     @JsonProperty('bachelorId')
     bachelorId: number = undefined;
 
-    constructor(obj, key) {
-        this.facultyId = obj.facultyId;
-        this.generalSkills = obj.generalSkills;
-        this.name = obj.name;
-        this.professionalPerspectives = obj.professionalPerspectives;
-        this.semesters = obj.semesters;
-        this.years = obj.years;
-        this.bachelorId = key;
+    constructor(obj: any) {
+        this.facultyId = obj ? (obj.facultyId ? obj.facultyId : undefined) : undefined;
+        this.generalSkills = obj ? (obj.generalSkills ? obj.generalSkills : []) : [];
+        this.name = obj ? (obj.name ? obj.name : undefined) : undefined;
+        this.professionalPerspectives = obj ? (obj.professionalPerspectives ? obj.professionalPerspectives : []) : [];
+        this.semesters = obj ? (obj.semesters ? obj.semesters : undefined) : undefined;
+        this.years = obj ? (obj.years ? obj.years : undefined) : undefined;
+        this.bachelorId = obj ? (obj.bachelorId ? obj.bachelorId : undefined) : undefined;
     }
 }

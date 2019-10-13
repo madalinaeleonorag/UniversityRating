@@ -59,8 +59,7 @@ export class SearchComponent implements OnInit, OnDestroy {
       this.universitiesData = result;
       this.getUniversityLocations(result);
     });
-    this.getFacilities(Object.keys(Facilities));
-    // this.firebaseService.getBachelorsByFacultyId('6EtosXDnyAoc6gu3JoLb').then(data => console.log(data));
+    this.facilitiesList = Object.keys(Facilities);
   }
 
   getData() {
@@ -144,14 +143,6 @@ export class SearchComponent implements OnInit, OnDestroy {
     });
     console.log('doctoralsData: ', result);
     return this.sortByRatings(result);
-  }
-
-  private getFacilities(facilities: Array<string>) {
-    facilities.forEach(facility => {
-      this.facilitiesList.push(
-        this.translate.instant(`filters.keywords.facilities.${facility}`)
-      );
-    });
   }
 
   private getUniversityLocations(universities: Array<any>) {

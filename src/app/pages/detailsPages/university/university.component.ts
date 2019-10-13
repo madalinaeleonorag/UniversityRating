@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { FirebaseService } from 'src/app/firebase/firebase-service.service';
+import { UniversityData } from 'src/app/models/UniversityData';
 
 @Component({
   selector: 'app-university',
@@ -10,12 +12,20 @@ import { ActivatedRoute } from '@angular/router';
 export class UniversityComponent implements OnInit, OnDestroy {
 
   paramSubscription: Subscription;
+  universityDetails: UniversityData = new UniversityData(undefined);
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private firebaseService: FirebaseService) { }
 
   ngOnInit() {
     this.paramSubscription = this.route.paramMap.subscribe(params => {
-      console.log(params.get('id'));
+      const id = params.get('id');
+      if (id) {
+        this.firebaseService.getUniversityById(id).then(data => {
+          this.universityDetails = new UniversityData(data);
+          console.log(this.universityDetails);
+
+        });
+      }
     });
   }
 
