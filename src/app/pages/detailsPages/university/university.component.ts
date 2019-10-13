@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { FirebaseService } from 'src/app/firebase/firebase-service.service';
@@ -7,7 +7,8 @@ import { UniversityData } from 'src/app/models/UniversityData';
 @Component({
   selector: 'app-university',
   templateUrl: './university.component.html',
-  styleUrls: ['./university.component.scss']
+  styleUrls: ['./university.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class UniversityComponent implements OnInit, OnDestroy {
 

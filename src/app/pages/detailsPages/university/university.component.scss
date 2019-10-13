@@ -1,0 +1,13 @@
+app-university {
+  .facilities-cards {
+    display: flex;
+    flex-flow: wrap;
+
+    mat-card {
+      height: 150px;
+      width: 150px;
+      text-align: center;
+      box-shadow: none !important;
+    }
+  }
+}
