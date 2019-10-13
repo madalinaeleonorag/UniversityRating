@@ -8,6 +8,7 @@ import { Facilities } from 'src/app/enums/Facilities';
 import { Subscription } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import * as _ from 'underscore';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -42,7 +43,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   universitiesData = [];
 
 
-  constructor(private firebaseService: FirebaseService, private translate: TranslateService) {
+  constructor(private firebaseService: FirebaseService, private translate: TranslateService, private router: Router) {
     this.categories = Object.keys(Categories);
     this.sortTypes = Object.keys(Sorting);
     this.typeOfInstitution = Object.keys(InstitutionType);
@@ -78,6 +79,7 @@ export class SearchComponent implements OnInit, OnDestroy {
         && this.matchingType(university.typeUniversity) && this.matchingFacilities(university.facilitiesUniversity)
         && this.matchingDescription(university.descriptionUniversity);
     });
+    console.log('universitiesData: ', result);
     return this.sortByRatings(result);
   }
 
@@ -86,6 +88,7 @@ export class SearchComponent implements OnInit, OnDestroy {
       return this.matchingNames(faculty.nameFaculty) && this.matchingLocations(faculty.locationFaculty)
         && this.matchingDescription(faculty.descriptionFaculty);
     });
+    console.log('facultiesData: ', result);
     return this.sortByRatings(result);
   }
 
@@ -103,6 +106,7 @@ export class SearchComponent implements OnInit, OnDestroy {
       return this.matchingNames(bachelor.name) && this.matchingLocations(bachelor.locationFaculty)
         && this.matchingDescription(bachelor.descriptionFaculty);
     });
+    console.log('bachelorsData: ', result);
     return this.sortByRatings(result);
   }
 
@@ -120,6 +124,7 @@ export class SearchComponent implements OnInit, OnDestroy {
       return this.matchingNames(master.name) && this.matchingLocations(master.locationFaculty)
         && this.matchingDescription(master.descriptionFaculty);
     });
+    console.log('mastersData: ', result);
     return this.sortByRatings(result);
   }
 
@@ -137,6 +142,7 @@ export class SearchComponent implements OnInit, OnDestroy {
       return this.matchingNames(doctoral.name) && this.matchingLocations(doctoral.locationFaculty)
         && this.matchingDescription(doctoral.descriptionFaculty);
     });
+    console.log('doctoralsData: ', result);
     return this.sortByRatings(result);
   }
 
@@ -241,6 +247,28 @@ export class SearchComponent implements OnInit, OnDestroy {
       case 'NoSorting': sortedData = data;
     }
     return sortedData;
+  }
+
+  goToUniversity(id: string) {
+    this.router.navigateByUrl(`/university/${id}`);
+  }
+
+  goToFaculty(id: string) {
+    this.router.navigateByUrl(`/faculty/${id}`);
+  }
+
+  goToBachelor(id: string) {
+    // TODO solve it
+    this.router.navigateByUrl(`/bachelor/${id}`);
+  }
+
+  goToMaster(id: string) {
+    // TODO solve it
+    this.router.navigateByUrl(`/master/${id}`);
+  }
+
+  goToDoctoral(id: string) {
+    this.router.navigateByUrl(`/doctoral/${id}`);
   }
 
   ngOnDestroy() {

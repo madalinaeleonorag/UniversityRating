@@ -49,6 +49,11 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { SearchComponent } from './pages/search/search.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { LocationPipe } from './pipes/location.pipe';
+import { UniversityComponent } from './pages/detailsPages/university/university.component';
+import { FacultyComponent } from './pages/detailsPages/faculty/faculty.component';
+import { BachelorComponent } from './pages/detailsPages/bachelor/bachelor.component';
+import { MasterComponent } from './pages/detailsPages/master/master.component';
+import { DoctoralComponent } from './pages/detailsPages/doctoral/doctoral.component';
 
 
 
@@ -79,7 +84,12 @@ export function createTranslateLoader(http: HttpClient) {
     FooterComponent,
     HomepageComponent,
     SearchComponent,
-    LocationPipe
+    LocationPipe,
+    UniversityComponent,
+    FacultyComponent,
+    BachelorComponent,
+    MasterComponent,
+    DoctoralComponent
   ],
   imports: [
     ReactiveFormsModule,
