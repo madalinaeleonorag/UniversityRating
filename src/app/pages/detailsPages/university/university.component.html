@@ -1,13 +1,126 @@
-<div fxLayout="row">
-    <div class="facilities-cards">
-        <div *ngFor="let facility of universityDetails.facilitiesUniversity">
-    <mat-card fxLayout="column" fxLayoutAlign="center center">
-        <!-- TODO put icons -->
-      <svg-icon src="{{ facility | facilityIcons }}" [svgStyle]="{ 'width.px':50, 'height.px':50 }"></svg-icon>
-      <mat-card-subtitle>
-        {{ facility | instantFacilityTranslate }}
-      </mat-card-subtitle>
-    </mat-card>
+<div fxLayout="column" fxLayoutAlign="center center" class="custom-university-header">
+  <img mat-card-image src="{{ universityDetails.logoUniversity }}" *ngIf="universityDetails.logoUniversity">
+  <img mat-card-image src="assets/university.png" *ngIf="!universityDetails.logoUniversity">
+  <div>
+    {{ universityDetails.nameUniversity |uppercase }}
   </div>
-  </div>
+  <!--<div>
+      {{ universityDetails.rating }}
+      TODO add stars there and in the homepage
+  </div> -->
+  <a href="{{ universityDetails.websiteUniversity }}">{{ 'university_page.header.website' | translate }}</a>
+  <!-- TODO compara button -->
 </div>
+<mat-tab-group mat-align-tabs="center">
+  <mat-tab label="{{ 'university_page.tab_labels.details' | translate }}">
+    <div class="custom-detail-field" *ngIf="universityDetails.typeUniversity">
+      <div class="custom-detail-field-title">
+        {{ 'university_page.details.type' | translate }}
+      </div>
+      {{ universityDetails.typeUniversity }}
+    </div>
+    <div class="custom-detail-field" *ngIf="universityDetails.descriptionUniversity">
+      <div class="custom-detail-field-title">
+        {{ 'university_page.details.description' | translate }}
+      </div>
+      {{ universityDetails.descriptionUniversity }}
+    </div>
+    <div class="custom-detail-field" *ngIf="universityDetails.mission">
+      <div class="custom-detail-field-title">
+        {{ 'university_page.details.mission' | translate }}
+      </div>
+      {{ universityDetails.mission }}
+    </div>
+    <div class="custom-detail-field" *ngIf="universityDetails.strategicPrograms.length > 0">
+      <div class="custom-detail-field-title">
+        {{ 'university_page.details.strategic_programs' | translate }}
+      </div>
+      <ul>
+        <li *ngFor="let item of universityDetails.strategicPrograms">
+          - {{ item }}
+        </li>
+      </ul>
+    </div>
+    <div class="custom-detail-field" *ngIf="universityDetails.values.length > 0">
+      <div class="custom-detail-field-title">
+        {{ 'university_page.details.values' | translate }}
+      </div>
+      <ul>
+        <li *ngFor="let item of universityDetails.values">
+          - {{ item }}
+        </li>
+      </ul>
+    </div>
+    <div class="custom-detail-field" *ngIf="universityDetails.vision">
+      <div class="custom-detail-field-title">
+        {{ 'university_page.details.vision' | translate }}
+      </div>
+      <ul>
+        {{ universityDetails.vision }}
+      </ul>
+    </div>
+
+  </mat-tab>
+
+  <mat-tab label="{{ 'university_page.tab_labels.faculties' | translate }}">
+    <table mat-table [dataSource]="facultiesData">
+      {{ facultiesData | json}}
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> {{ 'university_page.faculties.name' | translate }} </th>
+        <td mat-cell *matCellDef="let element"> {{ element.nameFaculty }} </td>
+      </ng-container>
+      <ng-container matColumnDef="bachelors">
+        <th mat-header-cell *matHeaderCellDef> {{ 'university_page.faculties.bachelors' | translate }} </th>
+        <td mat-cell *matCellDef="let element"> {{ element.bachelors?.length }} </td>
+      </ng-container>
+      <ng-container matColumnDef="masters">
+        <th mat-header-cell *matHeaderCellDef> {{ 'university_page.faculties.masters' | translate }} </th>
+        <td mat-cell *matCellDef="let element"> {{ element.masters?.length }} </td>
+      </ng-container>
+      <ng-container matColumnDef="doctorals">
+        <th mat-header-cell *matHeaderCellDef> {{ 'university_page.faculties.doctorals' | translate }} </th>
+        <td mat-cell *matCellDef="let element"> {{ element.doctorals ? element.doctorals?.length : 0 }} </td>
+      </ng-container>
+      <ng-container matColumnDef="button">
+        <th mat-header-cell *matHeaderCellDef> </th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-raised-button class="gradient-background white-text-button"
+            (click)="onNavigate(element.facultyId)">{{ 'university_page.faculties.details' | translate }}</button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-tab>
+
+  <mat-tab label="{{ 'university_page.tab_labels.location' | translate }}">
+
+  </mat-tab>
+
+  <mat-tab label="{{ 'university_page.tab_labels.photos' | translate }}">
+    <div *ngFor="let photo of universityDetails.photosUniversity">
+      <img mat-card-image src="{{ photo }}">
+    </div>
+  </mat-tab>
+
+  <mat-tab label="{{ 'university_page.tab_labels.facilities' | translate }}">
+    <div fxLayout="row">
+      <div class="facilities-cards">
+        <div *ngFor="let facility of universityDetails.facilitiesUniversity">
+          <mat-card fxLayout="column" fxLayoutAlign="center center">
+            <!-- TODO put icons -->
+            <svg-icon src="{{ facility | facilityIcons }}" [svgStyle]="{ 'width.px':50, 'height.px':50 }"></svg-icon>
+            <mat-card-subtitle>
+              {{ facility | instantFacilityTranslate }}
+            </mat-card-subtitle>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+
+  <mat-tab label="{{ 'university_page.tab_labels.contact' | translate }}">
+
+  </mat-tab>
+</mat-tab-group>

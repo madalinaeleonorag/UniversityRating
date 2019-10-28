@@ -43,7 +43,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   universitiesData = [];
 
 
-  constructor(private firebaseService: FirebaseService, private translate: TranslateService, private router: Router) {
+  constructor(private firebaseService: FirebaseService, private router: Router) {
     this.categories = Object.keys(Categories);
     this.sortTypes = Object.keys(Sorting);
     this.typeOfInstitution = Object.keys(InstitutionType);

@@ -57,5 +57,33 @@
     "counter_doctorals": "doctorate",
     "counter_semesters": "semestre",
     "counter_years": "ani"
+  },
+  "university_page": {
+    "tab_labels": {
+      "facilities": "Facilitati",
+      "details": "Detalii",
+      "location": "Locatie",
+      "photos": "Fotografii",
+      "faculties": "Facultati",
+      "contact": "Contact"
+    },
+    "header": {
+      "website": "Viziteaza site-ul universitatii"
+    },
+    "details": {
+      "type": "Tip institutie",
+      "description": "Descriere",
+      "mission": "Misiune",
+      "strategic_programs": "Programe strategice",
+      "values": "Valori",
+      "vision": "Viziune"
+    },
+    "faculties": {
+      "name": "Nume",
+      "bachelors": "Licente",
+      "masters": "Masterate",
+      "doctorals": "Doctorate",
+      "details": "Vezi facultate"
+    }
   }
 }

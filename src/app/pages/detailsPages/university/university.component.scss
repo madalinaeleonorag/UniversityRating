@@ -1,3 +1,5 @@
+@import "../../../variables.scss";
+
 app-university {
   .facilities-cards {
     display: flex;
@@ -8,6 +10,58 @@ app-university {
       width: 150px;
       text-align: center;
       box-shadow: none !important;
+      background-color: #fafafa;
+    }
+
+    mat-card-subtitle {
+      padding-top: 10px;
     }
   }
+
+  .custom-university-header {
+    padding-top: 30px;
+
+    .mat-card-image {
+      width: 200px;
+    }
+  }
+
+  .custom-detail-field {
+    padding-bottom: 10px;
+
+    li {
+      list-style-type: none;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+    }
+
+    .custom-detail-field-title {
+      font-weight: bold;
+      padding-bottom: 5px;
+    }
+  }
+
+  .mat-tab-body {
+    margin: 20px;
+  }
+
+  table {
+    width: 100%;
+
+    th.mat-header-cell {
+      padding: 10px;
+    }
+
+    td.mat-cell {
+      text-align: center;
+    }
+
+    td.mat-cell:first-of-type {
+      text-align: left;
+    }
+  }
+  
 }
