@@ -94,10 +94,6 @@
     </table>
   </mat-tab>
 
-  <mat-tab label="{{ 'university_page.tab_labels.location' | translate }}">
-
-  </mat-tab>
-
   <mat-tab label="{{ 'university_page.tab_labels.photos' | translate }}">
     <div *ngFor="let photo of universityDetails.photosUniversity">
       <img mat-card-image src="{{ photo }}">
@@ -121,6 +117,7 @@
   </mat-tab>
 
   <mat-tab label="{{ 'university_page.tab_labels.contact' | translate }}">
-
+      <div #map></div>
+      <!-- TODO map-->
   </mat-tab>
 </mat-tab-group>

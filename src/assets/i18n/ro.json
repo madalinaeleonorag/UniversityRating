@@ -62,7 +62,6 @@
     "tab_labels": {
       "facilities": "Facilitati",
       "details": "Detalii",
-      "location": "Locatie",
       "photos": "Fotografii",
       "faculties": "Facultati",
       "contact": "Contact"
@@ -77,6 +76,13 @@
       "strategic_programs": "Programe strategice",
       "values": "Valori",
       "vision": "Viziune"
+    },
+    "faculties": {
+      "name": "Nume",
+      "bachelors": "Licente",
+      "masters": "Masterate",
+      "doctorals": "Doctorate",
+      "details": "Vezi facultate"
     }
   }
 }

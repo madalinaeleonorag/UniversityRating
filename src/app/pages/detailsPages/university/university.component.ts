@@ -1,9 +1,10 @@
-import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewEncapsulation, ViewChild, AfterViewInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FirebaseService } from 'src/app/firebase/firebase-service.service';
 import { UniversityData } from 'src/app/models/UniversityData';
 import { FacultyData } from 'src/app/models/FacultyData';
+import { } from 'googlemaps';
 
 @Component({
   selector: 'app-university',
@@ -11,8 +12,10 @@ import { FacultyData } from 'src/app/models/FacultyData';
   styleUrls: ['./university.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class UniversityComponent implements OnInit, OnDestroy {
+export class UniversityComponent implements OnInit, OnDestroy, AfterViewInit {
 
+  @ViewChild('map', { static: false }) mapElement: any;
+  map: google.maps.Map;
   paramSubscription: Subscription;
   universityDetails: UniversityData = new UniversityData(undefined);
   facultiesData: FacultyData[] = [];
@@ -38,6 +41,15 @@ export class UniversityComponent implements OnInit, OnDestroy {
         });
       }
     });
+  }
+
+  ngAfterViewInit() {
+    const mapProperties = {
+      center: new google.maps.LatLng(35.2271, -80.8431),
+      zoom: 15,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    this.map = new google.maps.Map(this.mapElement.nativeElement, mapProperties);
   }
 
   onNavigate(id: string) {
