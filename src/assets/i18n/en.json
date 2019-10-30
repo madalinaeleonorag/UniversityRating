@@ -83,6 +83,11 @@
       "masters": "Masterate",
       "doctorals": "Doctorate",
       "details": "Vezi facultate"
+    },
+    "contact": {
+      "phone": "Telefon",
+      "address": "Adresa",
+      "fax": "Fax"
     }
   }
 }

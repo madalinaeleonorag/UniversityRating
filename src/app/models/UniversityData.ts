@@ -36,6 +36,8 @@ export class UniversityData {
     address: string = undefined;
     @JsonProperty('fax')
     fax: string = undefined;
+    @JsonProperty('phone')
+    phone: string = undefined;
 
     constructor(obj: any) {
         this.descriptionUniversity = obj ? (obj.descriptionUniversity ? obj.descriptionUniversity : undefined) : undefined;
@@ -55,5 +57,6 @@ export class UniversityData {
         this.websiteUniversity = obj ? (obj.websiteUniversity ? obj.websiteUniversity : undefined) : undefined;
         this.address = obj ? (obj.address ? obj.address : undefined) : undefined;
         this.fax = obj ? (obj.fax ? obj.fax : undefined) : undefined;
+        this.phone = obj ? (obj.phone ? obj.phone : undefined) : undefined;
     }
 }

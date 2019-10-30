@@ -4,6 +4,7 @@
   <div>
     {{ universityDetails.nameUniversity |uppercase }}
   </div>
+
   <!--<div>
       {{ universityDetails.rating }}
       TODO add stars there and in the homepage
@@ -117,7 +118,26 @@
   </mat-tab>
 
   <mat-tab label="{{ 'university_page.tab_labels.contact' | translate }}">
-      <div #map id="map"></div>
-      <!-- TODO map-->
+  <div #map id="map"></div>
+
+    <!-- TODO map-->
+    <div class="custom-detail-field" *ngIf="universityDetails.phone">
+      <div class="custom-detail-field-title">
+        {{ 'university_page.contact.phone' | translate }}
+      </div>
+      {{ universityDetails.phone }}
+    </div>
+    <div class="custom-detail-field" *ngIf="universityDetails.address">
+      <div class="custom-detail-field-title">
+        {{ 'university_page.contact.address' | translate }}
+      </div>
+      {{ universityDetails.address }}
+    </div>
+    <div class="custom-detail-field" *ngIf="universityDetails.fax">
+      <div class="custom-detail-field-title">
+        {{ 'university_page.contact.fax' | translate }}
+      </div>
+      {{ universityDetails.fax }}
+    </div>
   </mat-tab>
 </mat-tab-group>
