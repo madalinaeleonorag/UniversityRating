@@ -32,6 +32,10 @@ export class UniversityData {
     vision: string = undefined;
     @JsonProperty('websiteUniversity')
     websiteUniversity: string = undefined;
+    @JsonProperty('address')
+    address: string = undefined;
+    @JsonProperty('fax')
+    fax: string = undefined;
 
     constructor(obj: any) {
         this.descriptionUniversity = obj ? (obj.descriptionUniversity ? obj.descriptionUniversity : undefined) : undefined;
@@ -49,5 +53,7 @@ export class UniversityData {
         this.values = obj ? (obj.values ? obj.values : []) : [];
         this.vision = obj ? (obj.vision ? obj.vision : undefined) : undefined;
         this.websiteUniversity = obj ? (obj.websiteUniversity ? obj.websiteUniversity : undefined) : undefined;
+        this.address = obj ? (obj.address ? obj.address : undefined) : undefined;
+        this.fax = obj ? (obj.fax ? obj.fax : undefined) : undefined;
     }
 }

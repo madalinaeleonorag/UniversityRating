@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewEncapsulation, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewEncapsulation, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FirebaseService } from 'src/app/firebase/firebase-service.service';
@@ -14,7 +14,7 @@ import { } from 'googlemaps';
 })
 export class UniversityComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  @ViewChild('map', { static: false }) mapElement: any;
+  @ViewChild('map', { static: false }) mapElement: ElementRef;
   map: google.maps.Map;
   paramSubscription: Subscription;
   universityDetails: UniversityData = new UniversityData(undefined);
@@ -44,12 +44,16 @@ export class UniversityComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    const mapProperties = {
+    this.initializeMap();
+  }
+
+  initializeMap() {
+    const mapOptions: google.maps.MapOptions = {
       center: new google.maps.LatLng(35.2271, -80.8431),
       zoom: 15,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
-    this.map = new google.maps.Map(this.mapElement.nativeElement, mapProperties);
+    this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
   }
 
   onNavigate(id: string) {
