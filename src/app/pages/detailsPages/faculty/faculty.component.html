@@ -1,1 +1,76 @@
-<p>faculty works!</p>
+<div fxLayout="column" fxLayoutAlign="center center" class="custom-faculty-header">
+  <img mat-card-image src="{{ facultyDetails.logoFaculty }}" *ngIf="facultyDetails?.logoFaculty">
+  <img mat-card-image src="assets/university.png" *ngIf="!facultyDetails?.logoFaculty">
+  <div>
+    {{ facultyDetails?.nameFaculty | uppercase }}
+  </div>
+
+  {{ bachelorsData | json}}
+  <a href="{{ facultyDetails?.studyGuide }}">{{ 'faculty_page.header.studyGuide' | translate }}</a>
+  <!-- TODO compara button -->
+</div>
+<mat-tab-group mat-align-tabs="center">
+
+  <mat-tab label="{{ 'faculty_page.tab_labels.details' | translate }}">
+    <div class="custom-detail-field" *ngIf="universityDetails?.typeUniversity">
+      <div class="custom-detail-field-title">
+        {{ 'faculty_page.details.type' | translate }}
+      </div>
+      {{ universityDetails?.typeUniversity }}
+    </div>
+    <div class="custom-detail-field" *ngIf="facultyDetails?.descriptionFaculty">
+      <div class="custom-detail-field-title">
+        {{ 'faculty_page.details.description' | translate }}
+      </div>
+      {{ facultyDetails?.descriptionFaculty }}
+    </div>
+    <div class="custom-detail-field" *ngIf="universityDetails?.mission">
+      <div class="custom-detail-field-title">
+        {{ 'faculty_page.details.mission' | translate }}
+      </div>
+      {{ universityDetails?.mission }}
+    </div>
+    <div class="custom-detail-field" *ngIf="universityDetails?.strategicPrograms.length > 0">
+      <div class="custom-detail-field-title">
+        {{ 'faculty_page.details.strategic_programs' | translate }}
+      </div>
+      <ul>
+        <li *ngFor="let item of universityDetails?.strategicPrograms">
+          - {{ item }}
+        </li>
+      </ul>
+    </div>
+    <div class="custom-detail-field" *ngIf="universityDetails?.values.length > 0">
+      <div class="custom-detail-field-title">
+        {{ 'faculty_page.details.values' | translate }}
+      </div>
+      <ul>
+        <li *ngFor="let item of universityDetails?.values">
+          - {{ item }}
+        </li>
+      </ul>
+    </div>
+    <div class="custom-detail-field" *ngIf="universityDetails?.vision">
+      <div class="custom-detail-field-title">
+        {{ 'faculty_page.details.vision' | translate }}
+      </div>
+      <ul>
+        {{ universityDetails?.vision }}
+      </ul>
+    </div>
+
+  </mat-tab>
+
+  <mat-tab label="{{ 'faculty_page.tab_labels.bachelors' | translate }}">
+
+  </mat-tab>
+
+  <mat-tab label="{{ 'faculty_page.tab_labels.masters' | translate }}">
+
+  </mat-tab>
+
+  <mat-tab label="{{ 'faculty_page.tab_labels.doctorals' | translate }}">
+
+  </mat-tab>
+
+</mat-tab-group>

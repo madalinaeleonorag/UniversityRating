@@ -90,5 +90,24 @@
       "address": "Adresa",
       "fax": "Fax"
     }
+  },
+  "faculty_page": {
+    "tab_labels": {
+      "details": "Detalii",
+      "bachelors": "Licenta",
+      "masters": "Master",
+      "doctorals": "Doctorate"
+    },
+    "header": {
+      "studyGuide": "Viziteaza ghidul facultatii"
+    },
+    "details": {
+      "type": "Tip institutie",
+      "description": "Descriere",
+      "mission": "Misiune",
+      "strategic_programs": "Programe strategice",
+      "values": "Valori",
+      "vision": "Viziune"
+    }
   }
 }

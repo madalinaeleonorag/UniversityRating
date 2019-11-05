@@ -8,6 +8,8 @@ export class FacultyData {
     bachelors: string[] = [];
     @JsonProperty('masters')
     masters: string[] = [];
+    @JsonProperty('doctorals')
+    doctorals: string[] = [];
     @JsonProperty('locationFaculty')
     locationFaculty: any = undefined;
     @JsonProperty('logoFaculty')
@@ -25,6 +27,7 @@ export class FacultyData {
         this.facultyId = obj ? (obj.facultyId ? obj.facultyId : undefined) : undefined;
         this.bachelors = obj ? (obj.bachelors ? obj.bachelors : []) : [];
         this.masters = obj ? (obj.masters ? obj.masters : []) : [];
+        this.doctorals = obj ? (obj.doctorals ? obj.doctorals : []) : [];
         this.locationFaculty = obj ? (obj.locationFaculty ? obj.locationFaculty : undefined) : undefined;
         this.logoFaculty = obj ? (obj.logoFaculty ? obj.logoFaculty : undefined) : undefined;
         this.nameFaculty = obj ? (obj.nameFaculty ? obj.nameFaculty : undefined) : undefined;
