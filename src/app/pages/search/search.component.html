@@ -125,7 +125,7 @@
                 {{ result.years }} {{ 'filters.counter_years' | translate }}
               </p>
             </mat-card-content>
-            <button mat-button fxFlexFill (click)="goToBachelor(result.bachelorId)">{{ 'buttons.more_details' | translate | uppercase }}</button>
+            <button mat-button fxFlexFill (click)="goToBachelor(result.facultyId)">{{ 'buttons.more_details' | translate | uppercase }}</button>
           </mat-card>
           <!-- masters results -->
           <mat-card class="custom-card" fxLayout="column" fxLayoutAlign="center center" *ngIf="studyLevel === 'Master'">
@@ -142,7 +142,7 @@
                 {{ result.years }} {{ 'filters.counter_years' | translate }}
               </p>
             </mat-card-content>
-            <button mat-button fxFlexFill (click)="goToMaster(result.masterId)">{{ 'buttons.more_details' | translate | uppercase }}</button>
+            <button mat-button fxFlexFill (click)="goToMaster(result.facultyId)">{{ 'buttons.more_details' | translate | uppercase }}</button>
           </mat-card>
           <!-- doctorals results -->
           <mat-card class="custom-card" fxLayout="column" fxLayoutAlign="center center"
@@ -160,7 +160,7 @@
                 {{ result.years }} {{ 'filters.counter_years' | translate }}
               </p>
             </mat-card-content>
-            <button mat-button fxFlexFill (click)="goToDoctoral(result.doctoralId)">{{ 'buttons.more_details' | translate | uppercase }}</button>
+            <button mat-button fxFlexFill (click)="goToDoctoral(result.facultyId)">{{ 'buttons.more_details' | translate | uppercase }}</button>
           </mat-card>
         </div>
       </div>

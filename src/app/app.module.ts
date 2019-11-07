@@ -51,9 +51,6 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { LocationPipe } from './pipes/location.pipe';
 import { UniversityComponent } from './pages/detailsPages/university/university.component';
 import { FacultyComponent } from './pages/detailsPages/faculty/faculty.component';
-import { BachelorComponent } from './pages/detailsPages/bachelor/bachelor.component';
-import { MasterComponent } from './pages/detailsPages/master/master.component';
-import { DoctoralComponent } from './pages/detailsPages/doctoral/doctoral.component';
 import { InstantFacilityTranslatePipe } from './pipes/instant-facility-translate.pipe';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { FacilityIconsPipe } from './pipes/facility-icons.pipe';
@@ -87,9 +84,6 @@ export function createTranslateLoader(http: HttpClient) {
     LocationPipe,
     UniversityComponent,
     FacultyComponent,
-    BachelorComponent,
-    MasterComponent,
-    DoctoralComponent,
     InstantFacilityTranslatePipe,
     FacilityIconsPipe
   ],

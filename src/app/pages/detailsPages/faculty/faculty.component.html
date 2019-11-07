@@ -5,7 +5,6 @@
     {{ facultyDetails?.nameFaculty | uppercase }}
   </div>
 
-  {{ bachelorsData | json}}
   <a href="{{ facultyDetails?.studyGuide }}">{{ 'faculty_page.header.studyGuide' | translate }}</a>
   <!-- TODO compara button -->
 </div>
@@ -61,16 +60,102 @@
 
   </mat-tab>
 
-  <mat-tab label="{{ 'faculty_page.tab_labels.bachelors' | translate }}">
+  <mat-tab label="{{ 'faculty_page.tab_labels.bachelors' | translate }}" *ngIf="bachelorsData && bachelorsData.length > 0">
+
+    <mat-expansion-panel *ngFor="let bachelor of bachelorsData">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ bachelor.name }}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="custom-detail-field" *ngIf="bachelor?.years">
+        <div class="custom-detail-field-title">
+          {{ 'faculty_page.bachelors.years' | translate }}
+        </div>
+        {{ bachelor?.years }}
+      </div>
+      <div class="custom-detail-field" *ngIf="bachelor?.semesters">
+        <div class="custom-detail-field-title">
+          {{ 'faculty_page.bachelors.semesters' | translate }}
+        </div>
+        {{ bachelor?.semesters }}
+      </div>
+      <div class="custom-detail-field" *ngIf="bachelor?.generalSkills.length > 0">
+        <div class="custom-detail-field-title">
+          {{ 'faculty_page.bachelors.general_skills' | translate }}
+        </div>
+        <ul>
+          <li *ngFor="let item of bachelor?.generalSkills">
+            - {{ item }}
+          </li>
+        </ul>
+      </div>
+      <div class="custom-detail-field" *ngIf="bachelor?.professionalPerspectives.length > 0">
+        <div class="custom-detail-field-title">
+          {{ 'faculty_page.bachelors.professional_perspectives' | translate }}
+        </div>
+        <ul>
+          <li *ngFor="let item of bachelor?.professionalPerspectives">
+            - {{ item }}
+          </li>
+        </ul>
+      </div>
+    </mat-expansion-panel>
 
   </mat-tab>
 
-  <mat-tab label="{{ 'faculty_page.tab_labels.masters' | translate }}">
+  <mat-tab label="{{ 'faculty_page.tab_labels.masters' | translate }}" *ngIf="mastersData && mastersData.length > 0">
+
+    <mat-expansion-panel *ngFor="let master of mastersData">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ master.masterName }}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <!-- <div class="custom-detail-field" *ngIf="master?.years">
+        <div class="custom-detail-field-title">
+          {{ 'faculty_page.masters.years' | translate }}
+        </div>
+        {{ master?.years }}
+      </div>
+      <div class="custom-detail-field" *ngIf="master?.generalSkills.length > 0">
+        <div class="custom-detail-field-title">
+          {{ 'faculty_page.masters.general_skills' | translate }}
+        </div>
+        <ul>
+          <li *ngFor="let item of master?.generalSkills">
+            - {{ item }}
+          </li>
+        </ul>
+      </div> -->
+    </mat-expansion-panel>
 
   </mat-tab>
 
-  <mat-tab label="{{ 'faculty_page.tab_labels.doctorals' | translate }}">
-
+  <mat-tab label="{{ 'faculty_page.tab_labels.doctorals' | translate }}" *ngIf="doctoralsData && doctoralsData.length > 0">
+      <mat-expansion-panel *ngFor="let doctoral of doctoralsData">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{ doctoral.doctoralName }}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <!-- <div class="custom-detail-field" *ngIf="master?.years">
+            <div class="custom-detail-field-title">
+              {{ 'faculty_page.masters.years' | translate }}
+            </div>
+            {{ master?.years }}
+          </div>
+          <div class="custom-detail-field" *ngIf="master?.generalSkills.length > 0">
+            <div class="custom-detail-field-title">
+              {{ 'faculty_page.masters.general_skills' | translate }}
+            </div>
+            <ul>
+              <li *ngFor="let item of master?.generalSkills">
+                - {{ item }}
+              </li>
+            </ul>
+          </div> -->
+        </mat-expansion-panel>
   </mat-tab>
 
 </mat-tab-group>

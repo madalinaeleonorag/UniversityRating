@@ -108,6 +108,12 @@
       "strategic_programs": "Programe strategice",
       "values": "Valori",
       "vision": "Viziune"
+    },
+    "bachelors": {
+      "years": "Ani",
+      "semesters": "Semestre",
+      "general_skills": "Abilitati generale",
+      "professional_perspectives": "Perspective profesionale"
     }
   }
 }

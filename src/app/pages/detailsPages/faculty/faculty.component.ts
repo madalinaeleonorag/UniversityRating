@@ -51,14 +51,14 @@ export class FacultyComponent implements OnInit, OnDestroy {
             });
           }
           if (this.facultyDetails.masters.length > 0) {
-            this.facultyDetails.bachelors.forEach(masterId => {
+            this.facultyDetails.masters.forEach(masterId => {
               this.firebaseService.getMasterById(masterId).then(master => {
                 this.mastersData.push(new MasterData(master));
               });
             });
           }
           if (this.facultyDetails.doctorals.length > 0) {
-            this.facultyDetails.bachelors.forEach(doctoralId => {
+            this.facultyDetails.doctorals.forEach(doctoralId => {
               this.firebaseService.getDoctoralById(doctoralId).then(doctoral => {
                 this.doctoralsData.push(new DoctoralData(doctoral));
               });
