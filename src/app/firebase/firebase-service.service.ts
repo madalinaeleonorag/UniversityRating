@@ -9,7 +9,6 @@ export class FirebaseService {
 
   fb = firebase.firestore();
   bachelorsCollection = this.afs.collection('Bachelors');
-  commentsCollection = this.afs.collection('Comments');
   doctoralsCollection = this.afs.collection('Doctorals');
   facultiesCollection = this.afs.collection('Faculties');
   mastersCollection = this.afs.collection('Masters');
@@ -22,10 +21,6 @@ export class FirebaseService {
 
   getBachelorsData() {
     return this.bachelorsCollection.valueChanges();
-  }
-
-  getCommentsData() {
-    return this.commentsCollection.valueChanges();
   }
 
   getDoctoralsData() {

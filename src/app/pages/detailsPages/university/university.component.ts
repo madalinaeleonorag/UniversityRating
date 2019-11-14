@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewEncapsulation, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FirebaseService } from 'src/app/firebase/firebase-service.service';
@@ -12,7 +12,7 @@ import { } from 'googlemaps';
   styleUrls: ['./university.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class UniversityComponent implements OnInit, OnDestroy, AfterViewInit {
+export class UniversityComponent implements OnInit, OnDestroy {
 
   @ViewChild('map', { static: false }) mapElement: ElementRef;
   map: google.maps.Map;
@@ -29,6 +29,7 @@ export class UniversityComponent implements OnInit, OnDestroy, AfterViewInit {
       if (id) {
         this.firebaseService.getUniversityById(id).then(data => {
           this.universityDetails = new UniversityData(data);
+          this.initializeMap();
         });
         this.firebaseService.getFacultiesData().subscribe(data => {
           this.facultiesData = [];
@@ -43,17 +44,22 @@ export class UniversityComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 
-  ngAfterViewInit() {
-    this.initializeMap();
-  }
-
   initializeMap() {
     const mapOptions: google.maps.MapOptions = {
-      center: new google.maps.LatLng(35.2271, -80.8431),
+      center: new google.maps.LatLng(+this.universityDetails.locationUniversity[1],
+        +this.universityDetails.locationUniversity[2]),
       zoom: 15,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+
+    // tslint:disable-next-line: no-unused-expression
+    new google.maps.Marker({
+      position: new google.maps.LatLng(+this.universityDetails.locationUniversity[1],
+        +this.universityDetails.locationUniversity[2]),
+      map: this.map,
+      title: this.universityDetails.nameUniversity
+    });
   }
 
   onNavigate(id: string) {

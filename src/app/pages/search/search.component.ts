@@ -248,20 +248,6 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl(`/faculty/${id}`);
   }
 
-  goToBachelor(id: string) {
-    // TODO solve it
-    this.router.navigateByUrl(`/bachelor/${id}`);
-  }
-
-  goToMaster(id: string) {
-    // TODO solve it
-    this.router.navigateByUrl(`/master/${id}`);
-  }
-
-  goToDoctoral(id: string) {
-    this.router.navigateByUrl(`/doctoral/${id}`);
-  }
-
   ngOnDestroy() {
     if (this.bachelorSubscription) {
       this.bachelorSubscription.unsubscribe();
