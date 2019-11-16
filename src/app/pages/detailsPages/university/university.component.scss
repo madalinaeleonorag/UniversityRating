@@ -1,6 +1,12 @@
 @import "../../../variables.scss";
 
 app-university {
+
+  agm-map {
+    width: 100%;
+    height: 500px;
+  }
+  
   .facilities-cards {
     display: flex;
     flex-flow: wrap;

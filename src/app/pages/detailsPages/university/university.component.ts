@@ -5,6 +5,8 @@ import { FirebaseService } from 'src/app/firebase/firebase-service.service';
 import { UniversityData } from 'src/app/models/UniversityData';
 import { FacultyData } from 'src/app/models/FacultyData';
 import { } from 'googlemaps';
+import { ILatLng } from 'src/app/directives/directions-map.directive';
+import { LocationService } from 'src/app/services/location.service';
 
 @Component({
   selector: 'app-university',
@@ -20,8 +22,13 @@ export class UniversityComponent implements OnInit, OnDestroy {
   universityDetails: UniversityData = new UniversityData(undefined);
   facultiesData: FacultyData[] = [];
   displayedColumns: string[] = ['name', 'bachelors', 'masters', 'doctorals', 'button'];
+  origin: ILatLng;
+  destination: ILatLng;
+  displayDirections = false;
+  zoom = 25;
 
-  constructor(private route: ActivatedRoute, private firebaseService: FirebaseService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private firebaseService: FirebaseService, private router: Router,
+              private locationService: LocationService) { }
 
   ngOnInit() {
     this.paramSubscription = this.route.paramMap.subscribe(params => {
@@ -29,7 +36,14 @@ export class UniversityComponent implements OnInit, OnDestroy {
       if (id) {
         this.firebaseService.getUniversityById(id).then(data => {
           this.universityDetails = new UniversityData(data);
-          this.initializeMap();
+          if (Array.isArray(this.universityDetails.locationUniversity) && this.universityDetails.locationUniversity[1]) {
+            this.destination = {
+              latitude: +this.universityDetails.locationUniversity[1],
+              longitude: +this.universityDetails.locationUniversity[2]
+            };
+            this.getUserLocation();
+            this.displayDirections = true;
+          }
         });
         this.firebaseService.getFacultiesData().subscribe(data => {
           this.facultiesData = [];
@@ -44,21 +58,12 @@ export class UniversityComponent implements OnInit, OnDestroy {
     });
   }
 
-  initializeMap() {
-    const mapOptions: google.maps.MapOptions = {
-      center: new google.maps.LatLng(+this.universityDetails.locationUniversity[1],
-        +this.universityDetails.locationUniversity[2]),
-      zoom: 15,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-    this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-
-    // tslint:disable-next-line: no-unused-expression
-    new google.maps.Marker({
-      position: new google.maps.LatLng(+this.universityDetails.locationUniversity[1],
-        +this.universityDetails.locationUniversity[2]),
-      map: this.map,
-      title: this.universityDetails.nameUniversity
+  getUserLocation() {
+    this.locationService.getPosition().then(pos => {
+      this.origin = {
+        latitude: pos.lat,
+        longitude: pos.lng
+      };
     });
   }
 

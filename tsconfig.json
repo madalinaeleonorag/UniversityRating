@@ -18,7 +18,7 @@
       "es2018",
       "dom"
     ],
-    "types": ["googlemaps"]
+    "types": ["googlemaps", "jest", "node"]
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,

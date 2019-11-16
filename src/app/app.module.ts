@@ -54,6 +54,8 @@ import { FacultyComponent } from './pages/detailsPages/faculty/faculty.component
 import { InstantFacilityTranslatePipe } from './pipes/instant-facility-translate.pipe';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { FacilityIconsPipe } from './pipes/facility-icons.pipe';
+import { AgmCoreModule } from '@agm/core';
+import { DirectionsMapDirective } from './directives/directions-map.directive';
 
 // Firestore config
 const config = {
@@ -76,6 +78,7 @@ export function createTranslateLoader(http: HttpClient) {
 
 @NgModule({
   declarations: [
+    DirectionsMapDirective,
     AppComponent,
     HeaderComponent,
     FooterComponent,
@@ -88,6 +91,9 @@ export function createTranslateLoader(http: HttpClient) {
     FacilityIconsPipe
   ],
   imports: [
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCnKJYJPDPPKIwcf8fnDC7FXvUhRgPg1Gc'
+    }),
     ReactiveFormsModule,
     FormsModule,
     FlexLayoutModule,
