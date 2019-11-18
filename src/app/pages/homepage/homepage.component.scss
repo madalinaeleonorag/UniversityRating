@@ -6,7 +6,7 @@ app-homepage {
     margin-left: 10px;
   }
   .custom-banner {
-    height: 350px;
+    height: -webkit-fill-available;
     background-color: $darkBlue;
     padding: 50px;  
   }

@@ -56,6 +56,9 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
 import { FacilityIconsPipe } from './pipes/facility-icons.pipe';
 import { AgmCoreModule } from '@agm/core';
 import { DirectionsMapDirective } from './directives/directions-map.directive';
+import { AuthorRightsComponent } from './pages/author-rights/author-rights.component';
+import { ConfidentialityComponent } from './pages/confidentiality/confidentiality.component';
+import { TermsandconditionsComponent } from './pages/termsandconditions/termsandconditions.component';
 
 // Firestore config
 const config = {
@@ -88,7 +91,10 @@ export function createTranslateLoader(http: HttpClient) {
     UniversityComponent,
     FacultyComponent,
     InstantFacilityTranslatePipe,
-    FacilityIconsPipe
+    FacilityIconsPipe,
+    AuthorRightsComponent,
+    ConfidentialityComponent,
+    TermsandconditionsComponent
   ],
   imports: [
     AgmCoreModule.forRoot({

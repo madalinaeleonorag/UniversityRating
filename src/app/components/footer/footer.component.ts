@@ -1,43 +1,48 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.scss']
+  styleUrls: ['./footer.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class FooterComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
-  // TODO links
   items = [
     {
-      text: 'Ajutor',
-      value: '#'
-    },
-    {
       text: 'Termeni si conditii',
-      value: '#'
+      value: 'termsandconditions'
     },
     {
-      text: 'Confidentialitate',
-      value: '#'
+      text: 'Politica de confidentialitate',
+      value: 'confidentiality'
+    },
+    {
+      text: 'Drepturi de autor',
+      value: 'authorrights'
     },
     {
       text: 'ANPC',
-      value: '#'
+      value: 'https://anpc.ro/index.html'
     },
     {
       text: 'GDPR',
-      value: '#'
+      value: 'https://eugdpr.org/'
     }
-  ]
+  ];
 
   ngOnInit() {
   }
 
   onNavigate(link: string) {
-    window.open(link, "_blank");
+    if (link.includes('http')) {
+      window.open(link, '_blank');
+    } else {
+      this.router.navigateByUrl(`/${link}`);
+    }
   }
 
 }
