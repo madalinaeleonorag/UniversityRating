@@ -29,7 +29,6 @@ export class FacultyComponent implements OnInit, OnDestroy {
   doctoralsData: DoctoralData[] = [];
 
   constructor(private route: ActivatedRoute, private firebaseService: FirebaseService, private router: Router) { }
-//TODO add route to university page
 
   ngOnInit() {
     this.paramSubscription = this.route.paramMap.subscribe(params => {
@@ -37,7 +36,6 @@ export class FacultyComponent implements OnInit, OnDestroy {
       if (id) {
         this.firebaseService.getFacultyById(id).then(data => {
           this.facultyDetails = new FacultyData(data);
-          console.log('facultyDetails:', this.facultyDetails);
           if (this.facultyDetails.universityId) {
             this.firebaseService.getUniversityById(this.facultyDetails.universityId).then(university => {
               this.universityDetails = new UniversityData(university);

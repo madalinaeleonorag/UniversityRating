@@ -78,7 +78,6 @@ export class SearchComponent implements OnInit, OnDestroy {
         && this.matchingType(university.typeUniversity) && this.matchingFacilities(university.facilitiesUniversity)
         && this.matchingDescription(university.descriptionUniversity);
     });
-    console.log('universitiesData: ', result);
     return this.sortByRatings(result);
   }
 
@@ -87,7 +86,6 @@ export class SearchComponent implements OnInit, OnDestroy {
       return this.matchingNames(faculty.nameFaculty) && this.matchingLocations(faculty.locationFaculty)
         && this.matchingDescription(faculty.descriptionFaculty);
     });
-    console.log('facultiesData: ', result);
     return this.sortByRatings(result);
   }
 
@@ -105,7 +103,6 @@ export class SearchComponent implements OnInit, OnDestroy {
       return this.matchingNames(bachelor.name) && this.matchingLocations(bachelor.locationFaculty)
         && this.matchingDescription(bachelor.descriptionFaculty);
     });
-    console.log('bachelorsData: ', result);
     return this.sortByRatings(result);
   }
 
@@ -123,7 +120,6 @@ export class SearchComponent implements OnInit, OnDestroy {
       return this.matchingNames(master.name) && this.matchingLocations(master.locationFaculty)
         && this.matchingDescription(master.descriptionFaculty);
     });
-    console.log('mastersData: ', result);
     return this.sortByRatings(result);
   }
 
@@ -141,7 +137,6 @@ export class SearchComponent implements OnInit, OnDestroy {
       return this.matchingNames(doctoral.name) && this.matchingLocations(doctoral.locationFaculty)
         && this.matchingDescription(doctoral.descriptionFaculty);
     });
-    console.log('doctoralsData: ', result);
     return this.sortByRatings(result);
   }
 

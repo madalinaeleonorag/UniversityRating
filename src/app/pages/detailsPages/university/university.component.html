@@ -106,7 +106,6 @@
       <div class="facilities-cards">
         <div *ngFor="let facility of universityDetails.facilitiesUniversity">
           <mat-card fxLayout="column" fxLayoutAlign="center center">
-            <!-- TODO put icons -->
             <svg-icon src="{{ facility | facilityIcons }}" [svgStyle]="{ 'width.px':50, 'height.px':50 }"></svg-icon>
             <mat-card-subtitle>
               {{ facility | instantFacilityTranslate }}

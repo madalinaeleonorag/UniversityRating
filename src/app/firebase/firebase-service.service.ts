@@ -67,5 +67,4 @@ export class FirebaseService {
     return this.fb.collection('Doctorals').doc(id).get().then(doc => doc.data());
   }
 
-  // TODO: move all of the functions which includes firebase there from the old project
 }
