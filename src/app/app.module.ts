@@ -59,6 +59,8 @@ import { DirectionsMapDirective } from './directives/directions-map.directive';
 import { AuthorRightsComponent } from './pages/author-rights/author-rights.component';
 import { ConfidentialityComponent } from './pages/confidentiality/confidentiality.component';
 import { TermsandconditionsComponent } from './pages/termsandconditions/termsandconditions.component';
+import { LoginDialogComponent } from './components/login-dialog/login-dialog.component';
+import { AuthService } from './services/auth.service';
 
 // Firestore config
 const config = {
@@ -94,7 +96,11 @@ export function createTranslateLoader(http: HttpClient) {
     FacilityIconsPipe,
     AuthorRightsComponent,
     ConfidentialityComponent,
-    TermsandconditionsComponent
+    TermsandconditionsComponent,
+    LoginDialogComponent
+  ],
+  entryComponents: [
+    LoginDialogComponent
   ],
   imports: [
     AgmCoreModule.forRoot({
@@ -142,7 +148,7 @@ export function createTranslateLoader(http: HttpClient) {
     AppRoutingModule,
     BrowserAnimationsModule,
     // Firestore imports
-    AngularFireModule.initializeApp(config),
+    AngularFireModule.initializeApp(config, 'angular-auth-firebase'),
     AngularFirestoreModule, // firestore
     AngularFireAuthModule, // auth
     AngularFireStorageModule, // storage
@@ -160,7 +166,7 @@ export function createTranslateLoader(http: HttpClient) {
     }),
     AngularSvgIconModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

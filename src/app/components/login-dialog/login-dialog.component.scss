@@ -1,0 +1,12 @@
+app-login-dialog {
+  .mat-dialog-actions {
+    justify-content: space-between;
+  }
+  .mat-form-field {
+    width: 100%;
+  }
+  .custom-error {
+    color: red;
+    font-size: smaller;
+  }
+}

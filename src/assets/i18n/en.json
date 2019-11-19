@@ -115,5 +115,14 @@
       "general_skills": "Abilitati generale",
       "professional_perspectives": "Perspective profesionale"
     }
+  },
+  "login_dialog": {
+    "title": "Login",
+    "email": "Email",
+    "password": "Password",
+    "error_invalid_email": "Please enter a valid email address",
+    "error_required_email": "Email is required",
+    "cancel": "Cancel",
+    "login": "Login"
   }
 }

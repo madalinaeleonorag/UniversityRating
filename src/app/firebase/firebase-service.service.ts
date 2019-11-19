@@ -67,4 +67,8 @@ export class FirebaseService {
     return this.fb.collection('Doctorals').doc(id).get().then(doc => doc.data());
   }
 
+  getUserById(id: string) {
+    return this.fb.collection('Users').doc(id).get().then(doc => doc.data());
+  }
+
 }
