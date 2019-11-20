@@ -71,4 +71,8 @@ export class FirebaseService {
     return this.fb.collection('Users').doc(id).get().then(doc => doc.data());
   }
 
+  saveNewUser(details: any, uid: string) {
+    return firebase.firestore().collection('Users/').doc(uid).set(details);
+  }
+
 }

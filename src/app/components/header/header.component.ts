@@ -52,8 +52,7 @@ export class HeaderComponent implements OnInit {
       disableClose: true
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-      // this.authService.setUser(result);
+      this.authService.setUser(result);
     });
   }
 }

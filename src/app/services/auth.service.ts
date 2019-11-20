@@ -20,8 +20,7 @@ export class AuthService {
   }
 
   signUpRegular(signUpForm: any) {
-    console.log(signUpForm);
-    return signUpForm;
+    return this.firebaseAuth.auth.createUserWithEmailAndPassword(signUpForm.email, signUpForm.password);
   }
 
   setUser(userAuth: any) {
