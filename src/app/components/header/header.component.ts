@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material';
 import { LoginDialogComponent } from '../login-dialog/login-dialog.component';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
+import { SignUpDialogComponent } from '../sign-up-dialog/sign-up-dialog.component';
 
 @Component({
   selector: 'app-header',
@@ -45,6 +46,14 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  // TODO logic
-
+  openSignUpDialog() {
+    const dialogRef = this.dialog.open(SignUpDialogComponent, {
+      width: '100%',
+      disableClose: true
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+      // this.authService.setUser(result);
+    });
+  }
 }

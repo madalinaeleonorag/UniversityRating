@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { BehaviorSubject } from 'rxjs';
 import { FirebaseService } from '../firebase/firebase-service.service';
 import { UserData } from '../models/UserData';
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,11 @@ export class AuthService {
 
   signInRegular(email: string, password: string) {
     return this.firebaseAuth.auth.signInWithEmailAndPassword(email, password);
+  }
+
+  signUpRegular(signUpForm: any) {
+    console.log(signUpForm);
+    return signUpForm;
   }
 
   setUser(userAuth: any) {

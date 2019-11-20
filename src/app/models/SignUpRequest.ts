@@ -10,8 +10,10 @@ export class UserData {
     email: string = undefined;
     @JsonProperty('gdpr')
     gdpr: boolean = undefined;
-    @JsonProperty('id')
-    id: string = undefined;
+    @JsonProperty('password')
+    password: string = undefined;
+    @JsonProperty('passwordRepeat')
+    passwordRepeat: string = undefined;
     @JsonProperty('image')
     image: string = undefined;
     @JsonProperty('locality')
@@ -34,7 +36,8 @@ export class UserData {
         this.classLevel = obj ? (obj.classLevel ? obj.classLevel : undefined) : undefined;
         this.email = obj ? (obj.email ? obj.email : undefined) : undefined;
         this.gdpr = obj ? (obj.gdpr ? obj.gdpr : false) : false;
-        this.id = obj ? (obj.id ? obj.id : undefined) : undefined;
+        this.password = obj ? (obj.password ? obj.password : undefined) : undefined;
+        this.passwordRepeat = obj ? (obj.passwordRepeat ? obj.passwordRepeat : undefined) : undefined;
         this.image = obj ? (obj.image ? obj.image : undefined) : undefined;
         this.locality = obj ? (obj.locality ? obj.locality : undefined) : undefined;
         this.name = obj ? (obj.name ? obj.name : undefined) : undefined;
