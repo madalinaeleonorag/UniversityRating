@@ -90,13 +90,18 @@ export class SignUpDialogComponent implements OnInit {
 
   signUpWithEmail() {
     this.error = '';
-    this.authService.signUpRegular(this.signUpForm.value)
+    if (this.signUpForm.value.password === this.signUpForm.value.passwordRepeat) {
+      this.authService.signUpRegular(this.signUpForm.value)
       .then((res) => {
         this.firebaseService.saveNewUser(this.signUpForm.value, res.user.uid).then(newUser => {
           this.dialogRef.close(res);
         });
       })
       .catch((err) => this.error = err);
+    } else {
+      this.error = 'Passwords are different';
+    }
+    
   }
 
   cancelSignUp(): void {

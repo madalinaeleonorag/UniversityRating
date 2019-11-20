@@ -124,5 +124,23 @@
     "error_required_email": "Email is required",
     "cancel": "Cancel",
     "login": "Login"
+  },
+  "signup_dialog": {
+    "title": "Signup",
+    "email": "Email",
+    "password": "Password",
+    "cancel": "Cancel",
+    "signup": "Create account",
+    "gdpr": "I accept the processing of personal data in order to obtain statistics regarding user satisfaction",
+    "university_administration": "* The administration of a university using the account will be done after activating the functionality from the account settings menu.",
+    "name": "Name",
+    "surname": "Surname",
+    "birthday": "Birthday",
+    "sex": "Sex",
+    "male": "Male",
+    "female": "Female",
+    "location": "Location",
+    "school_level": "School level",
+    "class_level": "Class level"
   }
 }

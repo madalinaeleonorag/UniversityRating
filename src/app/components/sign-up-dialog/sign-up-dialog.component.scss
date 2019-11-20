@@ -1,3 +1,17 @@
+@import "../../variables.scss";
+
 app-sigp-up-dialog {
-  // TODO style
+  form {
+    display: flex;
+    flex-flow: column;
+  }
+  div.mat-dialog-actions {
+    display: flex;
+    justify-content: space-between !important;
+  }
+  .adminstration-info {
+    color: $darkBlue;
+  }
 }
+
+// TODO style
