@@ -24,7 +24,6 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.isUserSubscription = this.authService.isUserAuthenticatedObservable.subscribe(result => {
       this.user = result;
-      console.log(result)
     });
   }
 

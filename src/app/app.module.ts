@@ -103,6 +103,11 @@ export function createTranslateLoader(http: HttpClient) {
     LoginDialogComponent
   ],
   imports: [
+    // Firestore imports
+    AngularFireModule.initializeApp(config),
+    AngularFirestoreModule, // firestore
+    AngularFireAuthModule, // auth
+    AngularFireStorageModule, // storage
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCnKJYJPDPPKIwcf8fnDC7FXvUhRgPg1Gc'
     }),
@@ -147,11 +152,6 @@ export function createTranslateLoader(http: HttpClient) {
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    // Firestore imports
-    AngularFireModule.initializeApp(config, 'angular-auth-firebase'),
-    AngularFirestoreModule, // firestore
-    AngularFireAuthModule, // auth
-    AngularFireStorageModule, // storage
     // Router imports
     RouterModule.forRoot(
       appRoutes

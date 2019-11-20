@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 
@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'UniversityRating';
   firstPage: boolean;
 
@@ -21,9 +21,6 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    // this.firebaseService.getCommentsData().subscribe(result => console.log('getCommentsData: ', result));
-    // this.firebaseService.getRequestsData().subscribe(result => console.log('getRequestsData: ', result));
-    // this.firebaseService.getUsersData().subscribe(result => console.log('getUsersData: ', result));
   }
 
 }

@@ -19,11 +19,13 @@ export class AuthService {
   }
 
   setUser(userAuth: any) {
-    let userData: UserData;
-    this.firebaseService.getUserById(userAuth.user.uid).then(user => {
-      userData = new UserData(user);
-    });
-    this.isUserAuthenticatedSubject.next(userData);
+    if (userAuth) {
+      this.firebaseService.getUserById(userAuth.user.uid).then(user => {
+        this.isUserAuthenticatedSubject.next(new UserData(user));
+      });
+    } else {
+      this.isUserAuthenticatedSubject.next(null);
+    }
   }
 
   logOut() {
