@@ -62,6 +62,7 @@ import { TermsandconditionsComponent } from './pages/termsandconditions/termsand
 import { LoginDialogComponent } from './components/login-dialog/login-dialog.component';
 import { AuthService } from './services/auth.service';
 import { SignUpDialogComponent } from './components/sign-up-dialog/sign-up-dialog.component';
+import { CourseDetailsDialogComponent } from './components/course-details-dialog/course-details-dialog.component';
 
 // Firestore config
 const config = {
@@ -99,11 +100,13 @@ export function createTranslateLoader(http: HttpClient) {
     ConfidentialityComponent,
     TermsandconditionsComponent,
     LoginDialogComponent,
-    SignUpDialogComponent
+    SignUpDialogComponent,
+    CourseDetailsDialogComponent
   ],
   entryComponents: [
     LoginDialogComponent,
-    SignUpDialogComponent
+    SignUpDialogComponent,
+    CourseDetailsDialogComponent
   ],
   imports: [
     // Firestore imports

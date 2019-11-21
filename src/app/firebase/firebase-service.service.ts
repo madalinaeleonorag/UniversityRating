@@ -14,6 +14,7 @@ export class FirebaseService {
   mastersCollection = this.afs.collection('Masters');
   requestsCollection = this.afs.collection('Requests');
   universityCollection = this.afs.collection('University');
+  coursesCollection = this.afs.collection('Courses');
   usersCollection = this.afs.collection('Users');
 
   constructor(private afs: AngularFirestore) {
@@ -47,6 +48,10 @@ export class FirebaseService {
     return this.usersCollection.valueChanges();
   }
 
+  getCoursesData() {
+    return this.coursesCollection.valueChanges();
+  }
+
   getUniversityById(id: string) {
     return this.fb.collection('University').doc(id).get().then(doc => doc.data());
   }
@@ -65,6 +70,10 @@ export class FirebaseService {
 
   getDoctoralById(id: string) {
     return this.fb.collection('Doctorals').doc(id).get().then(doc => doc.data());
+  }
+
+  getCourseById(id: string) {
+    return this.fb.collection('Courses').doc(id).get().then(doc => doc.data());
   }
 
   getUserById(id: string) {

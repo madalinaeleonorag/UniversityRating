@@ -44,50 +44,50 @@
       }
     },
     "study_level": "Cauta dupa nivelul de studii",
-    "sort_rating": "Sorteaza dupa recenzii",
+    "sort_rating": "Sort by rating",
     "institution_type": {
-      "label": "Tipul institutiei",
+      "label": "Institution type",
       "state": "Stat",
-      "private": "Privat"
+      "private": "Private"
     },
-    "result_counter": "rezultate pe pagina",
-    "faculties_counter": "facultati",
-    "counter_bachelors": "licente",
-    "counter_masters": "masterate",
-    "counter_doctorals": "doctorate",
-    "counter_semesters": "semestre",
-    "counter_years": "ani"
+    "result_counter": "results",
+    "faculties_counter": "faculties",
+    "counter_bachelors": "bachelors",
+    "counter_masters": "masters",
+    "counter_doctorals": "doctorals",
+    "counter_semesters": "semesters",
+    "counter_years": "years"
   },
   "university_page": {
     "tab_labels": {
-      "facilities": "Facilitati",
-      "details": "Detalii",
-      "photos": "Fotografii",
-      "faculties": "Facultati",
+      "facilities": "Facilities",
+      "details": "Details",
+      "photos": "Photos",
+      "faculties": "Faculties",
       "contact": "Contact",
-      "map": "Harta"
+      "map": "Map"
     },
     "header": {
-      "website": "Viziteaza site-ul universitatii"
+      "website": "University website"
     },
     "details": {
-      "type": "Tip institutie",
-      "description": "Descriere",
-      "mission": "Misiune",
-      "strategic_programs": "Programe strategice",
-      "values": "Valori",
-      "vision": "Viziune"
+      "type": "Institution type",
+      "description": "Description",
+      "mission": "Mission",
+      "strategic_programs": "Strategic programs",
+      "values": "Values",
+      "vision": "Vision"
     },
     "faculties": {
-      "name": "Nume",
-      "bachelors": "Licente",
-      "masters": "Masterate",
-      "doctorals": "Doctorate",
-      "details": "Vezi facultate"
+      "name": "Name",
+      "bachelors": "Bachelors",
+      "masters": "Masters",
+      "doctorals": "Doctorals",
+      "details": "Go to faculty page"
     },
     "contact": {
-      "phone": "Telefon",
-      "address": "Adresa",
+      "phone": "Phone",
+      "address": "Address",
       "fax": "Fax"
     }
   },
@@ -102,19 +102,21 @@
       "studyGuide": "Viziteaza ghidul facultatii"
     },
     "details": {
-      "type": "Tip institutie",
-      "description": "Descriere",
-      "mission": "Misiune",
-      "strategic_programs": "Programe strategice",
-      "values": "Valori",
-      "vision": "Viziune"
+      "type": "Institution type",
+      "description": "Description",
+      "mission": "Mission",
+      "strategic_programs": "Strategic programs",
+      "values": "Values",
+      "vision": "Vision",
+      "courses": "Courses"
     },
     "bachelors": {
-      "years": "Ani",
-      "semesters": "Semestre",
+      "years": "Years",
+      "semesters": "Semesters",
       "general_skills": "Abilitati generale",
-      "professional_perspectives": "Perspective profesionale"
-    }
+      "professional_perspectives": "Professional perpectives"
+    },
+    "go_university": "Go to university page"
   },
   "login_dialog": {
     "title": "Login",
@@ -142,5 +144,13 @@
     "location": "Location",
     "school_level": "School level",
     "class_level": "Class level"
+  },
+  "course_data": {
+    "course_objectives": "Course objectives",
+    "credit_granted": "Credic granted by promotion",
+    "evaluation_procedure": "Evaluation procedure",
+    "hours": "Hours",
+    "name": "Name",
+    "semester": "Semester"
   }
 }

@@ -6,6 +6,8 @@
   </div>
 
   <a href="{{ facultyDetails?.studyGuide }}">{{ 'faculty_page.header.studyGuide' | translate }}</a>
+  <button mat-raised-button class="gradient-background white-text-button"
+    (click)="onNavigate(facultyDetails.universityId)">{{ 'faculty_page.go_university' | translate }}</button>
   <!-- TODO compara button -->
 </div>
 <mat-tab-group mat-align-tabs="center">
@@ -60,7 +62,8 @@
 
   </mat-tab>
 
-  <mat-tab label="{{ 'faculty_page.tab_labels.bachelors' | translate }}" *ngIf="bachelorsData && bachelorsData.length > 0">
+  <mat-tab label="{{ 'faculty_page.tab_labels.bachelors' | translate }}"
+    *ngIf="bachelorsData && bachelorsData.length > 0">
 
     <mat-expansion-panel *ngFor="let bachelor of bachelorsData">
       <mat-expansion-panel-header>
@@ -100,6 +103,17 @@
           </li>
         </ul>
       </div>
+      <div class="custom-detail-field" *ngIf="getCoursesForSpecialisation(bachelor.bachelorId).length > 0">
+        <div class="custom-detail-field-title">
+          {{ 'faculty_page.details.courses' | translate }}
+        </div>
+        <mat-chip-list>
+          <mat-chip [disableRipple]="true" [selectable]="false"
+            *ngFor="let item of getCoursesForSpecialisation(bachelor.bachelorId)">
+            {{ item.name }} <mat-icon class="custom-icon" (click)="showInfoAboutCourse(item)">help_outline</mat-icon>
+          </mat-chip>
+        </mat-chip-list>
+      </div>
     </mat-expansion-panel>
 
   </mat-tab>
@@ -132,14 +146,15 @@
 
   </mat-tab>
 
-  <mat-tab label="{{ 'faculty_page.tab_labels.doctorals' | translate }}" *ngIf="doctoralsData && doctoralsData.length > 0">
-      <mat-expansion-panel *ngFor="let doctoral of doctoralsData">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              {{ doctoral.doctoralName }}
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <!-- <div class="custom-detail-field" *ngIf="master?.years">
+  <mat-tab label="{{ 'faculty_page.tab_labels.doctorals' | translate }}"
+    *ngIf="doctoralsData && doctoralsData.length > 0">
+    <mat-expansion-panel *ngFor="let doctoral of doctoralsData">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ doctoral.doctoralName }}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <!-- <div class="custom-detail-field" *ngIf="master?.years">
             <div class="custom-detail-field-title">
               {{ 'faculty_page.masters.years' | translate }}
             </div>
@@ -155,7 +170,7 @@
               </li>
             </ul>
           </div> -->
-        </mat-expansion-panel>
+    </mat-expansion-panel>
   </mat-tab>
 
 </mat-tab-group>

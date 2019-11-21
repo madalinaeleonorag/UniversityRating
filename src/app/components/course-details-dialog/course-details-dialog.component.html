@@ -1,0 +1,36 @@
+<div class="custom-detail-field" *ngIf="course?.name">
+  <div class="custom-detail-field-title">
+    {{ 'course_data.name' | translate }}
+  </div>
+  {{ course?.name }}
+</div>
+<div class="custom-detail-field" *ngIf="course?.creditGrantedByPromotion">
+  <div class="custom-detail-field-title">
+    {{ 'course_data.credit_granted' | translate }}
+  </div>
+  {{ course?.creditGrantedByPromotion }}
+</div>
+<div class="custom-detail-field" *ngIf="course?.evaluationProcedure">
+  <div class="custom-detail-field-title">
+    {{ 'course_data.evaluation_procedure' | translate }}
+  </div>
+  {{ course?.evaluationProcedure }}
+</div>
+<div class="custom-detail-field" *ngIf="course?.hours">
+  <div class="custom-detail-field-title">
+    {{ 'course_data.hours' | translate }}
+  </div>
+  {{ course?.hours }}
+</div>
+<div class="custom-detail-field" *ngIf="course?.semester">
+  <div class="custom-detail-field-title">
+    {{ 'course_data.semester' | translate }}
+  </div>
+  {{ course?.semester }}
+</div>
+<div class="custom-detail-field" *ngIf="course?.courseObjectives">
+  <div class="custom-detail-field-title">
+    {{ 'course_data.course_objectives' | translate }}
+  </div>
+  {{ course?.courseObjectives }}
+</div>

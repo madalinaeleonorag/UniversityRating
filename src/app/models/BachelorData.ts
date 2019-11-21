@@ -10,6 +10,8 @@ export class BachelorData {
     name: string = undefined;
     @JsonProperty('professionalPerspectives')
     professionalPerspectives: string[] = [];
+    @JsonProperty('courses')
+    courses: string[] = [];
     @JsonProperty('semesters')
     semesters: number = undefined;
     @JsonProperty('years')
@@ -22,6 +24,7 @@ export class BachelorData {
         this.generalSkills = obj ? (obj.generalSkills ? obj.generalSkills : []) : [];
         this.name = obj ? (obj.name ? obj.name : undefined) : undefined;
         this.professionalPerspectives = obj ? (obj.professionalPerspectives ? obj.professionalPerspectives : []) : [];
+        this.courses = obj ? (obj.courses ? obj.courses : []) : [];
         this.semesters = obj ? (obj.semesters ? obj.semesters : undefined) : undefined;
         this.years = obj ? (obj.years ? obj.years : undefined) : undefined;
         this.bachelorId = obj ? (obj.bachelorId ? obj.bachelorId : undefined) : undefined;

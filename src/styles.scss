@@ -66,3 +66,41 @@ button {
 .mat-checkbox-layout {
   white-space: normal !important;
 }
+
+.material-icons {
+  font-size: unset;
+}
+
+.mat-icon {
+  height: auto !important;
+  width: auto !important;
+}
+.custom-icon {
+  padding-left: 5px;
+}
+
+.custom-icon:hover {
+  color: $gold;
+}
+
+.mat-chip.mat-standard-chip::after {
+  background: transparent; 
+}
+
+.custom-detail-field {
+  padding-bottom: 10px;
+
+  li {
+    list-style-type: none;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  .custom-detail-field-title {
+    font-weight: bold;
+    padding-bottom: 5px;
+  }
+}
