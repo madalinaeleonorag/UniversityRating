@@ -8,6 +8,7 @@
   <div fxLayout="row">
     <button mat-button [ngClass]="{'dark-text': firstPage, 'white-text': !firstPage}" (click)="openLoginDialog()" *ngIf="!user">{{ 'buttons.login' | translate | uppercase }}</button>
     <button mat-button [ngClass]="{'dark-text': firstPage, 'white-text': !firstPage}" (click)="openSignUpDialog()" *ngIf="!user">{{ 'buttons.signup' | translate | uppercase}}</button>
+    <button mat-button [ngClass]="{'dark-text': firstPage, 'white-text': !firstPage}" (click)="goToDashboard()" *ngIf="user && user.type === 'admin'">{{ 'buttons.dashboard' | translate | uppercase}}</button>
     <button mat-button [ngClass]="{'dark-text': firstPage, 'white-text': !firstPage}" (click)="logOutUser()" *ngIf="user">{{ 'buttons.logout' | translate | uppercase}}</button>
   </div>
 </mat-toolbar>

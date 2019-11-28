@@ -13,7 +13,8 @@
     "login": "Login",
     "signup": "Signup",
     "logout": "Logout",
-    "more_details": "Vezi detalii"
+    "more_details": "Vezi detalii",
+    "dashboard": "Dashboard"
   },
   "filters": {
     "keywords": {

@@ -63,6 +63,7 @@ import { LoginDialogComponent } from './components/login-dialog/login-dialog.com
 import { AuthService } from './services/auth.service';
 import { SignUpDialogComponent } from './components/sign-up-dialog/sign-up-dialog.component';
 import { CourseDetailsDialogComponent } from './components/course-details-dialog/course-details-dialog.component';
+import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 
 // Firestore config
 const config = {
@@ -101,7 +102,8 @@ export function createTranslateLoader(http: HttpClient) {
     TermsandconditionsComponent,
     LoginDialogComponent,
     SignUpDialogComponent,
-    CourseDetailsDialogComponent
+    CourseDetailsDialogComponent,
+    AdminDashboardComponent
   ],
   entryComponents: [
     LoginDialogComponent,

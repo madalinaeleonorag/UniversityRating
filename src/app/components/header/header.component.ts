@@ -32,6 +32,10 @@ export class HeaderComponent implements OnInit {
     this.router.navigateByUrl('/');
   }
 
+  goToDashboard() {
+    this.router.navigateByUrl('/dashboard');
+  }
+
   logOutUser() {
     this.authService.logOut();
   }
