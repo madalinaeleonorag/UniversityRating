@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DashboardService } from 'src/app/services/dashboard.service';
+import { DoughnutData } from 'src/app/models/DoughnutData';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminDashboardComponent implements OnInit {
 
-  constructor() { }
+  totalEducationLevelChart: any;
+
+  constructor(private dashboardServide: DashboardService) { }
 
   ngOnInit() {
+
+    this.totalEducationLevelChart =
+      new DoughnutData(this.dashboardServide.constructData(this.dashboardServide.getNumberOfEducationLevel(), 'Education level'));
+
   }
+
+
 
 }
