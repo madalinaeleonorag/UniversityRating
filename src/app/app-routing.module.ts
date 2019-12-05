@@ -7,7 +7,7 @@ import { FacultyComponent } from './pages/detailsPages/faculty/faculty.component
 import { AuthorRightsComponent } from './pages/author-rights/author-rights.component';
 import { TermsandconditionsComponent } from './pages/termsandconditions/termsandconditions.component';
 import { ConfidentialityComponent } from './pages/confidentiality/confidentiality.component';
-import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
+import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent },

@@ -63,8 +63,9 @@ import { LoginDialogComponent } from './components/login-dialog/login-dialog.com
 import { AuthService } from './services/auth.service';
 import { SignUpDialogComponent } from './components/sign-up-dialog/sign-up-dialog.component';
 import { CourseDetailsDialogComponent } from './components/course-details-dialog/course-details-dialog.component';
-import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
+import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
 import { DoughnutWidgetComponent } from './components/doughnut-widget/doughnut-widget.component';
+import { GoogleChartsModule } from 'angular-google-charts';
 
 // Firestore config
 const config = {
@@ -113,6 +114,7 @@ export function createTranslateLoader(http: HttpClient) {
     CourseDetailsDialogComponent
   ],
   imports: [
+    GoogleChartsModule.forRoot('AIzaSyCnKJYJPDPPKIwcf8fnDC7FXvUhRgPg1Gc'),
     // Firestore imports
     AngularFireModule.initializeApp(config),
     AngularFirestoreModule, // firestore
