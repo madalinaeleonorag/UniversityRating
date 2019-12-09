@@ -9,15 +9,40 @@ import { DoughnutData } from 'src/app/models/DoughnutData';
 })
 export class AdminDashboardComponent implements OnInit {
 
-  totalEducationLevelChart: any;
+  totalEducationLevel: any;
+  universityTypes: any;
+  usersSex: any;
+  usersGDPR: any;
+  courseVerificationType: any;
+  requestsStatuses: any;
 
-  constructor(private dashboardServide: DashboardService) { }
+  constructor(private dashboardService: DashboardService) { }
 
   ngOnInit() {
 
-    this.dashboardServide.getNumberOfEducationLevel().subscribe(result => {
-      this.totalEducationLevelChart =
-      new DoughnutData(this.dashboardServide.constructData(result, 'Education level'));
+    this.dashboardService.getNumberOfEducationLevel().subscribe(result => {
+      this.totalEducationLevel =
+      new DoughnutData(this.dashboardService.constructData(result, 'Education level'));
+    });
+
+    this.dashboardService.getNumbersOfUniversityTypes().subscribe(result => {
+      this.universityTypes = new DoughnutData(this.dashboardService.constructData(result, 'University types'));
+    });
+
+    this.dashboardService.getUsersSex().subscribe(result => {
+      this.usersSex = new DoughnutData(this.dashboardService.constructData(result, 'Users sex'));
+    });
+
+    this.dashboardService.getUsersGDPR().subscribe(result => {
+      this.usersGDPR = new DoughnutData(this.dashboardService.constructData(result, 'Users GDPR'));
+    });
+
+    this.dashboardService.getCourseVerificationType().subscribe(result => {
+      this.courseVerificationType = new DoughnutData(this.dashboardService.constructData(result, 'Course verification type'));
+    });
+
+    this.dashboardService.getRequestsStatuses().subscribe(result => {
+      this.requestsStatuses = new DoughnutData(this.dashboardService.constructData(result, 'Requests statuses'));
     });
 
   }
