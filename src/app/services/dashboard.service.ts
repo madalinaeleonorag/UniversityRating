@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FirebaseService } from '../firebase/firebase-service.service';
+import { forkJoin, Observable, of, merge, zip } from 'rxjs';
+import { switchMap, first, take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -15,26 +17,18 @@ export class DashboardService {
     };
   }
 
-  getNumberOfEducationLevel() {
-    let bachelors = 0;
-    let masters = 0;
-    let doctorals = 0;
-
-    // tslint:disable-next-line: deprecation
-    this.firebaseService.getBachelorsData().subscribe(result => {
-      bachelors = result.length;
-    });
-    this.firebaseService.getDoctoralsData().subscribe(result => {
-      doctorals = result.length;
-    });
-    this.firebaseService.getMastersData().subscribe(result => {
-      masters = result.length;
-    });
-
-    return [
-      ['bachelors', bachelors],
-      ['masters', masters],
-      ['doctorals', doctorals]
-    ];
+  getNumberOfEducationLevel(): Observable<any> {
+    return zip(this.firebaseService.getBachelorsData(),
+      this.firebaseService.getDoctoralsData(),
+      this.firebaseService.getMastersData())
+      .pipe(
+        switchMap(([bachelors, doctorals, masters]: [any, any, any]) => {
+          return of([
+            ['Bachelors', bachelors.length],
+            ['Masters', masters.length],
+            ['Doctorals', doctorals.length]
+          ]);
+        })
+      );
   }
 }

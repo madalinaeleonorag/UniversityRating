@@ -15,11 +15,11 @@ export class AdminDashboardComponent implements OnInit {
 
   ngOnInit() {
 
-    this.totalEducationLevelChart =
-      new DoughnutData(this.dashboardServide.constructData(this.dashboardServide.getNumberOfEducationLevel(), 'Education level'));
+    this.dashboardServide.getNumberOfEducationLevel().subscribe(result => {
+      this.totalEducationLevelChart =
+      new DoughnutData(this.dashboardServide.constructData(result, 'Education level'));
+    });
 
   }
-
-
 
 }
