@@ -6,6 +6,7 @@ import { UniversityData } from '../models/UniversityData';
 import { UserData } from '../models/UserData';
 import { CourseData } from '../models/CourseData';
 import { RequestData } from '../models/RequestData';
+import { FacultyData } from '../models/FacultyData';
 
 @Injectable({
   providedIn: 'root'
@@ -129,6 +130,116 @@ export class DashboardService {
           ['Declined', declined.length]
         ]);
       }));
+  }
+
+  getFacultiesPerUniversity() {
+    return this.firebaseService.getUniversitiesData().pipe(
+      switchMap((result: []) => {
+        const facultiesNumber = [];
+        result.forEach(item => {
+          const university = new UniversityData(item);
+          if (university.facultiesUniversity) {
+            facultiesNumber.push(university.facultiesUniversity.length);
+          } else {
+            facultiesNumber.push(0);
+          }
+        });
+        const numbers = [...new Set(facultiesNumber)];
+        const objectToReturn = [];
+        numbers.forEach(numberOfFaculties => {
+          objectToReturn.push([`${numberOfFaculties} faculties`, numberOfFaculties]);
+        });
+        return of(objectToReturn);
+      })
+    );
+  }
+
+  getPhotosPerUniversity() {
+    return this.firebaseService.getUniversitiesData().pipe(
+      switchMap((result: []) => {
+        const photosNumber = [];
+        result.forEach(item => {
+          const university = new UniversityData(item);
+          if (university.photosUniversity) {
+            photosNumber.push(university.photosUniversity.length);
+          } else {
+            photosNumber.push(0);
+          }
+        });
+        const numbers = [...new Set(photosNumber)];
+        const objectToReturn = [];
+        numbers.forEach(numberOfphotos => {
+          objectToReturn.push([`${numberOfphotos} photos`, numberOfphotos]);
+        });
+        return of(objectToReturn);
+      })
+    );
+  }
+
+  getBachelorsPerFaculty() {
+    return this.firebaseService.getFacultiesData().pipe(
+      switchMap((result: []) => {
+        const bachelorsNumber = [];
+        result.forEach(item => {
+          const faculty = new FacultyData(item);
+          if (faculty.bachelors) {
+            bachelorsNumber.push(faculty.bachelors.length);
+          } else {
+            bachelorsNumber.push(0);
+          }
+        });
+        const numbers = [...new Set(bachelorsNumber)];
+        const objectToReturn = [];
+        numbers.forEach(numberOfbachelors => {
+          objectToReturn.push([`${numberOfbachelors} bachelors`, numberOfbachelors]);
+        });
+        return of(objectToReturn);
+      })
+    );
+  }
+
+  getDoctoralsPerFaculty() {
+    return this.firebaseService.getFacultiesData().pipe(
+      switchMap((result: []) => {
+        const doctoralsNumber = [];
+        result.forEach(item => {
+          const faculty = new FacultyData(item);
+          if (faculty.doctorals) {
+            doctoralsNumber.push(faculty.doctorals.length);
+          } else {
+            doctoralsNumber.push(0);
+          }
+        });
+        const numbers = [...new Set(doctoralsNumber)];
+        const objectToReturn = [];
+        numbers.forEach(numberOfDoctorals => {
+          objectToReturn.push([`${numberOfDoctorals} doctorals`, numberOfDoctorals]);
+        });
+        return of(objectToReturn);
+      })
+    );
+  }
+
+  getMastersPerFaculty() {
+    return this.firebaseService.getFacultiesData().pipe(
+      switchMap((result: []) => {
+        const mastersNumber = [];
+        result.forEach(item => {
+          const faculty = new FacultyData(item);
+          if (faculty.masters) {
+            mastersNumber.push(faculty.masters.length);
+          } else {
+            mastersNumber.push(0);
+          }
+        });
+        const numbers = [...new Set(mastersNumber)];
+        const objectToReturn = [];
+        numbers.forEach(numberOfMasters => {
+          objectToReturn.push([`${numberOfMasters} masters`, numberOfMasters]);
+        });
+        return of(objectToReturn);
+      })
+    );
   }
 
 }

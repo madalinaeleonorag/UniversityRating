@@ -15,6 +15,11 @@ export class AdminDashboardComponent implements OnInit {
   usersGDPR: any;
   courseVerificationType: any;
   requestsStatuses: any;
+  facultiesPerUniversity: any;
+  photosPerUniversity: any;
+  bachelorsPerUniversity: any;
+  mastersPerUniversity: any;
+  doctoralsPerUniversity: any;
 
   constructor(private dashboardService: DashboardService) { }
 
@@ -43,6 +48,26 @@ export class AdminDashboardComponent implements OnInit {
 
     this.dashboardService.getRequestsStatuses().subscribe(result => {
       this.requestsStatuses = new DoughnutData(this.dashboardService.constructData(result, 'Requests statuses'));
+    });
+
+    this.dashboardService.getFacultiesPerUniversity().subscribe(result => {
+      this.facultiesPerUniversity = new DoughnutData(this.dashboardService.constructData(result, 'Faculties per university'));
+    });
+
+    this.dashboardService.getPhotosPerUniversity().subscribe(result => {
+      this.photosPerUniversity = new DoughnutData(this.dashboardService.constructData(result, 'Photos per university'));
+    });
+
+    this.dashboardService.getBachelorsPerFaculty().subscribe(result => {
+      this.bachelorsPerUniversity = new DoughnutData(this.dashboardService.constructData(result, 'Bachelors per university'));
+    });
+
+    this.dashboardService.getMastersPerFaculty().subscribe(result => {
+      this.mastersPerUniversity = new DoughnutData(this.dashboardService.constructData(result, 'Masters per university'));
+    });
+
+    this.dashboardService.getDoctoralsPerFaculty().subscribe(result => {
+      this.doctoralsPerUniversity = new DoughnutData(this.dashboardService.constructData(result, 'Doctorals per university'));
     });
 
   }
