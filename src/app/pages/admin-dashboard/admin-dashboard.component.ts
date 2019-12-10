@@ -20,6 +20,16 @@ export class AdminDashboardComponent implements OnInit {
   bachelorsPerUniversity: any;
   mastersPerUniversity: any;
   doctoralsPerUniversity: any;
+  facilitiesPerUniversity: any;
+  userAges: any;
+  facilitiesUsage: any;
+  classLevels: any;
+  schoolLevels: any;
+  userLocations: any;
+  universityLocations: any;
+  bachelorYears: any;
+  mastersYears: any;
+  doctoralsYears: any;
 
   constructor(private dashboardService: DashboardService) { }
 
@@ -68,6 +78,46 @@ export class AdminDashboardComponent implements OnInit {
 
     this.dashboardService.getDoctoralsPerFaculty().subscribe(result => {
       this.doctoralsPerUniversity = new DoughnutData(this.dashboardService.constructData(result, 'Doctorals per university'));
+    });
+
+    this.dashboardService.getFacilitiesPerFaculty().subscribe(result => {
+      this.facilitiesPerUniversity = new DoughnutData(this.dashboardService.constructData(result, 'Facilities per university'));
+    });
+
+    this.dashboardService.getUserAges().subscribe(result => {
+      this.userAges = new DoughnutData(this.dashboardService.constructData(result, 'User ages'));
+    });
+
+    this.dashboardService.getFacilitiesUsage().subscribe(result => {
+      this.facilitiesUsage = new DoughnutData(this.dashboardService.constructData(result, 'Facilities usage'));
+    });
+
+    this.dashboardService.getUsersClassLevel().subscribe(result => {
+      this.classLevels = new DoughnutData(this.dashboardService.constructData(result, 'Users class levels'));
+    });
+
+    this.dashboardService.getUsersSchoolLevel().subscribe(result => {
+      this.schoolLevels = new DoughnutData(this.dashboardService.constructData(result, 'Users school levels'));
+    });
+
+    this.dashboardService.getUsersLocation().subscribe(result => {
+      this.userLocations = new DoughnutData(this.dashboardService.constructData(result, 'Users locations'));
+    });
+
+    this.dashboardService.getUniversitiesLocation().subscribe(result => {
+      this.universityLocations = new DoughnutData(this.dashboardService.constructData(result, 'Universities locations'));
+    });
+
+    this.dashboardService.getBachelorsYears().subscribe(result => {
+      this.bachelorYears = new DoughnutData(this.dashboardService.constructData(result, 'Bachelors years'));
+    });
+
+    this.dashboardService.getMastersYears().subscribe(result => {
+      this.mastersYears = new DoughnutData(this.dashboardService.constructData(result, 'Masters years'));
+    });
+
+    this.dashboardService.getDoctoralsYears().subscribe(result => {
+      this.doctoralsYears = new DoughnutData(this.dashboardService.constructData(result, 'Doctorals years'));
     });
 
   }

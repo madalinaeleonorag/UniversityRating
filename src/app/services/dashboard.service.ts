@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import { FirebaseService } from '../firebase/firebase-service.service';
-import { forkJoin, Observable, of, merge, zip } from 'rxjs';
-import { switchMap, first, take } from 'rxjs/operators';
+import { Observable, of, zip } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { UniversityData } from '../models/UniversityData';
 import { UserData } from '../models/UserData';
 import { CourseData } from '../models/CourseData';
 import { RequestData } from '../models/RequestData';
 import { FacultyData } from '../models/FacultyData';
+import * as moment from 'moment';
+import * as _ from 'lodash';
+import { BachelorData } from '../models/BachelorData';
 
 @Injectable({
   providedIn: 'root'
@@ -236,6 +239,219 @@ export class DashboardService {
         const objectToReturn = [];
         numbers.forEach(numberOfMasters => {
           objectToReturn.push([`${numberOfMasters} masters`, numberOfMasters]);
+        });
+        return of(objectToReturn);
+      })
+    );
+  }
+
+  getFacilitiesPerFaculty() {
+    return this.firebaseService.getUniversitiesData().pipe(
+      switchMap((result: []) => {
+        const facilitiesNumber = [];
+        result.forEach(item => {
+          const university = new UniversityData(item);
+          if (university.facilitiesUniversity) {
+            facilitiesNumber.push(university.facilitiesUniversity.length);
+          } else {
+            facilitiesNumber.push(0);
+          }
+        });
+        const numbers = [...new Set(facilitiesNumber)];
+        const objectToReturn = [];
+        numbers.forEach(numberOfFacilities => {
+          objectToReturn.push([`${numberOfFacilities} facilities`, numberOfFacilities]);
+        });
+        return of(objectToReturn);
+      })
+    );
+  }
+
+  getUserAges() {
+    return this.firebaseService.getUsersData().pipe(
+      switchMap((result: []) => {
+        const usersAges = [];
+        result.forEach(item => {
+          const user = new UserData(item);
+          if (user.birthday) {
+            usersAges.push(Math.round(moment.duration(moment(new Date()).diff(moment(user.birthday))).asYears()));
+          } else {
+            usersAges.push(0);
+          }
+        });
+        const countOfAges = _.countBy(usersAges);
+        const ages = Object.keys(countOfAges);
+        const objectToReturn = [];
+        ages.forEach(age => {
+          objectToReturn.push([`${age}`, countOfAges[age]]);
+        });
+        return of(objectToReturn);
+      })
+    );
+  }
+
+  getFacilitiesUsage() {
+    return this.firebaseService.getUniversitiesData().pipe(
+      switchMap((result: []) => {
+        const universityFacilities = [];
+        result.forEach(item => {
+          const university = new UniversityData(item);
+          if (university.facilitiesUniversity) {
+            universityFacilities.push(...university.facilitiesUniversity);
+          }
+        });
+        const countOfFacilities = _.countBy(universityFacilities);
+        const facilities = Object.keys(countOfFacilities);
+        const objectToReturn = [];
+        facilities.forEach(facility => {
+          objectToReturn.push([`${facility}`, countOfFacilities[facility]]);
+        });
+        return of(objectToReturn);
+      })
+    );
+  }
+
+  getUsersClassLevel() {
+    return this.firebaseService.getUsersData().pipe(
+      switchMap((result: []) => {
+        const usersClassLevels = [];
+        result.forEach(item => {
+          const user = new UserData(item);
+          if (user.classLevel) {
+            usersClassLevels.push(user.classLevel);
+          }
+        });
+        const countOfClassLevels = _.countBy(usersClassLevels);
+        const classLevels = Object.keys(countOfClassLevels);
+        const objectToReturn = [];
+        classLevels.forEach(classLevel => {
+          objectToReturn.push([`${classLevel}`, countOfClassLevels[classLevel]]);
+        });
+        return of(objectToReturn);
+      })
+    );
+  }
+
+  getUsersSchoolLevel() {
+    return this.firebaseService.getUsersData().pipe(
+      switchMap((result: []) => {
+        const usersSchoolLevels = [];
+        result.forEach(item => {
+          const user = new UserData(item);
+          if (user.schoolLevel) {
+            usersSchoolLevels.push(user.schoolLevel);
+          }
+        });
+        const countOfSchoolLevels = _.countBy(usersSchoolLevels);
+        const SchoolLevels = Object.keys(countOfSchoolLevels);
+        const objectToReturn = [];
+        SchoolLevels.forEach(SchoolLevel => {
+          objectToReturn.push([`${SchoolLevel}`, countOfSchoolLevels[SchoolLevel]]);
+        });
+        return of(objectToReturn);
+      })
+    );
+  }
+
+  getUsersLocation() {
+    return this.firebaseService.getUsersData().pipe(
+      switchMap((result: []) => {
+        const usersLocations = [];
+        result.forEach(item => {
+          const user = new UserData(item);
+          if (user.locality) {
+            usersLocations.push(user.locality);
+          }
+        });
+        const countOfLocations = _.countBy(usersLocations);
+        const Locations = Object.keys(countOfLocations);
+        const objectToReturn = [];
+        Locations.forEach(Location => {
+          objectToReturn.push([`${Location}`, countOfLocations[Location]]);
+        });
+        return of(objectToReturn);
+      })
+    );
+  }
+
+  getUniversitiesLocation() {
+    return this.firebaseService.getUniversitiesData().pipe(
+      switchMap((result: []) => {
+        const universityLocations = [];
+        result.forEach(item => {
+          const university = new UniversityData(item);
+          if (university.locationUniversity && Array.isArray(university.locationUniversity)) {
+            universityLocations.push(university.locationUniversity[0]);
+          }
+        });
+        const countOfLocations = _.countBy(universityLocations);
+        const Locations = Object.keys(countOfLocations);
+        const objectToReturn = [];
+        Locations.forEach(Location => {
+          objectToReturn.push([`${Location}`, countOfLocations[Location]]);
+        });
+        return of(objectToReturn);
+      })
+    );
+  }
+
+  getBachelorsYears() {
+    return this.firebaseService.getBachelorsData().pipe(
+      switchMap((result: []) => {
+        const BachelorsYears = [];
+        result.forEach(item => {
+          const bachelor = new BachelorData(item);
+          if (bachelor.years) {
+            BachelorsYears.push(bachelor.years);
+          }
+        });
+        const countOfYears = _.countBy(BachelorsYears);
+        const Years = Object.keys(countOfYears);
+        const objectToReturn = [];
+        Years.forEach(Year => {
+          objectToReturn.push([`${Year}`, countOfYears[Year]]);
+        });
+        return of(objectToReturn);
+      })
+    );
+  }
+
+  getMastersYears() {
+    return this.firebaseService.getMastersData().pipe(
+      switchMap((result: []) => {
+        const MastersYears = [];
+        result.forEach(item => {
+          const bachelor = new BachelorData(item);
+          if (bachelor.years) {
+            MastersYears.push(bachelor.years);
+          }
+        });
+        const countOfYears = _.countBy(MastersYears);
+        const Years = Object.keys(countOfYears);
+        const objectToReturn = [];
+        Years.forEach(Year => {
+          objectToReturn.push([`${Year}`, countOfYears[Year]]);
+        });
+        return of(objectToReturn);
+      })
+    );
+  }
+
+  getDoctoralsYears() {
+    return this.firebaseService.getDoctoralsData().pipe(
+      switchMap((result: []) => {
+        const DoctoralsYears = [];
+        result.forEach(item => {
+          const bachelor = new BachelorData(item);
+          if (bachelor.years) {
+            DoctoralsYears.push(bachelor.years);
+          }
+        });
+        const countOfYears = _.countBy(DoctoralsYears);
+        const Years = Object.keys(countOfYears);
+        const objectToReturn = [];
+        Years.forEach(Year => {
+          objectToReturn.push([`${Year}`, countOfYears[Year]]);
         });
         return of(objectToReturn);
       })
