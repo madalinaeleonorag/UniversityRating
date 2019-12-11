@@ -1,12 +1,19 @@
-.custom-doughnuts {
+app-admin-dashboard {
+  .custom-statistics {
     display: flex;
     flex-flow: wrap;
-}
+  }
 
-td, th {
+  td,
+  th {
     text-align: center;
-}
+  }
 
-th.mat-header-cell {
+  th.mat-header-cell {
     text-align: center;
+  }
+
+  .mat-tab-body-content {
+    overflow: hidden;
+  }
 }

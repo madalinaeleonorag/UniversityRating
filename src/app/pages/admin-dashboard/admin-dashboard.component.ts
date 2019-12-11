@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { DashboardService } from 'src/app/services/dashboard.service';
 import { DoughnutData } from 'src/app/models/DoughnutData';
-import { BachelorData } from 'src/app/models/BachelorData';
 import { FirebaseService } from 'src/app/firebase/firebase-service.service';
 
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
-  styleUrls: ['./admin-dashboard.component.scss']
+  styleUrls: ['./admin-dashboard.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AdminDashboardComponent implements OnInit {
 
