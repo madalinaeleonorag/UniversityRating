@@ -31,12 +31,12 @@
       </div>
       {{ universityDetails?.mission }}
     </div>
-    <div class="custom-detail-field" *ngIf="universityDetails?.strategicPrograms.length > 0">
+    <div class="custom-detail-field" *ngIf="universityDetails?.strategicProgram.length > 0">
       <div class="custom-detail-field-title">
         {{ 'faculty_page.details.strategic_programs' | translate }}
       </div>
       <ul>
-        <li *ngFor="let item of universityDetails?.strategicPrograms">
+        <li *ngFor="let item of universityDetails?.strategicProgram">
           - {{ item }}
         </li>
       </ul>

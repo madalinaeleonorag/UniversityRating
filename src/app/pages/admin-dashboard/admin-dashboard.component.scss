@@ -2,3 +2,11 @@
     display: flex;
     flex-flow: wrap;
 }
+
+td, th {
+    text-align: center;
+}
+
+th.mat-header-cell {
+    text-align: center;
+}

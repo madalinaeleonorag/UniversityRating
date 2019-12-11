@@ -20,8 +20,8 @@ export class UniversityData {
     photosUniversity: string = undefined;
     @JsonProperty('rating')
     rating: number = undefined;
-    @JsonProperty('strategicPrograms')
-    strategicPrograms: string[] = [];
+    @JsonProperty('strategicProgram')
+    strategicProgram: string[] = [];
     @JsonProperty('typeUniversity')
     typeUniversity: string = undefined;
     @JsonProperty('universityId')
@@ -49,7 +49,7 @@ export class UniversityData {
         this.nameUniversity = obj ? (obj.nameUniversity ? obj.nameUniversity : undefined) : undefined;
         this.photosUniversity = obj ? (obj.photosUniversity ? obj.photosUniversity : undefined) : undefined;
         this.rating = obj ? (obj.rating ? obj.rating : undefined) : undefined;
-        this.strategicPrograms = obj ? (obj.strategicPrograms ? obj.strategicPrograms : []) : [];
+        this.strategicProgram = obj ? (obj.strategicProgram ? obj.strategicProgram : []) : [];
         this.typeUniversity = obj ? (obj.typeUniversity ? obj.typeUniversity : undefined) : undefined;
         this.universityId = obj ? (obj.universityId ? obj.universityId : undefined) : undefined;
         this.values = obj ? (obj.values ? obj.values : []) : [];

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from 'src/app/services/dashboard.service';
 import { DoughnutData } from 'src/app/models/DoughnutData';
+import { BachelorData } from 'src/app/models/BachelorData';
+import { FirebaseService } from 'src/app/firebase/firebase-service.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -30,14 +32,34 @@ export class AdminDashboardComponent implements OnInit {
   bachelorYears: any;
   mastersYears: any;
   doctoralsYears: any;
+  bachelorsData = [];
+  bachelorsDisplayedColumns: string[] = ['id', 'name', 'courses', 'years', 'semesters', 'skills', 'perspectives', 'facultyId'];
+  mastersData = [];
+  mastersDisplayedColumns: string[] = ['id', 'name', 'courses', 'facultyId'];
+  doctoralsData = [];
+  doctoralsDisplayedColumns: string[] = ['id', 'name', 'courses'];
+  facultiesData = [];
+  facultiesDisplayedColumns: string[] = ['id', 'name', 'bachelors', 'masters', 'doctorals', 'universityId'];
+  universitiesData = [];
+  // tslint:disable-next-line: max-line-length
+  universitiesDisplayedColumns: string[] = ['id', 'name', 'facilitiesUniversity', 'facultiesUniversity', 'photosUniversity', 'rating', 'strategicProgram', 'typeUniversity'];
+  usersData = [];
+  usersDisplayedColumns: string[] = ['id', 'name', 'surname', 'birthday', 'sex', 'email', 'gdpr', 'locality'];
 
-  constructor(private dashboardService: DashboardService) { }
+  constructor(private dashboardService: DashboardService, private firebaseService: FirebaseService) { }
 
   ngOnInit() {
 
+    this.firebaseService.getBachelorsData().subscribe(result => this.bachelorsData = result);
+    this.firebaseService.getMastersData().subscribe(result => this.mastersData = result);
+    this.firebaseService.getDoctoralsData().subscribe(result => this.doctoralsData = result);
+    this.firebaseService.getFacultiesData().subscribe(result => this.facultiesData = result);
+    this.firebaseService.getUniversitiesData().subscribe(result => this.universitiesData = result);
+    this.firebaseService.getUsersData().subscribe(result => this.usersData = result);
+
     this.dashboardService.getNumberOfEducationLevel().subscribe(result => {
       this.totalEducationLevel =
-      new DoughnutData(this.dashboardService.constructData(result, 'Education level'));
+        new DoughnutData(this.dashboardService.constructData(result, 'Education level'));
     });
 
     this.dashboardService.getNumbersOfUniversityTypes().subscribe(result => {

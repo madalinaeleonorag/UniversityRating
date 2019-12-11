@@ -20,8 +20,6 @@ export class FacultyData {
     studyGuide: string = undefined;
     @JsonProperty('universityId')
     universityId: string = undefined;
-    @JsonProperty('courses')
-    courses: string[] = [];
     @JsonProperty('descriptionFaculty')
     descriptionFaculty: string = undefined;
 
@@ -36,6 +34,5 @@ export class FacultyData {
         this.studyGuide = obj ? (obj.studyGuide ? obj.studyGuide : undefined) : undefined;
         this.universityId = obj ? (obj.universityId ? obj.universityId : undefined) : undefined;
         this.descriptionFaculty = obj ? (obj.descriptionFaculty ? obj.descriptionFaculty : undefined) : undefined;
-        this.courses = obj ? (obj.courses ? obj.courses : []) : [];
     }
 }
