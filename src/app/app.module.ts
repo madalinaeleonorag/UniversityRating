@@ -67,6 +67,7 @@ import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard
 import { DoughnutWidgetComponent } from './components/doughnut-widget/doughnut-widget.component';
 import { GoogleChartsModule } from 'angular-google-charts';
 import { BarChartComponent } from './components/bar-chart/bar-chart.component';
+import { UserDetailsComponent } from './pages/user-details/user-details.component';
 
 // Firestore config
 const config = {
@@ -108,7 +109,8 @@ export function createTranslateLoader(http: HttpClient) {
     CourseDetailsDialogComponent,
     AdminDashboardComponent,
     DoughnutWidgetComponent,
-    BarChartComponent
+    BarChartComponent,
+    UserDetailsComponent
   ],
   entryComponents: [
     LoginDialogComponent,

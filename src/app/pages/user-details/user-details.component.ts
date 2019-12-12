@@ -1,0 +1,47 @@
+import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
+import LocalitiesRO from 'src/assets/locationsRomania';
+import { FirebaseService } from 'src/app/firebase/firebase-service.service';
+import { UserData } from 'src/app/models/UserData';
+
+@Component({
+  selector: 'app-user-details',
+  templateUrl: './user-details.component.html',
+  styleUrls: ['./user-details.component.scss']
+})
+export class UserDetailsComponent implements OnInit {
+
+  user: UserData;
+  isUserSubscription: Subscription;
+  name: string;
+  surname: string;
+  birthday: string;
+  sex: string;
+  location: string;
+  locations: string[];
+  canEdit = false;
+
+  constructor(private authService: AuthService, private firebaseService: FirebaseService) {
+    this.locations = LocalitiesRO;
+  }
+
+  ngOnInit() {
+    this.isUserSubscription = this.authService.isUserAuthenticatedObservable.subscribe(result => {
+      this.user = result;
+      this.name = result.name;
+      this.surname = result.surname;
+      this.birthday = result.birthday;
+      this.sex = result.sex;
+      this.location = result.locality;
+    });
+  }
+
+  saveNewDetails() {
+    return this.firebaseService.editUserDetails(this.user.id, this.user).then(result => {
+      console.log(result);
+      this.canEdit = !this.canEdit;
+    });
+  }
+
+}

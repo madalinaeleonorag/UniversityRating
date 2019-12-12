@@ -8,6 +8,7 @@ import { AuthorRightsComponent } from './pages/author-rights/author-rights.compo
 import { TermsandconditionsComponent } from './pages/termsandconditions/termsandconditions.component';
 import { ConfidentialityComponent } from './pages/confidentiality/confidentiality.component';
 import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
+import { UserDetailsComponent } from './pages/user-details/user-details.component';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent },
@@ -17,7 +18,8 @@ const routes: Routes = [
   { path: 'authorrights', component: AuthorRightsComponent },
   { path: 'termsandconditions', component: TermsandconditionsComponent },
   { path: 'confidentiality', component: ConfidentialityComponent },
-  { path: 'dashboard', component: AdminDashboardComponent }
+  { path: 'dashboard', component: AdminDashboardComponent },
+  { path: 'userdetails', component: UserDetailsComponent }
 ];
 
 @NgModule({

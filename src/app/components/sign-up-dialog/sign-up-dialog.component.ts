@@ -101,7 +101,6 @@ export class SignUpDialogComponent implements OnInit {
     } else {
       this.error = 'Passwords are different';
     }
-    
   }
 
   cancelSignUp(): void {
