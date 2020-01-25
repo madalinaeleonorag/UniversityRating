@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { UserData } from '../models/UserData';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +23,7 @@ export class FirebaseService {
   editUserDetails(userId: string, details: object) {
     // TODO
     Object.keys(details).forEach((key) => (details[key] == null) && delete details[key]);
+    console.log(details)
     return this.fb.collection('Users').doc(userId).update(Object.assign({}, details));
   }
 

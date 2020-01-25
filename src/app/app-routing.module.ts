@@ -9,6 +9,7 @@ import { TermsandconditionsComponent } from './pages/termsandconditions/termsand
 import { ConfidentialityComponent } from './pages/confidentiality/confidentiality.component';
 import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
 import { UserDetailsComponent } from './pages/user-details/user-details.component';
+import { RequestUniversityComponent } from './pages/request-university/request-university.component';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent },
@@ -19,7 +20,8 @@ const routes: Routes = [
   { path: 'termsandconditions', component: TermsandconditionsComponent },
   { path: 'confidentiality', component: ConfidentialityComponent },
   { path: 'dashboard', component: AdminDashboardComponent },
-  { path: 'userdetails', component: UserDetailsComponent }
+  { path: 'userdetails', component: UserDetailsComponent },
+  { path: 'requestUniversity', component: RequestUniversityComponent }
 ];
 
 @NgModule({
