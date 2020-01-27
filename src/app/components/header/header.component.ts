@@ -40,6 +40,9 @@ export class HeaderComponent implements OnInit {
     this.router.navigateByUrl('/userdetails');
   }
 
+  goToRequests() {
+    this.router.navigateByUrl('/universityRequests');
+  }
   logOutUser() {
     this.authService.logOut();
   }

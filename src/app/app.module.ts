@@ -69,6 +69,8 @@ import { GoogleChartsModule } from 'angular-google-charts';
 import { BarChartComponent } from './components/bar-chart/bar-chart.component';
 import { UserDetailsComponent } from './pages/user-details/user-details.component';
 import { RequestUniversityComponent } from './pages/request-university/request-university.component';
+import { RequestsComponent } from './pages/requests/requests.component';
+import { ReviewResponseComponent } from './components/review-response/review-response.component';
 
 // Firestore config
 const config = {
@@ -112,12 +114,15 @@ export function createTranslateLoader(http: HttpClient) {
     DoughnutWidgetComponent,
     BarChartComponent,
     UserDetailsComponent,
-    RequestUniversityComponent
+    RequestUniversityComponent,
+    RequestsComponent,
+    ReviewResponseComponent
   ],
   entryComponents: [
     LoginDialogComponent,
     SignUpDialogComponent,
-    CourseDetailsDialogComponent
+    CourseDetailsDialogComponent,
+    ReviewResponseComponent
   ],
   imports: [
     GoogleChartsModule.forRoot('AIzaSyCnKJYJPDPPKIwcf8fnDC7FXvUhRgPg1Gc'),

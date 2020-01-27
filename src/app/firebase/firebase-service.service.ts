@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { RequestData } from '../models/RequestData';
+import { UniversityData } from '../models/UniversityData';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +25,6 @@ export class FirebaseService {
   editUserDetails(userId: string, details: object) {
     // TODO
     Object.keys(details).forEach((key) => (details[key] == null) && delete details[key]);
-    console.log(details)
     return this.fb.collection('Users').doc(userId).update(Object.assign({}, details));
   }
 
@@ -89,6 +90,42 @@ export class FirebaseService {
 
   saveNewUser(details: any, uid: string) {
     return firebase.firestore().collection('Users/').doc(uid).set(details);
+  }
+
+  approveRequest(request: RequestData) {
+    const universityData = {
+      address: request.address ? request.address : null,
+      descriptionUniversity: request.descriptionUniversity ? request.descriptionUniversity : null,
+      facilitiesUniversity: request.facilitiesUniversity ? request.facilitiesUniversity : null,
+      locationUniversity: request.locationUniversity ? request.locationUniversity : null,
+      logoUniversity: request.logoUniversity ? request.logoUniversity : null,
+      nameUniversity: request.nameUniversity ? request.nameUniversity : null,
+      phone: request.phone ? request.phone : null,
+      photosUniversity: request.photosUniversity ? request.photosUniversity : null,
+      typeUniversity: request.typeUniversity ? request.typeUniversity : null,
+      websiteUniversity: request.websiteUniversity ? request.websiteUniversity : null,
+      rating: 0
+    };
+    // approved in requests
+    firebase.firestore().collection('Requests/').doc(request.requestId).update({
+      status: 'approved'
+    });
+    // add in university
+    firebase.firestore().collection('University').doc(request.requestId).set(universityData);
+    // add universityId in user profile
+    firebase.firestore().collection('Users/').doc(request.userId).update({
+      universityId: request.requestId,
+      type: 'approved',
+      typeUser: 'university'
+    });
+  }
+
+  declineRequest(request: RequestData) {
+
+  }
+
+  reviewRequest(request: RequestData, message: string) {
+
   }
 
 }

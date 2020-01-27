@@ -10,6 +10,7 @@ import { ConfidentialityComponent } from './pages/confidentiality/confidentialit
 import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
 import { UserDetailsComponent } from './pages/user-details/user-details.component';
 import { RequestUniversityComponent } from './pages/request-university/request-university.component';
+import { RequestsComponent } from './pages/requests/requests.component';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent },
@@ -21,7 +22,8 @@ const routes: Routes = [
   { path: 'confidentiality', component: ConfidentialityComponent },
   { path: 'dashboard', component: AdminDashboardComponent },
   { path: 'userdetails', component: UserDetailsComponent },
-  { path: 'requestUniversity', component: RequestUniversityComponent }
+  { path: 'requestUniversity', component: RequestUniversityComponent },
+  { path: 'universityRequests', component: RequestsComponent }
 ];
 
 @NgModule({
