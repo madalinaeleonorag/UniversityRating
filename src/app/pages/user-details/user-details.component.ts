@@ -30,7 +30,7 @@ export class UserDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.isUserSubscription = this.authService.isUserAuthenticatedObservable.subscribe(result => {
-      console.log(result)
+      console.log(result);
       this.user = result;
       this.name = result.name;
       this.surname = result.surname;

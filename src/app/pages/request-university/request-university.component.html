@@ -1,1 +1,48 @@
-<p>request-university works!</p>
+<mat-card fxLayout="column" fxLayoutAlign="center center">
+    <form fxLayout="column" [formGroup]="form">
+  <mat-form-field>
+    <input matInput required placeholder="address" formControlName="addressFormControl" type="text">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput required placeholder="descriptionUniversity" formControlName="descriptionUniversityFormControl" type="text">
+  </mat-form-field>
+  <!-- TODO: autocomplette from what we already have in the database or add another one with icon -->
+  <!-- TODO: get facilities icons from storage and stransform them b/w -->
+  <mat-form-field>
+    <input matInput required placeholder="facilities" formControlName="facilitiesFormControl" type="text">
+  </mat-form-field>
+  <!-- TODO: show map for location when fields are completed -->
+  <mat-form-field>
+    <input matInput required placeholder="location" formControlName="locationFormControl" type="text">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput required placeholder="latitudeLocation" formControlName="latitudeLocationFormControl" type="number">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput required placeholder="longitudeLocation" formControlName="longitudeLocationFormControl" type="number">
+  </mat-form-field>
+  <!-- TODO: upload photo -->
+  <mat-form-field>
+    <input matInput required placeholder="logo" formControlName="logoFormControl" type="text">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput required placeholder="name" formControlName="nameFormControl" type="text">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput required placeholder="phone" formControlName="phoneFormControl" type="text">
+  </mat-form-field>
+  <!-- TODO: upload photos in storage -->
+  <mat-form-field>
+    <input matInput required placeholder="photos" formControlName="photosFormControl" type="text">
+  </mat-form-field>
+  <!-- TODO: select -->
+  <mat-form-field>
+    <input matInput required placeholder="type" formControlName="typeFormControl" type="text">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput required placeholder="website" formControlName="websiteFormControl" type="text">
+  </mat-form-field>
+</form>
+<button mat-button [disabled]="form.status === 'INVALID'" *ngIf="user"
+(click)="send()">Send request</button>
+</mat-card>

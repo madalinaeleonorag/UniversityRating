@@ -43,7 +43,7 @@ export class UniversityData {
         this.descriptionUniversity = obj ? (obj.descriptionUniversity ? obj.descriptionUniversity : undefined) : undefined;
         this.facilitiesUniversity = obj ? (obj.facilitiesUniversity ? obj.facilitiesUniversity : []) : [];
         this.facultiesUniversity = obj ? (obj.facultiesUniversity ? obj.facultiesUniversity : []) : [];
-        this.locationUniversity = obj ? (obj.locationUniversity ? obj.locationUniversity : undefined) : undefined;
+        this.locationUniversity = obj ? (obj.locationUniversity ? obj.locationUniversity : []) : [];
         this.logoUniversity = obj ? (obj.logoUniversity ? obj.logoUniversity : undefined) : undefined;
         this.mission = obj ? (obj.mission ? obj.mission : undefined) : undefined;
         this.nameUniversity = obj ? (obj.nameUniversity ? obj.nameUniversity : undefined) : undefined;
