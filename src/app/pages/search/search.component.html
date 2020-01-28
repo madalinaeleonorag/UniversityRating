@@ -82,7 +82,7 @@
               <p class="dark-blue-bold-text">{{ result.nameUniversity | uppercase }}</p>
               <p class="grey-text" *ngIf="result.locationUniversity[0]">{{ result.locationUniversity[0] }}</p>
               <p>{{ result.rating ? result.rating : 0 }} ★</p>
-              <p>
+              <p *ngIf="result.facultiesUniversity">
                 {{ result.facultiesUniversity.length }} {{ 'filters.faculties_counter' | translate }}
               </p>
             </mat-card-content>
