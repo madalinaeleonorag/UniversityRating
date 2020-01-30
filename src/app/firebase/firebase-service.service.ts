@@ -92,6 +92,33 @@ export class FirebaseService {
     return firebase.firestore().collection('Users/').doc(uid).set(details);
   }
 
+  sendRequest(form: any, user: any) {
+    console.log(form);
+    console.log(user);
+    firebase.firestore().collection('Requests').add({
+      nameUniversity: form.value.nameFormControl,
+      descriptionUniversity: form.value.descriptionUniversityFormControl,
+      websiteUniversity: form.value.websiteFormControl,
+      locationUniversity: [form.value.locationFormControl, form.value.latitudeLocationFormControl, form.value.longitudeLocationFormControl],
+      photosUniversity: form.value.photosFormControl,
+      logoUniversity: form.value.logoFormControl,
+      typeUniversity: form.value.typeFormControl,
+      facilitiesUniversity: form.value.facilitiesFormControl,
+      userId: user.id,
+      address: form.value.addressFormControl,
+      status: 'pending'
+    }).then(docRef => {
+      firebase.firestore().collection('Users/').doc(user.id).update({
+        requestId: docRef.id
+      })
+    }).catch(error => {
+      console.error('Error writing document: ', error)
+    });
+    firebase.firestore().collection('Users/').doc(user.id).update({
+      type: 'requesting'
+    });
+  }
+
   approveRequest(request: RequestData) {
     const universityData = {
       address: request.address ? request.address : null,

@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { MatSnackBar } from '@angular/material';
+import { FirebaseService } from 'src/app/firebase/firebase-service.service';
 
 @Component({
   selector: 'app-request-university',
@@ -18,7 +19,7 @@ export class RequestUniversityComponent implements OnInit {
   universityDetails: UniversityData;
   isUserSubscription: Subscription;
 
-  constructor(private authService: AuthService, private snackBar: MatSnackBar) {
+  constructor(private authService: AuthService, private snackBar: MatSnackBar, private firebaseService: FirebaseService) {
     this.universityDetails = new UniversityData(null);
     this.buildForm();
   }
@@ -50,6 +51,7 @@ export class RequestUniversityComponent implements OnInit {
     this.snackBar.open('Your request was sent', 'OK', {
       duration: 2000,
     });
+    this.firebaseService.sendRequest(this.form, this.user);
   }
 
 }
