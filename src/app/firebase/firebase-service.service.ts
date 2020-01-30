@@ -93,8 +93,6 @@ export class FirebaseService {
   }
 
   sendRequest(form: any, user: any) {
-    console.log(form);
-    console.log(user);
     firebase.firestore().collection('Requests').add({
       nameUniversity: form.value.nameFormControl,
       descriptionUniversity: form.value.descriptionUniversityFormControl,
@@ -110,9 +108,9 @@ export class FirebaseService {
     }).then(docRef => {
       firebase.firestore().collection('Users/').doc(user.id).update({
         requestId: docRef.id
-      })
+      });
     }).catch(error => {
-      console.error('Error writing document: ', error)
+      console.error('Error writing document: ', error);
     });
     firebase.firestore().collection('Users/').doc(user.id).update({
       type: 'requesting'
