@@ -28,6 +28,8 @@ export class UserData {
     surname: string = undefined;
     @JsonProperty('type')
     type: string = undefined;
+    @JsonProperty('universityId')
+    universityId: string = undefined;
 
     constructor(obj: any) {
         this.birthday = obj ? (obj.birthday ? obj.birthday : undefined) : undefined;
@@ -43,5 +45,6 @@ export class UserData {
         this.sex = obj ? (obj.sex ? obj.sex : undefined) : undefined;
         this.surname = obj ? (obj.surname ? obj.surname : undefined) : undefined;
         this.type = obj ? (obj.type ? obj.type : undefined) : undefined;
+        this.universityId = obj ? (obj.universityId ? obj.universityId : undefined) : undefined;
     }
 }

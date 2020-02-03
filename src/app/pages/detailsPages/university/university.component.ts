@@ -7,6 +7,7 @@ import { FacultyData } from 'src/app/models/FacultyData';
 import { } from 'googlemaps';
 import { ILatLng } from 'src/app/directives/directions-map.directive';
 import { LocationService } from 'src/app/services/location.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-university',
@@ -26,15 +27,22 @@ export class UniversityComponent implements OnInit, OnDestroy {
   destination: ILatLng;
   displayDirections = false;
   zoom = 25;
+  userCanEdit: boolean;
+  isUserSubscription: Subscription;
+  universityId: string;
 
   constructor(private route: ActivatedRoute, private firebaseService: FirebaseService, private router: Router,
-              private locationService: LocationService) { }
+              private locationService: LocationService, private authService: AuthService) { }
 
   ngOnInit() {
+    this.isUserSubscription = this.authService.isUserAuthenticatedObservable.subscribe(result => {
+      this.userCanEdit = result.universityId === this.universityId;
+    });
+
     this.paramSubscription = this.route.paramMap.subscribe(params => {
-      const id = params.get('id');
-      if (id) {
-        this.firebaseService.getUniversityById(id).then(data => {
+      this.universityId = params.get('id');
+      if (this.universityId) {
+        this.firebaseService.getUniversityById(this.universityId).then(data => {
           this.universityDetails = new UniversityData(data);
           if (Array.isArray(this.universityDetails.locationUniversity) && this.universityDetails.locationUniversity[1]) {
             this.destination = {
@@ -49,13 +57,17 @@ export class UniversityComponent implements OnInit, OnDestroy {
           this.facultiesData = [];
           data.forEach(faculty => {
             const facultyDetails = new FacultyData(faculty);
-            if (facultyDetails.universityId === id) {
+            if (facultyDetails.universityId === this.universityId) {
               this.facultiesData.push(facultyDetails);
             }
           });
         });
       }
     });
+  }
+
+  editDetails() {
+    console.log('test')
   }
 
   getUserLocation() {
@@ -74,6 +86,9 @@ export class UniversityComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.paramSubscription) {
       this.paramSubscription.unsubscribe();
+    }
+    if (this.isUserSubscription) {
+      this.isUserSubscription.unsubscribe();
     }
   }
 

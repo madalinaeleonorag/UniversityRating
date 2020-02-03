@@ -120,12 +120,33 @@ export class FirebaseService {
     });
   }
 
-  declineRequest(request: RequestData) {
+  reviewRequest(request: RequestData, message: string) {
 
   }
 
-  reviewRequest(request: RequestData, message: string) {
-
+  sendRequest(request: any) {
+    const requestData = {
+      address: request.address ? request.address : null,
+      descriptionUniversity: request.descriptionUniversity ? request.descriptionUniversity : null,
+      facilitiesUniversity: request.facilitiesUniversity ? request.facilitiesUniversity : null,
+      locationUniversity: request.locationUniversity ? request.locationUniversity : null,
+      logoUniversity: request.logoUniversity ? request.logoUniversity : null,
+      nameUniversity: request.nameUniversity ? request.nameUniversity : null,
+      phone: request.phone ? request.phone : null,
+      photosUniversity: request.photosUniversity ? request.photosUniversity : null,
+      typeUniversity: request.typeUniversity ? request.typeUniversity : null,
+      websiteUniversity: request.websiteUniversity ? request.websiteUniversity : null,
+      rating: 0,
+      userId: request.userId ? request.userId : null,
+      status: 'pending'
+    };
+    firebase.firestore().collection('Requests').add(requestData).then(docRef => {
+      firebase.firestore().collection('Users/').doc(request.userId).update({
+        requestId: docRef.id
+      })
+    }).catch(error => {
+      console.error('Error writing document: ', error)
+    })
   }
 
 }

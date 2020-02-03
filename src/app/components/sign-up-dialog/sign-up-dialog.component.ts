@@ -31,7 +31,7 @@ export class SignUpDialogComponent implements OnInit {
               private formBuilder: FormBuilder,
               private firebaseService: FirebaseService) {
     this.locations = LocalitiesRO;
-    // TODO optimize localities, too slow
+    // TODO: optimize localities, too slow
     this.buildForm();
   }
 
@@ -93,7 +93,22 @@ export class SignUpDialogComponent implements OnInit {
     if (this.signUpForm.value.password === this.signUpForm.value.passwordRepeat) {
       this.authService.signUpRegular(this.signUpForm.value)
       .then((res) => {
-        this.firebaseService.saveNewUser(this.signUpForm.value, res.user.uid).then(newUser => {
+        const details = {
+          email: this.signUpForm.value.email,
+          name: this.signUpForm.value.name,
+          surname: this.signUpForm.value.surname,
+          birthday: this.signUpForm.value.birthday,
+          sex: this.signUpForm.value.sex,
+          schoolLevel: this.signUpForm.value.schoolLevel,
+          classLevel: this.signUpForm.value.classLevel,
+          location: this.signUpForm.value.location,
+          gdpr: this.signUpForm.value.gdpr,
+          requestId: null,
+          type: 'user',
+          id: res.user.uid,
+          universityId: null
+        }
+        this.firebaseService.saveNewUser(details, res.user.uid).then(newUser => {
           this.dialogRef.close(res);
         });
       })

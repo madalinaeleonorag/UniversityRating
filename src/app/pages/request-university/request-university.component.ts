@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { MatSnackBar } from '@angular/material';
+import { FirebaseService } from 'src/app/firebase/firebase-service.service';
 
 @Component({
   selector: 'app-request-university',
@@ -18,7 +19,7 @@ export class RequestUniversityComponent implements OnInit {
   universityDetails: UniversityData;
   isUserSubscription: Subscription;
 
-  constructor(private authService: AuthService, private snackBar: MatSnackBar) {
+  constructor(private authService: AuthService, private snackBar: MatSnackBar, private firebaseService: FirebaseService) {
     this.universityDetails = new UniversityData(null);
     this.buildForm();
   }
@@ -47,6 +48,22 @@ export class RequestUniversityComponent implements OnInit {
   }
 
   send() {
+    const details = {
+      address: this.form.value.addressFormControl,
+      descriptionUniversity: this.form.value.descriptionUniversityFormControl,
+      locationUniversity: [this.form.value.locationFormControl, this.form.value.latitudeLocationFormControl, this.form.value.longitudeLocationFormControl],
+      facilitiesUniversity: this.form.value.facilitiesFormControl,
+      logoUniversity: this.form.value.logoFormControl,
+      nameUniversity: this.form.value.nameFormControl,
+      phone: this.form.value.phoneFormControl,
+      photosUniversity: this.form.value.photosFormControl,
+      status: 'pending',
+      typeUniversity: this.form.value.typeFormControl,
+      userId: this.user.id,
+      websiteUniversity: this.form.value.websiteFormControl,
+      adminAnswer: null
+    }
+    this.firebaseService.sendRequest(details);
     this.snackBar.open('Your request was sent', 'OK', {
       duration: 2000,
     });

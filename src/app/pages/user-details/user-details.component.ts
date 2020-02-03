@@ -37,7 +37,7 @@ export class UserDetailsComponent implements OnInit {
       this.birthday = result.birthday;
       this.sex = result.sex;
       this.location = result.locality;
-      this.requestActive = result.requestId ? true : false;
+      this.requestActive = result.requestId ? true : (result.type !== 'university') && (result.type !== 'admin');
     });
   }
 

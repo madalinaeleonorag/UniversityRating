@@ -27,10 +27,6 @@ export class RequestsComponent implements OnInit {
     this.firebaseService.approveRequest(item);
   }
 
-  decline(item) {
-    this.firebaseService.declineRequest(item);
-  }
-
   reviewByUser(item) {
     const dialogRef = this.dialog.open(ReviewResponseComponent, {
       width: '250px',

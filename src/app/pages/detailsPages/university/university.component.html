@@ -4,6 +4,8 @@
   <div>
     {{ universityDetails.nameUniversity |uppercase }}
   </div>
+  <button mat-raised-button class="gradient-background white-text-button"
+            (click)="editDetails()" *ngIf="userCanEdit">Edit data</button>
 
   <!--<div>
       {{ universityDetails.rating }}

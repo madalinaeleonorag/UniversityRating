@@ -10,8 +10,6 @@ export class RequestData {
     descriptionUniversity: string = undefined;
     @JsonProperty('email')
     email: string = undefined;
-    @JsonProperty('facilities')
-    facilities: string[] = [];
     @JsonProperty('locationUniversity')
     locationUniversity: string[] = [];
     @JsonProperty('facilitiesUniversity')
@@ -51,7 +49,6 @@ export class RequestData {
         this.typeUniversity = obj ? (obj.typeUniversity ? obj.typeUniversity : undefined) : undefined;
         this.userId = obj ? (obj.userId ? obj.userId : undefined) : undefined;
         this.websiteUniversity = obj ? (obj.websiteUniversity ? obj.websiteUniversity : undefined) : undefined;
-        this.facilities = obj ? (obj.facilities ? obj.facilities : []) : [];
         this.locationUniversity = obj ? (obj.locationUniversity ? obj.locationUniversity : []) : [];
         this.photosUniversity = obj ? (obj.photosUniversity ? obj.photosUniversity : []) : [];
         this.facilitiesUniversity = obj ? (obj.facilitiesUniversity ? obj.facilitiesUniversity : []) : [];
