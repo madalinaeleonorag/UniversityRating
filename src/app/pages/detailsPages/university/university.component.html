@@ -96,13 +96,13 @@
     </table>
   </mat-tab>
 
-  <mat-tab label="{{ 'university_page.tab_labels.photos' | translate }}">
+  <mat-tab *ngIf="isArray(universityDetails.photosUniversity)" label="{{ 'university_page.tab_labels.photos' | translate }}">
     <div *ngFor="let photo of universityDetails.photosUniversity">
       <img mat-card-image src="{{ photo }}">
     </div>
   </mat-tab>
 
-  <mat-tab label="{{ 'university_page.tab_labels.facilities' | translate }}">
+  <mat-tab *ngIf="isArray(universityDetails.facilitiesUniversity)" label="{{ 'university_page.tab_labels.facilities' | translate }}">
     <div fxLayout="row">
       <div class="facilities-cards">
         <div *ngFor="let facility of universityDetails.facilitiesUniversity">

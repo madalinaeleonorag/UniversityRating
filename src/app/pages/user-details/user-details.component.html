@@ -1,4 +1,19 @@
-<button mat-button (click)="goToRequestPage()" *ngIf="requestActive">Activeaza cont universitar</button>
+<button mat-button (click)="goToRequestPage()" *ngIf="!requestActive">Activeaza cont universitar</button>
+<mat-card *ngIf="requestActive">
+  <mat-card-title>
+ {{ requestStatus}}
+  </mat-card-title>
+  <mat-card-subtitle *ngIf="requestStatus === 'declined'">
+    {{ requestMessage}}
+  </mat-card-subtitle>
+  <mat-card-actions *ngIf="requestStatus === 'declined'">
+    <button mat-button (click)="goToRequestPage('new')">Send new request</button>
+    <button mat-button (click)="goToRequestPage('draft')">Modify and resend the last request</button>
+  </mat-card-actions>
+  <mat-card-actions *ngIf="requestStatus === 'approved'">
+    <button mat-button (click)="goToUniversityPage('new')">View and edit your university</button>
+  </mat-card-actions>
+</mat-card>
 <mat-card>
   <mat-card-header>
     Profile details

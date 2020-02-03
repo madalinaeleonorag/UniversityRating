@@ -22,7 +22,7 @@ const routes: Routes = [
   { path: 'confidentiality', component: ConfidentialityComponent },
   { path: 'dashboard', component: AdminDashboardComponent },
   { path: 'userdetails', component: UserDetailsComponent },
-  { path: 'requestUniversity', component: RequestUniversityComponent },
+  { path: 'requestUniversity/:state', component: RequestUniversityComponent },
   { path: 'universityRequests', component: RequestsComponent }
 ];
 

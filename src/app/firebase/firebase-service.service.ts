@@ -88,6 +88,10 @@ export class FirebaseService {
     return this.fb.collection('Users').doc(id).get().then(doc => doc.data());
   }
 
+  getRequestById(id: string) {
+    return this.fb.collection('Requests').doc(id).get().then(doc => doc.data());
+  }
+
   saveNewUser(details: any, uid: string) {
     return firebase.firestore().collection('Users/').doc(uid).set(details);
   }
@@ -104,7 +108,8 @@ export class FirebaseService {
       photosUniversity: request.photosUniversity ? request.photosUniversity : null,
       typeUniversity: request.typeUniversity ? request.typeUniversity : null,
       websiteUniversity: request.websiteUniversity ? request.websiteUniversity : null,
-      rating: 0
+      rating: 0,
+      adminAnswer: request.adminAnswer ? request.adminAnswer : null
     };
     // approved in requests
     firebase.firestore().collection('Requests/').doc(request.requestId).update({
@@ -120,33 +125,47 @@ export class FirebaseService {
     });
   }
 
-  reviewRequest(request: RequestData, message: string) {
-
+  declineRequest(request: RequestData, message: string) {
+    firebase.firestore().collection('Requests/').doc(request.requestId).update({
+      status: 'declined',
+      adminAnswer: message
+    })
   }
 
-  sendRequest(request: any) {
+  sendRequest(request: any, state: string, requestId: string) {
     const requestData = {
-      address: request.address ? request.address : null,
-      descriptionUniversity: request.descriptionUniversity ? request.descriptionUniversity : null,
-      facilitiesUniversity: request.facilitiesUniversity ? request.facilitiesUniversity : null,
-      locationUniversity: request.locationUniversity ? request.locationUniversity : null,
-      logoUniversity: request.logoUniversity ? request.logoUniversity : null,
-      nameUniversity: request.nameUniversity ? request.nameUniversity : null,
-      phone: request.phone ? request.phone : null,
-      photosUniversity: request.photosUniversity ? request.photosUniversity : null,
-      typeUniversity: request.typeUniversity ? request.typeUniversity : null,
-      websiteUniversity: request.websiteUniversity ? request.websiteUniversity : null,
+      address: request.address ? request.address : '',
+      descriptionUniversity: request.descriptionUniversity ? request.descriptionUniversity : '',
+      facilitiesUniversity: request.facilitiesUniversity ? request.facilitiesUniversity : '',
+      locationUniversity: request.locationUniversity ? request.locationUniversity : '',
+      logoUniversity: request.logoUniversity ? request.logoUniversity : '',
+      nameUniversity: request.nameUniversity ? request.nameUniversity : '',
+      phone: request.phone ? request.phone : '',
+      photosUniversity: request.photosUniversity ? request.photosUniversity : '',
+      typeUniversity: request.typeUniversity ? request.typeUniversity : '',
+      websiteUniversity: request.websiteUniversity ? request.websiteUniversity : '',
       rating: 0,
-      userId: request.userId ? request.userId : null,
-      status: 'pending'
+      userId: request.userId ? request.userId : '',
+      status: 'pending',
+      adminAnswer: ''
     };
-    firebase.firestore().collection('Requests').add(requestData).then(docRef => {
-      firebase.firestore().collection('Users/').doc(request.userId).update({
-        requestId: docRef.id
+    if(state === 'new') {
+      firebase.firestore().collection('Requests').add(requestData).then(docRef => {
+        firebase.firestore().collection('Requests').doc(docRef.id).update({
+          requestId: docRef.id
+        })
+        firebase.firestore().collection('Users/').doc(request.userId).update({
+          requestId: docRef.id
+        })
+      }).catch(error => {
+        console.error('Error writing document: ', error)
       })
-    }).catch(error => {
-      console.error('Error writing document: ', error)
-    })
+    } else if (state === 'draft') {
+      firebase.firestore().collection('Requests').doc(requestId).update({
+        status: 'pending'
+      })
+    }
+
   }
 
 }

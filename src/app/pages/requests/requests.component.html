@@ -101,7 +101,6 @@
     <mat-card-actions>
         <button mat-button (click)="approve(item)" *ngIf="item.status != 'approved'">approve</button>
         <button mat-button (click)="decline(item)" *ngIf="item.status === 'pending'">decline</button>
-        <button mat-button (click)="reviewByUser(item)" *ngIf="item.status === 'pending'">reviewByUser</button>
     </mat-card-actions>
   </mat-card>
 </div>

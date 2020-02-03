@@ -27,14 +27,14 @@ export class RequestsComponent implements OnInit {
     this.firebaseService.approveRequest(item);
   }
 
-  reviewByUser(item) {
+  decline(item) {
     const dialogRef = this.dialog.open(ReviewResponseComponent, {
       width: '250px',
       disableClose: true
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
-      this.firebaseService.reviewRequest(item, result);
+      this.firebaseService.declineRequest(item, result);
     });
   }
 

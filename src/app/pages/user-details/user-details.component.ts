@@ -23,6 +23,8 @@ export class UserDetailsComponent implements OnInit {
   locations: string[];
   canEdit = false;
   requestActive: boolean;
+  requestStatus: string;
+  requestMessage: string;
 
   constructor(private authService: AuthService, private firebaseService: FirebaseService, private router: Router) {
     this.locations = LocalitiesRO;
@@ -30,14 +32,19 @@ export class UserDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.isUserSubscription = this.authService.isUserAuthenticatedObservable.subscribe(result => {
-      console.log(result);
       this.user = result;
-      this.name = result.name;
-      this.surname = result.surname;
-      this.birthday = result.birthday;
-      this.sex = result.sex;
-      this.location = result.locality;
-      this.requestActive = result.requestId ? true : (result.type !== 'university') && (result.type !== 'admin');
+      this.name = result ? result.name : '';
+      this.surname = result ? result.surname : '';
+      this.birthday = result ? result.birthday : '';
+      this.sex = result ? result.sex : '';
+      this.location = result ? result.locality : '';
+      this.requestActive = result ? (result.requestId ? true : (result.type !== 'university') && (result.type !== 'admin')) : false;
+      if (result) {
+        this.firebaseService.getRequestById(result.requestId).then(response => {
+          this.requestStatus = response.status;
+          this.requestMessage = response.adminAnswer;
+        })
+      }
     });
   }
 
@@ -48,8 +55,12 @@ export class UserDetailsComponent implements OnInit {
     });
   }
 
-  goToRequestPage() {
-    this.router.navigateByUrl('/requestUniversity');
+  goToUniversityPage() {
+    this.router.navigateByUrl(`/university/${this.user.universityId}`);
+  }
+
+  goToRequestPage(state) {
+    this.router.navigateByUrl(`/requestUniversity/${state}`);
   }
 
 }

@@ -36,7 +36,7 @@ export class UniversityComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.isUserSubscription = this.authService.isUserAuthenticatedObservable.subscribe(result => {
-      this.userCanEdit = result.universityId === this.universityId;
+      this.userCanEdit = result ? result.universityId === this.universityId : false;
     });
 
     this.paramSubscription = this.route.paramMap.subscribe(params => {
@@ -64,6 +64,10 @@ export class UniversityComponent implements OnInit, OnDestroy {
         });
       }
     });
+  }
+
+  isArray(item: any) {
+    return Array.isArray(item);
   }
 
   editDetails() {

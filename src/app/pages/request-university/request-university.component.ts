@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { MatSnackBar } from '@angular/material';
 import { FirebaseService } from 'src/app/firebase/firebase-service.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-request-university',
@@ -18,8 +19,10 @@ export class RequestUniversityComponent implements OnInit {
   user: any;
   universityDetails: UniversityData;
   isUserSubscription: Subscription;
+  paramSubscription: Subscription;
+  state: string;
 
-  constructor(private authService: AuthService, private snackBar: MatSnackBar, private firebaseService: FirebaseService) {
+  constructor(private authService: AuthService, private snackBar: MatSnackBar, private firebaseService: FirebaseService, private route: ActivatedRoute) {
     this.universityDetails = new UniversityData(null);
     this.buildForm();
   }
@@ -27,6 +30,29 @@ export class RequestUniversityComponent implements OnInit {
   ngOnInit() {
     this.isUserSubscription = this.authService.isUserAuthenticatedObservable.subscribe(result => {
       this.user = result;
+    });
+
+    this.paramSubscription = this.route.paramMap.subscribe(params => {
+      console.log(params)
+      this.state = params.get('state');
+      if (params.get('state') === 'draft' && this.user) {
+        this.firebaseService.getRequestById(this.user.requestId).then(response => {
+          this.form.patchValue({
+            addressFormControl : response.address,
+            descriptionUniversityFormControl : response.descriptionUniversity,
+            facilitiesFormControl : response.facilitiesUniversity,
+            locationFormControl : response.locationUniversity[0],
+            latitudeLocationFormControl : response.locationUniversity[1],
+            longitudeLocationFormControl : response.locationUniversity[2],
+            logoFormControl : response.logoUniversity,
+            nameFormControl : response.nameUniversity,
+            phoneFormControl : response.phone,
+            photosFormControl : response.photosUniversity,
+            typeFormControl : response.typeUniversity,
+            websiteFormControl : response.websiteUniversity
+          })
+        })
+      }
     });
   }
 
@@ -63,7 +89,7 @@ export class RequestUniversityComponent implements OnInit {
       websiteUniversity: this.form.value.websiteFormControl,
       adminAnswer: null
     }
-    this.firebaseService.sendRequest(details);
+    this.firebaseService.sendRequest(details, this.state, this.user.requestId);
     this.snackBar.open('Your request was sent', 'OK', {
       duration: 2000,
     });
