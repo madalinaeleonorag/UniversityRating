@@ -33,7 +33,6 @@ export class RequestUniversityComponent implements OnInit {
     });
 
     this.paramSubscription = this.route.paramMap.subscribe(params => {
-      console.log(params)
       this.state = params.get('state');
       if (params.get('state') === 'draft' && this.user) {
         this.firebaseService.getRequestById(this.user.requestId).then(response => {
