@@ -16,7 +16,6 @@ export class RequestsComponent implements OnInit {
 
   ngOnInit() {
     this.firebaseService.getRequestsData().subscribe(result => {
-      console.log(result);
       result.forEach(element => {
         this.requests.push(new RequestData(element));
       });
@@ -33,7 +32,6 @@ export class RequestsComponent implements OnInit {
       disableClose: true
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
       this.firebaseService.declineRequest(item, result);
     });
   }

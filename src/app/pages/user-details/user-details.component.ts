@@ -50,7 +50,6 @@ export class UserDetailsComponent implements OnInit {
 
   saveNewDetails() {
     return this.firebaseService.editUserDetails(this.user.id, this.user).then(result => {
-      console.log(result);
       this.canEdit = !this.canEdit;
     });
   }
