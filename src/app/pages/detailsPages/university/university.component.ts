@@ -44,19 +44,31 @@ export class UniversityComponent implements OnInit, OnDestroy {
     this.form = new FormGroup({
       logoUniversity: new FormControl(this.universityDetails.logoUniversity, [Validators.required]),
       nameUniversity: new FormControl(this.universityDetails.nameUniversity, [Validators.required]),
-      universityId: new FormControl(this.universityDetails.universityId, [Validators.required])
+      universityId: new FormControl(this.universityDetails.universityId, [Validators.required]),
+      typeUniversity: new FormControl(this.universityDetails.typeUniversity, [Validators.required]),
+      descriptionUniversity: new FormControl(this.universityDetails.descriptionUniversity, [Validators.required]),
+      mission: new FormControl(this.universityDetails.mission, [Validators.required]),
+      strategicProgram: new FormControl(this.universityDetails.strategicProgram, [Validators.required]),
+      values: new FormControl(this.universityDetails.values, [Validators.required]),
+      vision: new FormControl(this.universityDetails.vision, [Validators.required]),
+      phone: new FormControl(this.universityDetails.phone, [Validators.required]),
+      address: new FormControl(this.universityDetails.address, [Validators.required]),
+      fax: new FormControl(this.universityDetails.fax, [Validators.required]),
+      locationUniversity: new FormControl(this.universityDetails.locationUniversity[0], [Validators.required]),
+      latitude: new FormControl(this.universityDetails.locationUniversity[1], [Validators.required]),
+      longitude: new FormControl(this.universityDetails.locationUniversity[2], [Validators.required])
     });
   }
 
   ngOnInit() {
     this.isUserSubscription = this.authService.isUserAuthenticatedObservable.subscribe(result => {
       this.user = result;
-      this.userCanEdit = result ? result.universityId === this.universityId : false;
+      this.userEditable();
     });
 
     this.paramSubscription = this.route.paramMap.subscribe(params => {
       this.universityId = params.get('id');
-      this.userCanEdit = this.user ? this.user.universityId === this.universityId : false;
+      this.userEditable();
       if (this.universityId) {
         this.firebaseService.getUniversityById(this.universityId).then(data => {
           this.universityDetails = new UniversityData(data);
@@ -83,17 +95,28 @@ export class UniversityComponent implements OnInit, OnDestroy {
     });
   }
 
+  userEditable() {
+    this.userCanEdit = this.user ? this.user.universityId === this.universityId : false;
+    if (this.editEnabled) {
+      this.displayedColumns.push('removeButton')
+    } else {
+      const index = this.displayedColumns.indexOf('removeButton');
+      this.displayedColumns.splice(index, 1);
+    }
+  }
+
   isArray(item: any) {
     return Array.isArray(item);
   }
 
   editDetails() {
     this.editEnabled = !this.editEnabled;
+    this.userEditable();
   }
 
   saveDetails() {
     this.editEnabled = !this.editEnabled;
-    this.firebaseService.saveUniversityDetails(new UniversityData(this.form.value));
+    this.firebaseService.saveUniversityDetails(this.form.value);
   }
 
   getUserLocation() {
@@ -103,6 +126,14 @@ export class UniversityComponent implements OnInit, OnDestroy {
         longitude: pos.lng
       };
     });
+  }
+
+  addFaculty() {
+    console.log('test');
+  }
+
+  removeFaculty(data: any) {
+    console.log(data);
   }
 
   onNavigate(id: string) {

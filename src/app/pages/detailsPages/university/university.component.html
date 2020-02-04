@@ -35,17 +35,32 @@
       </div>
       {{ universityDetails.typeUniversity }}
     </div>
+    <div *ngIf="editEnabled">
+      <mat-form-field>
+        <input matInput required placeholder="type" formControlName="typeUniversity" type="text">
+      </mat-form-field>
+    </div>
     <div class="custom-detail-field" *ngIf="universityDetails.descriptionUniversity && !editEnabled">
       <div class="custom-detail-field-title">
         {{ 'university_page.details.description' | translate }}
       </div>
       {{ universityDetails.descriptionUniversity }}
     </div>
+    <div *ngIf="editEnabled">
+      <mat-form-field>
+        <input matInput required placeholder="description" formControlName="descriptionUniversity" type="text">
+      </mat-form-field>
+    </div>
     <div class="custom-detail-field" *ngIf="universityDetails.mission && !editEnabled">
       <div class="custom-detail-field-title">
         {{ 'university_page.details.mission' | translate }}
       </div>
       {{ universityDetails.mission }}
+    </div>
+    <div *ngIf="editEnabled">
+      <mat-form-field>
+        <input matInput required placeholder="mission" formControlName="mission" type="text">
+      </mat-form-field>
     </div>
     <div class="custom-detail-field" *ngIf="universityDetails.strategicProgram.length > 0 && !editEnabled">
       <div class="custom-detail-field-title">
@@ -57,6 +72,11 @@
         </li>
       </ul>
     </div>
+    <div *ngIf="editEnabled">
+      <mat-form-field>
+        <input matInput required placeholder="strategicProgram" formControlName="strategicProgram" type="text">
+      </mat-form-field>
+    </div>
     <div class="custom-detail-field" *ngIf="universityDetails.values.length > 0 && !editEnabled">
       <div class="custom-detail-field-title">
         {{ 'university_page.details.values' | translate }}
@@ -67,6 +87,11 @@
         </li>
       </ul>
     </div>
+    <div *ngIf="editEnabled">
+      <mat-form-field>
+        <input matInput required placeholder="values" formControlName="values" type="text">
+      </mat-form-field>
+    </div>
     <div class="custom-detail-field" *ngIf="universityDetails.vision && !editEnabled">
       <div class="custom-detail-field-title">
         {{ 'university_page.details.vision' | translate }}
@@ -75,11 +100,18 @@
         {{ universityDetails.vision }}
       </ul>
     </div>
+    <div *ngIf="editEnabled">
+      <mat-form-field>
+        <input matInput required placeholder="vision" formControlName="vision" type="text">
+      </mat-form-field>
+    </div>
 
   </mat-tab>
 
   <mat-tab label="{{ 'university_page.tab_labels.faculties' | translate }}">
-    <table mat-table [dataSource]="facultiesData">
+    <button mat-raised-button class="gradient-background white-text-button" (click)="addFaculty()"
+    *ngIf="userCanEdit && editEnabled">Add faculty</button>
+    <table mat-table [dataSource]="facultiesData" *ngIf="facultiesData.length > 0">
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef> {{ 'university_page.faculties.name' | translate }} </th>
         <td mat-cell *matCellDef="let element"> {{ element.nameFaculty }} </td>
@@ -103,10 +135,18 @@
             (click)="onNavigate(element.facultyId)">{{ 'university_page.faculties.details' | translate }}</button>
         </td>
       </ng-container>
+      <ng-container matColumnDef="removeButton" *ngIf="userCanEdit && editEnabled">
+        <th mat-header-cell *matHeaderCellDef> </th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-raised-button class="gradient-background white-text-button"
+            (click)="removeFaculty(element)">Remove</button>
+        </td>
+      </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+    <div *ngIf="facultiesData.length === 0 || editEnabled">No data to display</div>
   </mat-tab>
 
   <mat-tab *ngIf="isArray(universityDetails.photosUniversity)"
@@ -133,29 +173,59 @@
   </mat-tab>
 
   <mat-tab label="{{ 'university_page.tab_labels.contact' | translate }}">
-    <div class="custom-detail-field" *ngIf="universityDetails.phone">
+    <div class="custom-detail-field" *ngIf="universityDetails.phone && !editEnabled">
       <div class="custom-detail-field-title">
         {{ 'university_page.contact.phone' | translate }}
       </div>
       {{ universityDetails.phone }}
     </div>
-    <div class="custom-detail-field" *ngIf="universityDetails.address">
+    <div *ngIf="editEnabled">
+      <mat-form-field>
+        <input matInput required placeholder="phone" formControlName="phone" type="text">
+      </mat-form-field>
+    </div>
+    <div class="custom-detail-field" *ngIf="universityDetails.address && !editEnabled">
       <div class="custom-detail-field-title">
         {{ 'university_page.contact.address' | translate }}
       </div>
       {{ universityDetails.address }}
     </div>
-    <div class="custom-detail-field" *ngIf="universityDetails.fax">
+    <div *ngIf="editEnabled">
+      <mat-form-field>
+        <input matInput required placeholder="address" formControlName="address" type="text">
+      </mat-form-field>
+    </div>
+    <div class="custom-detail-field" *ngIf="universityDetails.fax && !editEnabled">
       <div class="custom-detail-field-title">
         {{ 'university_page.contact.fax' | translate }}
       </div>
       {{ universityDetails.fax }}
     </div>
+    <div *ngIf="editEnabled">
+      <mat-form-field>
+        <input matInput required placeholder="fax" formControlName="fax" type="text">
+      </mat-form-field>
+    </div>
   </mat-tab>
 
-  <mat-tab label="{{ 'university_page.tab_labels.map' | translate }}" *ngIf="displayDirections">
+  <mat-tab label="{{ 'university_page.tab_labels.map' | translate }}" *ngIf="displayDirections || editEnabled">
+    <div *ngIf="editEnabled">
+      <mat-form-field>
+        <input matInput required placeholder="locationUniversity" formControlName="locationUniversity" type="text">
+      </mat-form-field>
+    </div>
+    <div *ngIf="editEnabled">
+      <mat-form-field>
+        <input matInput required placeholder="latitude" formControlName="latitude" type="text">
+      </mat-form-field>
+    </div>
+    <div *ngIf="editEnabled">
+      <mat-form-field>
+        <input matInput required placeholder="longitude" formControlName="longitude" type="text">
+      </mat-form-field>
+    </div>
     <agm-map appDirectionsMap [showDirection]="this.displayDirections" [origin]="origin" [destination]="destination"
-      [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false">
+      [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false" *ngIf="displayDirections">
       <agm-marker [latitude]="destination.latitude" [longitude]="destination.longitude">
       </agm-marker>
     </agm-map>
