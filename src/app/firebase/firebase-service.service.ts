@@ -109,6 +109,7 @@ export class FirebaseService {
       typeUniversity: request.typeUniversity ? request.typeUniversity : null,
       websiteUniversity: request.websiteUniversity ? request.websiteUniversity : null,
       rating: 0,
+      universityId: request.requestId,
       adminAnswer: request.adminAnswer ? request.adminAnswer : null
     };
     // approved in requests
