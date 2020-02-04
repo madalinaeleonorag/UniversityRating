@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FirebaseService } from 'src/app/firebase/firebase-service.service';
+import { FirebaseService } from 'src/app/services/firebase-service.service';
 import { UniversityData } from 'src/app/models/UniversityData';
 import { FacultyData } from 'src/app/models/FacultyData';
 import { BachelorData } from 'src/app/models/BachelorData';

@@ -1,13 +1,14 @@
 import { Component, OnInit, OnDestroy, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FirebaseService } from 'src/app/firebase/firebase-service.service';
+import { FirebaseService } from 'src/app/services/firebase-service.service';
 import { UniversityData } from 'src/app/models/UniversityData';
 import { FacultyData } from 'src/app/models/FacultyData';
 import { } from 'googlemaps';
 import { ILatLng } from 'src/app/directives/directions-map.directive';
-import { LocationService } from 'src/app/services/location.service';
+import { FunctionsService } from 'src/app/services/functions.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-university',
@@ -30,20 +31,36 @@ export class UniversityComponent implements OnInit, OnDestroy {
   userCanEdit: boolean;
   isUserSubscription: Subscription;
   universityId: string;
+  form: FormGroup;
+  user: any;
+  editEnabled: boolean;
 
   constructor(private route: ActivatedRoute, private firebaseService: FirebaseService, private router: Router,
-              private locationService: LocationService, private authService: AuthService) { }
+    private functionsService: FunctionsService, private authService: AuthService) {
+      this.buildForm();
+  }
+
+  private buildForm() {
+    this.form = new FormGroup({
+      logoUniversity: new FormControl(this.universityDetails.logoUniversity, [Validators.required]),
+      nameUniversity: new FormControl(this.universityDetails.nameUniversity, [Validators.required]),
+      universityId: new FormControl(this.universityDetails.universityId, [Validators.required])
+    });
+  }
 
   ngOnInit() {
     this.isUserSubscription = this.authService.isUserAuthenticatedObservable.subscribe(result => {
+      this.user = result;
       this.userCanEdit = result ? result.universityId === this.universityId : false;
     });
 
     this.paramSubscription = this.route.paramMap.subscribe(params => {
       this.universityId = params.get('id');
+      this.userCanEdit = this.user ? this.user.universityId === this.universityId : false;
       if (this.universityId) {
         this.firebaseService.getUniversityById(this.universityId).then(data => {
           this.universityDetails = new UniversityData(data);
+          this.buildForm();
           if (Array.isArray(this.universityDetails.locationUniversity) && this.universityDetails.locationUniversity[1]) {
             this.destination = {
               latitude: +this.universityDetails.locationUniversity[1],
@@ -71,11 +88,16 @@ export class UniversityComponent implements OnInit, OnDestroy {
   }
 
   editDetails() {
-    console.log('test')
+    this.editEnabled = !this.editEnabled;
+  }
+
+  saveDetails() {
+    this.editEnabled = !this.editEnabled;
+    this.firebaseService.saveUniversityDetails(new UniversityData(this.form.value));
   }
 
   getUserLocation() {
-    this.locationService.getPosition().then(pos => {
+    this.functionsService.getPosition().then(pos => {
       this.origin = {
         latitude: pos.lat,
         longitude: pos.lng

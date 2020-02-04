@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FirebaseService } from 'src/app/firebase/firebase-service.service';
+import { FirebaseService } from 'src/app/services/firebase-service.service';
 import { RequestData } from 'src/app/models/RequestData';
 import { ReviewResponseComponent } from 'src/app/components/review-response/review-response.component';
 import { MatDialog } from '@angular/material';

@@ -3,6 +3,7 @@ import * as firebase from 'firebase/app';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { RequestData } from '../models/RequestData';
 import { UniversityData } from '../models/UniversityData';
+import { FunctionsService } from './functions.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class FirebaseService {
   coursesCollection = this.afs.collection('Courses');
   usersCollection = this.afs.collection('Users');
 
-  constructor(private afs: AngularFirestore) {
+  constructor(private afs: AngularFirestore, private functionsService: FunctionsService) {
   }
 
   editUserDetails(userId: string, details: object) {
@@ -94,6 +95,11 @@ export class FirebaseService {
 
   saveNewUser(details: any, uid: string) {
     return firebase.firestore().collection('Users/').doc(uid).set(details);
+  }
+
+  saveUniversityDetails(details: UniversityData) {
+    console.log(details)
+    firebase.firestore().collection('University').doc(details.universityId).update(Object.assign({}, details));
   }
 
   approveRequest(request: RequestData) {
