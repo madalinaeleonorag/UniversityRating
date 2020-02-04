@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class LocationService {
+export class FunctionsService {
 
   constructor() { }
 
@@ -17,4 +17,5 @@ export class LocationService {
         });
     });
   }
+  
 }

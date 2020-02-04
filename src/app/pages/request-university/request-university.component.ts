@@ -4,7 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { MatSnackBar } from '@angular/material';
-import { FirebaseService } from 'src/app/firebase/firebase-service.service';
+import { FirebaseService } from 'src/app/services/firebase-service.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

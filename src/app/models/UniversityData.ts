@@ -40,23 +40,23 @@ export class UniversityData {
     phone: string = undefined;
 
     constructor(obj: any) {
-        this.descriptionUniversity = obj ? (obj.descriptionUniversity ? obj.descriptionUniversity : undefined) : undefined;
+        this.descriptionUniversity = obj ? (obj.descriptionUniversity ? obj.descriptionUniversity : '') : '';
         this.facilitiesUniversity = obj ? (obj.facilitiesUniversity ? obj.facilitiesUniversity : []) : [];
         this.facultiesUniversity = obj ? (obj.facultiesUniversity ? obj.facultiesUniversity : []) : [];
         this.locationUniversity = obj ? (obj.locationUniversity ? obj.locationUniversity : []) : [];
-        this.logoUniversity = obj ? (obj.logoUniversity ? obj.logoUniversity : undefined) : undefined;
-        this.mission = obj ? (obj.mission ? obj.mission : undefined) : undefined;
-        this.nameUniversity = obj ? (obj.nameUniversity ? obj.nameUniversity : undefined) : undefined;
-        this.photosUniversity = obj ? (obj.photosUniversity ? obj.photosUniversity : undefined) : undefined;
-        this.rating = obj ? (obj.rating ? obj.rating : undefined) : undefined;
+        this.logoUniversity = obj ? (obj.logoUniversity ? obj.logoUniversity : '') : '';
+        this.mission = obj ? (obj.mission ? obj.mission : '') : '';
+        this.nameUniversity = obj ? (obj.nameUniversity ? obj.nameUniversity : '') : '';
+        this.photosUniversity = obj ? (obj.photosUniversity ? obj.photosUniversity : '') : '';
+        this.rating = obj ? (obj.rating ? obj.rating : '') : '';
         this.strategicProgram = obj ? (obj.strategicProgram ? obj.strategicProgram : []) : [];
-        this.typeUniversity = obj ? (obj.typeUniversity ? obj.typeUniversity : undefined) : undefined;
-        this.universityId = obj ? (obj.universityId ? obj.universityId : undefined) : undefined;
+        this.typeUniversity = obj ? (obj.typeUniversity ? obj.typeUniversity : '') : '';
+        this.universityId = obj ? (obj.universityId ? obj.universityId : '') : '';
         this.values = obj ? (obj.values ? obj.values : []) : [];
-        this.vision = obj ? (obj.vision ? obj.vision : undefined) : undefined;
-        this.websiteUniversity = obj ? (obj.websiteUniversity ? obj.websiteUniversity : undefined) : undefined;
-        this.address = obj ? (obj.address ? obj.address : undefined) : undefined;
-        this.fax = obj ? (obj.fax ? obj.fax : undefined) : undefined;
-        this.phone = obj ? (obj.phone ? obj.phone : undefined) : undefined;
+        this.vision = obj ? (obj.vision ? obj.vision : '') : '';
+        this.websiteUniversity = obj ? (obj.websiteUniversity ? obj.websiteUniversity : '') : '';
+        this.address = obj ? (obj.address ? obj.address : '') : '';
+        this.fax = obj ? (obj.fax ? obj.fax : '') : '';
+        this.phone = obj ? (obj.phone ? obj.phone : '') : '';
     }
 }

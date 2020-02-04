@@ -1,11 +1,24 @@
+<form fxLayout="column" [formGroup]="form">
 <div fxLayout="column" fxLayoutAlign="center center" class="custom-university-header">
-  <img mat-card-image src="{{ universityDetails.logoUniversity }}" *ngIf="universityDetails.logoUniversity">
-  <img mat-card-image src="assets/university.png" *ngIf="!universityDetails.logoUniversity">
-  <div>
-    {{ universityDetails.nameUniversity |uppercase }}
+  <div *ngIf="!editEnabled">
+    <img mat-card-image src="{{ universityDetails.logoUniversity }}" *ngIf="universityDetails.logoUniversity">
+    <img mat-card-image src="assets/university.png" *ngIf="!universityDetails.logoUniversity">
+    <div>
+      {{ universityDetails.nameUniversity |uppercase }}
+    </div>
   </div>
-  <button mat-raised-button class="gradient-background white-text-button"
-            (click)="editDetails()" *ngIf="userCanEdit">Edit data</button>
+  <div *ngIf="editEnabled">
+    <mat-form-field>
+      <input matInput required placeholder="logo" formControlName="logoUniversity" type="text">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput required placeholder="name" formControlName="nameUniversity" type="text">
+    </mat-form-field>
+  </div>
+  <button mat-raised-button class="gradient-background white-text-button" (click)="editDetails()"
+    *ngIf="userCanEdit && !editEnabled">Edit data</button>
+  <button mat-raised-button class="gradient-background white-text-button" (click)="saveDetails()"
+    *ngIf="userCanEdit && editEnabled">Save data</button>
 
   <!--<div>
       {{ universityDetails.rating }}
@@ -16,35 +29,35 @@
 </div>
 <mat-tab-group mat-align-tabs="center">
   <mat-tab label="{{ 'university_page.tab_labels.details' | translate }}">
-    <div class="custom-detail-field" *ngIf="universityDetails.typeUniversity">
+    <div class="custom-detail-field" *ngIf="universityDetails.typeUniversity && !editEnabled">
       <div class="custom-detail-field-title">
         {{ 'university_page.details.type' | translate }}
       </div>
       {{ universityDetails.typeUniversity }}
     </div>
-    <div class="custom-detail-field" *ngIf="universityDetails.descriptionUniversity">
+    <div class="custom-detail-field" *ngIf="universityDetails.descriptionUniversity && !editEnabled">
       <div class="custom-detail-field-title">
         {{ 'university_page.details.description' | translate }}
       </div>
       {{ universityDetails.descriptionUniversity }}
     </div>
-    <div class="custom-detail-field" *ngIf="universityDetails.mission">
+    <div class="custom-detail-field" *ngIf="universityDetails.mission && !editEnabled">
       <div class="custom-detail-field-title">
         {{ 'university_page.details.mission' | translate }}
       </div>
       {{ universityDetails.mission }}
     </div>
-    <div class="custom-detail-field" *ngIf="universityDetails.strategicProgram.length > 0">
+    <div class="custom-detail-field" *ngIf="universityDetails.strategicProgram.length > 0 && !editEnabled">
       <div class="custom-detail-field-title">
         {{ 'university_page.details.strategic_programs' | translate }}
       </div>
       <ul>
-        <li *ngFor="let item of universityDetails.strategicProgram">
+        <li *ngFor="let item of universityDetails.strategicProgram && !editEnabled">
           - {{ item }}
         </li>
       </ul>
     </div>
-    <div class="custom-detail-field" *ngIf="universityDetails.values.length > 0">
+    <div class="custom-detail-field" *ngIf="universityDetails.values.length > 0 && !editEnabled">
       <div class="custom-detail-field-title">
         {{ 'university_page.details.values' | translate }}
       </div>
@@ -54,7 +67,7 @@
         </li>
       </ul>
     </div>
-    <div class="custom-detail-field" *ngIf="universityDetails.vision">
+    <div class="custom-detail-field" *ngIf="universityDetails.vision && !editEnabled">
       <div class="custom-detail-field-title">
         {{ 'university_page.details.vision' | translate }}
       </div>
@@ -96,13 +109,15 @@
     </table>
   </mat-tab>
 
-  <mat-tab *ngIf="isArray(universityDetails.photosUniversity)" label="{{ 'university_page.tab_labels.photos' | translate }}">
+  <mat-tab *ngIf="isArray(universityDetails.photosUniversity)"
+    label="{{ 'university_page.tab_labels.photos' | translate }}">
     <div *ngFor="let photo of universityDetails.photosUniversity">
       <img mat-card-image src="{{ photo }}">
     </div>
   </mat-tab>
 
-  <mat-tab *ngIf="isArray(universityDetails.facilitiesUniversity)" label="{{ 'university_page.tab_labels.facilities' | translate }}">
+  <mat-tab *ngIf="isArray(universityDetails.facilitiesUniversity)"
+    label="{{ 'university_page.tab_labels.facilities' | translate }}">
     <div fxLayout="row">
       <div class="facilities-cards">
         <div *ngFor="let facility of universityDetails.facilitiesUniversity">
@@ -147,3 +162,4 @@
   </mat-tab>
 
 </mat-tab-group>
+</form>

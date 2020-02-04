@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { FirebaseService } from 'src/app/firebase/firebase-service.service';
+import { FirebaseService } from 'src/app/services/firebase-service.service';
 import { Categories } from 'src/app/enums/Categories';
 import { Sorting } from 'src/app/enums/Sorting';
 import { InstitutionType } from 'src/app/enums/InstitutionType';

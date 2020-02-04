@@ -3,7 +3,7 @@ import { ErrorStateMatcher, MatDialogRef } from '@angular/material';
 import { FormControl, FormGroupDirective, NgForm, Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import LocalitiesRO from 'src/assets/locationsRomania';
-import { FirebaseService } from 'src/app/firebase/firebase-service.service';
+import { FirebaseService } from 'src/app/services/firebase-service.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {

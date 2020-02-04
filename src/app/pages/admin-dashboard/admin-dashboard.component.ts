@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { DashboardService } from 'src/app/services/dashboard.service';
 import { DoughnutData } from 'src/app/models/DoughnutData';
-import { FirebaseService } from 'src/app/firebase/firebase-service.service';
+import { FirebaseService } from 'src/app/services/firebase-service.service';
 
 @Component({
   selector: 'app-admin-dashboard',

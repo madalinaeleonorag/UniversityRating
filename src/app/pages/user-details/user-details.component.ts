@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import LocalitiesRO from 'src/assets/locationsRomania';
-import { FirebaseService } from 'src/app/firebase/firebase-service.service';
+import { FirebaseService } from 'src/app/services/firebase-service.service';
 import { UserData } from 'src/app/models/UserData';
 import { Router } from '@angular/router';
 
