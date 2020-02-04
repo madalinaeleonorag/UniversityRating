@@ -102,12 +102,11 @@ export class FirebaseService {
     firebase.firestore().collection('University').doc(details.universityId).update(Object.assign({}, details));
   }
 
-  approveRequest(request: RequestData) {
+  approveRequest(request: any) {
     const universityData = {
       address: request.address ? request.address : null,
       descriptionUniversity: request.descriptionUniversity ? request.descriptionUniversity : null,
       facilitiesUniversity: request.facilitiesUniversity ? request.facilitiesUniversity : null,
-      locationUniversity: request.locationUniversity ? request.locationUniversity : null,
       logoUniversity: request.logoUniversity ? request.logoUniversity : null,
       nameUniversity: request.nameUniversity ? request.nameUniversity : null,
       phone: request.phone ? request.phone : null,
@@ -116,7 +115,8 @@ export class FirebaseService {
       websiteUniversity: request.websiteUniversity ? request.websiteUniversity : null,
       rating: 0,
       universityId: request.requestId,
-      adminAnswer: request.adminAnswer ? request.adminAnswer : null
+      adminAnswer: request.adminAnswer ? request.adminAnswer : null,
+      locationUniversity: [request.locationUniversity, request.latitude, request.longitude]
     };
     // approved in requests
     firebase.firestore().collection('Requests/').doc(request.requestId).update({
