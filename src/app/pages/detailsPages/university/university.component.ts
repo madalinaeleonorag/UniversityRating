@@ -56,7 +56,8 @@ export class UniversityComponent implements OnInit, OnDestroy {
       fax: new FormControl(this.universityDetails.fax, [Validators.required]),
       locationUniversity: new FormControl(this.universityDetails.locationUniversity[0], [Validators.required]),
       latitude: new FormControl(this.universityDetails.locationUniversity[1], [Validators.required]),
-      longitude: new FormControl(this.universityDetails.locationUniversity[2], [Validators.required])
+      longitude: new FormControl(this.universityDetails.locationUniversity[2], [Validators.required]),
+      facilitiesUniversity: new FormControl(this.universityDetails.facilitiesUniversity, [Validators.required])
     });
   }
 
@@ -93,6 +94,15 @@ export class UniversityComponent implements OnInit, OnDestroy {
         });
       }
     });
+  }
+
+  addFacility() {
+    //
+  }
+
+  removeFacility(item) {
+    const index = this.universityDetails.facilitiesUniversity.indexOf(item);
+    this.universityDetails.facilitiesUniversity.splice(index, 1);
   }
 
   userEditable() {
