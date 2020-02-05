@@ -148,8 +148,12 @@
             <mat-card-subtitle>
               {{ facility | instantFacilityTranslate }}
             </mat-card-subtitle>
+            <svg-icon src="assets/icons/delete.svg" class="remove-icon" [svgStyle]="{ 'width.px':20, 'height.px':20, 'fill':'red' }" *ngIf="editEnabled" (click)="removeFacility(facility)"></svg-icon>
           </mat-card>
         </div>
+        <mat-card fxLayout="column" fxLayoutAlign="center center" *ngIf="editEnabled" (click)="addFacility()">
+          <svg-icon src="assets/icons/add.svg" [svgStyle]="{ 'width.px':50, 'height.px':50, 'fill':'green' }" class="add-icon"></svg-icon>
+        </mat-card>
       </div>
     </div>
   </mat-tab>

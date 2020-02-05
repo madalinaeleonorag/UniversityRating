@@ -6,7 +6,7 @@ app-university {
     width: 100%;
     height: 500px;
   }
-  
+
   .facilities-cards {
     display: flex;
     flex-flow: wrap;
@@ -21,6 +21,17 @@ app-university {
 
     mat-card-subtitle {
       padding-top: 10px;
+    }
+
+    .remove-icon {
+      position: absolute;
+      top: 0;
+      right: 0;
+      cursor: pointer;
+    }
+
+    .add-icon {
+      cursor: pointer;
     }
   }
 
@@ -55,5 +66,5 @@ app-university {
   #map {
     height: 100vh !important;
   }
-  
+
 }
