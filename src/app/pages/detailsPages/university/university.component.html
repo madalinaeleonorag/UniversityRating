@@ -62,35 +62,17 @@
         <input matInput required placeholder="mission" formControlName="mission" type="text">
       </mat-form-field>
     </div>
-    <div class="custom-detail-field" *ngIf="universityDetails.strategicProgram.length > 0 && !editEnabled">
+    <div class="custom-detail-field" *ngIf="universityDetails.strategicProgram.length > 0 || editEnabled">
       <div class="custom-detail-field-title">
         {{ 'university_page.details.strategic_programs' | translate }}
       </div>
-      <ul>
-        <li *ngFor="let item of universityDetails.strategicProgram && !editEnabled">
-          - {{ item }}
-        </li>
-      </ul>
+      <app-editable-list [editable]="editEnabled" [list]="universityDetails.strategicProgram" (listEdited)="modifyValuesFromList($event, 'strategicPrograms')"></app-editable-list>
     </div>
-    <div *ngIf="editEnabled">
-      <mat-form-field>
-        <input matInput required placeholder="strategicProgram" formControlName="strategicProgram" type="text">
-      </mat-form-field>
-    </div>
-    <div class="custom-detail-field" *ngIf="universityDetails.values.length > 0 && !editEnabled">
+    <div class="custom-detail-field" *ngIf="universityDetails.values.length > 0 || editEnabled">
       <div class="custom-detail-field-title">
         {{ 'university_page.details.values' | translate }}
       </div>
-      <ul>
-        <li *ngFor="let item of universityDetails.values">
-          - {{ item }}
-        </li>
-      </ul>
-    </div>
-    <div *ngIf="editEnabled">
-      <mat-form-field>
-        <input matInput required placeholder="values" formControlName="values" type="text">
-      </mat-form-field>
+      <app-editable-list [editable]="editEnabled" [list]="universityDetails.values" (listEdited)="modifyValuesFromList($event, 'values')"></app-editable-list>
     </div>
     <div class="custom-detail-field" *ngIf="universityDetails.vision && !editEnabled">
       <div class="custom-detail-field-title">

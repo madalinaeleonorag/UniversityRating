@@ -9,7 +9,7 @@ export class UniversityData {
     @JsonProperty('facultiesUniversity')
     facultiesUniversity: string[] = [];
     @JsonProperty('locationUniversity')
-    locationUniversity: any = undefined;
+    locationUniversity: Array<any> = [];
     @JsonProperty('logoUniversity')
     logoUniversity: string = undefined;
     @JsonProperty('mission')
