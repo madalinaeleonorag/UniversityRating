@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import * as _ from 'underscore';
 import { Router } from '@angular/router';
+import { UniversityData } from 'src/app/models/UniversityData';
 
 @Component({
   selector: 'app-search',
@@ -40,7 +41,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   mastersSubscription: Subscription;
   mastersData = [];
   universitiesSubscription: Subscription;
-  universitiesData = [];
+  universitiesData: UniversityData[] = [];
 
 
   constructor(private firebaseService: FirebaseService, private router: Router) {
@@ -56,7 +57,12 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.facultiesSubscription = this.firebaseService.getFacultiesData().subscribe(result => this.facultiesData = result);
     this.mastersSubscription = this.firebaseService.getMastersData().subscribe(result => this.mastersData = result);
     this.universitiesSubscription = this.firebaseService.getUniversitiesData().subscribe(result => {
-      this.universitiesData = result;
+      let resultsArray = [];
+      result.forEach(item => {
+        resultsArray.push(new UniversityData(item));
+      })
+      this.universitiesData = resultsArray;
+      console.log(this.universitiesData)
       this.getUniversityLocations(result);
     });
     this.facilitiesList = Object.keys(Facilities);
@@ -74,7 +80,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   private getUniversitiesData() {
     const result = this.universitiesData.filter(university => {
-      return this.matchingNames(university.nameUniversity) && this.matchingLocations(university.locationUniversity)
+      return this.matchingNames(university.nameUniversity) && this.matchingLocations(university.locationUniversity[0])
         && this.matchingType(university.typeUniversity) && this.matchingFacilities(university.facilitiesUniversity)
         && this.matchingDescription(university.descriptionUniversity);
     });

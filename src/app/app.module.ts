@@ -71,6 +71,7 @@ import { UserDetailsComponent } from './pages/user-details/user-details.componen
 import { RequestUniversityComponent } from './pages/request-university/request-university.component';
 import { RequestsComponent } from './pages/requests/requests.component';
 import { ReviewResponseComponent } from './components/review-response/review-response.component';
+import { EditableListComponent } from './components/editable-list/editable-list.component';
 
 // Firestore config
 const config = {
@@ -116,7 +117,8 @@ export function createTranslateLoader(http: HttpClient) {
     UserDetailsComponent,
     RequestUniversityComponent,
     RequestsComponent,
-    ReviewResponseComponent
+    ReviewResponseComponent,
+    EditableListComponent
   ],
   entryComponents: [
     LoginDialogComponent,

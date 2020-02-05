@@ -105,6 +105,10 @@ export class UniversityComponent implements OnInit, OnDestroy {
     }
   }
 
+  modifyValuesFromList(event: Array<any>, type: string) {
+    this.universityDetails[type] = event;
+  }
+
   isArray(item: any) {
     return Array.isArray(item);
   }
