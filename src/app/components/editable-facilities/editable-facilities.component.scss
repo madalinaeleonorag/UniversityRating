@@ -1,0 +1,18 @@
+app-editable-facilities {
+    .facilities-cards {
+        display: flex;
+        flex-flow: wrap;
+    
+        mat-card {
+          height: 150px;
+          text-align: center;
+          box-shadow: none !important;
+          background-color: #fafafa;
+        }
+    
+        mat-card-subtitle {
+          padding-top: 10px;
+        }
+    
+      }
+}
