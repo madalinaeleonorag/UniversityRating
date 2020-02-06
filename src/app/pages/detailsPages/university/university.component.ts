@@ -9,6 +9,7 @@ import { ILatLng } from 'src/app/directives/directions-map.directive';
 import { FunctionsService } from 'src/app/services/functions.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Facilities } from 'src/app/enums/Facilities';
 
 @Component({
   selector: 'app-university',
@@ -34,6 +35,7 @@ export class UniversityComponent implements OnInit, OnDestroy {
   form: FormGroup;
   user: any;
   editEnabled: boolean;
+  facilitiesList = Object.keys(Facilities);
 
   constructor(private route: ActivatedRoute, private firebaseService: FirebaseService, private router: Router,
     private functionsService: FunctionsService, private authService: AuthService) {
@@ -96,13 +98,8 @@ export class UniversityComponent implements OnInit, OnDestroy {
     });
   }
 
-  addFacility() {
-    //
-  }
-
-  removeFacility(item) {
-    const index = this.universityDetails.facilitiesUniversity.indexOf(item);
-    this.universityDetails.facilitiesUniversity.splice(index, 1);
+  facilitiesListEdited(event) {
+    this.universityDetails.facilitiesUniversity = event;
   }
 
   userEditable() {

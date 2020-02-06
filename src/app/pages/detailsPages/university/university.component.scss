@@ -7,34 +7,6 @@ app-university {
     height: 500px;
   }
 
-  .facilities-cards {
-    display: flex;
-    flex-flow: wrap;
-
-    mat-card {
-      height: 150px;
-      width: 150px;
-      text-align: center;
-      box-shadow: none !important;
-      background-color: #fafafa;
-    }
-
-    mat-card-subtitle {
-      padding-top: 10px;
-    }
-
-    .remove-icon {
-      position: absolute;
-      top: 0;
-      right: 0;
-      cursor: pointer;
-    }
-
-    .add-icon {
-      cursor: pointer;
-    }
-  }
-
   .custom-university-header {
     padding-top: 30px;
 
