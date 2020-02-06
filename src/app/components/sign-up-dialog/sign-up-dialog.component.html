@@ -32,12 +32,8 @@
         <option value="F">{{ 'signup_dialog.female' | translate }}</option>
       </select>
     </mat-form-field>
-    <mat-form-field>
       <mat-label>{{ 'signup_dialog.location' | translate }}</mat-label>
-      <select matNativeControl formControlName="location">
-        <option *ngFor="let location of locations" [value]="location">{{ location }}</option>
-      </select>
-    </mat-form-field>
+      <AutocompleteAddressComponent (setAddress)="getAddress($event)" adressType="geocode"></AutocompleteAddressComponent>
     <mat-form-field>
       <mat-label>{{ 'signup_dialog.school_level' | translate }}</mat-label>
       <select matNativeControl formControlName="schoolLevel">

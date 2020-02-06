@@ -90,5 +90,9 @@ export class RequestUniversityComponent implements OnInit {
       duration: 2000,
     });
   }
+  getAddress(place: object) { 
+    console.log(place)
+    this.universityDetails.address = place['formatted_address'];
+  }
 
 }

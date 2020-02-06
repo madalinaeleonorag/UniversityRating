@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
-import LocalitiesRO from 'src/assets/locationsRomania';
 import { FirebaseService } from 'src/app/services/firebase-service.service';
 import { UserData } from 'src/app/models/UserData';
 import { Router } from '@angular/router';
@@ -27,7 +26,6 @@ export class UserDetailsComponent implements OnInit {
   requestMessage: string;
 
   constructor(private authService: AuthService, private firebaseService: FirebaseService, private router: Router) {
-    this.locations = LocalitiesRO;
   }
 
   ngOnInit() {

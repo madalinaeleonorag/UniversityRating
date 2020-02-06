@@ -1,7 +1,5 @@
   <form fxLayout="column" [formGroup]="form">
-    <mat-form-field>
-      <input matInput required placeholder="address" formControlName="addressFormControl" type="text">
-    </mat-form-field>
+    <AutocompleteAddressComponent (setAddress)="getAddress($event)" adressType="geocode"></AutocompleteAddressComponent>
     <mat-form-field>
       <input matInput required placeholder="descriptionUniversity" formControlName="descriptionUniversityFormControl"
         type="text">
