@@ -1,30 +1,28 @@
   <form fxLayout="column" [formGroup]="form">
-    <AutocompleteAddressComponent (setAddress)="getAddress($event)" adressType="geocode"></AutocompleteAddressComponent>
     <mat-form-field>
-      <input matInput required placeholder="descriptionUniversity" formControlName="descriptionUniversityFormControl"
+      <input matInput required placeholder="Name" formControlName="nameFormControl" type="text">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput required placeholder="Description" formControlName="descriptionUniversityFormControl"
         type="text">
     </mat-form-field>
-    <!-- TODO: autocomplette from what we already have in the database or add another one with icon -->
-    <!-- TODO: show map for location when fields are completed -->
     <mat-form-field>
-      <input matInput required placeholder="city" formControlName="locationFormControl" type="text">
-    </mat-form-field>
-    <!-- TODO: upload photo -->
-    <mat-form-field>
-      <input matInput required placeholder="logo" formControlName="logoFormControl" type="text">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput required placeholder="name" formControlName="nameFormControl" type="text">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput required placeholder="phone" formControlName="phoneFormControl" type="text">
-    </mat-form-field>
-    <!-- TODO: select -->
-    <mat-form-field>
-      <input matInput required placeholder="type" formControlName="typeFormControl" type="text">
+      <mat-label>Institution type</mat-label>
+      <mat-select formControlName="typeFormControl">
+        <mat-option value="privat">
+          Private
+        </mat-option>
+        <mat-option value="stat">
+          Stat
+        </mat-option>
+      </mat-select>
     </mat-form-field>
     <mat-form-field>
-      <input matInput required placeholder="website" formControlName="websiteFormControl" type="text">
+      <input matInput required placeholder="Website URL" formControlName="websiteFormControl" type="text">
     </mat-form-field>
+    <mat-form-field>
+      <input matInput required placeholder="Phone number" formControlName="phoneFormControl" type="text">
+    </mat-form-field>
+    <AutocompleteAddressComponent (setAddress)="getAddress($event)" adressType="geocode"></AutocompleteAddressComponent>
+    <button mat-button [disabled]="form.status === 'INVALID'" *ngIf="user" (click)="send()">Send request</button>
   </form>
-  <button mat-button [disabled]="form.status === 'INVALID'" *ngIf="user" (click)="send()">Send request</button>

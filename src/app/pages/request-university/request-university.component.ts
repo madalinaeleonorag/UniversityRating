@@ -93,6 +93,8 @@ export class RequestUniversityComponent implements OnInit {
   getAddress(place: object) { 
     console.log(place)
     this.universityDetails.address = place['formatted_address'];
+    const addressComponents = place['address_components'];
+    this.form.value.locationFormControl = addressComponents[addressComponents.length - 4].long_name;
   }
 
 }
