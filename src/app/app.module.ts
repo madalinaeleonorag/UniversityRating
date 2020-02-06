@@ -73,6 +73,7 @@ import { RequestsComponent } from './pages/requests/requests.component';
 import { ReviewResponseComponent } from './components/review-response/review-response.component';
 import { EditableListComponent } from './components/editable-list/editable-list.component';
 import { EditableFacilitiesComponent } from './components/editable-facilities/editable-facilities.component';
+import { AutocompleteAddressComponent } from './components/google-places/google-places.component';
 
 // Firestore config
 const config = {
@@ -120,7 +121,8 @@ export function createTranslateLoader(http: HttpClient) {
     RequestsComponent,
     ReviewResponseComponent,
     EditableListComponent,
-    EditableFacilitiesComponent
+    EditableFacilitiesComponent,
+    AutocompleteAddressComponent
   ],
   entryComponents: [
     LoginDialogComponent,

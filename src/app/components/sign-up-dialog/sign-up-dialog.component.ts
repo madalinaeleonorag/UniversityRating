@@ -2,7 +2,6 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ErrorStateMatcher, MatDialogRef } from '@angular/material';
 import { FormControl, FormGroupDirective, NgForm, Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
-import LocalitiesRO from 'src/assets/locationsRomania';
 import { FirebaseService } from 'src/app/services/firebase-service.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -30,12 +29,15 @@ export class SignUpDialogComponent implements OnInit {
               private authService: AuthService,
               private formBuilder: FormBuilder,
               private firebaseService: FirebaseService) {
-    this.locations = LocalitiesRO;
-    // TODO: optimize localities, too slow
     this.buildForm();
   }
 
   ngOnInit() {
+  }
+
+  getAddress(place: object) { 
+    const addressComponents = place['address_components'];
+    this.signUpForm.value.location = addressComponents[addressComponents.length - 4].long_name;
   }
 
   buildForm() {
