@@ -8,9 +8,7 @@
       </div>
     </div>
     <div *ngIf="editEnabled">
-      <mat-form-field>
-        <input matInput required placeholder="logo" formControlName="logoUniversity" type="text">
-      </mat-form-field>
+      <app-file-uploader type="logoUniversity" [id]="universityDetails.universityId"></app-file-uploader>
       <mat-form-field>
         <input matInput required placeholder="name" formControlName="nameUniversity" type="text">
       </mat-form-field>

@@ -10,6 +10,7 @@ import { FunctionsService } from 'src/app/services/functions.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Facilities } from 'src/app/enums/Facilities';
+import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'app-university',
@@ -36,6 +37,7 @@ export class UniversityComponent implements OnInit, OnDestroy {
   user: any;
   editEnabled: boolean;
   facilitiesList = Object.keys(Facilities);
+  image: string;
 
   constructor(private route: ActivatedRoute, private firebaseService: FirebaseService, private router: Router,
     private functionsService: FunctionsService, private authService: AuthService) {
@@ -44,7 +46,6 @@ export class UniversityComponent implements OnInit, OnDestroy {
 
   private buildForm() {
     this.form = new FormGroup({
-      logoUniversity: new FormControl(this.universityDetails.logoUniversity, [Validators.required]),
       nameUniversity: new FormControl(this.universityDetails.nameUniversity, [Validators.required]),
       universityId: new FormControl(this.universityDetails.universityId, [Validators.required]),
       typeUniversity: new FormControl(this.universityDetails.typeUniversity, [Validators.required]),
