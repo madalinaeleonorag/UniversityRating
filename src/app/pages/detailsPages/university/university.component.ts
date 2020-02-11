@@ -73,7 +73,7 @@ export class UniversityComponent implements OnInit, OnDestroy {
       this.universityId = params.get('id');
       this.userEditable();
       if (this.universityId) {
-        this.firebaseService.getUniversityById(this.universityId).then(data => {
+        this.firebaseService.getUniversityById(this.universityId).subscribe(data => {
           this.universityDetails = new UniversityData(data);
           this.buildForm();
           if (Array.isArray(this.universityDetails.locationUniversity) && this.universityDetails.locationUniversity[1]) {

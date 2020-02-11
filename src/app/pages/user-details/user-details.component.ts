@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { FirebaseService } from 'src/app/services/firebase-service.service';
 import { UserData } from 'src/app/models/UserData';
 import { Router } from '@angular/router';
+import { RequestData } from 'src/app/models/RequestData';
 
 @Component({
   selector: 'app-user-details',
@@ -38,9 +39,10 @@ export class UserDetailsComponent implements OnInit {
       this.location = result ? result.locality : '';
       this.requestActive = result ? (result.requestId ? true : (result.type !== 'university') && (result.type !== 'admin')) : false;
       if (result) {
-        this.firebaseService.getRequestById(result.requestId).then(response => {
-          this.requestStatus = response.status;
-          this.requestMessage = response.adminAnswer;
+        this.firebaseService.getRequestById(result.requestId).subscribe(response => {
+          const data = new RequestData(response);
+          this.requestStatus = data.status;
+          this.requestMessage = data.adminAnswer;
         })
       }
     });
