@@ -44,7 +44,7 @@
               Stat
             </mat-option>
           </mat-select>
-        </mat-form-field> 
+        </mat-form-field>
       </div>
       <div class="custom-detail-field" *ngIf="universityDetails.descriptionUniversity && !editEnabled">
         <div class="custom-detail-field-title">
@@ -150,7 +150,8 @@
       label="{{ 'university_page.tab_labels.facilities' | translate }}">
       <div fxLayout="row">
         <app-editable-facilities [facilitiesList]="facilitiesList"
-          [selectedFacilities]="universityDetails.facilitiesUniversity" [editEnabled]="editEnabled" (listEdited)="facilitiesListEdited($event)"> 
+          [selectedFacilities]="universityDetails.facilitiesUniversity" [editEnabled]="editEnabled"
+          (listEdited)="facilitiesListEdited($event)">
         </app-editable-facilities>
       </div>
     </mat-tab>
@@ -174,9 +175,9 @@
         {{ universityDetails.address }}
       </div>
       <div *ngIf="editEnabled">
-        <mat-form-field>
-          <input matInput required placeholder="address" formControlName="address" type="text">
-        </mat-form-field>
+          <mat-label>address</mat-label>
+          <AutocompleteAddressComponent (setAddress)="getAddress($event)" adressType="geocode">
+          </AutocompleteAddressComponent>
       </div>
       <div class="custom-detail-field" *ngIf="universityDetails.fax && !editEnabled">
         <div class="custom-detail-field-title">
@@ -209,7 +210,7 @@
       </div>
       <agm-map appDirectionsMap [showDirection]="this.displayDirections" [origin]="origin" [destination]="destination"
         [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false" *ngIf="displayDirections">
-        <agm-marker [latitude]="destination.latitude" [longitude]="destination.longitude">
+        <agm-marker [latitude]="destination?.lat" [longitude]="destination?.lng">
         </agm-marker>
       </agm-map>
     </mat-tab>

@@ -27,7 +27,7 @@ export class UniversityComponent implements OnInit, OnDestroy {
   facultiesData: FacultyData[] = [];
   displayedColumns: string[] = ['name', 'bachelors', 'masters', 'doctorals', 'button'];
   origin: ILatLng;
-  destination: ILatLng;
+  destination: object;
   displayDirections = false;
   zoom = 25;
   userCanEdit: boolean;
@@ -41,7 +41,7 @@ export class UniversityComponent implements OnInit, OnDestroy {
 
   constructor(private route: ActivatedRoute, private firebaseService: FirebaseService, private router: Router,
     private functionsService: FunctionsService, private authService: AuthService) {
-      this.buildForm();
+    this.buildForm();
   }
 
   private buildForm() {
@@ -64,6 +64,13 @@ export class UniversityComponent implements OnInit, OnDestroy {
     });
   }
 
+  getAddress(place: any) {
+    console.log(place)
+    this.form.value.address = place.formatted_address;
+    const addressComponents = place['address_components'];
+    this.form.value.locationUniversity = addressComponents[addressComponents.length - 4].long_name;
+  }
+
   ngOnInit() {
     this.isUserSubscription = this.authService.isUserAuthenticatedObservable.subscribe(result => {
       this.user = result;
@@ -77,13 +84,16 @@ export class UniversityComponent implements OnInit, OnDestroy {
         this.firebaseService.getUniversityById(this.universityId).subscribe(data => {
           this.universityDetails = new UniversityData(data);
           this.buildForm();
-          if (Array.isArray(this.universityDetails.locationUniversity) && this.universityDetails.locationUniversity[1]) {
-            this.destination = {
-              latitude: +this.universityDetails.locationUniversity[1],
-              longitude: +this.universityDetails.locationUniversity[2]
-            };
-            this.getUserLocation();
-            this.displayDirections = true;
+          // if (Array.isArray(this.universityDetails.locationUniversity) && this.universityDetails.locationUniversity[1]) {
+          //   this.destination = {
+          //     latitude: +this.universityDetails.locationUniversity[1],
+          //     longitude: +this.universityDetails.locationUniversity[2]
+          //   };
+          //   this.getUserLocation();
+          //   this.displayDirections = true;
+          // }
+          if(this.universityDetails.address) {
+            this.getLatLng(this.universityDetails.address)
           }
         });
         this.firebaseService.getFacultiesData().subscribe(data => {
@@ -96,6 +106,17 @@ export class UniversityComponent implements OnInit, OnDestroy {
           });
         });
       }
+    });
+  }
+
+  getLatLng(address: string) {
+    const geocoder = new google.maps.Geocoder();
+    let LatLng;
+    geocoder.geocode({ 'address': address }, (results, status) => {
+      LatLng = results[0] ? results[0].geometry.location : null;
+      this.destination = LatLng.toJSON();
+      this.getUserLocation();
+      this.displayDirections = true;
     });
   }
 
