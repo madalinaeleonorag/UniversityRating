@@ -3,7 +3,6 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { BehaviorSubject } from 'rxjs';
 import { FirebaseService } from './firebase-service.service';
 import { UserData } from '../models/UserData';
-import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +24,7 @@ export class AuthService {
 
   setUser(userAuth: any) {
     if (userAuth) {
-      this.firebaseService.getUserById(userAuth.user.uid).then(user => {
+      this.firebaseService.getUserById(userAuth.user.uid).subscribe(user => {
         this.isUserAuthenticatedSubject.next(new UserData(user));
       });
     } else {

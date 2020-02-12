@@ -41,10 +41,10 @@ export class FacultyComponent implements OnInit, OnDestroy {
     this.paramSubscription = this.route.paramMap.subscribe(params => {
       const id = params.get('id');
       if (id) {
-        this.firebaseService.getFacultyById(id).then(data => {
+        this.firebaseService.getFacultyById(id).subscribe(data => {
           this.facultyDetails = new FacultyData(data);
           if (this.facultyDetails.universityId) {
-            this.firebaseService.getUniversityById(this.facultyDetails.universityId).then(university => {
+            this.firebaseService.getUniversityById(this.facultyDetails.universityId).subscribe(university => {
               this.universityDetails = new UniversityData(university);
             });
           }
@@ -59,10 +59,11 @@ export class FacultyComponent implements OnInit, OnDestroy {
   getBachelors() {
     if (this.facultyDetails.bachelors.length > 0) {
       this.facultyDetails.bachelors.forEach(bachelorId => {
-        this.firebaseService.getBacheloryById(bachelorId).then(bachelor => {
+        this.firebaseService.getBacheloryById(bachelorId).subscribe(bachelor => {
+          const data = new BachelorData(bachelor);
           this.bachelorsData.push(new BachelorData(bachelor));
-          if (bachelor.courses && bachelor.courses.length > 0) {
-            this.getCourses(bachelor.courses);
+          if (data.courses && data.courses.length > 0) {
+            this.getCourses(data.courses);
           }
         });
       });
@@ -72,10 +73,11 @@ export class FacultyComponent implements OnInit, OnDestroy {
   getMasters() {
     if (this.facultyDetails.masters.length > 0) {
       this.facultyDetails.masters.forEach(masterId => {
-        this.firebaseService.getMasterById(masterId).then(master => {
+        this.firebaseService.getMasterById(masterId).subscribe(master => {
+          const data = new MasterData(master);
           this.mastersData.push(new MasterData(master));
-          if (master.courses && master.courses.length > 0) {
-            this.getCourses(master.courses);
+          if (data.courses && data.courses.length > 0) {
+            this.getCourses(data.courses);
           }
         });
       });
@@ -85,10 +87,11 @@ export class FacultyComponent implements OnInit, OnDestroy {
   getDoctorals() {
     if (this.facultyDetails.doctorals.length > 0) {
       this.facultyDetails.doctorals.forEach(doctoralId => {
-        this.firebaseService.getDoctoralById(doctoralId).then(doctoral => {
+        this.firebaseService.getDoctoralById(doctoralId).subscribe(doctoral => {
+          const data = new MasterData(doctoral);
           this.doctoralsData.push(new DoctoralData(doctoral));
-          if (doctoral.courses && doctoral.courses.length > 0) {
-            this.getCourses(doctoral.courses);
+          if (data.courses && data.courses.length > 0) {
+            this.getCourses(data.courses);
           }
         });
       });
@@ -97,7 +100,7 @@ export class FacultyComponent implements OnInit, OnDestroy {
 
   getCourses(coursesIds: string[]) {
     coursesIds.forEach(courseId => {
-      this.firebaseService.getCourseById(courseId).then(result => {
+      this.firebaseService.getCourseById(courseId).subscribe(result => {
         this.courses.push(new CourseData(result));
       });
     });
