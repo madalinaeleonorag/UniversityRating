@@ -35,8 +35,16 @@
       </div>
       <div *ngIf="editEnabled">
         <mat-form-field>
-          <input matInput required placeholder="type" formControlName="typeUniversity" type="text">
-        </mat-form-field>
+          <mat-label>Institution type</mat-label>
+          <mat-select formControlName="typeUniversity">
+            <mat-option value="privat">
+              Private
+            </mat-option>
+            <mat-option value="stat">
+              Stat
+            </mat-option>
+          </mat-select>
+        </mat-form-field> 
       </div>
       <div class="custom-detail-field" *ngIf="universityDetails.descriptionUniversity && !editEnabled">
         <div class="custom-detail-field-title">
