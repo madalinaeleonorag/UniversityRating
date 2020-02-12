@@ -1,4 +1,4 @@
-<button mat-button (click)="goToRequestPage()" *ngIf="!requestActive">Activeaza cont universitar</button>
+<button mat-button (click)="goToRequestPage('new')" *ngIf="!requestActive">Activeaza cont universitar</button>
 <mat-card *ngIf="requestActive">
   <mat-card-title>
  {{ requestStatus}}
@@ -11,7 +11,7 @@
     <button mat-button (click)="goToRequestPage('draft')">Modify and resend the last request</button>
   </mat-card-actions>
   <mat-card-actions *ngIf="requestStatus === 'approved'">
-    <button mat-button (click)="goToUniversityPage('new')">View and edit your university</button>
+    <button mat-button (click)="goToUniversityPage()">View and edit your university</button>
   </mat-card-actions>
 </mat-card>
 <mat-card>

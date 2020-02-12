@@ -34,7 +34,6 @@ export class FileUploaderComponent implements OnInit {
           }).catch(error => {
             console.log('error on loading image')
           });
-          
         })
       }
         break
