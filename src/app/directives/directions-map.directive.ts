@@ -15,7 +15,7 @@ declare var google: any;
 })
 export class DirectionsMapDirective implements OnInit, OnChanges {
   @Input() origin: ILatLng;
-  @Input() destination: ILatLng;
+  @Input() destination: any;
   @Input() showDirection: boolean;
 
   // We'll keep a single google maps directions renderer instance so we get to reuse it.
@@ -45,7 +45,7 @@ export class DirectionsMapDirective implements OnInit, OnChanges {
             directionsRenderer.setMap(map);
             directionsService.route({
                 origin: {lat: this.origin.latitude, lng: this.origin.longitude},
-                destination: {lat: this.destination.latitude, lng: this.destination.longitude},
+                destination: {lat: this.destination.lat, lng: this.destination.lng},
                 waypoints: [],
                 optimizeWaypoints: true,
                 travelMode: 'DRIVING'
