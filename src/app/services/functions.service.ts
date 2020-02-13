@@ -8,13 +8,18 @@ export class FunctionsService {
   constructor() { }
 
   getPosition(): Promise<any> {
+    const options = {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0
+    };
     return new Promise((resolve, reject) => {
       navigator.geolocation.watchPosition(resp => {
         resolve({ lng: resp.coords.longitude, lat: resp.coords.latitude });
       },
         err => {
           reject(err);
-        });
+        }, options);
     });
   }
   
