@@ -22,5 +22,20 @@ export class FunctionsService {
         }, options);
     });
   }
-  
+
+  getCityFromAddress(address: string) {
+    const geocoder = new google.maps.Geocoder();
+    let city;
+    geocoder.geocode({ 'address': address }, (results, status) => {
+      if (status == 'OK') {
+        const addressComponents = results[0]['address_components'];
+        city = addressComponents[addressComponents.length - 4].long_name;
+        return city;
+      } else {
+        console.log('Geocode was not successful for the following reason: ' + status);
+      }
+    });
+    // return city;
+  }
+
 }

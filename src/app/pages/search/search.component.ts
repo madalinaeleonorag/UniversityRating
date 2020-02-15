@@ -10,6 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
 import * as _ from 'underscore';
 import { Router } from '@angular/router';
 import { UniversityData } from 'src/app/models/UniversityData';
+import { FunctionsService } from 'src/app/services/functions.service';
 
 @Component({
   selector: 'app-search',
@@ -44,7 +45,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   universitiesData: UniversityData[] = [];
 
 
-  constructor(private firebaseService: FirebaseService, private router: Router) {
+  constructor(private firebaseService: FirebaseService, private router: Router, private functionsService: FunctionsService) {
     this.categories = Object.keys(Categories);
     this.sortTypes = Object.keys(Sorting);
     this.typeOfInstitution = Object.keys(InstitutionType);
@@ -62,7 +63,6 @@ export class SearchComponent implements OnInit, OnDestroy {
         resultsArray.push(new UniversityData(item));
       })
       this.universitiesData = resultsArray;
-      console.log(this.universitiesData)
       this.getUniversityLocations(result);
     });
     this.facilitiesList = Object.keys(Facilities);
@@ -80,7 +80,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   private getUniversitiesData() {
     const result = this.universitiesData.filter(university => {
-      return this.matchingNames(university.nameUniversity) && this.matchingLocations(university.locationUniversity[0])
+      return this.matchingNames(university.nameUniversity) && this.matchingLocations(university.locality)
         && this.matchingType(university.typeUniversity) && this.matchingFacilities(university.facilitiesUniversity)
         && this.matchingDescription(university.descriptionUniversity);
     });
@@ -149,13 +149,9 @@ export class SearchComponent implements OnInit, OnDestroy {
   private getUniversityLocations(universities: Array<any>) {
     const locations = [];
     universities.forEach(university => {
-      locations.push(this.getLocationIfArray(university.locationUniversity));
+      locations.push(university.locality);
     });
     this.locationsList = _.uniq(locations);
-  }
-
-  private getLocationIfArray(value: any) {
-    return Array.isArray(value) ? value[0] : value;
   }
 
   private matchingNames(name: string) {
@@ -163,8 +159,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   private matchingLocations(location: string) {
-    const locationValue = this.getLocationIfArray(location);
-    return this.locations.value ? this.locations.value.includes(locationValue) || this.locations.value.includes('all_locations') : true;
+    return this.locations.value ? this.locations.value.search(location) !== -1 || this.locations.value.includes('all_locations') : true;
   }
 
   private matchingType(type: string) {
@@ -193,6 +188,20 @@ export class SearchComponent implements OnInit, OnDestroy {
     } else {
       return true;
     }
+  }
+
+  getCityFromAddress(value: any): any {
+    const geocoder = new google.maps.Geocoder();
+    let city: any;
+    return geocoder.geocode({ 'address': value }, (results, status) => {
+      if (status == 'OK') {
+        const addressComponents = results[0]['address_components'];
+        city = addressComponents[addressComponents.length - 4].long_name;
+        return city
+      } else {
+        console.log('Geocode was not successful for the following reason: ' + status);
+      }
+    });
   }
 
   private matchingDescription(description: string) {

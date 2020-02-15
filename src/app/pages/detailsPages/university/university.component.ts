@@ -56,9 +56,7 @@ export class UniversityComponent implements OnInit, OnDestroy {
       phone: new FormControl(this.universityDetails.phone, [Validators.required]),
       address: new FormControl(this.universityDetails.address, [Validators.required]),
       fax: new FormControl(this.universityDetails.fax, [Validators.required]),
-      locationUniversity: new FormControl(this.universityDetails.locationUniversity[0], [Validators.required]),
-      latitude: new FormControl(this.universityDetails.locationUniversity[1], [Validators.required]),
-      longitude: new FormControl(this.universityDetails.locationUniversity[2], [Validators.required]),
+      locality: new FormControl(this.universityDetails.locality, [Validators.required]),
       facilitiesUniversity: new FormControl(this.universityDetails.facilitiesUniversity, [Validators.required])
     });
   }
@@ -66,7 +64,7 @@ export class UniversityComponent implements OnInit, OnDestroy {
   getAddress(place: any) {
     this.form.value.address = place.formatted_address;
     const addressComponents = place['address_components'];
-    this.form.value.locationUniversity = addressComponents[addressComponents.length - 4].long_name;
+    this.form.value.locality = addressComponents[addressComponents.length - 4].long_name;
   }
 
   ngOnInit() {
@@ -148,11 +146,11 @@ export class UniversityComponent implements OnInit, OnDestroy {
   }
 
   addFaculty() {
-    console.log('test');
+    // console.log('test');
   }
 
   removeFaculty(data: any) {
-    console.log(data);
+    // console.log(data);
   }
 
   onNavigate(id: string) {

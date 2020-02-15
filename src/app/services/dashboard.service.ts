@@ -380,8 +380,8 @@ export class DashboardService {
         const universityLocations = [];
         result.forEach(item => {
           const university = new UniversityData(item);
-          if (university.locationUniversity && Array.isArray(university.locationUniversity)) {
-            universityLocations.push(university.locationUniversity[0]);
+          if (university.address) {
+            universityLocations.push(university.address);
           }
         });
         const countOfLocations = _.countBy(universityLocations);
