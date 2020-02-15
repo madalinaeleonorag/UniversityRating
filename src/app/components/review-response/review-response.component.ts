@@ -19,4 +19,8 @@ export class ReviewResponseComponent implements OnInit {
     this.dialogRef.close(this.message);
   }
 
+  cancel() {
+    this.dialogRef.close('cancel');
+  }
+
 }

@@ -28,12 +28,19 @@ export class RequestsComponent implements OnInit {
 
   decline(item) {
     const dialogRef = this.dialog.open(ReviewResponseComponent, {
-      width: '250px',
       disableClose: true
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.firebaseService.declineRequest(item, result);
+      if (result !== 'cancel') {
+        this.firebaseService.declineRequest(item, result);
+      }
     });
+  }
+
+  getData(type: string) {
+    return this.requests.filter(item => {
+      return item.status === type
+    })
   }
 
 }
