@@ -8,8 +8,6 @@ export class UniversityData {
     facilitiesUniversity: string[] = [];
     @JsonProperty('facultiesUniversity')
     facultiesUniversity: string[] = [];
-    @JsonProperty('locationUniversity')
-    locationUniversity: Array<any> = [];
     @JsonProperty('logoUniversity')
     logoUniversity: string = undefined;
     @JsonProperty('mission')
@@ -38,12 +36,13 @@ export class UniversityData {
     fax: string = undefined;
     @JsonProperty('phone')
     phone: string = undefined;
+    @JsonProperty('locality')
+    locality: string = undefined;
 
     constructor(obj: any) {
         this.descriptionUniversity = obj ? (obj.descriptionUniversity ? obj.descriptionUniversity : '') : '';
         this.facilitiesUniversity = obj ? (obj.facilitiesUniversity ? obj.facilitiesUniversity : []) : [];
         this.facultiesUniversity = obj ? (obj.facultiesUniversity ? obj.facultiesUniversity : []) : [];
-        this.locationUniversity = obj ? (obj.locationUniversity ? obj.locationUniversity : []) : [];
         this.logoUniversity = obj ? (obj.logoUniversity ? obj.logoUniversity : '') : '';
         this.mission = obj ? (obj.mission ? obj.mission : '') : '';
         this.nameUniversity = obj ? (obj.nameUniversity ? obj.nameUniversity : '') : '';
@@ -58,5 +57,6 @@ export class UniversityData {
         this.address = obj ? (obj.address ? obj.address : '') : '';
         this.fax = obj ? (obj.fax ? obj.fax : '') : '';
         this.phone = obj ? (obj.phone ? obj.phone : '') : '';
+        this.locality = obj ? (obj.locality ? obj.locality : '') : '';
     }
 }

@@ -46,9 +46,6 @@ export class RequestUniversityComponent implements OnInit {
             addressFormControl: data.address,
             descriptionUniversityFormControl: data.descriptionUniversity,
             facilitiesFormControl: data.facilitiesUniversity,
-            locationFormControl: data.locationUniversity[0],
-            latitudeLocationFormControl: data.locationUniversity[1],
-            longitudeLocationFormControl: data.locationUniversity[2],
             logoFormControl: data.logoUniversity,
             nameFormControl: data.nameUniversity,
             phoneFormControl: data.phone,
@@ -65,7 +62,6 @@ export class RequestUniversityComponent implements OnInit {
     this.form = new FormGroup({
       addressFormControl: new FormControl(this.universityDetails.address, [Validators.required]),
       descriptionUniversityFormControl: new FormControl(this.universityDetails.descriptionUniversity, [Validators.required]),
-      locationFormControl: new FormControl(this.universityDetails.locationUniversity[0], [Validators.required]),
       logoFormControl: new FormControl(this.universityDetails.logoUniversity),
       nameFormControl: new FormControl(this.universityDetails.nameUniversity, [Validators.required]),
       phoneFormControl: new FormControl(this.universityDetails.phone, [Validators.required]),
@@ -78,7 +74,6 @@ export class RequestUniversityComponent implements OnInit {
     const details = {
       address: this.form.value.addressFormControl,
       descriptionUniversity: this.form.value.descriptionUniversityFormControl,
-      locationUniversity: [this.form.value.locationFormControl, 0, 0],
       logoUniversity: this.form.value.logoFormControl,
       nameUniversity: this.form.value.nameFormControl,
       phone: this.form.value.phoneFormControl,
@@ -94,7 +89,6 @@ export class RequestUniversityComponent implements OnInit {
     });
   }
   getAddress(place: object) {
-    console.log(place)
     this.universityDetails.address = place['formatted_address'];
     const addressComponents = place['address_components'];
     this.form.value.locationFormControl = addressComponents[addressComponents.length - 4].long_name;

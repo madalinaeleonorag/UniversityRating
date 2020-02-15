@@ -193,21 +193,6 @@
     </mat-tab>
 
     <mat-tab label="{{ 'university_page.tab_labels.map' | translate }}" *ngIf="displayDirections || editEnabled">
-      <div *ngIf="editEnabled">
-        <mat-form-field>
-          <input matInput required placeholder="locationUniversity" formControlName="locationUniversity" type="text">
-        </mat-form-field>
-      </div>
-      <div *ngIf="editEnabled">
-        <mat-form-field>
-          <input matInput required placeholder="latitude" formControlName="latitude" type="text">
-        </mat-form-field>
-      </div>
-      <div *ngIf="editEnabled">
-        <mat-form-field>
-          <input matInput required placeholder="longitude" formControlName="longitude" type="text">
-        </mat-form-field>
-      </div>
       <agm-map appDirectionsMap [showDirection]="this.displayDirections" [origin]="origin" [destination]="destination"
         [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false" *ngIf="displayDirections">
         <agm-marker [latitude]="destination?.lat" [longitude]="destination?.lng">

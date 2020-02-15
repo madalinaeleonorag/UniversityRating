@@ -99,7 +99,6 @@ export class FirebaseService {
   }
 
   saveUniversityDetails(details: UniversityData) {
-    console.log(details)
     firebase.firestore().collection('University').doc(details.universityId).update(Object.assign({}, details));
   }
 
