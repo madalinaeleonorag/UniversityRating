@@ -49,21 +49,25 @@ export class HeaderComponent implements OnInit {
 
   openLoginDialog() {
     const dialogRef = this.dialog.open(LoginDialogComponent, {
-      width: '250px',
+      width: '50vw',
       disableClose: true
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.authService.setUser(result.user.uid);
+      if (result) {
+        this.authService.setUser(result.user.uid);
+      }
     });
   }
 
   openSignUpDialog() {
     const dialogRef = this.dialog.open(SignUpDialogComponent, {
-      width: '100%',
+      width: '80vw',
       disableClose: true
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.authService.setUser(result.user.uid);
+      if (result) {
+        this.authService.setUser(result.user.uid);
+      }
     });
   }
 }
