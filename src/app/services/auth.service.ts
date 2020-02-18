@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { BehaviorSubject } from 'rxjs';
 import { FirebaseService } from './firebase-service.service';
 import { UserData } from '../models/UserData';
+import { first } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -22,14 +23,22 @@ export class AuthService {
     return this.firebaseAuth.auth.createUserWithEmailAndPassword(signUpForm.email, signUpForm.password);
   }
 
-  setUser(userAuth: any) {
-    if (userAuth) {
-      this.firebaseService.getUserById(userAuth.user.uid).subscribe(user => {
+  setUser(uid: string) {
+    if (uid) {
+      this.firebaseService.getUserById(uid).subscribe(user => {
         this.isUserAuthenticatedSubject.next(new UserData(user));
       });
     } else {
       this.isUserAuthenticatedSubject.next(null);
     }
+  }
+
+  verifyIfUserAlreadySignedIn() {
+    return this.firebaseAuth.authState.subscribe(item => {
+      if (item !== null) {
+        this.setUser(item.uid);
+      }
+    });
   }
 
   logOut() {

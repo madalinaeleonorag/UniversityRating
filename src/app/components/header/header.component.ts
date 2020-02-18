@@ -53,7 +53,7 @@ export class HeaderComponent implements OnInit {
       disableClose: true
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.authService.setUser(result);
+      this.authService.setUser(result.user.uid);
     });
   }
 
@@ -63,7 +63,7 @@ export class HeaderComponent implements OnInit {
       disableClose: true
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.authService.setUser(result);
+      this.authService.setUser(result.user.uid);
     });
   }
 }
