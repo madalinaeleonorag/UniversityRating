@@ -1,7 +1,17 @@
+@import '../../../app/variables.scss';
+
 app-footer {
   .custom-footer {
     position: fixed;
     bottom: 0px;
     width: 100%;
+    flex-flow: wrap;
+    justify-content: space-evenly;
+    width: 100%;
+    display: flex;
+
+    button:hover {
+      color: $gold;
+    }
   }
 }
