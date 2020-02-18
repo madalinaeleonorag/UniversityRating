@@ -1,16 +1,20 @@
 <mat-toolbar fxLayout="row" fxLayoutAlign="space-between center" class="custom-toolbar" [ngClass]="{'custom-white-toolbar': firstPage, 'custom-dark-toolbar': !firstPage}">
-  <div>
-  </div>
-  <div fxLayout="column" fxLayoutAlign="center center" (click)="goToHomepage()" class="app-title-cursor">
+  <div fxLayout="column" (click)="goToHomepage()" class="app-title-cursor">
     <div class="custom-title" [ngClass]="{'dark-blue-bold-text': firstPage, 'white-bold-text': !firstPage}">{{ 'header.title' | translate | uppercase }}</div>
     <div [ngClass]="{'dark-text': firstPage, 'white-text': !firstPage}">{{ 'header.subtitle' | translate | uppercase}}</div>
   </div>
-  <div fxLayout="row">
-    <button mat-button [ngClass]="{'dark-text': firstPage, 'white-text': !firstPage}" (click)="openLoginDialog()" *ngIf="!user">{{ 'buttons.login' | translate | uppercase }}</button>
-    <button mat-button [ngClass]="{'dark-text': firstPage, 'white-text': !firstPage}" (click)="openSignUpDialog()" *ngIf="!user">{{ 'buttons.signup' | translate | uppercase}}</button>
-    <button mat-button [ngClass]="{'dark-text': firstPage, 'white-text': !firstPage}" (click)="goToDashboard()" *ngIf="user && user.type === 'admin'">{{ 'buttons.dashboard' | translate | uppercase}}</button>
-    <button mat-button [ngClass]="{'dark-text': firstPage, 'white-text': !firstPage}" (click)="goToRequests()" *ngIf="user && user.type === 'admin'">University requests</button>
-    <button mat-button [ngClass]="{'dark-text': firstPage, 'white-text': !firstPage}" (click)="goToUserDetails()" *ngIf="user">Account</button>
-    <button mat-button [ngClass]="{'dark-text': firstPage, 'white-text': !firstPage}" (click)="logOutUser()" *ngIf="user">{{ 'buttons.logout' | translate | uppercase}}</button>
-  </div>
+  <button mat-button [matMenuTriggerFor]="menu" #t="matMenuTrigger">
+    <mat-icon *ngIf="t.menuOpen === false && !user">menu</mat-icon>
+    <mat-icon *ngIf="t.menuOpen === false && user">account_circle</mat-icon>
+    <mat-icon *ngIf="t.menuOpen === true">close</mat-icon>
+  </button>
+
 </mat-toolbar>
+<mat-menu #menu="matMenu" xPosition="before">
+  <button mat-menu-item (click)="openLoginDialog()" *ngIf="!user">{{ 'buttons.login' | translate | uppercase }}</button>
+  <button mat-menu-item (click)="openSignUpDialog()" *ngIf="!user">{{ 'buttons.signup' | translate | uppercase}}</button>
+  <button mat-menu-item (click)="goToDashboard()" *ngIf="user && user.type === 'admin'">{{ 'buttons.dashboard' | translate | uppercase}}</button>
+  <button mat-menu-item (click)="goToRequests()" *ngIf="user && user.type === 'admin'">University requests</button>
+  <button mat-menu-item (click)="goToUserDetails()" *ngIf="user">Account</button>
+  <button mat-menu-item (click)="logOutUser()" *ngIf="user">{{ 'buttons.logout' | translate | uppercase}}</button>
+</mat-menu>

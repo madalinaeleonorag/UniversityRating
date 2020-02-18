@@ -1,6 +1,6 @@
 <div class="container">
   <div fxLayout="row">
-    <div fxLayout="column" fxFlex="30">
+    <div class="custom-flex-filters">
       <mat-card class="custom-filters">
         <!-- study level -->
         <mat-card-subtitle>{{ 'filters.study_level' | translate }}</mat-card-subtitle>
@@ -69,7 +69,7 @@
       </mat-card>
     </div>
 
-    <div fxFlex="70">
+    <div>
       <div class="grey-text">{{ getData().length }} {{ 'filters.result_counter' | translate }}</div>
       <div class="results-cards">
         <div *ngFor="let result of getData()">

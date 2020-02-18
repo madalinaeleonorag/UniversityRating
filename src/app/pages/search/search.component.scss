@@ -40,6 +40,11 @@ app-search {
 
   mat-card.custom-filters {
     margin-right: 20px;
+    max-width: min-content;
+  }
+
+  custom-flex-filters {
+    max-width: min-content;
   }
 
   .results-cards {
