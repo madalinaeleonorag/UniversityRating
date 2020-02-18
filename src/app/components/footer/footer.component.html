@@ -1,4 +1,4 @@
-<div fxLayout="row" fxLayoutAlign="space-around center" class="gradient-background custom-footer">
+<div class="custom-footer">
     <div *ngFor="let item of items">
             <button mat-button (click)="onNavigate(item.value)" class="white-text-button">{{ item.text | uppercase }}</button>
     </div>
