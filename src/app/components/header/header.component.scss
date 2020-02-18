@@ -7,6 +7,13 @@ app-header {
     z-index: 1;
     position: fixed;
     z-index: 2;
+
+    .mat-icon {
+      width: 100%;
+    font-size: 50px;
+    height: 100%;
+    color: white;
+    }
   }
   .custom-white-toolbar {
     background-color: $white;
@@ -24,4 +31,9 @@ app-header {
     color: $white;
   }
 
+  @media only screen and (max-width: 500px) {
+    .app-title-cursor {
+      visibility: hidden;
+    }
+  }
 }
