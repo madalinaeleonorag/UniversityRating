@@ -62,7 +62,6 @@ export class RequestUniversityComponent implements OnInit {
     this.form = new FormGroup({
       addressFormControl: new FormControl(this.universityDetails.address, [Validators.required]),
       descriptionUniversityFormControl: new FormControl(this.universityDetails.descriptionUniversity, [Validators.required]),
-      logoFormControl: new FormControl(this.universityDetails.logoUniversity),
       nameFormControl: new FormControl(this.universityDetails.nameUniversity, [Validators.required]),
       phoneFormControl: new FormControl(this.universityDetails.phone, [Validators.required]),
       typeFormControl: new FormControl(this.universityDetails.typeUniversity, [Validators.required]),
@@ -74,7 +73,6 @@ export class RequestUniversityComponent implements OnInit {
     const details = {
       address: this.form.value.addressFormControl,
       descriptionUniversity: this.form.value.descriptionUniversityFormControl,
-      logoUniversity: this.form.value.logoFormControl,
       nameUniversity: this.form.value.nameFormControl,
       phone: this.form.value.phoneFormControl,
       status: 'pending',

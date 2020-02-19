@@ -1,0 +1,14 @@
+@import '../../../app/variables.scss';
+
+app-requests {
+
+    mat-tab-body {
+        background-color: $darkBlue;
+
+        .mat-card {
+            margin: 20px;
+        }
+    }
+
+
+}
