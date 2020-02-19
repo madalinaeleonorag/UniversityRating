@@ -10,23 +10,27 @@ app-header {
 
     .mat-icon {
       width: 100%;
-    font-size: 50px;
-    height: 100%;
-    color: white;
+      font-size: 50px;
+      height: 100%;
     }
   }
+
   .custom-white-toolbar {
     background-color: $white;
   }
+
   .custom-dark-toolbar {
     background-color: $darkBlue;
   }
+
   .custom-title {
     font-size: 3vw;
   }
+
   .dark-text {
     color: $black;
   }
+
   .white-text {
     color: $white;
   }

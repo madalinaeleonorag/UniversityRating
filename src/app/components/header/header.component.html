@@ -4,9 +4,9 @@
     <div [ngClass]="{'dark-text': firstPage, 'white-text': !firstPage}">{{ 'header.subtitle' | translate | uppercase}}</div>
   </div>
   <button mat-button [matMenuTriggerFor]="menu" #t="matMenuTrigger">
-    <mat-icon *ngIf="t.menuOpen === false && !user">menu</mat-icon>
-    <mat-icon *ngIf="t.menuOpen === false && user">account_circle</mat-icon>
-    <mat-icon *ngIf="t.menuOpen === true">close</mat-icon>
+    <mat-icon *ngIf="t.menuOpen === false && !user" [ngClass]="{'dark-blue-bold-text': firstPage, 'white-text': !firstPage}">menu</mat-icon>
+    <mat-icon *ngIf="t.menuOpen === false && user" [ngClass]="{'dark-blue-bold-text': firstPage, 'white-text': !firstPage}">account_circle</mat-icon>
+    <mat-icon *ngIf="t.menuOpen === true" [ngClass]="{'dark-blue-bold-text': firstPage, 'white-text': !firstPage}">close</mat-icon>
   </button>
 
 </mat-toolbar>
