@@ -136,7 +136,7 @@ export class FirebaseService {
     firebase.firestore().collection('Requests/').doc(request.requestId).update({
       status: 'declined',
       adminAnswer: message
-    })
+    });
   }
 
   sendRequest(request: any, state: string, requestId: string) {
@@ -156,23 +156,44 @@ export class FirebaseService {
       status: 'pending',
       adminAnswer: ''
     };
-    if(state === 'new') {
+    if (state === 'new') {
       firebase.firestore().collection('Requests').add(requestData).then(docRef => {
         firebase.firestore().collection('Requests').doc(docRef.id).update({
           requestId: docRef.id
-        })
+        });
         firebase.firestore().collection('Users/').doc(request.userId).update({
           requestId: docRef.id
-        })
+        });
       }).catch(error => {
-        console.error('Error writing document: ', error)
-      })
+        console.error('Error writing document: ', error);
+      });
     } else if (state === 'draft') {
       firebase.firestore().collection('Requests').doc(requestId).update({
         status: 'pending'
-      })
+      });
     }
+  }
 
+  setNewFacultyForUniversity(universityId: string, data: any, existingFaculties: Array<string>) {
+    firebase.firestore().collection('Faculties').add(
+      {
+        nameFaculty: data.name,
+        descriptionFaculty: data.description
+      }
+    ).then(docRef => {
+      let faculties = [];
+      if (Array.isArray(existingFaculties)) {
+        faculties = [...existingFaculties];
+        faculties.push(docRef.id);
+      } else {
+        faculties.push(docRef.id);
+      }
+      firebase.firestore().collection('University/').doc(universityId).update({
+        facultiesUniversity: faculties
+      });
+    }).catch(error => {
+      console.error('Error writing document: ', error);
+    });
   }
 
 }

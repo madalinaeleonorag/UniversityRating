@@ -4,7 +4,7 @@
       <img mat-card-image src="{{ universityDetails.logoUniversity }}" *ngIf="universityDetails.logoUniversity">
       <img mat-card-image src="assets/university.png" *ngIf="!universityDetails.logoUniversity">
       <div>
-        {{ universityDetails.nameUniversity |uppercase }}
+        {{ universityDetails.nameUniversity | uppercase }}
       </div>
     </div>
     <div *ngIf="editEnabled">
@@ -99,7 +99,7 @@
     </mat-tab>
 
     <mat-tab label="{{ 'university_page.tab_labels.faculties' | translate }}">
-      <button mat-raised-button class="gradient-background white-text-button" (click)="addFaculty()"
+      <button mat-raised-button class="gradient-background white-text-button" (click)="addFacultyDialog()"
         *ngIf="userCanEdit && editEnabled">Add faculty</button>
       <table mat-table [dataSource]="facultiesData" *ngIf="facultiesData.length > 0">
         <ng-container matColumnDef="name">

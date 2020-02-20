@@ -10,6 +10,8 @@ import { FunctionsService } from 'src/app/services/functions.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Facilities } from 'src/app/enums/Facilities';
+import { MatDialog } from '@angular/material';
+import { AddFacultyDialogComponent } from 'src/app/components/add-faculty-dialog/add-faculty-dialog.component';
 
 @Component({
   selector: 'app-university',
@@ -39,8 +41,19 @@ export class UniversityComponent implements OnInit, OnDestroy {
   image: string;
 
   constructor(private route: ActivatedRoute, private firebaseService: FirebaseService, private router: Router,
-    private functionsService: FunctionsService, private authService: AuthService) {
+              private functionsService: FunctionsService, private authService: AuthService, private dialog: MatDialog) {
     this.buildForm();
+  }
+
+  addFacultyDialog() {
+    const dialogRef = this.dialog.open(AddFacultyDialogComponent, {
+      width: '50vw',
+      disableClose: true
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result)
+      this.firebaseService.setNewFacultyForUniversity(this.universityDetails.universityId, result, this.universityDetails.facultiesUniversity);
+    });
   }
 
   private buildForm() {
@@ -63,7 +76,7 @@ export class UniversityComponent implements OnInit, OnDestroy {
 
   getAddress(place: any) {
     this.form.value.address = place.formatted_address;
-    const addressComponents = place['address_components'];
+    const addressComponents = place.address_components;
     this.form.value.locality = addressComponents[addressComponents.length - 4].long_name;
   }
 
@@ -86,8 +99,8 @@ export class UniversityComponent implements OnInit, OnDestroy {
         this.firebaseService.getUniversityById(this.universityId).subscribe(data => {
           this.universityDetails = new UniversityData(data);
           this.buildForm();
-          if(this.universityDetails.address) {
-            this.getLatLng(this.universityDetails.address)
+          if (this.universityDetails.address) {
+            this.getLatLng(this.universityDetails.address);
           }
         });
         this.firebaseService.getFacultiesData().subscribe(data => {
@@ -106,7 +119,7 @@ export class UniversityComponent implements OnInit, OnDestroy {
   getLatLng(address: string) {
     const geocoder = new google.maps.Geocoder();
     let LatLng;
-    geocoder.geocode({ 'address': address }, (results, status) => {
+    geocoder.geocode({ address: address }, (results, status) => {
       LatLng = results[0] ? results[0].geometry.location : null;
       this.destination = LatLng.toJSON();
       this.displayDirections = true;
@@ -120,7 +133,7 @@ export class UniversityComponent implements OnInit, OnDestroy {
   userEditable() {
     this.userCanEdit = this.user ? this.user.universityId === this.universityId : false;
     if (this.editEnabled) {
-      this.displayedColumns.push('removeButton')
+      this.displayedColumns.push('removeButton');
     } else {
       const index = this.displayedColumns.indexOf('removeButton');
       this.displayedColumns.splice(index, 1);
@@ -143,10 +156,6 @@ export class UniversityComponent implements OnInit, OnDestroy {
   saveDetails() {
     this.editEnabled = !this.editEnabled;
     this.firebaseService.saveUniversityDetails(this.form.value);
-  }
-
-  addFaculty() {
-    // console.log('test');
   }
 
   removeFaculty(data: any) {
