@@ -136,7 +136,6 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
-      <div *ngIf="facultiesData.length === 0 || editEnabled">No data to display</div>
     </mat-tab>
 
     <mat-tab *ngIf="isArray(universityDetails.photosUniversity)"

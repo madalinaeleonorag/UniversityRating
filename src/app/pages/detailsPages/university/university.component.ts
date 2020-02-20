@@ -51,7 +51,6 @@ export class UniversityComponent implements OnInit, OnDestroy {
       disableClose: true
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result)
       this.firebaseService.setNewFacultyForUniversity(this.universityDetails.universityId, result, this.universityDetails.facultiesUniversity);
     });
   }
