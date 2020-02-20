@@ -178,7 +178,8 @@ export class FirebaseService {
     firebase.firestore().collection('Faculties').add(
       {
         nameFaculty: data.name,
-        descriptionFaculty: data.description
+        descriptionFaculty: data.description,
+        universityId
       }
     ).then(docRef => {
       let faculties = [];
