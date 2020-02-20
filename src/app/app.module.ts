@@ -76,6 +76,7 @@ import { EditableFacilitiesComponent } from './components/editable-facilities/ed
 import { AutocompleteAddressComponent } from './components/google-places/google-places.component';
 import { FileUploaderComponent } from './components/file-uploader/file-uploader.component';
 import { GetCityFromAddressPipe } from './pipes/get-city-from-address.pipe';
+import { AddFacultyDialogComponent } from './components/add-faculty-dialog/add-faculty-dialog.component';
 
 // Firestore config
 const config = {
@@ -126,13 +127,15 @@ export function createTranslateLoader(http: HttpClient) {
     EditableFacilitiesComponent,
     AutocompleteAddressComponent,
     FileUploaderComponent,
-    GetCityFromAddressPipe
+    GetCityFromAddressPipe,
+    AddFacultyDialogComponent
   ],
   entryComponents: [
     LoginDialogComponent,
     SignUpDialogComponent,
     CourseDetailsDialogComponent,
-    ReviewResponseComponent
+    ReviewResponseComponent,
+    AddFacultyDialogComponent
   ],
   imports: [
     GoogleChartsModule.forRoot('AIzaSyCnKJYJPDPPKIwcf8fnDC7FXvUhRgPg1Gc'),
