@@ -125,7 +125,7 @@
               (click)="onNavigate(element.facultyId)">{{ 'university_page.faculties.details' | translate }}</button>
           </td>
         </ng-container>
-        <ng-container matColumnDef="removeButton" *ngIf="userCanEdit && editEnabled">
+        <ng-container matColumnDef="remove" *ngIf="userCanEdit && editEnabled">
           <th mat-header-cell *matHeaderCellDef> </th>
           <td mat-cell *matCellDef="let element">
             <button mat-raised-button class="gradient-background white-text-button"
