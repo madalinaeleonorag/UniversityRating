@@ -192,6 +192,9 @@ export class FirebaseService {
       firebase.firestore().collection('University/').doc(universityId).update({
         facultiesUniversity: faculties
       });
+      firebase.firestore().collection('Faculties/').doc(docRef.id).update({
+        facultyId: docRef.id
+      });
     }).catch(error => {
       console.error('Error writing document: ', error);
     });
