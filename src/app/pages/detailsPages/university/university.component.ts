@@ -132,12 +132,6 @@ export class UniversityComponent implements OnInit, OnDestroy {
 
   userEditable() {
     this.userCanEdit = this.user ? this.user.universityId === this.universityId : false;
-    if (this.editEnabled) {
-      this.displayedColumns.push('remove');
-    } else {
-      const index = this.displayedColumns.indexOf('remove');
-      this.displayedColumns.splice(index, 1);
-    }
   }
 
   modifyValuesFromList(event: Array<any>, type: string) {
@@ -150,12 +144,15 @@ export class UniversityComponent implements OnInit, OnDestroy {
 
   editDetails() {
     this.editEnabled = !this.editEnabled;
+    this.displayedColumns.push('remove');
     this.userEditable();
   }
 
   saveDetails() {
     this.editEnabled = !this.editEnabled;
     this.firebaseService.saveUniversityDetails(this.form.value);
+    const index = this.displayedColumns.indexOf('remove');
+    this.displayedColumns.splice(index, 1);
   }
 
   removeFaculty(data: any) {
