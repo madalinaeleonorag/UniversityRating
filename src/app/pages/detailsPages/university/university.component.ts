@@ -156,7 +156,7 @@ export class UniversityComponent implements OnInit, OnDestroy {
   }
 
   removeFaculty(data: any) {
-    // console.log(data);
+    this.firebaseService.facultyRemove(data);
   }
 
   onNavigate(id: string) {

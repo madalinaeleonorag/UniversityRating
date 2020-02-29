@@ -5,6 +5,7 @@ import { RequestData } from '../models/RequestData';
 import { UniversityData } from '../models/UniversityData';
 import { FunctionsService } from './functions.service';
 import { Observable } from 'rxjs';
+import { FacultyData } from '../models/FacultyData';
 
 @Injectable({
   providedIn: 'root'
@@ -198,6 +199,19 @@ export class FirebaseService {
     }).catch(error => {
       console.error('Error writing document: ', error);
     });
+  }
+
+  facultyRemove(item: FacultyData) {
+    firebase.firestore().collection('Faculties').doc(item.facultyId).delete().then(res => {
+      this.getUniversityById(item.universityId).subscribe(university => {
+        const data = new UniversityData(university);
+        const index = data.facultiesUniversity.indexOf(item.facultyId);
+        data.facultiesUniversity.slice(index, 1);
+        firebase.firestore().collection('University').doc(item.universityId).update({
+          facultiesUniversity: data.facultiesUniversity
+        });
+      });
+    })
   }
 
 }
