@@ -5,7 +5,7 @@
     {{ facultyDetails?.nameFaculty | uppercase }}
   </div>
 
-  <a href="{{ facultyDetails?.studyGuide }}">{{ 'faculty_page.header.studyGuide' | translate }}</a>
+  <a href="{{ facultyDetails?.studyGuide }}" *ngIf="facultyDetails?.studyGuide">{{ 'faculty_page.header.studyGuide' | translate }}</a>
   <button mat-raised-button class="gradient-background white-text-button"
     (click)="onNavigate(facultyDetails.universityId)">{{ 'faculty_page.go_university' | translate }}</button>
   <!-- TODO compara button -->
@@ -126,13 +126,13 @@
           {{ master.masterName }}
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <!-- <div class="custom-detail-field" *ngIf="master?.years">
+      <div class="custom-detail-field" *ngIf="master?.years">
         <div class="custom-detail-field-title">
           {{ 'faculty_page.masters.years' | translate }}
         </div>
         {{ master?.years }}
       </div>
-      <div class="custom-detail-field" *ngIf="master?.generalSkills.length > 0">
+      <div class="custom-detail-field" *ngIf="master && master.generalSkills && master.generalSkills.length > 0">
         <div class="custom-detail-field-title">
           {{ 'faculty_page.masters.general_skills' | translate }}
         </div>
@@ -141,7 +141,7 @@
             - {{ item }}
           </li>
         </ul>
-      </div> -->
+      </div>
     </mat-expansion-panel>
 
   </mat-tab>
@@ -154,22 +154,22 @@
           {{ doctoral.doctoralName }}
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <!-- <div class="custom-detail-field" *ngIf="master?.years">
-            <div class="custom-detail-field-title">
-              {{ 'faculty_page.masters.years' | translate }}
-            </div>
-            {{ master?.years }}
-          </div>
-          <div class="custom-detail-field" *ngIf="master?.generalSkills.length > 0">
-            <div class="custom-detail-field-title">
-              {{ 'faculty_page.masters.general_skills' | translate }}
-            </div>
-            <ul>
-              <li *ngFor="let item of master?.generalSkills">
-                - {{ item }}
-              </li>
-            </ul>
-          </div> -->
+      <div class="custom-detail-field" *ngIf="master?.years">
+        <div class="custom-detail-field-title">
+          {{ 'faculty_page.masters.years' | translate }}
+        </div>
+        {{ master?.years }}
+      </div>
+      <div class="custom-detail-field" *ngIf="master && master.generalSkills && master.generalSkills.length > 0">
+        <div class="custom-detail-field-title">
+          {{ 'faculty_page.masters.general_skills' | translate }}
+        </div>
+        <ul>
+          <li *ngFor="let item of master?.generalSkills">
+            - {{ item }}
+          </li>
+        </ul>
+      </div>
     </mat-expansion-panel>
   </mat-tab>
 
