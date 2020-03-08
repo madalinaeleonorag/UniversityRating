@@ -15,10 +15,10 @@ export class AzureAiTextAnalysisService {
   sentimentAnalysis() {
 
     const sentimentInput = [
-      "this sucks"
+      'this sucks'
     ];
     client.analyzeSentiment(sentimentInput).then(result => {
-      console.log(result[0])
+      console.log(result[0]);
     });
   }
 
