@@ -52,8 +52,8 @@ export class RequestUniversityComponent implements OnInit {
             photosFormControl: data.photosUniversity,
             typeFormControl: data.typeUniversity,
             websiteFormControl: data.websiteUniversity
-          })
-        })
+          });
+        });
       }
     });
   }
@@ -80,15 +80,17 @@ export class RequestUniversityComponent implements OnInit {
       userId: this.user.id,
       websiteUniversity: this.form.value.websiteFormControl,
       adminAnswer: null
-    }
+    };
     this.firebaseService.sendRequest(details, this.state, this.user.requestId);
     this.snackBar.open('Your request was sent', 'OK', {
       duration: 2000,
     });
   }
   getAddress(place: object) {
-    this.universityDetails.address = place['formatted_address'];
-    const addressComponents = place['address_components'];
+    const formatted = 'formatted_address';
+    const components = 'address_components';
+    this.universityDetails.address = place[formatted];
+    const addressComponents = place[components];
     this.form.value.locationFormControl = addressComponents[addressComponents.length - 4].long_name;
   }
 

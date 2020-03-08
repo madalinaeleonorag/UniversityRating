@@ -1,7 +1,7 @@
 <button mat-button (click)="goToRequestPage('new')" *ngIf="!requestActive">Activeaza cont universitar</button>
 <mat-card *ngIf="requestActive">
   <mat-card-title>
- {{ requestStatus}}
+    {{ requestStatus}}
   </mat-card-title>
   <mat-card-subtitle *ngIf="requestStatus === 'declined'">
     {{ requestMessage}}
@@ -44,20 +44,3 @@
     <button mat-button (click)="saveNewDetails()" *ngIf="canEdit">Save</button>
   </mat-card-actions>
 </mat-card>
-
-
-<div mat-dialog-actions>
-</div>
-
-<!-- <mat-form-field class="example-full-width">
-        <input matInput placeholder="{{ 'signup_dialog.email' | translate }}" formControlName="email"
-          [errorStateMatcher]="matcher" type="email">
-      </mat-form-field> -->
-<!-- <mat-form-field class="example-full-width">
-        <input matInput placeholder="{{ 'signup_dialog.password' | translate }}" formControlName="password"
-          type="password">
-</!-->
-<!-- <mat-form-field class="example-full-width">
-        <input matInput placeholder="{{ 'signup_dialog.password' | translate }}" formControlName="passwordRepeat"
-          type="password">
-      </mat-form-field>  -->

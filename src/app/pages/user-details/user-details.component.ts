@@ -43,7 +43,7 @@ export class UserDetailsComponent implements OnInit {
           const data = new RequestData(response);
           this.requestStatus = data.status;
           this.requestMessage = data.adminAnswer;
-        })
+        });
       }
     });
   }

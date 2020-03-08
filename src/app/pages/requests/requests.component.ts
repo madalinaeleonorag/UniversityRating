@@ -40,8 +40,8 @@ export class RequestsComponent implements OnInit {
 
   getData(type: string) {
     return this.requests.filter(item => {
-      return item.status === type
-    })
+      return item.status === type;
+    });
   }
 
 }

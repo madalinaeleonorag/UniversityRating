@@ -36,7 +36,7 @@ export class AutocompleteAddressComponent implements OnInit, AfterViewInit {
         });
     }
 
-    invokeEvent(place: Object) {
+    invokeEvent(place: object) {
         this.setAddress.emit(place);
     }
 

@@ -58,10 +58,10 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.facultiesSubscription = this.firebaseService.getFacultiesData().subscribe(result => this.facultiesData = result);
     this.mastersSubscription = this.firebaseService.getMastersData().subscribe(result => this.mastersData = result);
     this.universitiesSubscription = this.firebaseService.getUniversitiesData().subscribe(result => {
-      let resultsArray = [];
+      const resultsArray = [];
       result.forEach(item => {
         resultsArray.push(new UniversityData(item));
-      })
+      });
       this.universitiesData = resultsArray;
       this.getUniversityLocations(result);
     });
@@ -193,11 +193,11 @@ export class SearchComponent implements OnInit, OnDestroy {
   getCityFromAddress(value: any): any {
     const geocoder = new google.maps.Geocoder();
     let city: any;
-    return geocoder.geocode({ 'address': value }, (results, status) => {
-      if (status == 'OK') {
-        const addressComponents = results[0]['address_components'];
+    return geocoder.geocode({ address: value }, (results, status) => {
+      if (status === 'OK') {
+        const addressComponents = results[0].address_components;
         city = addressComponents[addressComponents.length - 4].long_name;
-        return city
+        return city;
       } else {
         console.log('Geocode was not successful for the following reason: ' + status);
       }
