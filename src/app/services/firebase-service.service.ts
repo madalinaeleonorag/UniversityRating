@@ -20,6 +20,7 @@ export class FirebaseService {
   requestsCollection = this.afs.collection('Requests');
   universityCollection = this.afs.collection('University');
   coursesCollection = this.afs.collection('Courses');
+  reviewsCollection = this.afs.collection('Reviews');
   usersCollection = this.afs.collection('Users');
 
   constructor(private afs: AngularFirestore, private functionsService: FunctionsService) {
@@ -61,6 +62,10 @@ export class FirebaseService {
 
   getCoursesData() {
     return this.coursesCollection.valueChanges();
+  }
+
+  getReviewsData() {
+    return this.reviewsCollection.valueChanges();
   }
 
   getUniversityById(id: string): Observable<any> {
@@ -211,7 +216,7 @@ export class FirebaseService {
           facultiesUniversity: data.facultiesUniversity
         });
       });
-    })
+    });
   }
 
 }

@@ -1,0 +1,9 @@
+<mat-card *ngFor="let review of reviewsList" class="custom-card-comment">
+  <mat-card-content class="custom-card-comment-content"> 
+
+    {{ getUserDetailById(review.userId) | json  }}
+        <img src="{{ getUserDetailById(review.userId).image }}" class="custom-avatar-image" *ngIf="getUserDetailById(review.userId).logoUniversity">
+        <img src="assets/account.png" class="custom-avatar-image" *ngIf="!getUserDetailById(review.userId).logoUniversity">
+  <div>{{ review | json }}</div>
+</mat-card-content>
+</mat-card>

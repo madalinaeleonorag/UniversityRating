@@ -12,6 +12,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Facilities } from 'src/app/enums/Facilities';
 import { MatDialog } from '@angular/material';
 import { AddFacultyDialogComponent } from 'src/app/components/add-faculty-dialog/add-faculty-dialog.component';
+import { ReviewData } from 'src/app/models/ReviewData';
 
 @Component({
   selector: 'app-university',
@@ -26,6 +27,7 @@ export class UniversityComponent implements OnInit, OnDestroy {
   paramSubscription: Subscription;
   universityDetails: UniversityData = new UniversityData(undefined);
   facultiesData: FacultyData[] = [];
+  reviewsData: ReviewData[] = [];
   displayedColumns: string[] = ['name', 'bachelors', 'masters', 'doctorals', 'button'];
   origin: ILatLng;
   destination: any;
@@ -112,6 +114,15 @@ export class UniversityComponent implements OnInit, OnDestroy {
             }
           });
         });
+        this.firebaseService.getReviewsData().subscribe(data => {
+          this.reviewsData = [];
+          data.forEach(review => {
+            const reviewDetails = new ReviewData(review);
+            if (reviewDetails.universityId === this.universityId) {
+              this.reviewsData.push(reviewDetails);
+            }
+          });
+        });
       }
     });
   }
@@ -119,14 +130,14 @@ export class UniversityComponent implements OnInit, OnDestroy {
   getLatLng(address: string) {
     const geocoder = new google.maps.Geocoder();
     let LatLng;
-    geocoder.geocode({ address: address }, (results, status) => {
+    geocoder.geocode({ address }, (results, status) => {
       LatLng = results[0] ? results[0].geometry.location : null;
       this.destination = LatLng.toJSON();
       this.displayDirections = true;
     });
   }
 
-  facilitiesListEdited(event) {
+  facilitiesListEdited(event: any) {
     this.universityDetails.facilitiesUniversity = event;
   }
 

@@ -35,8 +35,9 @@ export class SignUpDialogComponent implements OnInit {
   ngOnInit() {
   }
 
-  getAddress(place: object) { 
-    const addressComponents = place['address_components'];
+  getAddress(place: object) {
+    const address = 'address_components';
+    const addressComponents = place[address];
     this.signUpForm.value.location = addressComponents[addressComponents.length - 4].long_name;
   }
 
@@ -109,7 +110,7 @@ export class SignUpDialogComponent implements OnInit {
           type: 'user',
           id: res.user.uid,
           universityId: null
-        }
+        };
         this.firebaseService.saveNewUser(details, res.user.uid).then(newUser => {
           this.dialogRef.close(res);
         });

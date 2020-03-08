@@ -17,7 +17,7 @@ export class FunctionsService {
         resolve({ lng: resp.coords.longitude, lat: resp.coords.latitude });
       },
         err => {
-          console.log(err)
+          console.log(err);
           reject(err);
         }, options);
     });
@@ -26,9 +26,9 @@ export class FunctionsService {
   getCityFromAddress(address: string) {
     const geocoder = new google.maps.Geocoder();
     let city;
-    geocoder.geocode({ 'address': address }, (results, status) => {
-      if (status == 'OK') {
-        const addressComponents = results[0]['address_components'];
+    geocoder.geocode({ address }, (results, status) => {
+      if (status === 'OK') {
+        const addressComponents = results[0].address_components;
         city = addressComponents[addressComponents.length - 4].long_name;
         return city;
       } else {

@@ -6,14 +6,13 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class GetCityFromAddressPipe implements PipeTransform {
 
   transform(value: any): any {
-    console.log(value)
     const geocoder = new google.maps.Geocoder();
     let city: any;
-    return geocoder.geocode({ 'address': value }, (results, status) => {
-      if (status == 'OK') {
-        const addressComponents = results[0]['address_components'];
+    return geocoder.geocode({ address: value }, (results, status) => {
+      if (status === 'OK') {
+        const addressComponents = results[0].address_components;
         city = addressComponents[addressComponents.length - 4].long_name;
-        return city
+        return city;
       } else {
         console.log('Geocode was not successful for the following reason: ' + status);
       }

@@ -19,28 +19,28 @@ export class FileUploaderComponent implements OnInit {
       case 'gallery': {
         const uploadTask = this.afStorage.ref(`/universityPhotos/${this.id}`).put(event.target.files[0]);
       }
-        break
+                      break;
       case 'user': {
         const uploadTask = this.afStorage.ref(`/users/${this.id}`).put(event.target.files[0]);
       }
-        break
+                   break;
       case 'logoUniversity': {
         const uploadTask = this.afStorage.ref(`/logoUniversity/${this.id}`).put(event.target.files[0]);
         uploadTask.then(snapshot => {
           firebase.storage().ref(snapshot.metadata.fullPath).getDownloadURL().then(url => {
             firebase.firestore().collection('University/').doc(this.id).update({
               logoUniversity: url
-            })
+            });
           }).catch(error => {
-            console.log('error on loading image')
+            console.log('error on loading image');
           });
-        })
+        });
       }
-        break
+                             break;
       case 'logoFaculty': {
         const uploadTask = this.afStorage.ref(`/logoFaculty/${this.id}`).put(event.target.files[0]);
       }
-        break
+                          break;
     }
 
   }

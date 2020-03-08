@@ -77,6 +77,7 @@ import { AutocompleteAddressComponent } from './components/google-places/google-
 import { FileUploaderComponent } from './components/file-uploader/file-uploader.component';
 import { GetCityFromAddressPipe } from './pipes/get-city-from-address.pipe';
 import { AddFacultyDialogComponent } from './components/add-faculty-dialog/add-faculty-dialog.component';
+import { EditableCommentsComponent } from './components/editable-comments/editable-comments.component';
 
 // Firestore config
 const config = {
@@ -128,7 +129,8 @@ export function createTranslateLoader(http: HttpClient) {
     AutocompleteAddressComponent,
     FileUploaderComponent,
     GetCityFromAddressPipe,
-    AddFacultyDialogComponent
+    AddFacultyDialogComponent,
+    EditableCommentsComponent
   ],
   entryComponents: [
     LoginDialogComponent,
