@@ -78,7 +78,6 @@ import { FileUploaderComponent } from './components/file-uploader/file-uploader.
 import { GetCityFromAddressPipe } from './pipes/get-city-from-address.pipe';
 import { AddFacultyDialogComponent } from './components/add-faculty-dialog/add-faculty-dialog.component';
 import { EditableCommentsComponent } from './components/editable-comments/editable-comments.component';
-import { NgxStarRatingModule } from 'ngx-star-rating';
 import { EditableStarRatingComponent } from './components/editable-star-rating/editable-star-rating.component';
 import { FromNumberToArrayPipe } from './pipes/from-number-to-array.pipe';
 
@@ -195,7 +194,6 @@ export function createTranslateLoader(http: HttpClient) {
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    NgxStarRatingModule,
     // Router imports
     RouterModule.forRoot(
       appRoutes
