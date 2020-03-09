@@ -202,7 +202,7 @@
     <mat-tab *ngIf="reviewsData && reviewsData.length > 0"
     label="Reviews">
     <div fxLayout="row">
-      <app-editable-comments [reviewsList]="reviewsData"></app-editable-comments>
+      <app-editable-comments *ngFor="let review of reviewsData" [review]="review"></app-editable-comments>
     </div>
   </mat-tab>
 

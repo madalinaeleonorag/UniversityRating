@@ -15,7 +15,7 @@ export class ReviewData {
     @JsonProperty('reviewId')
     reviewId: string = undefined;
     @JsonProperty('stars')
-    stars: string = undefined;
+    stars: number = undefined;
     @JsonProperty('date')
     date: string = undefined;
 
