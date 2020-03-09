@@ -1,9 +1,40 @@
-<mat-card *ngFor="let review of reviewsList" class="custom-card-comment">
-  <mat-card-content class="custom-card-comment-content"> 
+<mat-card class="custom-card-comment">
+  <mat-card-content class="custom-card-comment-content">
+    <img src="{{ userData?.image }}" class="custom-avatar-image" *ngIf="userData?.image">
+    <img src="assets/account.png" class="custom-avatar-image" *ngIf="!userData?.image">
+    <div *ngIf="!editable">
+      <div class="name">
+        {{ userData?.name }} {{ userData?.surname }}
+        <div class="date">
+          &nbsp;- {{ review.date }}
+        </div>
+      </div>
+      <div class="stars">
+        <app-editable-star-rating *ngIf="review.stars" [stars]="review.stars" [editable]="editable"></app-editable-star-rating>
+      </div>
+      <div class="comment">
+        {{ review.comment }}
+      </div>
+    </div>
+    <div *ngIf="editable">
+      <div class="name">
+        {{ user?.name }} {{ user?.surname }}
+        <div class="date">
+          &nbsp;-
+        </div>
+      </div>
+      <div [formGroup]="form">
 
-    {{ getUserDetailById(review.userId) | json  }}
-        <img src="{{ getUserDetailById(review.userId).image }}" class="custom-avatar-image" *ngIf="getUserDetailById(review.userId).logoUniversity">
-        <img src="assets/account.png" class="custom-avatar-image" *ngIf="!getUserDetailById(review.userId).logoUniversity">
-  <div>{{ review | json }}</div>
-</mat-card-content>
+      </div>
+      <div class="stars" formControlName="stars">
+        <app-editable-star-rating *ngIf="review.stars" [stars]="review.stars" [editable]="editable"></app-editable-star-rating>
+      </div>
+      <div class="comment" formControlName="comment">
+        {{ review.comment }}
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button *ngIf="editable" mat-button (click)="addComment()" [disabled]="form.status === 'INVALID'">Send comment</button>
+  </mat-card-actions>
 </mat-card>

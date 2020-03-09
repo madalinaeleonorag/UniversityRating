@@ -1,6 +1,8 @@
 app-editable-comments {
+  width: 100%;
+
   .custom-card-comment {
-    padding: 30px;
+    padding: 20px;
 
     .custom-card-comment-content {
       display: flex;
@@ -10,6 +12,23 @@ app-editable-comments {
         width: 50px;
         height: 50px;
         margin-right: 10px;
+        border-radius: 50%;
+      }
+
+      .name {
+        display: flex;
+        font-weight: bold;
+
+        .date {
+          color: grey;
+          font-weight: normal;
+        }
+      }
+
+      .stars {
+      }
+
+      .comment {
       }
     }
   }

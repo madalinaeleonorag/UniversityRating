@@ -13,6 +13,7 @@ import { Facilities } from 'src/app/enums/Facilities';
 import { MatDialog } from '@angular/material';
 import { AddFacultyDialogComponent } from 'src/app/components/add-faculty-dialog/add-faculty-dialog.component';
 import { ReviewData } from 'src/app/models/ReviewData';
+import { UserData } from 'src/app/models/UserData';
 
 @Component({
   selector: 'app-university',
@@ -37,7 +38,7 @@ export class UniversityComponent implements OnInit, OnDestroy {
   isUserSubscription: Subscription;
   universityId: string;
   form: FormGroup;
-  user: any;
+  user: UserData;
   editEnabled: boolean;
   facilitiesList = Object.keys(Facilities);
   image: string;
@@ -84,7 +85,7 @@ export class UniversityComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.isUserSubscription = this.authService.isUserAuthenticatedObservable.subscribe(result => {
-      this.user = result;
+      this.user = new UserData(result);
       this.userEditable();
       this.functionsService.getPosition().then(pos => {
         this.origin = {
@@ -92,6 +93,9 @@ export class UniversityComponent implements OnInit, OnDestroy {
           longitude: pos.lng
         };
       });
+      if (result) {
+        this.showAddNewComment();
+      }
     });
 
     this.paramSubscription = this.route.paramMap.subscribe(params => {
@@ -125,6 +129,18 @@ export class UniversityComponent implements OnInit, OnDestroy {
         });
       }
     });
+  }
+
+  showAddNewComment() {
+    if(this.reviewsData.filter(item => item.userId === this.user.id).length === 0) {
+      const newCommentForPresentLoggedInUser = {
+        status: 'pending',
+        universityId: this.universityId,
+        userId: this.user.id,
+        date: new Date()
+      }
+      this.reviewsData.push(new ReviewData(newCommentForPresentLoggedInUser));
+    }
   }
 
   getLatLng(address: string) {

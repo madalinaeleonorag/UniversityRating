@@ -32,7 +32,7 @@ export class FileUploaderComponent implements OnInit {
               logoUniversity: url
             });
           }).catch(error => {
-            console.log('error on loading image');
+            console.log('%c error on loading image', 'color: #4d79ff;');
           });
         });
       }
