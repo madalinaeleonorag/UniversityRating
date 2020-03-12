@@ -12,6 +12,10 @@ body {
   background-color: $background;
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
 button {
   max-width: fit-content;
 }

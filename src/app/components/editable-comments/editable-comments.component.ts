@@ -5,6 +5,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { FirebaseService } from 'src/app/services/firebase-service.service';
 import { UserData } from 'src/app/models/UserData';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { AzureAiTextAnalysisService } from 'src/app/services/azure-ai-text-analysis.service';
+import { TextAnalyticData } from 'src/app/models/TextAnalyticData';
 
 @Component({
   selector: 'app-editable-comments',
@@ -20,14 +22,19 @@ export class EditableCommentsComponent implements OnInit {
   @Input() editable: boolean;
   user: UserData;
   form: FormGroup;
+  starsValue: number;
+  commentText: string;
+  // editCommentCheck: boolean;
 
-  constructor(private authService: AuthService, private firebaseService: FirebaseService, private formBuilder: FormBuilder) { }
+  constructor(private authService: AuthService, private firebaseService: FirebaseService, private formBuilder: FormBuilder, private azureService: AzureAiTextAnalysisService) { }
 
   ngOnInit() {
     this.isUserSubscription = this.authService.isUserAuthenticatedObservable.subscribe(result => {
-      this.editable = result ? result.userId === this.review.userId : false;
       this.user = new UserData(result);
     });
+    // if (!this.review.comment) {
+    //   this.editCommentCheck = true;
+    // }
     this.getUserDetailById(this.review.userId);
     this.form = this.formBuilder.group({
       stars: new FormControl('', [
@@ -45,9 +52,39 @@ export class EditableCommentsComponent implements OnInit {
     });
   }
 
+  // editComment() {
+  //   this.editCommentCheck = true;
+  //   this.commentText = this.review.comment;
+  // }
+
   addComment() {
-    console.log('test comment')
-    console.log(this.form.value)
+    this.review.comment = this.commentText;
+    this.checkSentiment(this.review.comment);
+    // this.firebaseService.getReviewsData().subscribe(allReviews => {
+    //   const commentUserAlreadyExists = allReviews.filter((item: ReviewData) => item.userId === this.user.id).length === 0;
+    //   if (commentUserAlreadyExists) {
+        this.firebaseService.addComment(this.review);
+      // } else {
+      //   this.firebaseService.updateExistingComment(this.review)
+      //   this.editCommentCheck = false;
+      // }
+    // })
+      
+  }
+
+  checkSentiment(text: string) {
+    this.azureService.sentimentAnalysis(text).subscribe(res => {
+      const data = new TextAnalyticData(res[0]);
+      if (data.sentiment != 'negative') {
+        this.review.status = 'approved';
+      } else {
+        this.review.status = 'pending';
+      }
+    })
+  }
+
+  setStarsForEditableComment(event: number) {
+    this.review.stars = event;
   }
 
 }

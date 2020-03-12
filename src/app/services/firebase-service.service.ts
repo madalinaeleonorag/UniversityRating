@@ -6,6 +6,8 @@ import { UniversityData } from '../models/UniversityData';
 import { FunctionsService } from './functions.service';
 import { Observable } from 'rxjs';
 import { FacultyData } from '../models/FacultyData';
+import { ReviewData } from '../models/ReviewData';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -217,6 +219,45 @@ export class FirebaseService {
         });
       });
     });
+  }
+
+  addComment(item: ReviewData) {
+    var dayString = moment(new Date()).format("DD-MM-YYYY");
+    const data = {
+      comment: item.comment,
+      facultyId: item.facultyId ? item.facultyId : '',
+      status: item.status ? item.status : '',
+      stars: item.stars,
+      userId: item.userId,
+      universityId: item.universityId ? item.universityId : '',
+      date: dayString
+    }
+    firebase.firestore().collection('Reviews').add(data).then(res => {
+      firebase.firestore().collection('Reviews').doc(res.id).update({
+        reviewId: res.id
+      })
+      console.log(res)
+    }).catch(err => {
+      console.log(err);
+    })
+  }
+
+  updateExistingComment(item: ReviewData) {
+    const data = {
+      comment: item.comment,
+      facultyId: item.facultyId ? item.facultyId : '',
+      status: item.status,
+      stars: item.stars,
+      userId: item.userId,
+      universityId: item.universityId ? item.universityId : '',
+      date: item.date,
+      reviewId: item.reviewId
+    }
+    firebase.firestore().collection('Reviews').doc(item.reviewId).update(data).then(res => {
+      console.log(res)
+    }).catch(err => {
+      console.log(err)
+    })
   }
 
 }

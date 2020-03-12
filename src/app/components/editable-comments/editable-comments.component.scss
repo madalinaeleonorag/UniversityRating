@@ -1,8 +1,21 @@
+@import "../../variables.scss";
+
 app-editable-comments {
   width: 100%;
 
   .custom-card-comment {
     padding: 20px;
+    width: 100%;
+    margin: 5px;
+
+    .mat-card-actions {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .editable-content {
+      width: 100%;
+    }
 
     .custom-card-comment-content {
       display: flex;
@@ -25,10 +38,24 @@ app-editable-comments {
         }
       }
 
-      .stars {
+      .comment-header {
+        display: flex;
+        justify-content: space-between;
       }
 
       .comment {
+        textarea {
+          margin: 0px;
+          width: 100%;
+          margin-top: 5px;
+          height: 50px;
+          background-color: $background;
+          border: none;
+        }
+      }
+
+      .custom-card-content {
+        width: 100%;
       }
     }
   }

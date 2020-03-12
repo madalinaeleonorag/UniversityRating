@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-editable-star-rating',
@@ -10,10 +10,16 @@ export class EditableStarRatingComponent implements OnInit {
 
   @Input() stars: number;
   @Input() editable: boolean;
+  @Output() setStarsEmitter = new EventEmitter();
   
   constructor() { }
 
   ngOnInit() {
+  }
+
+  setStars(numberOfStars: number) {
+    this.stars = numberOfStars
+    this.setStarsEmitter.emit(numberOfStars);
   }
 
 }
