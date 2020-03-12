@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TextAnalyticsClient, TextAnalyticsApiKeyCredential } from '@azure/ai-text-analytics';
+import { of } from 'rxjs';
 
 const key = '2e1ffec2d1f347a787bec6dbbf17fe0a';
 const endpoint = `https://universityrating.cognitiveservices.azure.com/`;
@@ -12,14 +13,8 @@ export class AzureAiTextAnalysisService {
 
   constructor() { }
 
-  sentimentAnalysis() {
-
-    const sentimentInput = [
-      'this sucks'
-    ];
-    client.analyzeSentiment(sentimentInput).then(result => {
-      console.log(result[0]);
-    });
+  sentimentAnalysis(text: string) {
+    return of(client.analyzeSentiment([text]));
   }
 
 }

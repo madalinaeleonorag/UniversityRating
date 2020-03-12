@@ -119,10 +119,13 @@ export class UniversityComponent implements OnInit, OnDestroy {
           });
         });
         this.firebaseService.getReviewsData().subscribe(data => {
+          if (data) {
+            this.showAddNewComment();
+          }
           this.reviewsData = [];
           data.forEach(review => {
             const reviewDetails = new ReviewData(review);
-            if (reviewDetails.universityId === this.universityId) {
+            if (reviewDetails.universityId === this.universityId && reviewDetails.status === 'approved') {
               this.reviewsData.push(reviewDetails);
             }
           });
@@ -134,10 +137,10 @@ export class UniversityComponent implements OnInit, OnDestroy {
   showAddNewComment() {
     if(this.reviewsData.filter(item => item.userId === this.user.id).length === 0) {
       const newCommentForPresentLoggedInUser = {
-        status: 'pending',
         universityId: this.universityId,
         userId: this.user.id,
-        date: new Date()
+        date: new Date(),
+        stars: 5
       }
       this.reviewsData.push(new ReviewData(newCommentForPresentLoggedInUser));
     }

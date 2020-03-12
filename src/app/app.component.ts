@@ -21,7 +21,6 @@ export class AppComponent implements OnInit {
       router.url.toString() === '/' ? this.firstPage = true : this.firstPage = false;
     });
     this.authService.verifyIfUserAlreadySignedIn();
-    this.textAnalysisService.sentimentAnalysis();
   }
 
   ngOnInit() {
