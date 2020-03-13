@@ -14,7 +14,7 @@ export class AzureAiTextAnalysisService {
   constructor() { }
 
   sentimentAnalysis(text: string) {
-    return of(client.analyzeSentiment([text]));
+    return client.analyzeSentiment([text]);
   }
 
 }

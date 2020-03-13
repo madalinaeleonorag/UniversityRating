@@ -1,4 +1,4 @@
-<mat-card class="custom-card-comment">
+<mat-card class="custom-card-comment" *ngIf="review.status === 'approved'">
   <mat-card-content class="custom-card-comment-content">
     <img src="{{ userData?.image }}" class="custom-avatar-image" *ngIf="userData?.image">
     <img src="assets/account.png" class="custom-avatar-image" *ngIf="!userData?.image">
@@ -35,7 +35,13 @@
       </div>
     </div>
   </mat-card-content>
-  <mat-card-actions>
-    <button *ngIf="editable" mat-button (click)="addComment()" [disabled]="!commentText">Send comment</button>
+  <mat-card-actions *ngIf="editable">
+    <button mat-button (click)="addComment()" [disabled]="!commentText">Send comment</button>
   </mat-card-actions>
+</mat-card>
+<mat-card class="custom-card-comment" *ngIf="review.status === 'pending' && user.id === review.userId">
+  <mat-card-content>
+    Your comment seems to be negative. We will review it and it is possible an admin of the application to reach you if
+    it it required in order to confirm that your comment it's not a spam. Thank you for your understanding.
+  </mat-card-content>
 </mat-card>
