@@ -236,7 +236,6 @@ export class FirebaseService {
       firebase.firestore().collection('Reviews').doc(res.id).update({
         reviewId: res.id
       })
-      console.log(res)
     }).catch(err => {
       console.log(err);
     })
@@ -254,7 +253,6 @@ export class FirebaseService {
       reviewId: item.reviewId
     }
     firebase.firestore().collection('Reviews').doc(item.reviewId).update(data).then(res => {
-      console.log(res)
     }).catch(err => {
       console.log(err)
     })

@@ -44,7 +44,7 @@ export class UniversityComponent implements OnInit, OnDestroy {
   image: string;
 
   constructor(private route: ActivatedRoute, private firebaseService: FirebaseService, private router: Router,
-              private functionsService: FunctionsService, private authService: AuthService, private dialog: MatDialog) {
+    private functionsService: FunctionsService, private authService: AuthService, private dialog: MatDialog) {
     this.buildForm();
   }
 
@@ -94,7 +94,7 @@ export class UniversityComponent implements OnInit, OnDestroy {
         };
       });
       if (result) {
-        this.showAddNewComment();
+        this.showAddNewComment(this.reviewsData);
       }
     });
 
@@ -119,30 +119,30 @@ export class UniversityComponent implements OnInit, OnDestroy {
           });
         });
         this.firebaseService.getReviewsData().subscribe(data => {
-          if (data) {
-            this.showAddNewComment();
-          }
           this.reviewsData = [];
           data.forEach(review => {
             const reviewDetails = new ReviewData(review);
-            if (reviewDetails.universityId === this.universityId && reviewDetails.status === 'approved') {
+            if (reviewDetails.universityId === this.universityId && reviewDetails.status !== 'declined') {
               this.reviewsData.push(reviewDetails);
             }
           });
+          console.log(this.reviewsData)
         });
       }
     });
   }
 
-  showAddNewComment() {
-    if(this.reviewsData.filter(item => item.userId === this.user.id).length === 0) {
+  showAddNewComment(data: any) {
+    if (data.filter((item: ReviewData) => item.userId === this.user.id).length === 0) {
       const newCommentForPresentLoggedInUser = {
         universityId: this.universityId,
         userId: this.user.id,
         date: new Date(),
+        status: 'approved',
         stars: 5
       }
       this.reviewsData.push(new ReviewData(newCommentForPresentLoggedInUser));
+      console.log(this.reviewsData)
     }
   }
 

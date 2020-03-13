@@ -1,11 +1,9 @@
 @import "../../variables.scss";
 
 app-editable-comments {
-  width: 100%;
 
   .custom-card-comment {
     padding: 20px;
-    width: 100%;
     margin: 5px;
 
     .mat-card-actions {
@@ -16,7 +14,7 @@ app-editable-comments {
     .editable-content {
       width: 100%;
     }
-
+    
     .custom-card-comment-content {
       display: flex;
       flex-direction: row;
@@ -44,6 +42,7 @@ app-editable-comments {
       }
 
       .comment {
+        word-break: break-word;
         textarea {
           margin: 0px;
           width: 100%;

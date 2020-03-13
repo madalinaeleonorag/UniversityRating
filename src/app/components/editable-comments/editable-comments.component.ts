@@ -24,6 +24,7 @@ export class EditableCommentsComponent implements OnInit {
   form: FormGroup;
   starsValue: number;
   commentText: string;
+  negativeSentimentWarning: boolean;
   // editCommentCheck: boolean;
 
   constructor(private authService: AuthService, private firebaseService: FirebaseService, private formBuilder: FormBuilder, private azureService: AzureAiTextAnalysisService) { }
@@ -59,28 +60,17 @@ export class EditableCommentsComponent implements OnInit {
 
   addComment() {
     this.review.comment = this.commentText;
-    this.checkSentiment(this.review.comment);
-    // this.firebaseService.getReviewsData().subscribe(allReviews => {
-    //   const commentUserAlreadyExists = allReviews.filter((item: ReviewData) => item.userId === this.user.id).length === 0;
-    //   if (commentUserAlreadyExists) {
+    this.azureService.sentimentAnalysis(this.review.comment)
+      .then(res => {
+        const data = new TextAnalyticData(res[0]);
+        if (data.sentiment !== 'negative') {
+          this.review.status = 'approved';
+        } else {
+          this.review.status = 'pending';
+          this.negativeSentimentWarning = true;
+        }
         this.firebaseService.addComment(this.review);
-      // } else {
-      //   this.firebaseService.updateExistingComment(this.review)
-      //   this.editCommentCheck = false;
-      // }
-    // })
-      
-  }
-
-  checkSentiment(text: string) {
-    this.azureService.sentimentAnalysis(text).subscribe(res => {
-      const data = new TextAnalyticData(res[0]);
-      if (data.sentiment != 'negative') {
-        this.review.status = 'approved';
-      } else {
-        this.review.status = 'pending';
-      }
-    })
+      })
   }
 
   setStarsForEditableComment(event: number) {
