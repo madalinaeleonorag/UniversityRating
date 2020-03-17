@@ -126,7 +126,6 @@ export class UniversityComponent implements OnInit, OnDestroy {
               this.reviewsData.push(reviewDetails);
             }
           });
-          console.log(this.reviewsData)
         });
       }
     });

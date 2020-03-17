@@ -19,4 +19,7 @@
         [ngStyle]="{'color': stars > 3 ? 'green' : stars == 3 ? 'orange' : 'red'}">star</mat-icon>
     <mat-icon *ngFor="let star of (5 - stars | fromNumberToArray)"
         [ngStyle]="{'color': stars > 3 ? 'green' : stars == 3 ? 'orange' : 'red'}">star_border</mat-icon>
+       <div *ngIf="showNumberOfRatings" class="grey-text">
+        {{ reviews?.length }} reviews
+       </div> 
 </div>

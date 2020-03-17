@@ -1,7 +1,6 @@
 @import "../../variables.scss";
 
 app-editable-comments {
-
   .custom-card-comment {
     padding: 20px;
     margin: 5px;
@@ -14,7 +13,7 @@ app-editable-comments {
     .editable-content {
       width: 100%;
     }
-    
+
     .custom-card-comment-content {
       display: flex;
       flex-direction: row;

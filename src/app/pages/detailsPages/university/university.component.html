@@ -1,6 +1,6 @@
 <form fxLayout="column" [formGroup]="form">
   <div fxLayout="column" fxLayoutAlign="center center" class="custom-university-header">
-    <div *ngIf="!editEnabled">
+    <div *ngIf="!editEnabled" class="name-and-logo">
       <img mat-card-image src="{{ universityDetails.logoUniversity }}" *ngIf="universityDetails.logoUniversity">
       <img mat-card-image src="assets/university.png" *ngIf="!universityDetails.logoUniversity">
       <div>
@@ -17,12 +17,9 @@
       *ngIf="userCanEdit && !editEnabled">Edit data</button>
     <button mat-raised-button class="gradient-background white-text-button" (click)="saveDetails()"
       *ngIf="userCanEdit && editEnabled">Save data</button>
-
-    <!--<div>
-      {{ universityDetails.rating }}
-      TODO add stars there and in the homepage
-  </div> -->
     <a href="{{ universityDetails.websiteUniversity }}">{{ 'university_page.header.website' | translate }}</a>
+    <app-editable-star-rating *ngIf="reviewsData" [reviews]="reviewsData" [editable]="false" [type]="university" showNumberOfRatings="true">
+    </app-editable-star-rating>
     <!-- TODO compara button -->
   </div>
   <mat-tab-group mat-align-tabs="center">
