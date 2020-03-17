@@ -14,10 +14,8 @@
           <!-- <mat-icon *ngIf="editable" (click)="editComment()" class="cursor-pointer">create</mat-icon> -->
         </div>
       </div>
-      <div class="stars">
-        <app-editable-star-rating *ngIf="review.stars" [stars]="review.stars" [editable]="editable">
-        </app-editable-star-rating>
-      </div>
+      <app-editable-star-rating *ngIf="review.stars" [stars]="review.stars" [editable]="editable">
+      </app-editable-star-rating>
       <div class="comment">
         {{ review.comment }}
       </div>
@@ -26,10 +24,8 @@
       <div class="name">
         {{ user?.name }} {{ user?.surname }}
       </div>
-      <div class="stars">
-        <app-editable-star-rating [stars]="review.stars" [editable]="editable"
-          (setStarsEmitter)="setStarsForEditableComment($event)"></app-editable-star-rating>
-      </div>
+      <app-editable-star-rating [stars]="review.stars" [editable]="editable"
+        (setStarsEmitter)="setStarsForEditableComment($event)"></app-editable-star-rating>
       <div class="comment">
         <textarea matInput [(ngModel)]="commentText"></textarea>
       </div>
@@ -43,5 +39,10 @@
   <mat-card-content>
     Your comment seems to be negative. We will review it and it is possible an admin of the application to reach you if
     it it required in order to confirm that your comment it's not a spam. Thank you for your understanding.
+  </mat-card-content>
+</mat-card>
+<mat-card class="custom-card-comment" *ngIf="review.status === 'pending' && user.id !== review.userId">
+  <mat-card-content>
+    This comment seems to be negative and it's under review by one of our admins to be sure that it's not a spam. Thank you for your understanding.
   </mat-card-content>
 </mat-card>
