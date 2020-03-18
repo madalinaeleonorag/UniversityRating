@@ -18,7 +18,8 @@
     <button mat-raised-button class="gradient-background white-text-button" (click)="saveDetails()"
       *ngIf="userCanEdit && editEnabled">Save data</button>
     <a href="{{ universityDetails.websiteUniversity }}">{{ 'university_page.header.website' | translate }}</a>
-    <app-editable-star-rating *ngIf="reviewsData" [reviews]="reviewsData" [editable]="false" [type]="university" showNumberOfRatings="true">
+    <app-editable-star-rating *ngIf="reviewsData" [reviews]="reviewsData" [editable]="false" [type]="university"
+      showNumberOfRatings="true">
     </app-editable-star-rating>
     <!-- TODO compara button -->
   </div>
@@ -171,9 +172,9 @@
         {{ universityDetails.address }}
       </div>
       <div *ngIf="editEnabled">
-          <mat-label>address</mat-label>
-          <AutocompleteAddressComponent (setAddress)="getAddress($event)" adressType="geocode">
-          </AutocompleteAddressComponent>
+        <mat-label>address</mat-label>
+        <AutocompleteAddressComponent (setAddress)="getAddress($event)" adressType="geocode">
+        </AutocompleteAddressComponent>
       </div>
       <div class="custom-detail-field" *ngIf="universityDetails.fax && !editEnabled">
         <div class="custom-detail-field-title">
@@ -196,12 +197,12 @@
       </agm-map>
     </mat-tab>
 
-    <mat-tab *ngIf="reviewsData && reviewsData.length > 0"
-    label="Reviews">
-    <div fxLayout="column">
-      <app-editable-comments *ngFor="let review of reviewsData" [review]="review" [editable]="user.id === review.userId && !review.comment"></app-editable-comments>
-    </div>
-  </mat-tab>
+    <mat-tab *ngIf="reviewsData && reviewsData.length > 0" label="Reviews">
+      <div fxLayout="column">
+        <app-editable-comments *ngFor="let review of reviewsData" [review]="review"
+          [editable]="user.id === review.userId && !review.comment"></app-editable-comments>
+      </div>
+    </mat-tab>
 
   </mat-tab-group>
 </form>
