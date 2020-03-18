@@ -29,6 +29,7 @@ export class EditableStarRatingComponent implements OnInit, OnChanges {
      }
   }
   getStarsFromReview() {
+    this.reviews = this.reviews.filter(item => item.comment)
     this.stars = this.reviews.reduce((a: number,b: ReviewData) => a - 0 + b.stars, 0) / this.reviews.length
   }
 

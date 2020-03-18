@@ -5,9 +5,13 @@
     {{ facultyDetails?.nameFaculty | uppercase }}
   </div>
 
-  <a href="{{ facultyDetails?.studyGuide }}" *ngIf="facultyDetails?.studyGuide">{{ 'faculty_page.header.studyGuide' | translate }}</a>
+  <a href="{{ facultyDetails?.studyGuide }}"
+    *ngIf="facultyDetails?.studyGuide">{{ 'faculty_page.header.studyGuide' | translate }}</a>
   <button mat-raised-button class="gradient-background white-text-button"
     (click)="onNavigate(facultyDetails.universityId)">{{ 'faculty_page.go_university' | translate }}</button>
+  <app-editable-star-rating *ngIf="reviewsData" [reviews]="reviewsData" [editable]="false" [type]="faculty"
+    showNumberOfRatings="true">
+  </app-editable-star-rating>
   <!-- TODO compara button -->
 </div>
 <mat-tab-group mat-align-tabs="center">
@@ -171,6 +175,13 @@
         </ul>
       </div>
     </mat-expansion-panel>
+  </mat-tab>
+
+  <mat-tab *ngIf="reviewsData && reviewsData.length > 0" label="Reviews">
+    <div fxLayout="column">
+      <app-editable-comments *ngFor="let review of reviewsData" [review]="review"
+        [editable]="user.id === review.userId && !review.comment"></app-editable-comments>
+    </div>
   </mat-tab>
 
 </mat-tab-group>

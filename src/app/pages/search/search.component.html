@@ -100,15 +100,6 @@
               <p class="grey-text" *ngIf="result.locationFaculty">{{ result.locationFaculty | location }}</p>
               <app-editable-star-rating *ngIf="result.facultyId" [id]="result.facultyId" [editable]="false" type="faculty" showNumberOfRatings="true">
               </app-editable-star-rating>
-              <p *ngIf="result.bachelors">
-                {{ result.bachelors.length }} {{ 'filters.counter_bachelors' | translate }}
-              </p>
-              <p *ngIf="result.masters">
-                {{ result.masters.length }} {{ 'filters.counter_masters' | translate }}
-              </p>
-              <p *ngIf="result.doctorals">
-                {{ result.doctorals.length }} {{ 'filters.counter_doctorals' | translate }}
-              </p>
             </mat-card-content>
             <button mat-button fxFlexFill
               (click)="goToFaculty(result.facultyId)">{{ 'buttons.more_details' | translate | uppercase }}</button>
@@ -121,12 +112,9 @@
             <mat-card-content>
               <p class="dark-blue-bold-text">{{ result.name | uppercase }}</p>
               <p class="grey-text" *ngIf="result.locationFaculty">{{ result.locationFaculty | location }}</p>
-              <p *ngIf="result.semesters">
-                {{ result.semesters }} {{ 'filters.counter_semesters' | translate }}
-              </p>
-              <p *ngIf="result.years">
-                {{ result.years }} {{ 'filters.counter_years' | translate }}
-              </p>
+              <!-- TODO those ratings -->
+              <!-- <app-editable-star-rating *ngIf="result.facultyId" [id]="result.facultyId" [editable]="false" type="faculty" showNumberOfRatings="true">
+              </app-editable-star-rating> -->
             </mat-card-content>
             <button mat-button fxFlexFill
               (click)="goToFaculty(result.facultyId)">{{ 'buttons.more_details' | translate | uppercase }}</button>
@@ -139,12 +127,8 @@
             <mat-card-content>
               <p class="dark-blue-bold-text">{{ result.masterName | uppercase }}</p>
               <p class="grey-text" *ngIf="result.locationFaculty">{{ result.locationFaculty | location }}</p>
-              <p *ngIf="result.semesters">
-                {{ result.semesters }} {{ 'filters.counter_semesters' | translate }}
-              </p>
-              <p *ngIf="result.years">
-                {{ result.years }} {{ 'filters.counter_years' | translate }}
-              </p>
+              <!-- <app-editable-star-rating *ngIf="result.facultyId" [id]="result.facultyId" [editable]="false" type="faculty" showNumberOfRatings="true">
+              </app-editable-star-rating> -->
             </mat-card-content>
             <button mat-button fxFlexFill
               (click)="goToFaculty(result.facultyId)">{{ 'buttons.more_details' | translate | uppercase }}</button>
@@ -157,12 +141,12 @@
             <mat-card-content>
               <p class="dark-blue-bold-text">{{ result.doctoralName | uppercase }}</p>
               <p class="grey-text" *ngIf="result.locationFaculty">{{ result.locationFaculty | location }}</p>
-              <p *ngIf="result.semesters">
+              <!-- <p *ngIf="result.semesters">
                 {{ result.semesters }} {{ 'filters.counter_semesters' | translate }}
               </p>
               <p *ngIf="result.years">
                 {{ result.years }} {{ 'filters.counter_years' | translate }}
-              </p>
+              </p> -->
             </mat-card-content>
             <button mat-button fxFlexFill
               (click)="goToFaculty(result.facultyId)">{{ 'buttons.more_details' | translate | uppercase }}</button>

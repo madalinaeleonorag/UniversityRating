@@ -141,7 +141,6 @@ export class UniversityComponent implements OnInit, OnDestroy {
         stars: 5
       }
       this.reviewsData.push(new ReviewData(newCommentForPresentLoggedInUser));
-      console.log(this.reviewsData)
     }
   }
 

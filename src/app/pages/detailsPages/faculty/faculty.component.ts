@@ -10,6 +10,9 @@ import { DoctoralData } from 'src/app/models/DoctoralData';
 import { CourseData } from 'src/app/models/CourseData';
 import { MatDialog } from '@angular/material';
 import { CourseDetailsDialogComponent } from 'src/app/components/course-details-dialog/course-details-dialog.component';
+import { ReviewData } from 'src/app/models/ReviewData';
+import { UserData } from 'src/app/models/UserData';
+import { AuthService } from 'src/app/services/auth.service';
 
 export interface FoodNode {
   name: string;
@@ -31,29 +34,56 @@ export class FacultyComponent implements OnInit, OnDestroy {
   mastersData: MasterData[] = [];
   doctoralsData: DoctoralData[] = [];
   courses = [];
+  reviewsData: ReviewData[];
+  facultyId: string;
+  user: UserData;
+  userCanEdit: boolean;
+  editEnabled: boolean;
+  isUserSubscription: Subscription;
 
   constructor(private route: ActivatedRoute,
               private firebaseService: FirebaseService,
               private router: Router,
+              private authService: AuthService,
               private dialog: MatDialog) { }
 
   ngOnInit() {
     this.paramSubscription = this.route.paramMap.subscribe(params => {
-      const id = params.get('id');
-      if (id) {
-        this.firebaseService.getFacultyById(id).subscribe(data => {
+      this.facultyId = params.get('id');
+      if (this.facultyId) {
+        this.firebaseService.getFacultyById(this.facultyId).subscribe(data => {
           this.facultyDetails = new FacultyData(data);
           if (this.facultyDetails.universityId) {
             this.firebaseService.getUniversityById(this.facultyDetails.universityId).subscribe(university => {
               this.universityDetails = new UniversityData(university);
+              if (university) {
+                this.userEditable();
+              }
             });
           }
+          this.getReviews();
           this.getBachelors();
           this.getMasters();
           this.getDoctorals();
         });
       }
     });
+    this.isUserSubscription = this.authService.isUserAuthenticatedObservable.subscribe(result => {
+      this.user = new UserData(result);
+      if (result) {
+        this.userEditable();
+        this.showAddNewComment(this.reviewsData);
+      }
+    });
+  }
+
+  editDetails() {
+    this.editEnabled = !this.editEnabled;
+    this.userEditable();
+  }
+
+  userEditable() {
+    this.userCanEdit = this.user && this.universityDetails ? this.user.universityId === this.universityDetails.universityId : false;
   }
 
   getBachelors() {
@@ -68,6 +98,19 @@ export class FacultyComponent implements OnInit, OnDestroy {
         });
       });
     }
+  }
+
+  getReviews() {
+    this.firebaseService.getReviewsData().subscribe(data => {
+      this.reviewsData = [];
+      data.forEach(review => {
+        const reviewDetails = new ReviewData(review);
+        if (reviewDetails.facultyId === this.facultyId && reviewDetails.status !== 'declined') {
+          this.reviewsData.push(reviewDetails);
+        }
+      });
+      this.showAddNewComment(this.reviewsData);
+    });
   }
 
   getMasters() {
@@ -95,6 +138,20 @@ export class FacultyComponent implements OnInit, OnDestroy {
           }
         });
       });
+    }
+  }
+
+  showAddNewComment(data: any) {
+    if (data && data.filter((item: ReviewData) => item.userId === this.user.id).length === 0) {
+      const newCommentForPresentLoggedInUser = {
+        facultyId: this.facultyId,
+        userId: this.user.id,
+        date: new Date(),
+        status: 'approved',
+        stars: 5
+      }
+      this.reviewsData.push(new ReviewData(newCommentForPresentLoggedInUser));
+      console.log(this.reviewsData)
     }
   }
 
