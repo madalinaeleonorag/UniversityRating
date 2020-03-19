@@ -13,6 +13,7 @@ import { CourseDetailsDialogComponent } from 'src/app/components/course-details-
 import { ReviewData } from 'src/app/models/ReviewData';
 import { UserData } from 'src/app/models/UserData';
 import { AuthService } from 'src/app/services/auth.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 export interface FoodNode {
   name: string;
@@ -40,6 +41,7 @@ export class FacultyComponent implements OnInit, OnDestroy {
   userCanEdit: boolean;
   editEnabled: boolean;
   isUserSubscription: Subscription;
+  form: FormGroup;
 
   constructor(private route: ActivatedRoute,
               private firebaseService: FirebaseService,
@@ -53,6 +55,7 @@ export class FacultyComponent implements OnInit, OnDestroy {
       if (this.facultyId) {
         this.firebaseService.getFacultyById(this.facultyId).subscribe(data => {
           this.facultyDetails = new FacultyData(data);
+          this.buildForm();
           if (this.facultyDetails.universityId) {
             this.firebaseService.getUniversityById(this.facultyDetails.universityId).subscribe(university => {
               this.universityDetails = new UniversityData(university);
@@ -75,6 +78,20 @@ export class FacultyComponent implements OnInit, OnDestroy {
         this.showAddNewComment(this.reviewsData);
       }
     });
+  }
+
+  private buildForm() {
+    this.form = new FormGroup({
+      nameFaculty: new FormControl(this.facultyDetails.nameFaculty, [Validators.required]),
+      studyGuide: new FormControl(this.facultyDetails.studyGuide, [Validators.required]),
+      facultyId: new FormControl(this.facultyDetails.facultyId, [Validators.required]),
+      descriptionFaculty: new FormControl(this.facultyDetails.descriptionFaculty, [Validators.required]),
+    });
+  }
+
+  saveDetails() {
+    this.editEnabled = !this.editEnabled;
+    this.firebaseService.saveFacultyDetails(this.form.value);
   }
 
   editDetails() {

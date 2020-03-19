@@ -1,187 +1,209 @@
-<div fxLayout="column" fxLayoutAlign="center center" class="custom-faculty-header">
-  <img mat-card-image src="{{ facultyDetails.logoFaculty }}" *ngIf="facultyDetails?.logoFaculty">
-  <img mat-card-image src="assets/university.png" *ngIf="!facultyDetails?.logoFaculty">
-  <div>
-    {{ facultyDetails?.nameFaculty | uppercase }}
+<form fxLayout="column" [formGroup]="form" *ngIf="form">
+  <div fxLayout="column" fxLayoutAlign="center center" class="custom-faculty-header">
+    <div *ngIf="!editEnabled" class="name-and-logo">
+      <img mat-card-image src="{{ facultyDetails.logoFaculty }}" *ngIf="facultyDetails?.logoFaculty">
+      <img mat-card-image src="assets/university.png" *ngIf="!facultyDetails?.logoFaculty">
+      <div>
+        {{ facultyDetails?.nameFaculty | uppercase }}
+      </div>
+      <a href="{{ facultyDetails?.studyGuide }}"
+        *ngIf="facultyDetails?.studyGuide">{{ 'faculty_page.header.studyGuide' | translate }}</a>
+    </div>
+    <div *ngIf="editEnabled" class="name-and-logo">
+      <app-file-uploader type="logoFaculty" [id]="facultyDetails.facultyId"></app-file-uploader>
+      <mat-form-field>
+        <input matInput required placeholder="name" formControlName="nameFaculty" type="text">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput required placeholder="studyGuide" formControlName="studyGuide" type="text">
+      </mat-form-field>
+    </div>
+
+    <button mat-raised-button class="gradient-background white-text-button"
+      (click)="onNavigate(facultyDetails.universityId)">{{ 'faculty_page.go_university' | translate }}</button>
+    <app-editable-star-rating *ngIf="reviewsData" [reviews]="reviewsData" [editable]="false" [type]="faculty"
+      showNumberOfRatings="true">
+    </app-editable-star-rating>
+    <button mat-raised-button class="gradient-background white-text-button" (click)="editDetails()"
+      *ngIf="userCanEdit && !editEnabled">Edit data</button>
+    <button mat-raised-button class="gradient-background white-text-button" (click)="saveDetails()"
+      *ngIf="userCanEdit && editEnabled">Save data</button>
+    <!-- TODO compara button -->
   </div>
+  <mat-tab-group mat-align-tabs="center">
 
-  <a href="{{ facultyDetails?.studyGuide }}"
-    *ngIf="facultyDetails?.studyGuide">{{ 'faculty_page.header.studyGuide' | translate }}</a>
-  <button mat-raised-button class="gradient-background white-text-button"
-    (click)="onNavigate(facultyDetails.universityId)">{{ 'faculty_page.go_university' | translate }}</button>
-  <app-editable-star-rating *ngIf="reviewsData" [reviews]="reviewsData" [editable]="false" [type]="faculty"
-    showNumberOfRatings="true">
-  </app-editable-star-rating>
-  <!-- TODO compara button -->
-</div>
-<mat-tab-group mat-align-tabs="center">
-
-  <mat-tab label="{{ 'faculty_page.tab_labels.details' | translate }}">
-    <div class="custom-detail-field" *ngIf="universityDetails?.typeUniversity">
-      <div class="custom-detail-field-title">
-        {{ 'faculty_page.details.type' | translate }}
-      </div>
-      {{ universityDetails?.typeUniversity }}
-    </div>
-    <div class="custom-detail-field" *ngIf="facultyDetails?.descriptionFaculty">
-      <div class="custom-detail-field-title">
-        {{ 'faculty_page.details.description' | translate }}
-      </div>
-      {{ facultyDetails?.descriptionFaculty }}
-    </div>
-    <div class="custom-detail-field" *ngIf="universityDetails?.mission">
-      <div class="custom-detail-field-title">
-        {{ 'faculty_page.details.mission' | translate }}
-      </div>
-      {{ universityDetails?.mission }}
-    </div>
-    <div class="custom-detail-field" *ngIf="universityDetails?.strategicProgram.length > 0">
-      <div class="custom-detail-field-title">
-        {{ 'faculty_page.details.strategic_programs' | translate }}
-      </div>
-      <ul>
-        <li *ngFor="let item of universityDetails?.strategicProgram">
-          - {{ item }}
-        </li>
-      </ul>
-    </div>
-    <div class="custom-detail-field" *ngIf="universityDetails?.values.length > 0">
-      <div class="custom-detail-field-title">
-        {{ 'faculty_page.details.values' | translate }}
-      </div>
-      <ul>
-        <li *ngFor="let item of universityDetails?.values">
-          - {{ item }}
-        </li>
-      </ul>
-    </div>
-    <div class="custom-detail-field" *ngIf="universityDetails?.vision">
-      <div class="custom-detail-field-title">
-        {{ 'faculty_page.details.vision' | translate }}
-      </div>
-      <ul>
-        {{ universityDetails?.vision }}
-      </ul>
-    </div>
-
-  </mat-tab>
-
-  <mat-tab label="{{ 'faculty_page.tab_labels.bachelors' | translate }}"
-    *ngIf="bachelorsData && bachelorsData.length > 0">
-
-    <mat-expansion-panel *ngFor="let bachelor of bachelorsData">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          {{ bachelor.name }}
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <div class="custom-detail-field" *ngIf="bachelor?.years">
+    <mat-tab label="{{ 'faculty_page.tab_labels.details' | translate }}">
+      <div class="custom-detail-field" *ngIf="universityDetails?.typeUniversity">
         <div class="custom-detail-field-title">
-          {{ 'faculty_page.bachelors.years' | translate }}
+          {{ 'faculty_page.details.type' | translate }}
         </div>
-        {{ bachelor?.years }}
+        {{ universityDetails?.typeUniversity }}
       </div>
-      <div class="custom-detail-field" *ngIf="bachelor?.semesters">
+      <div class="custom-detail-field" *ngIf="facultyDetails?.descriptionFaculty && !editEnabled">
         <div class="custom-detail-field-title">
-          {{ 'faculty_page.bachelors.semesters' | translate }}
+          {{ 'faculty_page.details.description' | translate }}
         </div>
-        {{ bachelor?.semesters }}
+        {{ facultyDetails?.descriptionFaculty }}
       </div>
-      <div class="custom-detail-field" *ngIf="bachelor?.generalSkills.length > 0">
+      <div *ngIf="editEnabled">
+        <mat-form-field>
+          <input matInput required placeholder="description" formControlName="descriptionFaculty" type="text">
+        </mat-form-field>
+      </div>
+      <div class="custom-detail-field" *ngIf="universityDetails?.mission">
         <div class="custom-detail-field-title">
-          {{ 'faculty_page.bachelors.general_skills' | translate }}
+          {{ 'faculty_page.details.mission' | translate }}
+        </div>
+        {{ universityDetails?.mission }}
+      </div>
+      <div class="custom-detail-field" *ngIf="universityDetails?.strategicProgram.length > 0">
+        <div class="custom-detail-field-title">
+          {{ 'faculty_page.details.strategic_programs' | translate }}
         </div>
         <ul>
-          <li *ngFor="let item of bachelor?.generalSkills">
+          <li *ngFor="let item of universityDetails?.strategicProgram">
             - {{ item }}
           </li>
         </ul>
       </div>
-      <div class="custom-detail-field" *ngIf="bachelor?.professionalPerspectives.length > 0">
+      <div class="custom-detail-field" *ngIf="universityDetails?.values.length > 0">
         <div class="custom-detail-field-title">
-          {{ 'faculty_page.bachelors.professional_perspectives' | translate }}
+          {{ 'faculty_page.details.values' | translate }}
         </div>
         <ul>
-          <li *ngFor="let item of bachelor?.professionalPerspectives">
+          <li *ngFor="let item of universityDetails?.values">
             - {{ item }}
           </li>
         </ul>
       </div>
-      <div class="custom-detail-field" *ngIf="getCoursesForSpecialisation(bachelor.bachelorId).length > 0">
+      <div class="custom-detail-field" *ngIf="universityDetails?.vision">
         <div class="custom-detail-field-title">
-          {{ 'faculty_page.details.courses' | translate }}
-        </div>
-        <mat-chip-list>
-          <mat-chip [disableRipple]="true" [selectable]="false"
-            *ngFor="let item of getCoursesForSpecialisation(bachelor.bachelorId)">
-            {{ item.name }} <mat-icon class="custom-icon" (click)="showInfoAboutCourse(item)">help_outline</mat-icon>
-          </mat-chip>
-        </mat-chip-list>
-      </div>
-    </mat-expansion-panel>
-
-  </mat-tab>
-
-  <mat-tab label="{{ 'faculty_page.tab_labels.masters' | translate }}" *ngIf="mastersData && mastersData.length > 0">
-
-    <mat-expansion-panel *ngFor="let master of mastersData">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          {{ master.masterName }}
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <div class="custom-detail-field" *ngIf="master?.years">
-        <div class="custom-detail-field-title">
-          {{ 'faculty_page.masters.years' | translate }}
-        </div>
-        {{ master?.years }}
-      </div>
-      <div class="custom-detail-field" *ngIf="master && master.generalSkills && master.generalSkills.length > 0">
-        <div class="custom-detail-field-title">
-          {{ 'faculty_page.masters.general_skills' | translate }}
+          {{ 'faculty_page.details.vision' | translate }}
         </div>
         <ul>
-          <li *ngFor="let item of master?.generalSkills">
-            - {{ item }}
-          </li>
+          {{ universityDetails?.vision }}
         </ul>
       </div>
-    </mat-expansion-panel>
 
-  </mat-tab>
+    </mat-tab>
 
-  <mat-tab label="{{ 'faculty_page.tab_labels.doctorals' | translate }}"
-    *ngIf="doctoralsData && doctoralsData.length > 0">
-    <mat-expansion-panel *ngFor="let doctoral of doctoralsData">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          {{ doctoral.doctoralName }}
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <div class="custom-detail-field" *ngIf="master?.years">
-        <div class="custom-detail-field-title">
-          {{ 'faculty_page.masters.years' | translate }}
+    <mat-tab label="{{ 'faculty_page.tab_labels.bachelors' | translate }}"
+      *ngIf="bachelorsData && bachelorsData.length > 0">
+
+      <mat-expansion-panel *ngFor="let bachelor of bachelorsData">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{ bachelor.name }}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="custom-detail-field" *ngIf="bachelor?.years">
+          <div class="custom-detail-field-title">
+            {{ 'faculty_page.bachelors.years' | translate }}
+          </div>
+          {{ bachelor?.years }}
         </div>
-        {{ master?.years }}
-      </div>
-      <div class="custom-detail-field" *ngIf="master && master.generalSkills && master.generalSkills.length > 0">
-        <div class="custom-detail-field-title">
-          {{ 'faculty_page.masters.general_skills' | translate }}
+        <div class="custom-detail-field" *ngIf="bachelor?.semesters">
+          <div class="custom-detail-field-title">
+            {{ 'faculty_page.bachelors.semesters' | translate }}
+          </div>
+          {{ bachelor?.semesters }}
         </div>
-        <ul>
-          <li *ngFor="let item of master?.generalSkills">
-            - {{ item }}
-          </li>
-        </ul>
+        <div class="custom-detail-field" *ngIf="bachelor?.generalSkills.length > 0">
+          <div class="custom-detail-field-title">
+            {{ 'faculty_page.bachelors.general_skills' | translate }}
+          </div>
+          <ul>
+            <li *ngFor="let item of bachelor?.generalSkills">
+              - {{ item }}
+            </li>
+          </ul>
+        </div>
+        <div class="custom-detail-field" *ngIf="bachelor?.professionalPerspectives.length > 0">
+          <div class="custom-detail-field-title">
+            {{ 'faculty_page.bachelors.professional_perspectives' | translate }}
+          </div>
+          <ul>
+            <li *ngFor="let item of bachelor?.professionalPerspectives">
+              - {{ item }}
+            </li>
+          </ul>
+        </div>
+        <div class="custom-detail-field" *ngIf="getCoursesForSpecialisation(bachelor.bachelorId).length > 0">
+          <div class="custom-detail-field-title">
+            {{ 'faculty_page.details.courses' | translate }}
+          </div>
+          <mat-chip-list>
+            <mat-chip [disableRipple]="true" [selectable]="false"
+              *ngFor="let item of getCoursesForSpecialisation(bachelor.bachelorId)">
+              {{ item.name }} <mat-icon class="custom-icon" (click)="showInfoAboutCourse(item)">help_outline</mat-icon>
+            </mat-chip>
+          </mat-chip-list>
+        </div>
+      </mat-expansion-panel>
+
+    </mat-tab>
+
+    <mat-tab label="{{ 'faculty_page.tab_labels.masters' | translate }}" *ngIf="mastersData && mastersData.length > 0">
+
+      <mat-expansion-panel *ngFor="let master of mastersData">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{ master.masterName }}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="custom-detail-field" *ngIf="master?.years">
+          <div class="custom-detail-field-title">
+            {{ 'faculty_page.masters.years' | translate }}
+          </div>
+          {{ master?.years }}
+        </div>
+        <div class="custom-detail-field" *ngIf="master && master.generalSkills && master.generalSkills.length > 0">
+          <div class="custom-detail-field-title">
+            {{ 'faculty_page.masters.general_skills' | translate }}
+          </div>
+          <ul>
+            <li *ngFor="let item of master?.generalSkills">
+              - {{ item }}
+            </li>
+          </ul>
+        </div>
+      </mat-expansion-panel>
+
+    </mat-tab>
+
+    <mat-tab label="{{ 'faculty_page.tab_labels.doctorals' | translate }}"
+      *ngIf="doctoralsData && doctoralsData.length > 0">
+      <mat-expansion-panel *ngFor="let doctoral of doctoralsData">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{ doctoral.doctoralName }}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="custom-detail-field" *ngIf="master?.years">
+          <div class="custom-detail-field-title">
+            {{ 'faculty_page.masters.years' | translate }}
+          </div>
+          {{ master?.years }}
+        </div>
+        <div class="custom-detail-field" *ngIf="master && master.generalSkills && master.generalSkills.length > 0">
+          <div class="custom-detail-field-title">
+            {{ 'faculty_page.masters.general_skills' | translate }}
+          </div>
+          <ul>
+            <li *ngFor="let item of master?.generalSkills">
+              - {{ item }}
+            </li>
+          </ul>
+        </div>
+      </mat-expansion-panel>
+    </mat-tab>
+
+    <mat-tab *ngIf="reviewsData && reviewsData.length > 0" label="Reviews">
+      <div fxLayout="column">
+        <app-editable-comments *ngFor="let review of reviewsData" [review]="review"
+          [editable]="user.id === review.userId && !review.comment"></app-editable-comments>
       </div>
-    </mat-expansion-panel>
-  </mat-tab>
+    </mat-tab>
 
-  <mat-tab *ngIf="reviewsData && reviewsData.length > 0" label="Reviews">
-    <div fxLayout="column">
-      <app-editable-comments *ngFor="let review of reviewsData" [review]="review"
-        [editable]="user.id === review.userId && !review.comment"></app-editable-comments>
-    </div>
-  </mat-tab>
-
-</mat-tab-group>
+  </mat-tab-group>
+</form>

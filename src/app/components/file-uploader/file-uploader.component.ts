@@ -19,11 +19,11 @@ export class FileUploaderComponent implements OnInit {
       case 'gallery': {
         const uploadTask = this.afStorage.ref(`/universityPhotos/${this.id}`).put(event.target.files[0]);
       }
-                      break;
+        break;
       case 'user': {
         const uploadTask = this.afStorage.ref(`/users/${this.id}`).put(event.target.files[0]);
       }
-                   break;
+        break;
       case 'logoUniversity': {
         const uploadTask = this.afStorage.ref(`/logoUniversity/${this.id}`).put(event.target.files[0]);
         uploadTask.then(snapshot => {
@@ -36,11 +36,20 @@ export class FileUploaderComponent implements OnInit {
           });
         });
       }
-                             break;
+        break;
       case 'logoFaculty': {
         const uploadTask = this.afStorage.ref(`/logoFaculty/${this.id}`).put(event.target.files[0]);
+        uploadTask.then(snapshot => {
+          firebase.storage().ref(snapshot.metadata.fullPath).getDownloadURL().then(url => {
+            firebase.firestore().collection('Faculties/').doc(this.id).update({
+              logoFaculty: url
+            });
+          }).catch(error => {
+            console.log('%c error on loading image', 'color: #4d79ff;');
+          });
+        });
       }
-                          break;
+        break;
     }
 
   }
