@@ -4,7 +4,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { RequestData } from '../models/RequestData';
 import { UniversityData } from '../models/UniversityData';
 import { FunctionsService } from './functions.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { FacultyData } from '../models/FacultyData';
 import { ReviewData } from '../models/ReviewData';
 import * as moment from 'moment';
@@ -210,10 +210,10 @@ export class FirebaseService {
 
   facultyRemove(item: FacultyData) {
     firebase.firestore().collection('Faculties').doc(item.facultyId).delete().then(res => {
-      this.getUniversityById(item.universityId).subscribe(university => {
+      let subscriptionUniversity: Subscription = this.getUniversityById(item.universityId).subscribe(university => {
+        subscriptionUniversity.unsubscribe();
         const data = new UniversityData(university);
-        const index = data.facultiesUniversity.indexOf(item.facultyId);
-        data.facultiesUniversity.slice(index, 1);
+        data.facultiesUniversity.splice(data.facultiesUniversity.indexOf(item.facultyId), 1);
         firebase.firestore().collection('University').doc(item.universityId).update({
           facultiesUniversity: data.facultiesUniversity
         });
