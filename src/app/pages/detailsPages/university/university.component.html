@@ -7,7 +7,7 @@
         {{ universityDetails.nameUniversity | uppercase }}
       </div>
     </div>
-    <div *ngIf="editEnabled">
+    <div *ngIf="editEnabled" class="name-and-logo">
       <app-file-uploader type="logoUniversity" [id]="universityDetails.universityId"></app-file-uploader>
       <mat-form-field>
         <input matInput required placeholder="name" formControlName="nameUniversity" type="text">

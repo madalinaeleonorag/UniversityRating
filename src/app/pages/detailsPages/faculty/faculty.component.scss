@@ -8,6 +8,12 @@ app-faculty {
     .mat-card-image {
       width: 200px;
     }
+
+    .name-and-logo {
+      text-align: center;
+      display: flex;
+      flex-flow: column;
+    }
   }
 
   .mat-tab-body {

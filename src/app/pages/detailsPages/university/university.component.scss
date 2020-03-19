@@ -16,6 +16,8 @@ app-university {
 
     .name-and-logo {
       text-align: center;
+      display: flex;
+      flex-flow: column;
     }
   }
 

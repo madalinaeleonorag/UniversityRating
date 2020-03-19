@@ -110,6 +110,10 @@ export class FirebaseService {
     firebase.firestore().collection('University').doc(details.universityId).update(Object.assign({}, details));
   }
 
+  saveFacultyDetails(details: FacultyData) {
+    firebase.firestore().collection('Faculties').doc(details.facultyId).update(Object.assign({}, details));
+  }
+
   approveRequest(request: any) {
     const universityData = {
       address: request.address ? request.address : null,
