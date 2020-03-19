@@ -212,6 +212,77 @@ export class FirebaseService {
     });
   }
 
+  setNewProgramForUniversity(facultyDetails: FacultyData, name: string, type: string) {
+    switch (type) {
+      case 'bachelor': {
+        firebase.firestore().collection('Bachelors').add(
+          {
+            name,
+            facultyId: facultyDetails.facultyId
+          }).then(res => {
+            firebase.firestore().collection('Bachelors').doc(res.id).update({ bachelorId: res.id })
+            let bachelorsPrograms = [];
+            if (Array.isArray(facultyDetails.bachelors)) {
+              bachelorsPrograms = [...facultyDetails.bachelors];
+              bachelorsPrograms.push(res.id);
+            } else {
+              bachelorsPrograms.push(res.id);
+            }
+            firebase.firestore().collection('Faculties/').doc(facultyDetails.facultyId).update({
+              bachelors: bachelorsPrograms
+            });
+          }).catch(err => {
+            console.log(err)
+          })
+      }
+        break;
+      case 'master': {
+        firebase.firestore().collection('Masters').add(
+          {
+            masterName: name,
+            facultyId: facultyDetails.facultyId
+          }).then(res => {
+            firebase.firestore().collection('Masters').doc(res.id).update({ masterId: res.id })
+            let mastersPrograms = [];
+            if (Array.isArray(facultyDetails.masters)) {
+              mastersPrograms = [...facultyDetails.masters];
+              mastersPrograms.push(res.id);
+            } else {
+              mastersPrograms.push(res.id);
+            }
+            firebase.firestore().collection('Faculties/').doc(facultyDetails.facultyId).update({
+              masters: mastersPrograms
+            });
+          }).catch(err => {
+            console.log(err)
+          })
+      }
+        break;
+      case 'doctoral': {
+        firebase.firestore().collection('Doctorals').add(
+          {
+            doctoralName: name,
+            facultyId: facultyDetails.facultyId
+          }).then(res => {
+            firebase.firestore().collection('Doctorals').doc(res.id).update({ masterId: res.id })
+            let doctoralsPrograms = [];
+            if (Array.isArray(facultyDetails.doctorals)) {
+              doctoralsPrograms = [...facultyDetails.doctorals];
+              doctoralsPrograms.push(res.id);
+            } else {
+              doctoralsPrograms.push(res.id);
+            }
+            firebase.firestore().collection('Faculties/').doc(facultyDetails.facultyId).update({
+              doctorals: doctoralsPrograms
+            });
+          }).catch(err => {
+            console.log(err)
+          })
+      }
+        break;
+    }
+  }
+
   facultyRemove(item: FacultyData) {
     firebase.firestore().collection('Faculties').doc(item.facultyId).delete().then(res => {
       let subscriptionUniversity: Subscription = this.getUniversityById(item.universityId).subscribe(university => {

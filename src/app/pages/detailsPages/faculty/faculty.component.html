@@ -88,12 +88,15 @@
     </mat-tab>
 
     <mat-tab label="{{ 'faculty_page.tab_labels.bachelors' | translate }}"
-      *ngIf="bachelorsData && bachelorsData.length > 0">
+      *ngIf="bachelorsData && bachelorsData.length > 0 || editEnabled">
+
+      <button mat-raised-button class="gradient-background white-text-button" (click)="addProgramDialog('bachelor')"
+        *ngIf="userCanEdit && editEnabled">Add bachelor</button>
 
       <mat-expansion-panel *ngFor="let bachelor of bachelorsData">
         <mat-expansion-panel-header>
           <mat-panel-title>
-            {{ bachelor.name }}
+            {{ bachelor?.name }}
           </mat-panel-title>
         </mat-expansion-panel-header>
         <div class="custom-detail-field" *ngIf="bachelor?.years">
@@ -143,8 +146,9 @@
 
     </mat-tab>
 
-    <mat-tab label="{{ 'faculty_page.tab_labels.masters' | translate }}" *ngIf="mastersData && mastersData.length > 0">
-
+    <mat-tab label="{{ 'faculty_page.tab_labels.masters' | translate }}" *ngIf="mastersData && mastersData.length > 0 || editEnabled">
+      <button mat-raised-button class="gradient-background white-text-button" (click)="addProgramDialog('master')"
+      *ngIf="userCanEdit && editEnabled">Add master</button>
       <mat-expansion-panel *ngFor="let master of mastersData">
         <mat-expansion-panel-header>
           <mat-panel-title>
@@ -172,7 +176,9 @@
     </mat-tab>
 
     <mat-tab label="{{ 'faculty_page.tab_labels.doctorals' | translate }}"
-      *ngIf="doctoralsData && doctoralsData.length > 0">
+      *ngIf="doctoralsData && doctoralsData.length > 0 || editEnabled">
+      <button mat-raised-button class="gradient-background white-text-button" (click)="addProgramDialog('doctoral')"
+        *ngIf="userCanEdit && editEnabled">Add doctoral</button>
       <mat-expansion-panel *ngFor="let doctoral of doctoralsData">
         <mat-expansion-panel-header>
           <mat-panel-title>
