@@ -14,6 +14,7 @@ import { ReviewData } from 'src/app/models/ReviewData';
 import { UserData } from 'src/app/models/UserData';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { AddProgramDialogComponent } from 'src/app/components/add-program-dialog/add-program-dialog.component';
 
 export interface FoodNode {
   name: string;
@@ -104,6 +105,7 @@ export class FacultyComponent implements OnInit, OnDestroy {
   }
 
   getBachelors() {
+    this.bachelorsData = [];
     if (this.facultyDetails.bachelors.length > 0) {
       this.facultyDetails.bachelors.forEach(bachelorId => {
         this.firebaseService.getBacheloryById(bachelorId).subscribe(bachelor => {
@@ -130,7 +132,20 @@ export class FacultyComponent implements OnInit, OnDestroy {
     });
   }
 
+  addProgramDialog(type: string) {
+    const dialogRef = this.dialog.open(AddProgramDialogComponent, {
+      width: '50vw',
+      disableClose: true,
+      data: type
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.firebaseService.setNewProgramForUniversity(this.facultyDetails,
+        result.name, type);
+    });
+  }
+
   getMasters() {
+    this.mastersData = [];
     if (this.facultyDetails.masters.length > 0) {
       this.facultyDetails.masters.forEach(masterId => {
         this.firebaseService.getMasterById(masterId).subscribe(master => {
@@ -145,6 +160,7 @@ export class FacultyComponent implements OnInit, OnDestroy {
   }
 
   getDoctorals() {
+    this.doctoralsData = [];
     if (this.facultyDetails.doctorals.length > 0) {
       this.facultyDetails.doctorals.forEach(doctoralId => {
         this.firebaseService.getDoctoralById(doctoralId).subscribe(doctoral => {

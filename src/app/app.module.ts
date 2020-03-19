@@ -80,6 +80,7 @@ import { AddFacultyDialogComponent } from './components/add-faculty-dialog/add-f
 import { EditableCommentsComponent } from './components/editable-comments/editable-comments.component';
 import { EditableStarRatingComponent } from './components/editable-star-rating/editable-star-rating.component';
 import { FromNumberToArrayPipe } from './pipes/from-number-to-array.pipe';
+import { AddProgramDialogComponent } from './components/add-program-dialog/add-program-dialog.component';
 
 // Firestore config
 const config = {
@@ -134,14 +135,16 @@ export function createTranslateLoader(http: HttpClient) {
     AddFacultyDialogComponent,
     EditableCommentsComponent,
     EditableStarRatingComponent,
-    FromNumberToArrayPipe
+    FromNumberToArrayPipe,
+    AddProgramDialogComponent
   ],
   entryComponents: [
     LoginDialogComponent,
     SignUpDialogComponent,
     CourseDetailsDialogComponent,
     ReviewResponseComponent,
-    AddFacultyDialogComponent
+    AddFacultyDialogComponent,
+    AddProgramDialogComponent
   ],
   imports: [
     GoogleChartsModule.forRoot('AIzaSyCnKJYJPDPPKIwcf8fnDC7FXvUhRgPg1Gc'),
