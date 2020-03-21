@@ -81,6 +81,7 @@ import { EditableCommentsComponent } from './components/editable-comments/editab
 import { EditableStarRatingComponent } from './components/editable-star-rating/editable-star-rating.component';
 import { FromNumberToArrayPipe } from './pipes/from-number-to-array.pipe';
 import { AddProgramDialogComponent } from './components/add-program-dialog/add-program-dialog.component';
+import { EditableExpansionPanelComponent } from './components/editable-expansion-panel/editable-expansion-panel.component';
 
 // Firestore config
 const config = {
@@ -136,7 +137,8 @@ export function createTranslateLoader(http: HttpClient) {
     EditableCommentsComponent,
     EditableStarRatingComponent,
     FromNumberToArrayPipe,
-    AddProgramDialogComponent
+    AddProgramDialogComponent,
+    EditableExpansionPanelComponent
   ],
   entryComponents: [
     LoginDialogComponent,

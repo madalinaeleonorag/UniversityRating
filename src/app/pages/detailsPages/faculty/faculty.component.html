@@ -93,66 +93,19 @@
       <button mat-raised-button class="gradient-background white-text-button" (click)="addProgramDialog('bachelor')"
         *ngIf="userCanEdit && editEnabled">Add bachelor</button>
 
-      <mat-expansion-panel *ngFor="let bachelor of bachelorsData">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            {{ bachelor?.name }}
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <div class="custom-detail-field" *ngIf="bachelor?.years">
-          <div class="custom-detail-field-title">
-            {{ 'faculty_page.bachelors.years' | translate }}
-          </div>
-          {{ bachelor?.years }}
-        </div>
-        <div class="custom-detail-field" *ngIf="bachelor?.semesters">
-          <div class="custom-detail-field-title">
-            {{ 'faculty_page.bachelors.semesters' | translate }}
-          </div>
-          {{ bachelor?.semesters }}
-        </div>
-        <div class="custom-detail-field" *ngIf="bachelor?.generalSkills.length > 0">
-          <div class="custom-detail-field-title">
-            {{ 'faculty_page.bachelors.general_skills' | translate }}
-          </div>
-          <ul>
-            <li *ngFor="let item of bachelor?.generalSkills">
-              - {{ item }}
-            </li>
-          </ul>
-        </div>
-        <div class="custom-detail-field" *ngIf="bachelor?.professionalPerspectives.length > 0">
-          <div class="custom-detail-field-title">
-            {{ 'faculty_page.bachelors.professional_perspectives' | translate }}
-          </div>
-          <ul>
-            <li *ngFor="let item of bachelor?.professionalPerspectives">
-              - {{ item }}
-            </li>
-          </ul>
-        </div>
-        <div class="custom-detail-field" *ngIf="getCoursesForSpecialisation(bachelor.bachelorId).length > 0">
-          <div class="custom-detail-field-title">
-            {{ 'faculty_page.details.courses' | translate }}
-          </div>
-          <mat-chip-list>
-            <mat-chip [disableRipple]="true" [selectable]="false"
-              *ngFor="let item of getCoursesForSpecialisation(bachelor.bachelorId)">
-              {{ item.name }} <mat-icon class="custom-icon" (click)="showInfoAboutCourse(item)">help_outline</mat-icon>
-            </mat-chip>
-          </mat-chip-list>
-        </div>
-      </mat-expansion-panel>
+      <app-editable-expansion-panel *ngFor="let bachelor of bachelorsData" [data]="bachelor" type="bachelor">
+      </app-editable-expansion-panel>
 
     </mat-tab>
 
-    <mat-tab label="{{ 'faculty_page.tab_labels.masters' | translate }}" *ngIf="mastersData && mastersData.length > 0 || editEnabled">
+    <mat-tab label="{{ 'faculty_page.tab_labels.masters' | translate }}"
+      *ngIf="mastersData && mastersData.length > 0 || editEnabled">
       <button mat-raised-button class="gradient-background white-text-button" (click)="addProgramDialog('master')"
-      *ngIf="userCanEdit && editEnabled">Add master</button>
+        *ngIf="userCanEdit && editEnabled">Add master</button>
       <mat-expansion-panel *ngFor="let master of mastersData">
         <mat-expansion-panel-header>
           <mat-panel-title>
-            {{ master.masterName }}
+            {{ master.name }}
           </mat-panel-title>
         </mat-expansion-panel-header>
         <div class="custom-detail-field" *ngIf="master?.years">
@@ -182,7 +135,7 @@
       <mat-expansion-panel *ngFor="let doctoral of doctoralsData">
         <mat-expansion-panel-header>
           <mat-panel-title>
-            {{ doctoral.doctoralName }}
+            {{ doctoral.name }}
           </mat-panel-title>
         </mat-expansion-panel-header>
         <div class="custom-detail-field" *ngIf="master?.years">

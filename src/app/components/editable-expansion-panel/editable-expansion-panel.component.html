@@ -1,0 +1,51 @@
+<mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <mat-icon *ngIf="editable" (click)="editProgram(type)" class="cursor-pointer">create</mat-icon>
+        {{ data?.name }}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="custom-detail-field" *ngIf="data?.years">
+      <div class="custom-detail-field-title">
+        {{ 'faculty_page.bachelors.years' | translate }}
+      </div>
+      {{ data?.years }}
+    </div>
+    <div class="custom-detail-field" *ngIf="data?.semesters">
+      <div class="custom-detail-field-title">
+        {{ 'faculty_page.bachelors.semesters' | translate }}
+      </div>
+      {{ data?.semesters }}
+    </div>
+    <div class="custom-detail-field" *ngIf="data?.generalSkills.length > 0">
+      <div class="custom-detail-field-title">
+        {{ 'faculty_page.bachelors.general_skills' | translate }}
+      </div>
+      <ul>
+        <li *ngFor="let item of data?.generalSkills">
+          - {{ item }}
+        </li>
+      </ul>
+    </div>
+    <div class="custom-detail-field" *ngIf="data?.professionalPerspectives.length > 0">
+      <div class="custom-detail-field-title">
+        {{ 'faculty_page.bachelors.professional_perspectives' | translate }}
+      </div>
+      <ul>
+        <li *ngFor="let item of data?.professionalPerspectives">
+          - {{ item }}
+        </li>
+      </ul>
+    </div>
+    <div class="custom-detail-field" *ngIf="getCoursesForSpecialisation(data.id).length > 0">
+      <div class="custom-detail-field-title">
+        {{ 'faculty_page.details.courses' | translate }}
+      </div>
+      <mat-chip-list>
+        <mat-chip [disableRipple]="true" [selectable]="false"
+          *ngFor="let item of getCoursesForSpecialisation(data.id)">
+          {{ item.name }} <mat-icon class="custom-icon" (click)="showInfoAboutCourse(item)">help_outline</mat-icon>
+        </mat-chip>
+      </mat-chip-list>
+    </div>
+  </mat-expansion-panel>
