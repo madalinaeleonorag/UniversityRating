@@ -16,8 +16,8 @@ export class BachelorData {
     semesters: number = undefined;
     @JsonProperty('years')
     years: number = undefined;
-    @JsonProperty('bachelorId')
-    bachelorId: number = undefined;
+    @JsonProperty('id')
+    id: number = undefined;
 
     constructor(obj: any) {
         this.facultyId = obj ? (obj.facultyId ? obj.facultyId : undefined) : undefined;
@@ -27,6 +27,6 @@ export class BachelorData {
         this.courses = obj ? (obj.courses ? obj.courses : []) : [];
         this.semesters = obj ? (obj.semesters ? obj.semesters : undefined) : undefined;
         this.years = obj ? (obj.years ? obj.years : undefined) : undefined;
-        this.bachelorId = obj ? (obj.bachelorId ? obj.bachelorId : undefined) : undefined;
+        this.id = obj ? (obj.id ? obj.id : undefined) : undefined;
     }
 }

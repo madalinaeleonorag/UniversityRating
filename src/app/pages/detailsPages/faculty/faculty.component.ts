@@ -7,9 +7,7 @@ import { FacultyData } from 'src/app/models/FacultyData';
 import { BachelorData } from 'src/app/models/BachelorData';
 import { MasterData } from 'src/app/models/MasterData';
 import { DoctoralData } from 'src/app/models/DoctoralData';
-import { CourseData } from 'src/app/models/CourseData';
 import { MatDialog } from '@angular/material';
-import { CourseDetailsDialogComponent } from 'src/app/components/course-details-dialog/course-details-dialog.component';
 import { ReviewData } from 'src/app/models/ReviewData';
 import { UserData } from 'src/app/models/UserData';
 import { AuthService } from 'src/app/services/auth.service';
@@ -35,7 +33,6 @@ export class FacultyComponent implements OnInit, OnDestroy {
   bachelorsData: BachelorData[] = [];
   mastersData: MasterData[] = [];
   doctoralsData: DoctoralData[] = [];
-  courses = [];
   reviewsData: ReviewData[];
   facultyId: string;
   user: UserData;
@@ -107,13 +104,9 @@ export class FacultyComponent implements OnInit, OnDestroy {
   getBachelors() {
     this.bachelorsData = [];
     if (this.facultyDetails.bachelors.length > 0) {
-      this.facultyDetails.bachelors.forEach(bachelorId => {
-        this.firebaseService.getBacheloryById(bachelorId).subscribe(bachelor => {
-          const data = new BachelorData(bachelor);
+      this.facultyDetails.bachelors.forEach(id => {
+        this.firebaseService.getBacheloryById(id).subscribe(bachelor => {
           this.bachelorsData.push(new BachelorData(bachelor));
-          if (data.courses && data.courses.length > 0) {
-            this.getCourses(data.courses);
-          }
         });
       });
     }
@@ -147,13 +140,9 @@ export class FacultyComponent implements OnInit, OnDestroy {
   getMasters() {
     this.mastersData = [];
     if (this.facultyDetails.masters.length > 0) {
-      this.facultyDetails.masters.forEach(masterId => {
-        this.firebaseService.getMasterById(masterId).subscribe(master => {
-          const data = new MasterData(master);
+      this.facultyDetails.masters.forEach(id => {
+        this.firebaseService.getMasterById(id).subscribe(master => {
           this.mastersData.push(new MasterData(master));
-          if (data.courses && data.courses.length > 0) {
-            this.getCourses(data.courses);
-          }
         });
       });
     }
@@ -162,13 +151,9 @@ export class FacultyComponent implements OnInit, OnDestroy {
   getDoctorals() {
     this.doctoralsData = [];
     if (this.facultyDetails.doctorals.length > 0) {
-      this.facultyDetails.doctorals.forEach(doctoralId => {
-        this.firebaseService.getDoctoralById(doctoralId).subscribe(doctoral => {
-          const data = new MasterData(doctoral);
+      this.facultyDetails.doctorals.forEach(id => {
+        this.firebaseService.getDoctoralById(id).subscribe(doctoral => {
           this.doctoralsData.push(new DoctoralData(doctoral));
-          if (data.courses && data.courses.length > 0) {
-            this.getCourses(data.courses);
-          }
         });
       });
     }
@@ -184,33 +169,7 @@ export class FacultyComponent implements OnInit, OnDestroy {
         stars: 5
       }
       this.reviewsData.push(new ReviewData(newCommentForPresentLoggedInUser));
-      console.log(this.reviewsData)
     }
-  }
-
-  getCourses(coursesIds: string[]) {
-    coursesIds.forEach(courseId => {
-      this.firebaseService.getCourseById(courseId).subscribe(result => {
-        this.courses.push(new CourseData(result));
-      });
-    });
-  }
-
-  getCoursesForSpecialisation(specialisationId: string) {
-    const specificCourses: CourseData[] = [];
-    this.courses.forEach((course: CourseData) => {
-      if (course.specialisationId === specialisationId) {
-        specificCourses.push(course);
-      }
-    });
-    return specificCourses;
-  }
-
-  showInfoAboutCourse(course: CourseData) {
-    this.dialog.open(CourseDetailsDialogComponent, {
-      width: '100%',
-      data: course
-    });
   }
 
   onNavigate(id: string) {

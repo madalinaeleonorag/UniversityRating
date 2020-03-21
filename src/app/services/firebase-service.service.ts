@@ -79,7 +79,7 @@ export class FirebaseService {
   }
 
   getBacheloryById(id: string) {
-    return this.mastersCollection.doc(id).valueChanges();
+    return this.bachelorsCollection.doc(id).valueChanges();
   }
 
   getMasterById(id: string) {
@@ -220,7 +220,7 @@ export class FirebaseService {
             name,
             facultyId: facultyDetails.facultyId
           }).then(res => {
-            firebase.firestore().collection('Bachelors').doc(res.id).update({ bachelorId: res.id })
+            firebase.firestore().collection('Bachelors').doc(res.id).update({ id: res.id })
             let bachelorsPrograms = [];
             if (Array.isArray(facultyDetails.bachelors)) {
               bachelorsPrograms = [...facultyDetails.bachelors];
@@ -239,10 +239,10 @@ export class FirebaseService {
       case 'master': {
         firebase.firestore().collection('Masters').add(
           {
-            masterName: name,
+            name: name,
             facultyId: facultyDetails.facultyId
           }).then(res => {
-            firebase.firestore().collection('Masters').doc(res.id).update({ masterId: res.id })
+            firebase.firestore().collection('Masters').doc(res.id).update({ id: res.id })
             let mastersPrograms = [];
             if (Array.isArray(facultyDetails.masters)) {
               mastersPrograms = [...facultyDetails.masters];
@@ -261,10 +261,10 @@ export class FirebaseService {
       case 'doctoral': {
         firebase.firestore().collection('Doctorals').add(
           {
-            doctoralName: name,
+            name: name,
             facultyId: facultyDetails.facultyId
           }).then(res => {
-            firebase.firestore().collection('Doctorals').doc(res.id).update({ masterId: res.id })
+            firebase.firestore().collection('Doctorals').doc(res.id).update({ id: res.id })
             let doctoralsPrograms = [];
             if (Array.isArray(facultyDetails.doctorals)) {
               doctoralsPrograms = [...facultyDetails.doctorals];

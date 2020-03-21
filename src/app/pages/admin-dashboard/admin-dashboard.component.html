@@ -30,7 +30,7 @@
         <table mat-table [dataSource]="bachelorsData">
           <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef> Id </th>
-            <td mat-cell *matCellDef="let element"> {{ element.bachelorId }} </td>
+            <td mat-cell *matCellDef="let element"> {{ element.id }} </td>
           </ng-container>
           <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef> Name </th>
@@ -72,11 +72,11 @@
         <table mat-table [dataSource]="mastersData">
           <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef> Id </th>
-            <td mat-cell *matCellDef="let element"> {{ element.masterId }} </td>
+            <td mat-cell *matCellDef="let element"> {{ element.id }} </td>
           </ng-container>
           <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef> Name </th>
-            <td mat-cell *matCellDef="let element"> {{ element.masterName }} </td>
+            <td mat-cell *matCellDef="let element"> {{ element.name }} </td>
           </ng-container>
           <ng-container matColumnDef="courses">
             <th mat-header-cell *matHeaderCellDef> Registered courses </th>
@@ -96,11 +96,11 @@
         <table mat-table [dataSource]="doctoralsData">
           <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef> Id </th>
-            <td mat-cell *matCellDef="let element"> {{ element.doctoralId }} </td>
+            <td mat-cell *matCellDef="let element"> {{ element.id }} </td>
           </ng-container>
           <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef> Name </th>
-            <td mat-cell *matCellDef="let element"> {{ element.doctoralName }} </td>
+            <td mat-cell *matCellDef="let element"> {{ element.name }} </td>
           </ng-container>
           <ng-container matColumnDef="courses">
             <th mat-header-cell *matHeaderCellDef> Registered courses </th>

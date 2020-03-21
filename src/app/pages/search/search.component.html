@@ -125,7 +125,7 @@
             <img mat-card-image src="{{ result.logoFaculty }}" *ngIf="result.logoFaculty">
             <img mat-card-image src="assets/university.png" *ngIf="!result.logoFaculty">
             <mat-card-content>
-              <p class="dark-blue-bold-text">{{ result.masterName | uppercase }}</p>
+              <p class="dark-blue-bold-text">{{ result.name | uppercase }}</p>
               <p class="grey-text" *ngIf="result.locationFaculty">{{ result.locationFaculty | location }}</p>
               <!-- <app-editable-star-rating *ngIf="result.facultyId" [id]="result.facultyId" [editable]="false" type="faculty" showNumberOfRatings="true">
               </app-editable-star-rating> -->
@@ -139,7 +139,7 @@
             <img mat-card-image src="{{ result.logoFaculty }}" *ngIf="result.logoFaculty">
             <img mat-card-image src="assets/university.png" *ngIf="!result.logoFaculty">
             <mat-card-content>
-              <p class="dark-blue-bold-text">{{ result.doctoralName | uppercase }}</p>
+              <p class="dark-blue-bold-text">{{ result.name | uppercase }}</p>
               <p class="grey-text" *ngIf="result.locationFaculty">{{ result.locationFaculty | location }}</p>
               <!-- <p *ngIf="result.semesters">
                 {{ result.semesters }} {{ 'filters.counter_semesters' | translate }}

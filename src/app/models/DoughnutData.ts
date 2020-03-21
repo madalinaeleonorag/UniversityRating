@@ -2,7 +2,7 @@ import { JsonObject, JsonProperty } from 'json2typescript';
 
 @JsonObject('DoughnutData')
 export class DoughnutData {
-    @JsonProperty('doctoralId')
+    @JsonProperty('id')
     values: Array<Array<any>> = undefined;
     @JsonProperty('title')
     title: string = undefined;
