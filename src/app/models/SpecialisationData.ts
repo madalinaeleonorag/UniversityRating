@@ -1,7 +1,7 @@
 import { JsonObject, JsonProperty } from 'json2typescript';
 
-@JsonObject('BachelorData')
-export class BachelorData {
+@JsonObject('SpecialisationData')
+export class SpecialisationData {
     @JsonProperty('facultyId')
     facultyId: string = undefined;
     @JsonProperty('generalSkills')
@@ -17,7 +17,7 @@ export class BachelorData {
     @JsonProperty('years')
     years: number = undefined;
     @JsonProperty('id')
-    id: number = undefined;
+    id: string = undefined;
 
     constructor(obj: any) {
         this.facultyId = obj ? (obj.facultyId ? obj.facultyId : undefined) : undefined;

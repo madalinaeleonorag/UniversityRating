@@ -8,6 +8,7 @@ import { Observable, Subscription } from 'rxjs';
 import { FacultyData } from '../models/FacultyData';
 import { ReviewData } from '../models/ReviewData';
 import * as moment from 'moment';
+import { SpecialisationData } from '../models/SpecialisationData';
 
 @Injectable({
   providedIn: 'root'
@@ -294,6 +295,58 @@ export class FirebaseService {
         });
       });
     });
+  }
+
+  programRemove(item: SpecialisationData, type: string) {
+    let specialisationType: string;
+    switch (type) {
+      case 'bachelor': specialisationType = 'Bachelors'
+      break;
+      case 'master': specialisationType = 'Masters'
+      break;
+      case 'doctoral': specialisationType = 'Doctorals'
+      break;
+    }
+    let propertyType: string;
+    switch (type) {
+      case 'bachelor': propertyType = 'bachelors'
+      break;
+      case 'master': propertyType = 'masters'
+      break;
+      case 'doctoral': propertyType = 'doctorals'
+      break;
+    }
+    firebase.firestore().collection(specialisationType).doc(item.id).delete().then(res => {
+      let subscriptionFaculty: Subscription = this.getFacultyById(item.facultyId).subscribe(faculty => {
+        subscriptionFaculty.unsubscribe();
+        const data = new FacultyData(faculty);
+        data[propertyType].splice(data[propertyType].indexOf(item.id), 1);
+        switch (type) {
+          case 'bachelor': {
+            firebase.firestore().collection('Faculties').doc(item.facultyId).update({
+              bachelors : data[propertyType]
+             });
+          }
+          break;
+          case 'master': {
+            firebase.firestore().collection('Faculties').doc(item.facultyId).update({
+              masters : data[propertyType]
+             });
+          }
+          break;
+          case 'doctoral': {
+            firebase.firestore().collection('Faculties').doc(item.facultyId).update({
+              doctorals : data[propertyType]
+             });
+          }
+          break;
+        }
+      });
+    });
+  }
+
+  programEdit(item: SpecialisationData, type: string) {
+    
   }
 
   addComment(item: ReviewData) {

@@ -9,7 +9,7 @@ import { RequestData } from '../models/RequestData';
 import { FacultyData } from '../models/FacultyData';
 import * as moment from 'moment';
 import * as _ from 'lodash';
-import { BachelorData } from '../models/BachelorData';
+import { SpecialisationData } from '../models/SpecialisationData';
 
 @Injectable({
   providedIn: 'root'
@@ -400,7 +400,7 @@ export class DashboardService {
       switchMap((result: []) => {
         const BachelorsYears = [];
         result.forEach(item => {
-          const bachelor = new BachelorData(item);
+          const bachelor = new SpecialisationData(item);
           if (bachelor.years) {
             BachelorsYears.push(bachelor.years);
           }
@@ -421,7 +421,7 @@ export class DashboardService {
       switchMap((result: []) => {
         const MastersYears = [];
         result.forEach(item => {
-          const bachelor = new BachelorData(item);
+          const bachelor = new SpecialisationData(item);
           if (bachelor.years) {
             MastersYears.push(bachelor.years);
           }
@@ -442,7 +442,7 @@ export class DashboardService {
       switchMap((result: []) => {
         const DoctoralsYears = [];
         result.forEach(item => {
-          const bachelor = new BachelorData(item);
+          const bachelor = new SpecialisationData(item);
           if (bachelor.years) {
             DoctoralsYears.push(bachelor.years);
           }
