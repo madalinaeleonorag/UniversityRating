@@ -4,9 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FirebaseService } from 'src/app/services/firebase-service.service';
 import { UniversityData } from 'src/app/models/UniversityData';
 import { FacultyData } from 'src/app/models/FacultyData';
-import { BachelorData } from 'src/app/models/BachelorData';
-import { MasterData } from 'src/app/models/MasterData';
-import { DoctoralData } from 'src/app/models/DoctoralData';
+import { SpecialisationData } from 'src/app/models/SpecialisationData';
 import { MatDialog } from '@angular/material';
 import { ReviewData } from 'src/app/models/ReviewData';
 import { UserData } from 'src/app/models/UserData';
@@ -30,13 +28,13 @@ export class FacultyComponent implements OnInit, OnDestroy {
   paramSubscription: Subscription;
   facultyDetails: FacultyData;
   universityDetails: UniversityData;
-  bachelorsData: BachelorData[] = [];
-  mastersData: MasterData[] = [];
-  doctoralsData: DoctoralData[] = [];
+  bachelorsData: SpecialisationData[] = [];
+  mastersData: SpecialisationData[] = [];
+  doctoralsData: SpecialisationData[] = [];
   reviewsData: ReviewData[];
   facultyId: string;
   user: UserData;
-  userCanEdit: boolean;
+  userCanEditBoolean: boolean;
   editEnabled: boolean;
   isUserSubscription: Subscription;
   form: FormGroup;
@@ -58,7 +56,7 @@ export class FacultyComponent implements OnInit, OnDestroy {
             this.firebaseService.getUniversityById(this.facultyDetails.universityId).subscribe(university => {
               this.universityDetails = new UniversityData(university);
               if (university) {
-                this.userEditable();
+                this.userCanEdit();
               }
             });
           }
@@ -72,7 +70,7 @@ export class FacultyComponent implements OnInit, OnDestroy {
     this.isUserSubscription = this.authService.isUserAuthenticatedObservable.subscribe(result => {
       this.user = new UserData(result);
       if (result) {
-        this.userEditable();
+        this.userCanEdit();
         this.showAddNewComment(this.reviewsData);
       }
     });
@@ -94,11 +92,11 @@ export class FacultyComponent implements OnInit, OnDestroy {
 
   editDetails() {
     this.editEnabled = !this.editEnabled;
-    this.userEditable();
+    this.userCanEdit();
   }
 
-  userEditable() {
-    this.userCanEdit = this.user && this.universityDetails ? this.user.universityId === this.universityDetails.universityId : false;
+  userCanEdit() {
+    this.userCanEditBoolean = this.user && this.universityDetails ? this.user.universityId === this.universityDetails.universityId : false;
   }
 
   getBachelors() {
@@ -106,7 +104,7 @@ export class FacultyComponent implements OnInit, OnDestroy {
     if (this.facultyDetails.bachelors.length > 0) {
       this.facultyDetails.bachelors.forEach(id => {
         this.firebaseService.getBacheloryById(id).subscribe(bachelor => {
-          this.bachelorsData.push(new BachelorData(bachelor));
+          this.bachelorsData.push(new SpecialisationData(bachelor));
         });
       });
     }
@@ -142,7 +140,7 @@ export class FacultyComponent implements OnInit, OnDestroy {
     if (this.facultyDetails.masters.length > 0) {
       this.facultyDetails.masters.forEach(id => {
         this.firebaseService.getMasterById(id).subscribe(master => {
-          this.mastersData.push(new MasterData(master));
+          this.mastersData.push(new SpecialisationData(master));
         });
       });
     }
@@ -153,7 +151,7 @@ export class FacultyComponent implements OnInit, OnDestroy {
     if (this.facultyDetails.doctorals.length > 0) {
       this.facultyDetails.doctorals.forEach(id => {
         this.firebaseService.getDoctoralById(id).subscribe(doctoral => {
-          this.doctoralsData.push(new DoctoralData(doctoral));
+          this.doctoralsData.push(new SpecialisationData(doctoral));
         });
       });
     }

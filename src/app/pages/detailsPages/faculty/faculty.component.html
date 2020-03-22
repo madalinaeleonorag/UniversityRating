@@ -93,7 +93,7 @@
       <button mat-raised-button class="gradient-background white-text-button" (click)="addProgramDialog('bachelor')"
         *ngIf="userCanEdit && editEnabled">Add bachelor</button>
 
-      <app-editable-expansion-panel *ngFor="let bachelor of bachelorsData" [data]="bachelor" type="bachelor">
+      <app-editable-expansion-panel *ngFor="let bachelor of bachelorsData" [data]="bachelor" type="bachelor" [editable]="userCanEdit && editEnabled">
       </app-editable-expansion-panel>
 
     </mat-tab>
@@ -102,29 +102,8 @@
       *ngIf="mastersData && mastersData.length > 0 || editEnabled">
       <button mat-raised-button class="gradient-background white-text-button" (click)="addProgramDialog('master')"
         *ngIf="userCanEdit && editEnabled">Add master</button>
-      <mat-expansion-panel *ngFor="let master of mastersData">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            {{ master.name }}
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <div class="custom-detail-field" *ngIf="master?.years">
-          <div class="custom-detail-field-title">
-            {{ 'faculty_page.masters.years' | translate }}
-          </div>
-          {{ master?.years }}
-        </div>
-        <div class="custom-detail-field" *ngIf="master && master.generalSkills && master.generalSkills.length > 0">
-          <div class="custom-detail-field-title">
-            {{ 'faculty_page.masters.general_skills' | translate }}
-          </div>
-          <ul>
-            <li *ngFor="let item of master?.generalSkills">
-              - {{ item }}
-            </li>
-          </ul>
-        </div>
-      </mat-expansion-panel>
+        <app-editable-expansion-panel *ngFor="let master of mastersData" [data]="master" type="master" [editable]="userCanEdit && editEnabled">
+        </app-editable-expansion-panel>
 
     </mat-tab>
 
@@ -132,29 +111,8 @@
       *ngIf="doctoralsData && doctoralsData.length > 0 || editEnabled">
       <button mat-raised-button class="gradient-background white-text-button" (click)="addProgramDialog('doctoral')"
         *ngIf="userCanEdit && editEnabled">Add doctoral</button>
-      <mat-expansion-panel *ngFor="let doctoral of doctoralsData">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            {{ doctoral.name }}
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <div class="custom-detail-field" *ngIf="master?.years">
-          <div class="custom-detail-field-title">
-            {{ 'faculty_page.masters.years' | translate }}
-          </div>
-          {{ master?.years }}
-        </div>
-        <div class="custom-detail-field" *ngIf="master && master.generalSkills && master.generalSkills.length > 0">
-          <div class="custom-detail-field-title">
-            {{ 'faculty_page.masters.general_skills' | translate }}
-          </div>
-          <ul>
-            <li *ngFor="let item of master?.generalSkills">
-              - {{ item }}
-            </li>
-          </ul>
-        </div>
-      </mat-expansion-panel>
+        <app-editable-expansion-panel *ngFor="let doctoral of doctoralsData" [data]="doctoral" type="doctoral" [editable]="userCanEdit && editEnabled">
+        </app-editable-expansion-panel>
     </mat-tab>
 
     <mat-tab *ngIf="reviewsData && reviewsData.length > 0" label="Reviews">
