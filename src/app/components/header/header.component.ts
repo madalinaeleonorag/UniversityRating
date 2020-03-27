@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Input, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { LoginDialogComponent } from '../login-dialog/login-dialog.component';
@@ -19,6 +19,18 @@ export class HeaderComponent implements OnInit {
 
   constructor(private router: Router, private dialog: MatDialog, private authService: AuthService) {
   }
+
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll(e) {
+     if (window.pageYOffset > 100) {
+       let element = document.getElementById('navbar');
+       element.classList.add('is_sticky');
+     } else {
+      let element = document.getElementById('navbar');
+        element.classList.remove('is_sticky'); 
+     }
+  }
+
 
   @Input() firstPage: boolean;
 
