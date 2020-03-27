@@ -1,16 +1,54 @@
 @import "../../variables.scss";
 
 app-homepage {
+
   .banner-logo {
-    max-width: 250px;
-    margin-left: 10px;
+    width: auto;
+    height: 160px;
+    margin-left:10px;
   }
-  .custom-banner {
-    height: -webkit-fill-available;
-    background-color: $darkBlue;
-    padding: 50px;  
+
+  .wave-one::before {
+    position: absolute;
+    content: "";
+    left: 0;
+    bottom: -144px;
+    width: 100%;
+    height: 595px;
+    background-position-y: bottom;
+    background-repeat: repeat-x;
+    background-size: cover;
+    background-image: url(../../../assets/wave.png);
   }
-  .mat-raised-button {
-    margin-top: 10px;
+
+  .banner-slider {
+    height: 80vh;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+
+  .gradient-blue {
+    background-color: #ab46f8;
+    background-image: -moz-linear-gradient(45deg, #ab46f8 0%, #5225f8 100%);
+    background-image: -webkit-gradient(
+      linear,
+      left top,
+      right top,
+      color-stop(0%, #ab46f8),
+      color-stop(100%, #5225f8)
+    );
+    background-image: -webkit-linear-gradient(45deg, #ab46f8 0%, #5225f8 100%);
+    background-image: -o-linear-gradient(45deg, #ab46f8 0%, #5225f8 100%);
+    background: -ms-linear-gradient(45deg, #ab46f8 0%, #5225f8 100%);
+    background: -webkit-linear-gradient(45deg, #ab46f8 0%, #5225f8 100%);
+    background: -o-linear-gradient(45deg, #ab46f8 0%, #5225f8 100%);
+    background: linear-gradient(45deg, #ab46f8 0%, #5225f8 100%);
+  }
+
+  .wave-one {
+    position: relative;
   }
 }
