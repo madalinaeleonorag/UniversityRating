@@ -21,7 +21,7 @@ export class EditableExpansionPanelComponent implements OnInit {
   courses = [];
   userChooseToEdit: boolean;
 
-  constructor(private firebaseService: FirebaseService, private dialog: MatDialog) { }
+  constructor(private firebaseService: FirebaseService) { }
 
   ngOnInit() {
     this.buildForm();
@@ -75,14 +75,6 @@ export class EditableExpansionPanelComponent implements OnInit {
       }
     });
     return specificCourses;
-  }
-
-
-  showInfoAboutCourse(course: CourseData) {
-    this.dialog.open(CourseDetailsDialogComponent, {
-      width: '50vw',
-      data: course
-    });
   }
 
 }

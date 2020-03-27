@@ -25,9 +25,9 @@
       showNumberOfRatings="true">
     </app-editable-star-rating>
     <button mat-raised-button class="gradient-background white-text-button" (click)="editDetails()"
-      *ngIf="userCanEdit && !editEnabled">Edit data</button>
+      *ngIf="userCanEditBoolean && !editEnabled">Edit data</button>
     <button mat-raised-button class="gradient-background white-text-button" (click)="saveDetails()"
-      *ngIf="userCanEdit && editEnabled">Save data</button>
+      *ngIf="userCanEditBoolean && editEnabled">Save data</button>
     <!-- TODO compara button -->
   </div>
   <mat-tab-group mat-align-tabs="center">
@@ -91,9 +91,9 @@
       *ngIf="bachelorsData && bachelorsData.length > 0 || editEnabled">
 
       <button mat-raised-button class="gradient-background white-text-button" (click)="addProgramDialog('bachelor')"
-        *ngIf="userCanEdit && editEnabled">Add bachelor</button>
+        *ngIf="userCanEditBoolean && editEnabled">Add bachelor</button>
 
-      <app-editable-expansion-panel *ngFor="let bachelor of bachelorsData" [data]="bachelor" type="bachelor" [editable]="userCanEdit && editEnabled">
+      <app-editable-expansion-panel *ngFor="let bachelor of bachelorsData" [data]="bachelor" type="bachelor" [editable]="userCanEditBoolean && editEnabled">
       </app-editable-expansion-panel>
 
     </mat-tab>
@@ -101,8 +101,8 @@
     <mat-tab label="{{ 'faculty_page.tab_labels.masters' | translate }}"
       *ngIf="mastersData && mastersData.length > 0 || editEnabled">
       <button mat-raised-button class="gradient-background white-text-button" (click)="addProgramDialog('master')"
-        *ngIf="userCanEdit && editEnabled">Add master</button>
-        <app-editable-expansion-panel *ngFor="let master of mastersData" [data]="master" type="master" [editable]="userCanEdit && editEnabled">
+        *ngIf="userCanEditBoolean && editEnabled">Add master</button>
+        <app-editable-expansion-panel *ngFor="let master of mastersData" [data]="master" type="master" [editable]="userCanEditBoolean && editEnabled">
         </app-editable-expansion-panel>
 
     </mat-tab>
@@ -110,8 +110,8 @@
     <mat-tab label="{{ 'faculty_page.tab_labels.doctorals' | translate }}"
       *ngIf="doctoralsData && doctoralsData.length > 0 || editEnabled">
       <button mat-raised-button class="gradient-background white-text-button" (click)="addProgramDialog('doctoral')"
-        *ngIf="userCanEdit && editEnabled">Add doctoral</button>
-        <app-editable-expansion-panel *ngFor="let doctoral of doctoralsData" [data]="doctoral" type="doctoral" [editable]="userCanEdit && editEnabled">
+        *ngIf="userCanEditBoolean && editEnabled">Add doctoral</button>
+        <app-editable-expansion-panel *ngFor="let doctoral of doctoralsData" [data]="doctoral" type="doctoral" [editable]="userCanEditBoolean && editEnabled">
         </app-editable-expansion-panel>
     </mat-tab>
 

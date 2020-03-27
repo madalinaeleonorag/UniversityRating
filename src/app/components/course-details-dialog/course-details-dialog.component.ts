@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { CourseData } from 'src/app/models/CourseData';
+import { FirebaseService } from 'src/app/services/firebase-service.service';
 
 @Component({
   selector: 'app-course-details-dialog',
@@ -9,10 +10,22 @@ import { CourseData } from 'src/app/models/CourseData';
 })
 export class CourseDetailsDialogComponent implements OnInit {
 
+  course: CourseData;
+  editable: boolean;
+  new: boolean;
+
   constructor(public dialogRef: MatDialogRef<CourseDetailsDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public course: CourseData) { }
+              @Inject(MAT_DIALOG_DATA) public params: any, private firebaseService: FirebaseService) {
+                this.course = params.course;
+                this.editable = params.editable;
+                this.new = params.new;
+              }
 
   ngOnInit() {
+  }
+
+  removeCourse(course: CourseData) {
+    this.firebaseService.removeCourse(course);
   }
 
 }

@@ -9,6 +9,7 @@ import { FacultyData } from '../models/FacultyData';
 import { ReviewData } from '../models/ReviewData';
 import * as moment from 'moment';
 import { SpecialisationData } from '../models/SpecialisationData';
+import { CourseData } from '../models/CourseData';
 
 @Injectable({
   providedIn: 'root'
@@ -297,25 +298,67 @@ export class FirebaseService {
     });
   }
 
+  removeCourse(course: CourseData) {
+    firebase.firestore().collection('Courses').doc(course.courseId).delete().then(res => {
+      switch (course.studyLevel) {
+        case 'bachelor': {
+          let subscriptionBachelor: Subscription = this.getBacheloryById(course.specialisationId).subscribe(bachelor => {
+            subscriptionBachelor.unsubscribe();
+            const data = new SpecialisationData(bachelor);
+            data.courses.splice(data.courses.indexOf(course.courseId), 1);
+            firebase.firestore().collection('Bachelors').doc(course.specialisationId).update({
+              courses: data.courses
+            });
+          });
+        }
+        break;
+        case 'master': {
+          let subscriptionMaster: Subscription = this.getMasterById(course.specialisationId).subscribe(master => {
+            subscriptionMaster.unsubscribe();
+            const data = new SpecialisationData(master);
+            data.courses.splice(data.courses.indexOf(course.courseId), 1);
+            firebase.firestore().collection('Masters').doc(course.specialisationId).update({
+              courses: data.courses
+            });
+          });
+        }
+        break;
+        case 'doctoral': {
+          let subscriptionDoctoral: Subscription = this.getDoctoralById(course.specialisationId).subscribe(doctoral => {
+            subscriptionDoctoral.unsubscribe();
+            const data = new SpecialisationData(doctoral);
+            data.courses.splice(data.courses.indexOf(course.courseId), 1);
+            firebase.firestore().collection('Doctorals').doc(course.specialisationId).update({
+              courses: data.courses
+            });
+          });
+        }
+        break;
+      }
+    });
+  }
+
   programRemove(item: SpecialisationData, type: string) {
     let specialisationType: string;
-    switch (type) {
-      case 'bachelor': specialisationType = 'Bachelors'
-      break;
-      case 'master': specialisationType = 'Masters'
-      break;
-      case 'doctoral': specialisationType = 'Doctorals'
-      break;
-    }
     let propertyType: string;
     switch (type) {
-      case 'bachelor': propertyType = 'bachelors'
+      case 'bachelor': {
+        specialisationType = 'Bachelors';
+        propertyType = 'bachelors';
+      }
       break;
-      case 'master': propertyType = 'masters'
+      case 'master': {
+        specialisationType = 'Masters';
+        propertyType = 'masters';
+      }
       break;
-      case 'doctoral': propertyType = 'doctorals'
+      case 'doctoral': {
+        specialisationType = 'Doctorals';
+        propertyType = 'doctorals';
+      }
       break;
     }
+
     firebase.firestore().collection(specialisationType).doc(item.id).delete().then(res => {
       let subscriptionFaculty: Subscription = this.getFacultyById(item.facultyId).subscribe(faculty => {
         subscriptionFaculty.unsubscribe();

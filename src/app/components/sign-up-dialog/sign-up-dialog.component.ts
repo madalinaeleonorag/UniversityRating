@@ -38,7 +38,7 @@ export class SignUpDialogComponent implements OnInit {
   getAddress(place: object) {
     const address = 'address_components';
     const addressComponents = place[address];
-    this.signUpForm.value.location = addressComponents[addressComponents.length - 4].long_name;
+    this.signUpForm.get('location').setValue(addressComponents[addressComponents.length - 4].long_name)
   }
 
   buildForm() {

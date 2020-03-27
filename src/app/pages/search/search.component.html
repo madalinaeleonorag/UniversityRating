@@ -15,16 +15,16 @@
         <mat-card-subtitle>{{ 'filters.keywords.label' | translate }}</mat-card-subtitle>
         <mat-card-content>
           <!-- keywords search -->
-          <mat-form-field fxFlexFill>
+          <mat-form-field>
             <input matInput placeholder="{{ 'filters.keywords.name' | translate }}" [formControl]="keywordsSearch">
           </mat-form-field>
           <!-- description search -->
-          <mat-form-field fxFlexFill>
+          <mat-form-field>
             <input matInput placeholder="{{ 'filters.keywords.description' | translate }}"
               [formControl]="descriptionSearch">
           </mat-form-field>
           <!-- locatin search -->
-          <mat-form-field fxFlexFill>
+          <mat-form-field>
             <mat-label>{{ 'filters.keywords.location.label' | translate }}</mat-label>
             <mat-select [formControl]="locations">
               <mat-select-trigger>
@@ -35,7 +35,7 @@
             </mat-select>
           </mat-form-field>
           <!-- facilities search -->
-          <mat-form-field fxFlexFill *ngIf="studyLevel === 'University'">
+          <mat-form-field *ngIf="studyLevel === 'University'">
             <mat-label>{{ 'filters.keywords.facilities.label' | translate }}</mat-label>
             <mat-select [formControl]="facilities" multiple>
               <mat-select-trigger>
@@ -87,7 +87,7 @@
                 {{ result.facultiesUniversity.length }} {{ 'filters.faculties_counter' | translate }}
               </p>
             </mat-card-content>
-            <button mat-button fxFlexFill
+            <button mat-button
               (click)="goToUniversity(result.universityId)">{{ 'buttons.more_details' | translate | uppercase }}</button>
           </mat-card>
           <!-- faculty results -->
@@ -101,7 +101,7 @@
               <app-editable-star-rating *ngIf="result.facultyId" [id]="result.facultyId" [editable]="false" type="faculty" showNumberOfRatings="true">
               </app-editable-star-rating>
             </mat-card-content>
-            <button mat-button fxFlexFill
+            <button mat-button
               (click)="goToFaculty(result.facultyId)">{{ 'buttons.more_details' | translate | uppercase }}</button>
           </mat-card>
           <!-- bachelor results -->
@@ -116,7 +116,7 @@
               <!-- <app-editable-star-rating *ngIf="result.facultyId" [id]="result.facultyId" [editable]="false" type="faculty" showNumberOfRatings="true">
               </app-editable-star-rating> -->
             </mat-card-content>
-            <button mat-button fxFlexFill
+            <button mat-button
               (click)="goToFaculty(result.facultyId)">{{ 'buttons.more_details' | translate | uppercase }}</button>
               <!-- TODO verify why this buttons are not working -->
           </mat-card>
@@ -130,7 +130,7 @@
               <!-- <app-editable-star-rating *ngIf="result.facultyId" [id]="result.facultyId" [editable]="false" type="faculty" showNumberOfRatings="true">
               </app-editable-star-rating> -->
             </mat-card-content>
-            <button mat-button fxFlexFill
+            <button mat-button
               (click)="goToFaculty(result.facultyId)">{{ 'buttons.more_details' | translate | uppercase }}</button>
           </mat-card>
           <!-- doctorals results -->
@@ -148,7 +148,7 @@
                 {{ result.years }} {{ 'filters.counter_years' | translate }}
               </p> -->
             </mat-card-content>
-            <button mat-button fxFlexFill
+            <button mat-button
               (click)="goToFaculty(result.facultyId)">{{ 'buttons.more_details' | translate | uppercase }}</button>
           </mat-card>
         </div>

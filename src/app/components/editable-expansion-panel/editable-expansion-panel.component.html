@@ -51,26 +51,21 @@
                 {{ 'faculty_page.bachelors.general_skills' | translate }}
             </div>
             <app-editable-list [editable]="userChooseToEdit" [list]="data.generalSkills"
-            (listEdited)="modifyValuesFromList($event, 'generalSkills')"></app-editable-list>
+                (listEdited)="modifyValuesFromList($event, 'generalSkills')"></app-editable-list>
         </div>
         <div class="custom-detail-field" *ngIf="data.professionalPerspectives">
             <div class="custom-detail-field-title" *ngIf="data.professionalPerspectives.length > 0 || userChooseToEdit">
                 {{ 'faculty_page.bachelors.professional_perspectives' | translate }}
             </div>
             <app-editable-list [editable]="userChooseToEdit" [list]="data.professionalPerspectives"
-            (listEdited)="modifyValuesFromList($event, 'professionalPerspectives')"></app-editable-list>
+                (listEdited)="modifyValuesFromList($event, 'professionalPerspectives')"></app-editable-list>
         </div>
-        <div class="custom-detail-field" *ngIf="getCoursesForSpecialisation(data.id).length > 0">
+        <div class="custom-detail-field" *ngIf="getCoursesForSpecialisation(data.id).length > 0 || userChooseToEdit">
             <div class="custom-detail-field-title">
                 {{ 'faculty_page.details.courses' | translate }}
             </div>
-            <mat-chip-list>
-                <mat-chip [disableRipple]="true" [selectable]="false"
-                    *ngFor="let item of getCoursesForSpecialisation(data.id)">
-                    {{ item.name }} <mat-icon class="custom-icon" (click)="showInfoAboutCourse(item)">help_outline
-                    </mat-icon>
-                </mat-chip>
-            </mat-chip-list>
+            <app-editable-chips-list [courses]="getCoursesForSpecialisation(data.id)" [editable]="userChooseToEdit"
+                [specialisationId]="data.id" [specialisationType]="type"></app-editable-chips-list>
         </div>
     </mat-expansion-panel>
 </form>
