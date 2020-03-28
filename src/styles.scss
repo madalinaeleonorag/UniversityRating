@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@import './app/variables.scss';
+@import "./app/variables.scss";
 
 html,
 body {
@@ -21,8 +21,14 @@ body {
 }
 
 .mat-form-field-flex {
-  background-color: #17005b12;
-    padding: 5px;
+  padding: 5px;
+  border: 1px solid #17005b12;
+  border-radius: 10px;
+}
+
+.mat-form-field-underline {
+  background-color: none;
+  display: none;
 }
 
 button {
@@ -47,16 +53,24 @@ button {
   border-radius: 0px !important;
 }
 
+.custom-mat-card {
+  position: relative;
+  padding: 16px;
+  max-width: 20vw;
+  align-items: center;
+  display: flex;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: none !important;
+  flex-direction: column;
+}
+
 .grey-text {
   color: $lightGrey;
 }
 
 .app-title-cursor {
   cursor: pointer;
-}
-
-.gradient-background {
-  background: linear-gradient(90deg, rgba(149, 91, 7, 1) 0%, rgba(201, 138, 25, 1) 35%, rgba(223, 162, 54, 1) 100%);
 }
 
 .large-font {
@@ -89,15 +103,59 @@ button {
   width: auto !important;
 }
 .custom-icon {
-  padding-left: 5px;
+  padding: 5px;
+  color: black;
+}
+
+.custom-text {
+  padding: 5px;
+  color: black;
+}
+
+.white-button-without-hover {
+  background-color: white;
+  margin-left: 10px;
+  color: black;
+}
+
+.white-button {
+  background-color: white;
+  color: black;
+}
+
+.white-button:hover {
+  color: white;
+  background-color: $gradient1;
+  background-image: -moz-linear-gradient(45deg, $gradient1 0%, $gradient2 100%);
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    color-stop(0%, $gradient1),
+    color-stop(100%, $gradient2)
+  );
+  background-image: -webkit-linear-gradient(
+    45deg,
+    $gradient1 0%,
+    $gradient2 100%
+  );
+  background-image: -o-linear-gradient(45deg, $gradient1 0%, $gradient2 100%);
+  background: -ms-linear-gradient(45deg, $gradient1 0%, $gradient2 100%);
+  background: -webkit-linear-gradient(45deg, $gradient1 0%, $gradient2 100%);
+  background: -o-linear-gradient(45deg, $gradient1 0%, $gradient2 100%);
+  background: linear-gradient(45deg, $gradient1 0%, $gradient2 100%);
 }
 
 .custom-icon:hover {
-  color: $gold;
+  color: $gradient1;
+}
+
+.custom-text:hover {
+  color: $gradient2;
 }
 
 .mat-chip.mat-standard-chip::after {
-  background: transparent; 
+  background: transparent;
 }
 
 .custom-detail-field {
@@ -123,4 +181,26 @@ button {
   top: 0;
   right: 0;
   cursor: pointer;
+}
+
+.custom-gradient {
+  background-color: $gradient1;
+  background-image: -moz-linear-gradient(45deg, $gradient1 0%, $gradient2 100%);
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    color-stop(0%, $gradient1),
+    color-stop(100%, $gradient2)
+  );
+  background-image: -webkit-linear-gradient(
+    45deg,
+    $gradient1 0%,
+    $gradient2 100%
+  );
+  background-image: -o-linear-gradient(45deg, $gradient1 0%, $gradient2 100%);
+  background: -ms-linear-gradient(45deg, $gradient1 0%, $gradient2 100%);
+  background: -webkit-linear-gradient(45deg, $gradient1 0%, $gradient2 100%);
+  background: -o-linear-gradient(45deg, $gradient1 0%, $gradient2 100%);
+  background: linear-gradient(45deg, $gradient1 0%, $gradient2 100%);
 }

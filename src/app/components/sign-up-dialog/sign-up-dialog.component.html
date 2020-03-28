@@ -58,8 +58,8 @@
   {{ error }}
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="cancelSignUp()">{{ 'signup_dialog.cancel' | translate }}</button>
-  <button mat-button [disabled]="signUpForm.status === 'INVALID'"
+  <button mat-stroked-button (click)="cancelSignUp()">{{ 'signup_dialog.cancel' | translate }}</button>
+  <button mat-stroked-button [disabled]="signUpForm.status === 'INVALID'"
     (click)="signUpWithEmail()">{{ 'signup_dialog.signup' | translate }}</button>
 </div>
 

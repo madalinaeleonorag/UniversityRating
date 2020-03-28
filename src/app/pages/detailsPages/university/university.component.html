@@ -13,9 +13,9 @@
         <input matInput required placeholder="name" formControlName="nameUniversity" type="text">
       </mat-form-field>
     </div>
-    <button mat-raised-button class="gradient-background white-text-button" (click)="editDetails()"
+    <button mat-stroked-button class="custom-gradient white-text-button" (click)="editDetails()"
       *ngIf="userCanEdit && !editEnabled">Edit data</button>
-    <button mat-raised-button class="gradient-background white-text-button" (click)="saveDetails()"
+    <button mat-stroked-button class="custom-gradient white-text-button" (click)="saveDetails()"
       *ngIf="userCanEdit && editEnabled">Save data</button>
     <a href="{{ universityDetails.websiteUniversity }}">{{ 'university_page.header.website' | translate }}</a>
     <app-editable-star-rating *ngIf="reviewsData" [reviews]="reviewsData" [editable]="false" [type]="university"
@@ -97,7 +97,7 @@
     </mat-tab>
 
     <mat-tab label="{{ 'university_page.tab_labels.faculties' | translate }}">
-      <button mat-raised-button class="gradient-background white-text-button" (click)="addFacultyDialog()"
+      <button mat-stroked-button class="custom-gradient white-text-button" (click)="addFacultyDialog()"
         *ngIf="userCanEdit && editEnabled">Add faculty</button>
       <table mat-table [dataSource]="facultiesData" *ngIf="facultiesData.length > 0">
         <ng-container matColumnDef="name">
@@ -119,14 +119,14 @@
         <ng-container matColumnDef="button">
           <th mat-header-cell *matHeaderCellDef> </th>
           <td mat-cell *matCellDef="let element">
-            <button mat-raised-button class="gradient-background white-text-button"
+            <button mat-stroked-button class="custom-gradient white-text-button"
               (click)="onNavigate(element.facultyId)">{{ 'university_page.faculties.details' | translate }}</button>
           </td>
         </ng-container>
         <ng-container matColumnDef="remove" *ngIf="userCanEdit && editEnabled">
           <th mat-header-cell *matHeaderCellDef> </th>
           <td mat-cell *matCellDef="let element">
-            <button mat-raised-button class="gradient-background white-text-button"
+            <button mat-stroked-button class="custom-gradient white-text-button"
               (click)="removeFaculty(element)">Remove</button>
           </td>
         </ng-container>

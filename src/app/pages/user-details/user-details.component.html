@@ -1,4 +1,4 @@
-<button mat-button (click)="goToRequestPage('new')" *ngIf="!requestActive">Activeaza cont universitar</button>
+<button mat-stroked-button (click)="goToRequestPage('new')" *ngIf="!requestActive">Activeaza cont universitar</button>
 <mat-card *ngIf="requestActive">
   <mat-card-title>
     {{ requestStatus}}
@@ -7,11 +7,11 @@
     {{ requestMessage}}
   </mat-card-subtitle>
   <mat-card-actions *ngIf="requestStatus === 'declined'">
-    <button mat-button (click)="goToRequestPage('new')">Send new request</button>
-    <button mat-button (click)="goToRequestPage('draft')">Modify and resend the last request</button>
+    <button mat-stroked-button (click)="goToRequestPage('new')">Send new request</button>
+    <button mat-stroked-button (click)="goToRequestPage('draft')">Modify and resend the last request</button>
   </mat-card-actions>
   <mat-card-actions *ngIf="requestStatus === 'approved'">
-    <button mat-button (click)="goToUniversityPage()">View and edit your university</button>
+    <button mat-stroked-button (click)="goToUniversityPage()">View and edit your university</button>
   </mat-card-actions>
 </mat-card>
 <mat-card>
@@ -40,7 +40,7 @@
     </mat-form-field>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button (click)="canEdit = !canEdit" *ngIf="!canEdit">Edit details</button>
-    <button mat-button (click)="saveNewDetails()" *ngIf="canEdit">Save</button>
+    <button mat-stroked-button (click)="canEdit = !canEdit" *ngIf="!canEdit">Edit details</button>
+    <button mat-stroked-button (click)="saveNewDetails()" *ngIf="canEdit">Save</button>
   </mat-card-actions>
 </mat-card>

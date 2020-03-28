@@ -32,7 +32,7 @@
     </div>
   </mat-card-content>
   <mat-card-actions *ngIf="editable">
-    <button mat-button (click)="addComment()" [disabled]="!commentText">Send comment</button>
+    <button mat-stroked-button (click)="addComment()" [disabled]="!commentText">Send comment</button>
   </mat-card-actions>
 </mat-card>
 <mat-card class="custom-card-comment" *ngIf="review.status === 'pending' && user.id === review.userId">

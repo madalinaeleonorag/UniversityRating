@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(e) {
-     if (window.pageYOffset > 100) {
+     if (window.pageYOffset > 50) {
        let element = document.getElementById('navbar');
        element.classList.add('is_sticky');
      } else {
