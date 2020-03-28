@@ -32,7 +32,7 @@
         <option value="F">{{ 'signup_dialog.female' | translate }}</option>
       </select>
     </mat-form-field>
-      <mat-label>{{ 'signup_dialog.location' | translate }}</mat-label>
+      <!-- <mat-label>{{ 'signup_dialog.location' | translate }}</mat-label> -->
       <AutocompleteAddressComponent (setAddress)="getAddress($event)" adressType="geocode"></AutocompleteAddressComponent>
     <mat-form-field>
       <mat-label>{{ 'signup_dialog.school_level' | translate }}</mat-label>
