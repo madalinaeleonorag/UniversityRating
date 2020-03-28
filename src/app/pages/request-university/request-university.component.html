@@ -24,5 +24,5 @@
       <input matInput required placeholder="Phone number" formControlName="phoneFormControl" type="text">
     </mat-form-field>
     <AutocompleteAddressComponent (setAddress)="getAddress($event)" adressType="geocode"></AutocompleteAddressComponent>
-    <button mat-button [disabled]="form.status === 'INVALID'" *ngIf="user" (click)="send()">Send request</button>
+    <button mat-stroked-button [disabled]="form.status === 'INVALID'" *ngIf="user" (click)="send()">Send request</button>
   </form>

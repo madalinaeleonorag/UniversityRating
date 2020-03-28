@@ -7,7 +7,7 @@
     </form>
   </div>
   <div mat-dialog-actions>
-    <button mat-button (click)="cancel()">cancel</button>
-    <button mat-button (click)="save()" [disabled]="form.status === 'INVALID'">save</button>
+    <button mat-stroked-button (click)="cancel()">cancel</button>
+    <button mat-stroked-button (click)="save()" [disabled]="form.status === 'INVALID'">save</button>
   </div>
   

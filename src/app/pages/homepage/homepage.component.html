@@ -1,16 +1,51 @@
-<div class="banner-slider gradient-blue wave-one">
-  <div fxLayout="row" fxLayoutAlign="space-around center">
-  <div fxLayout="column">
-    <div class="white-bold-text large-font">{{ 'banner.first_text1' | translate | uppercase}}</div>
-    <div class="white-bold-text large-font">{{ 'banner.first_text2' | translate | uppercase}}</div>
-    <div class="white-text">{{ 'banner.second_text' | translate | uppercase}}</div>
-    <button mat-raised-button class="gradient-background white-text-button" (click)="goToSearch()">{{ 'buttons.search' | translate | uppercase}}</button>
+<div class="banner-slider custom-gradient wave-one">
+  <div fxLayout="row" fxLayoutAlign="space-around center" class="center-items">
+    <div fxLayout="column">
+      <div class="white-bold-text large-font">
+        {{ "banner.first_text1" | translate | uppercase }}
+      </div>
+      <div class="white-bold-text large-font">
+        {{ "banner.first_text2" | translate | uppercase }}
+      </div>
+      <div class="white-text">
+        {{ "banner.second_text" | translate | uppercase }}
+      </div>
+      <button
+        mat-stroked-button
+        class="white-button-without-hover"
+        (click)="goToSearch()"
+      >
+        {{ "buttons.search" | translate | uppercase }}
+      </button>
+    </div>
   </div>
-  <div>
-        <img class="banner-logo" src="assets/logos/logo.png">
-  </div>
-</div>
 </div>
 
+<div class="cards">
+  <mat-card>
+    <mat-icon class="custom-icon">
+      search
+    </mat-icon>
+    <div class="custom-text">
+      search for your best option throught hundred of updated options
+    </div>
+  </mat-card>
+  <mat-card>
+    <mat-icon class="custom-icon">
+      grade
+    </mat-icon>
+    <div class="custom-text">
+      grade and add a comment to institutions so others can see if it fits for them
+    </div>
+  </mat-card>
+  <mat-card>
+    <mat-icon class="custom-icon">
+      add
+    </mat-icon>
+    <div class="custom-text">
+      create an account and activate it to claim a university and add verified informations about it
+    </div>
+  </mat-card>
+</div>
 
 <app-footer></app-footer>

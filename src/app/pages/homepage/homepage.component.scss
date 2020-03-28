@@ -1,11 +1,16 @@
 @import "../../variables.scss";
 
 app-homepage {
-
   .banner-logo {
     width: auto;
     height: 160px;
-    margin-left:10px;
+    margin-left: 10px;
+  }
+
+  .cards {
+    display: flex;
+    margin: 30px 60px;
+    justify-content: space-evenly;
   }
 
   .wave-one::before {
@@ -21,6 +26,21 @@ app-homepage {
     background-image: url(../../../assets/wave.png);
   }
 
+  .center-items {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .mat-card {
+    max-width: 20vw;
+    box-shadow: none !important;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+
   .banner-slider {
     height: 80vh;
     display: -webkit-box;
@@ -28,27 +48,19 @@ app-homepage {
     display: flex;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
-  }
 
-  .gradient-blue {
-    background-color: #ab46f8;
-    background-image: -moz-linear-gradient(45deg, #ab46f8 0%, #5225f8 100%);
-    background-image: -webkit-gradient(
-      linear,
-      left top,
-      right top,
-      color-stop(0%, #ab46f8),
-      color-stop(100%, #5225f8)
-    );
-    background-image: -webkit-linear-gradient(45deg, #ab46f8 0%, #5225f8 100%);
-    background-image: -o-linear-gradient(45deg, #ab46f8 0%, #5225f8 100%);
-    background: -ms-linear-gradient(45deg, #ab46f8 0%, #5225f8 100%);
-    background: -webkit-linear-gradient(45deg, #ab46f8 0%, #5225f8 100%);
-    background: -o-linear-gradient(45deg, #ab46f8 0%, #5225f8 100%);
-    background: linear-gradient(45deg, #ab46f8 0%, #5225f8 100%);
+    .mat-stroked-button {
+      margin-top: 20px;
+    }
   }
 
   .wave-one {
     position: relative;
+  }
+
+  .custom-icon {
+    height: 50px !important;
+    font-size: -webkit-xxx-large;
+    width: 100% !important;
   }
 }

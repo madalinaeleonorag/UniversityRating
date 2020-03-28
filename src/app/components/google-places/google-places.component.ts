@@ -1,10 +1,11 @@
 
-import { Component, ViewChild, EventEmitter, Output, OnInit, AfterViewInit, Input } from '@angular/core';
+import { Component, ViewChild, EventEmitter, Output, OnInit, AfterViewInit, Input, ViewEncapsulation } from '@angular/core';
 import { } from 'googlemaps';
 
 @Component({
     selector: 'AutocompleteAddressComponent',
-    templateUrl: './google-places.component.html'
+    templateUrl: './google-places.component.html',
+    encapsulation: ViewEncapsulation.None
 })
 export class AutocompleteAddressComponent implements OnInit, AfterViewInit {
     @Input() adressType: string;

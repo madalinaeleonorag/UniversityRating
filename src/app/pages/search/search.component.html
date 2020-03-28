@@ -87,7 +87,7 @@
                 {{ result.facultiesUniversity.length }} {{ 'filters.faculties_counter' | translate }}
               </p>
             </mat-card-content>
-            <button mat-button
+            <button mat-stroked-button
               (click)="goToUniversity(result.universityId)">{{ 'buttons.more_details' | translate | uppercase }}</button>
           </mat-card>
           <!-- faculty results -->
@@ -101,7 +101,7 @@
               <app-editable-star-rating *ngIf="result.facultyId" [id]="result.facultyId" [editable]="false" type="faculty" showNumberOfRatings="true">
               </app-editable-star-rating>
             </mat-card-content>
-            <button mat-button
+            <button mat-stroked-button
               (click)="goToFaculty(result.facultyId)">{{ 'buttons.more_details' | translate | uppercase }}</button>
           </mat-card>
           <!-- bachelor results -->
@@ -116,7 +116,7 @@
               <!-- <app-editable-star-rating *ngIf="result.facultyId" [id]="result.facultyId" [editable]="false" type="faculty" showNumberOfRatings="true">
               </app-editable-star-rating> -->
             </mat-card-content>
-            <button mat-button
+            <button mat-stroked-button
               (click)="goToFaculty(result.facultyId)">{{ 'buttons.more_details' | translate | uppercase }}</button>
               <!-- TODO verify why this buttons are not working -->
           </mat-card>
@@ -130,7 +130,7 @@
               <!-- <app-editable-star-rating *ngIf="result.facultyId" [id]="result.facultyId" [editable]="false" type="faculty" showNumberOfRatings="true">
               </app-editable-star-rating> -->
             </mat-card-content>
-            <button mat-button
+            <button mat-stroked-button
               (click)="goToFaculty(result.facultyId)">{{ 'buttons.more_details' | translate | uppercase }}</button>
           </mat-card>
           <!-- doctorals results -->
@@ -148,7 +148,7 @@
                 {{ result.years }} {{ 'filters.counter_years' | translate }}
               </p> -->
             </mat-card-content>
-            <button mat-button
+            <button mat-stroked-button
               (click)="goToFaculty(result.facultyId)">{{ 'buttons.more_details' | translate | uppercase }}</button>
           </mat-card>
         </div>
