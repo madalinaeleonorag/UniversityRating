@@ -9,7 +9,7 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  background-color: white;
+  background-color: $white;
 }
 
 .cursor-pointer {
@@ -41,7 +41,7 @@ button {
 }
 
 .dark-blue-bold-text {
-  color: $darkBlue;
+  color: $gradient2;
   font-weight: bold;
 }
 
@@ -66,7 +66,7 @@ button {
 }
 
 .grey-text {
-  color: $lightGrey;
+  color: $lightgray;
 }
 
 .app-title-cursor {
@@ -86,7 +86,7 @@ button {
 }
 
 .custom-error {
-  color: red;
+  color: $danger;
   font-size: smaller;
 }
 
@@ -104,27 +104,28 @@ button {
 }
 .custom-icon {
   padding: 5px;
-  color: black;
+  color: $black;
 }
 
 .custom-text {
   padding: 5px;
-  color: black;
+  color: $black;
 }
 
 .white-button-without-hover {
-  background-color: white;
+  background-color: $white;
   margin-left: 10px;
-  color: black;
+  color: $black;
 }
 
-.white-button {
-  background-color: white;
-  color: black;
+.white-button-with-hover {
+  background-color: $white;
+  color: $black;
 }
 
-.white-button:hover {
-  color: white;
+.white-button-with-hover:hover {
+  color: $white;
+  border:none;
   background-color: $gradient1;
   background-image: -moz-linear-gradient(45deg, $gradient1 0%, $gradient2 100%);
   background-image: -webkit-gradient(
@@ -146,12 +147,59 @@ button {
   background: linear-gradient(45deg, $gradient1 0%, $gradient2 100%);
 }
 
+.gradient-button-without-hover {
+  color: $white;
+  border:none !important;
+  background-color: $gradient1;
+  background-image: -moz-linear-gradient(45deg, $gradient1 0%, $gradient2 100%);
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    color-stop(0%, $gradient1),
+    color-stop(100%, $gradient2)
+  );
+  background-image: -webkit-linear-gradient(
+    45deg,
+    $gradient1 0%,
+    $gradient2 100%
+  );
+  background-image: -o-linear-gradient(45deg, $gradient1 0%, $gradient2 100%);
+  background: -ms-linear-gradient(45deg, $gradient1 0%, $gradient2 100%);
+  background: -webkit-linear-gradient(45deg, $gradient1 0%, $gradient2 100%);
+  background: -o-linear-gradient(45deg, $gradient1 0%, $gradient2 100%);
+  background: linear-gradient(45deg, $gradient1 0%, $gradient2 100%);
+}
+
+.gradient-text {
+  background: linear-gradient(45deg, $gradient1 0%, $gradient2 100%);;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .custom-icon:hover {
   color: $gradient1;
 }
 
+.gradient-text-with-hover {
+  color: $black;
+}
+
+.gradient-text-with-hover:hover {
+  background: linear-gradient(45deg, $gradient1 0%, $gradient2 100%);;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .custom-text:hover {
   color: $gradient2;
+}
+
+.custom-card-with-hover:hover {
+  border: 1px solid rgba(0,0,0,.12);
+  border-radius: 4px !important;
 }
 
 .mat-chip.mat-standard-chip::after {

@@ -23,5 +23,5 @@
 <div mat-dialog-actions>
   <button mat-stroked-button (click)="cancelLogin()">{{ 'login_dialog.cancel' | translate }}</button>
   <button mat-stroked-button [disabled]="emailFormControl.status === 'INVALID' || passwordFormControl.status === 'INVALID'"
-    (click)="signInWithEmail()">{{ 'login_dialog.login' | translate }}</button>
+    (click)="signInWithEmail()" class="gradient-button-without-hover">{{ 'login_dialog.login' | translate }}</button>
 </div>

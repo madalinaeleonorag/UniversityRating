@@ -60,7 +60,7 @@ export class DirectionsMapDirective implements OnInit, OnChanges {
             // infowindow2.setPosition(response.routes[0].legs[0].steps[middleStep].end_location);
             // infowindow2.open(map);
           } else {
-            console.log(`%c Directions request failed due to ${status}`, 'background: #444; padding: 2px; border-radius:2px; color: #ffff00');
+            console.log(`%c Directions request failed due to ${status}`, 'background: #444; padding: 2px; border-radius:2px; color: #ffc107');
           }
         });
       }

@@ -30,7 +30,7 @@ app-editable-comments {
         font-weight: bold;
 
         .date {
-          color: grey;
+          color: $lightgray;
           font-weight: normal;
         }
       }
@@ -47,7 +47,7 @@ app-editable-comments {
           width: 100%;
           margin-top: 5px;
           height: 50px;
-          background-color: $background;
+          background-color: $white;
           border: none;
         }
       }

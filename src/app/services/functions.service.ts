@@ -31,7 +31,7 @@ export class FunctionsService {
         city = addressComponents[addressComponents.length - 4].long_name;
         return city;
       } else {
-        console.log(`%c Geocode was not successful for the following reason: ${status}`, 'color: #ff993;');
+        console.log(`%c Geocode was not successful for the following reason: ${status}`, 'color: #ffc107;');
       }
     });
     // return city;

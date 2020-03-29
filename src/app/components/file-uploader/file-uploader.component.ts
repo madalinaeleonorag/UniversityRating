@@ -32,7 +32,7 @@ export class FileUploaderComponent implements OnInit {
               logoUniversity: url
             });
           }).catch(error => {
-            console.log('%c error on loading image', 'color: #4d79ff;');
+            console.log('%c error on loading image', 'color: #dc3545;');
           });
         });
       }
@@ -45,7 +45,7 @@ export class FileUploaderComponent implements OnInit {
               logoFaculty: url
             });
           }).catch(error => {
-            console.log('%c error on loading image', 'color: #4d79ff;');
+            console.log('%c error on loading image', 'color: #dc3545;');
           });
         });
       }
