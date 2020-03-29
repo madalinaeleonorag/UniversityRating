@@ -11,21 +11,15 @@
         </div>
 
         <div>
-          <button mat-stroked-button [matMenuTriggerFor]="menu" #t="matMenuTrigger" *ngIf="user">
+          <button mat-stroked-button [matMenuTriggerFor]="menu" #t="matMenuTrigger" *ngIf="user" class="white-button-without-hover">
             <mat-icon
               *ngIf="t.menuOpen === false && !user"
-              [ngClass]="{
-                'dark-blue-bold-text': firstPage,
-                'white-text': !firstPage
-              }"
+              class="custom-icon-login gradient-text-with-hover"
               >menu</mat-icon
             >
             <mat-icon
               *ngIf="t.menuOpen === false && user"
-              [ngClass]="{
-                'dark-blue-bold-text': firstPage,
-                'white-text': !firstPage
-              }"
+              class="custom-icon-login gradient-text-with-hover"
               >account_circle</mat-icon
             >
             <mat-icon
