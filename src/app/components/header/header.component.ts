@@ -14,7 +14,9 @@ import { SignUpDialogComponent } from '../sign-up-dialog/sign-up-dialog.componen
 })
 export class HeaderComponent implements OnInit {
 
+  @Input() firstPage: boolean;
   user: any;
+  isSticky: boolean;
   isUserSubscription: Subscription;
 
   constructor(private router: Router, private dialog: MatDialog, private authService: AuthService) {
@@ -23,16 +25,15 @@ export class HeaderComponent implements OnInit {
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(e) {
      if (window.pageYOffset > 50) {
+       this.isSticky = true;
        let element = document.getElementById('navbar');
        element.classList.add('is_sticky');
      } else {
+      this.isSticky = false;
       let element = document.getElementById('navbar');
         element.classList.remove('is_sticky'); 
      }
   }
-
-
-  @Input() firstPage: boolean;
 
   ngOnInit() {
     this.isUserSubscription = this.authService.isUserAuthenticatedObservable.subscribe(result => {

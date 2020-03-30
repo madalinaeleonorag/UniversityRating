@@ -1,4 +1,6 @@
-<header class="sticky-header header-area transparent-header" id="navbar">
+<header class="sticky-header header-area transparent-header" id="navbar"
+[ngClass]="{'is-sticky': isSticky}"
+[ngClass]="{'custom-gradient': !firstPage}">
   <div class="container">
     <nav class="navbar navbar-expand-md" fxLayout="row"
     fxLayoutAlign="space-between center">
@@ -24,14 +26,11 @@
             >
             <mat-icon
               *ngIf="t.menuOpen === true"
-              [ngClass]="{
-                'dark-blue-bold-text': firstPage,
-                'white-text': !firstPage
-              }"
+              class="custom-icon-login gradient-text-with-hover"
               >close</mat-icon
             >
           </button>
-        <button mat-stroked-button (click)="openLoginDialog()" *ngIf="!user">
+        <button mat-stroked-button (click)="openLoginDialog()" *ngIf="!user" class="white-text-button-without-hover">
           {{ "buttons.login" | translate | uppercase }}
         </button>
         <button mat-stroked-button (click)="openSignUpDialog()" *ngIf="!user" class="white-button-without-hover">

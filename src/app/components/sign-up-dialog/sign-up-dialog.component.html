@@ -32,7 +32,6 @@
         <option value="F">{{ 'signup_dialog.female' | translate }}</option>
       </select>
     </mat-form-field>
-      <!-- <mat-label>{{ 'signup_dialog.location' | translate }}</mat-label> -->
       <AutocompleteAddressComponent (setAddress)="getAddress($event)" adressType="geocode"></AutocompleteAddressComponent>
     <mat-form-field>
       <mat-label>{{ 'signup_dialog.school_level' | translate }}</mat-label>
@@ -60,7 +59,7 @@
 <div mat-dialog-actions>
   <button mat-stroked-button (click)="cancelSignUp()">{{ 'signup_dialog.cancel' | translate }}</button>
   <button mat-stroked-button [disabled]="signUpForm.status === 'INVALID'"
-    (click)="signUpWithEmail()">{{ 'signup_dialog.signup' | translate }}</button>
+    (click)="signUpWithEmail()" class="gradient-button-without-hover">{{ 'signup_dialog.signup' | translate }}</button>
 </div>
 
 <!-- TODO add translate for dropdowns -->

@@ -63,12 +63,15 @@ app-header {
     font-size: 1.7rem;
   }
 
-  .header-area.is_sticky {
+  .header-area.is-sticky {
     .custom-title {
-      background: linear-gradient(45deg, $gradient1 0%, $gradient2 100%);;
+      background: linear-gradient(45deg, $gradient-middle 0%, $gradient2 100%);;
       background-clip: text;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+    }
+    .white-text-button-without-hover {
+      color: $black !important;
     }
     background: #ffffff;
     -webkit-box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
