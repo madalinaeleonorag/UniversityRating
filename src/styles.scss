@@ -112,8 +112,12 @@ button {
   color: $black;
 }
 
+.white-text-button-without-hover {
+  color: $white !important;
+}
+
 .white-button-without-hover {
-  background-color: $white;
+  background-color: $white !important;
   margin-left: 10px;
   color: $black;
 }
@@ -148,7 +152,7 @@ button {
 }
 
 .gradient-button-without-hover {
-  color: $white;
+  color: $white !important;
   border:none !important;
   background-color: $gradient1;
   background-image: -moz-linear-gradient(45deg, $gradient1 0%, $gradient2 100%);
@@ -191,6 +195,10 @@ button {
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.mat-stroked-button {
+  color: $black;
 }
 
 .custom-text:hover {

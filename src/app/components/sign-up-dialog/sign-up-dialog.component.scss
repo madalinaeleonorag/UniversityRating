@@ -1,6 +1,5 @@
 @import "../../variables.scss";
 
-app-sigp-up-dialog {
   form {
     display: flex;
     flex-flow: column;
@@ -10,7 +9,8 @@ app-sigp-up-dialog {
     justify-content: space-between !important;
   }
   .adminstration-info {
-    color: $gradient2;
+    color: $lightgray;
+    margin-bottom: 20px;
   }
-}
+
 

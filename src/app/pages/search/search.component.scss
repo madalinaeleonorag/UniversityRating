@@ -1,13 +1,40 @@
 @import "../../variables.scss";
 
 app-search {
-  .container {
-    padding: 20px;
-  }
 
   mat-card-subtitle {
     font-weight: bold;
     color: $black !important;
+  }
+
+  .banner-slider {
+    height: 80vh;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+
+    .mat-stroked-button {
+      margin-top: 20px;
+    }
+  }
+
+  .wave-one {
+    position: relative;
+  }
+
+  .wave-one::before {
+    position: absolute;
+    content: "";
+    left: 0;
+    bottom: -144px;
+    width: 100%;
+    height: 595px;
+    background-position-y: bottom;
+    background-repeat: repeat-x;
+    background-size: cover;
+    background-image: url(../../../assets/wave.png);
   }
 
   mat-card.custom-card { 
