@@ -31,8 +31,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   facilitiesList: string[] = [];
   studyLevel = 'University';
   ratingType = 'NoSorting';
-  institutionState = true;
-  institutionPrivate = true;
+  institutionTypeSelection = [];
   bachelorSubscription: Subscription;
   bachelorData = [];
   doctoralSubscription: Subscription;
@@ -163,12 +162,10 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   private matchingType(type: string) {
-    if (this.institutionState === true && this.institutionPrivate === true) {
+    if (this.institutionTypeSelection.length > 0 && this.institutionTypeSelection.includes(type.toLowerCase())) {
       return true;
-    } else if (this.institutionState === true) {
-      return this.institutionState ? this.institutionState === true && type === 'Stat' : true;
-    } else if (this.institutionPrivate === true) {
-      return this.institutionPrivate ? this.institutionPrivate === true && type === 'Privat' : true;
+    } else if (this.institutionTypeSelection.length === 0) {
+      return true
     } else {
       return false;
     }

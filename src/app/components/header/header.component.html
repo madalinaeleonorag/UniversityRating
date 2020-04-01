@@ -1,6 +1,6 @@
 <header class="sticky-header header-area transparent-header" id="navbar"
-[ngClass]="{'is-sticky': isSticky}"
-[ngClass]="{'custom-gradient': !firstPage}">
+[ngClass]="{'is-sticky': isSticky || !firstPage}"
+[ngClass]="{'gradient-text': !firstPage}">
   <div class="container">
     <nav class="navbar navbar-expand-md" fxLayout="row"
     fxLayoutAlign="space-between center">
