@@ -1,6 +1,19 @@
 @import "../../variables.scss";
 
 app-search {
+
+  .custom-flex-filters {
+    top: 76px;
+    position: fixed;
+    z-index: 999;
+    display: flex;
+    flex-flow: wrap;
+    justify-content: space-evenly;
+    background-color: $white;
+    box-shadow: 0 4px 6px 0px $shadow;
+    width: 100%;
+  }
+
   mat-card.custom-filters {
     margin-right: 20px;
     max-width: min-content;
@@ -14,6 +27,9 @@ app-search {
   .results-cards {
     display: flex;
     flex-flow: wrap;
+    margin-top: 160px;
+    margin-right: 20px;
+    margin-left: 20px;
 
     mat-card.custom-card:hover {
       .mat-card-image {

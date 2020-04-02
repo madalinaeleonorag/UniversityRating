@@ -47,7 +47,7 @@ app-header {
     position: relative;
     display: -ms-flexbox;
     display: flex;
-    color: white;
+    color: $white;
     -ms-flex-align: center;
     align-items: center;
     -ms-flex-pack: justify;
@@ -73,9 +73,7 @@ app-header {
     .white-text-button-without-hover {
       color: $black !important;
     }
-    background: #ffffff;
-    -webkit-box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    background: $white;
     position: fixed;
     .navbar {
       color: $gradient2;
@@ -90,7 +88,9 @@ app-header {
     transition: all 0.3s ease-in-out 0s;
   }
 
-  .box-shadow {
-    box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
+  .header-area.box-shadow-header {
+    -webkit-box-shadow: 0 4px 6px 0px $shadow;
+    box-shadow: 0 4px 6px 0px $shadow;
   }
+
 }
