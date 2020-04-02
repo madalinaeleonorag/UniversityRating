@@ -15,6 +15,7 @@ import { SignUpDialogComponent } from '../sign-up-dialog/sign-up-dialog.componen
 export class HeaderComponent implements OnInit {
 
   @Input() firstPage: boolean;
+  @Input() searchPage: boolean;
   user: any;
   isSticky: boolean;
   isUserSubscription: Subscription;
@@ -24,14 +25,11 @@ export class HeaderComponent implements OnInit {
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(e) {
+    console.log(this.searchPage)
      if (window.pageYOffset > 50) {
        this.isSticky = true;
-       let element = document.getElementById('navbar');
-       element.classList.add('is_sticky');
      } else {
       this.isSticky = false;
-      let element = document.getElementById('navbar');
-        element.classList.remove('is_sticky'); 
      }
   }
 
