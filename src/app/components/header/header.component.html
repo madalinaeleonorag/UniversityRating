@@ -1,8 +1,7 @@
 <header
   class="sticky-header header-area transparent-header"
   id="navbar"
-  [ngClass]="{ 'is-sticky': isSticky || !firstPage, 'gradient-text': !firstPage }"
-  [ngClass]="{ 'box-shadow-header': isSticky || !firstPage}"
+  [ngClass]="{ 'is-sticky': isSticky || !firstPage, 'box-shadow-header': isSticky}"
 >
   <div class="container">
     <nav
@@ -14,6 +13,7 @@
         class="app-title-cursor"
         (click)="goToHomepage()"
         class="custom-title"
+        [ngClass]="{ 'gradient-text': !firstPage }"
       >
         UniversityRatings
       </div>

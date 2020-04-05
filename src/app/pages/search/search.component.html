@@ -1,6 +1,6 @@
 <div class="container">
   <div fxLayout="column">
-    <div class="custom-flex-filters">
+    <div class="custom-flex-filters" #filters>
         <!-- study level -->
         <mat-form-field>
           <mat-label>{{ "filters.study_level" | translate }}</mat-label>
@@ -100,7 +100,8 @@
         </mat-form-field>
     </div>
 
-      <div class="grey-text">
+    <div #results id="resultsId">
+      <div class="grey-text" style="padding: 20px;">
         {{ getData().length }} {{ "filters.result_counter" | translate }}
       </div>
       <div class="results-cards">
@@ -277,5 +278,7 @@
           </mat-card>
         </div>
       </div>
+    </div>
+
   </div>
 </div>

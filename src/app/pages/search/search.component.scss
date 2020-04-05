@@ -27,7 +27,6 @@ app-search {
   .results-cards {
     display: flex;
     flex-flow: wrap;
-    margin-top: 160px;
     margin-right: 20px;
     margin-left: 20px;
 
@@ -38,7 +37,7 @@ app-search {
     }
   
     mat-card.custom-card {
-      width: 20vw;
+      width: 17.8vw;
       height: 50vh;
       padding: 5px;
       margin-right: 20px;

@@ -25,7 +25,6 @@ export class HeaderComponent implements OnInit {
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(e) {
-    console.log(this.searchPage)
      if (window.pageYOffset > 50) {
        this.isSticky = true;
      } else {
