@@ -1,25 +1,32 @@
-import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { FirebaseService } from 'src/app/services/firebase-service.service';
-import { Categories } from 'src/app/enums/Categories';
-import { Sorting } from 'src/app/enums/Sorting';
-import { InstitutionType } from 'src/app/enums/InstitutionType';
-import { Facilities } from 'src/app/enums/Facilities';
-import { Subscription } from 'rxjs';
-import { TranslateService } from '@ngx-translate/core';
-import * as _ from 'underscore';
-import { Router } from '@angular/router';
-import { UniversityData } from 'src/app/models/UniversityData';
-import { FunctionsService } from 'src/app/services/functions.service';
+import {
+  Component,
+  OnInit,
+  ViewEncapsulation,
+  OnDestroy,
+  ElementRef,
+  ViewChild
+} from "@angular/core";
+import { FormControl } from "@angular/forms";
+import { FirebaseService } from "src/app/services/firebase-service.service";
+import { Categories } from "src/app/enums/Categories";
+import { Sorting } from "src/app/enums/Sorting";
+import { InstitutionType } from "src/app/enums/InstitutionType";
+import { Facilities } from "src/app/enums/Facilities";
+import { Subscription } from "rxjs";
+import * as _ from "underscore";
+import { Router } from "@angular/router";
+import { UniversityData } from "src/app/models/UniversityData";
+import { FunctionsService } from "src/app/services/functions.service";
 
 @Component({
-  selector: 'app-search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss'],
+  selector: "app-search",
+  templateUrl: "./search.component.html",
+  styleUrls: ["./search.component.scss"],
   encapsulation: ViewEncapsulation.None
 })
 export class SearchComponent implements OnInit, OnDestroy {
-
+  @ViewChild("filters", { static: true }) filtersView: ElementRef;
+  @ViewChild("results", { static: true }) resultsView: ElementRef;
   categories: string[] = [];
   sortTypes: string[] = [];
   typeOfInstitution: string[] = [];
@@ -29,8 +36,8 @@ export class SearchComponent implements OnInit, OnDestroy {
   facilities = new FormControl();
   locationsList: any[] = [];
   facilitiesList: string[] = [];
-  studyLevel = 'University';
-  ratingType = 'NoSorting';
+  studyLevel = "University";
+  ratingType = "NoSorting";
   institutionTypeSelection = [];
   bachelorSubscription: Subscription;
   bachelorData = [];
@@ -43,8 +50,10 @@ export class SearchComponent implements OnInit, OnDestroy {
   universitiesSubscription: Subscription;
   universitiesData: UniversityData[] = [];
 
-
-  constructor(private firebaseService: FirebaseService, private router: Router, private functionsService: FunctionsService) {
+  constructor(
+    private firebaseService: FirebaseService,
+    private router: Router
+  ) {
     this.categories = Object.keys(Categories);
     this.sortTypes = Object.keys(Sorting);
     this.typeOfInstitution = Object.keys(InstitutionType);
@@ -52,44 +61,72 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.bachelorSubscription = this.firebaseService.getBachelorsData().subscribe(result => this.bachelorData = result);
-    this.doctoralSubscription = this.firebaseService.getDoctoralsData().subscribe(result => this.doctoralData = result);
-    this.facultiesSubscription = this.firebaseService.getFacultiesData().subscribe(result => this.facultiesData = result);
-    this.mastersSubscription = this.firebaseService.getMastersData().subscribe(result => this.mastersData = result);
-    this.universitiesSubscription = this.firebaseService.getUniversitiesData().subscribe(result => {
-      const resultsArray = [];
-      result.forEach(item => {
-        resultsArray.push(new UniversityData(item));
+    document
+      .getElementById("resultsId")
+      .setAttribute(
+        "style",
+        `margin-top: ${this.filtersView.nativeElement.offsetHeight}px;`
+      );
+    this.bachelorSubscription = this.firebaseService
+      .getBachelorsData()
+      .subscribe(result => (this.bachelorData = result));
+    this.doctoralSubscription = this.firebaseService
+      .getDoctoralsData()
+      .subscribe(result => (this.doctoralData = result));
+    this.facultiesSubscription = this.firebaseService
+      .getFacultiesData()
+      .subscribe(result => (this.facultiesData = result));
+    this.mastersSubscription = this.firebaseService
+      .getMastersData()
+      .subscribe(result => (this.mastersData = result));
+    this.universitiesSubscription = this.firebaseService
+      .getUniversitiesData()
+      .subscribe(result => {
+        const resultsArray = [];
+        result.forEach(item => {
+          resultsArray.push(new UniversityData(item));
+        });
+        this.universitiesData = resultsArray;
+        this.getUniversityLocations(result);
       });
-      this.universitiesData = resultsArray;
-      this.getUniversityLocations(result);
-    });
     this.facilitiesList = Object.keys(Facilities);
   }
 
   getData() {
     switch (this.studyLevel) {
-      case 'University': return this.getUniversitiesData();
-      case 'Faculty': return this.getFacultiesData();
-      case 'Bachelor': return this.getBachelorsData();
-      case 'Master': return this.getMastersData();
-      case 'Doctoral': return this.getDoctoralsData();
+      case "University":
+        return this.getUniversitiesData();
+      case "Faculty":
+        return this.getFacultiesData();
+      case "Bachelor":
+        return this.getBachelorsData();
+      case "Master":
+        return this.getMastersData();
+      case "Doctoral":
+        return this.getDoctoralsData();
     }
   }
 
   private getUniversitiesData() {
     const result = this.universitiesData.filter(university => {
-      return this.matchingNames(university.nameUniversity) && this.matchingLocations(university.locality)
-        && this.matchingType(university.typeUniversity) && this.matchingFacilities(university.facilitiesUniversity)
-        && this.matchingDescription(university.descriptionUniversity);
+      return (
+        this.matchingNames(university.nameUniversity) &&
+        this.matchingLocations(university.locality) &&
+        this.matchingType(university.typeUniversity) &&
+        this.matchingFacilities(university.facilitiesUniversity) &&
+        this.matchingDescription(university.descriptionUniversity)
+      );
     });
     return this.sortByRatings(result);
   }
 
   private getFacultiesData() {
     const result = this.facultiesData.filter(faculty => {
-      return this.matchingNames(faculty.nameFaculty) && this.matchingLocations(faculty.locationFaculty)
-        && this.matchingDescription(faculty.descriptionFaculty);
+      return (
+        this.matchingNames(faculty.nameFaculty) &&
+        this.matchingLocations(faculty.locationFaculty) &&
+        this.matchingDescription(faculty.descriptionFaculty)
+      );
     });
     return this.sortByRatings(result);
   }
@@ -98,15 +135,20 @@ export class SearchComponent implements OnInit, OnDestroy {
     const dataWithFaculties = [];
     this.bachelorData.forEach(bachelor => {
       if (bachelor.facultyId) {
-        const facultyData = this.facultiesData.filter(faculty => faculty.facultyId === bachelor.facultyId);
+        const facultyData = this.facultiesData.filter(
+          faculty => faculty.facultyId === bachelor.facultyId
+        );
         dataWithFaculties.push(Object.assign({}, bachelor, facultyData[0]));
       } else {
         dataWithFaculties.push(bachelor);
       }
     });
     const result = dataWithFaculties.filter(bachelor => {
-      return this.matchingNames(bachelor.name) && this.matchingLocations(bachelor.locationFaculty)
-        && this.matchingDescription(bachelor.descriptionFaculty);
+      return (
+        this.matchingNames(bachelor.name) &&
+        this.matchingLocations(bachelor.locationFaculty) &&
+        this.matchingDescription(bachelor.descriptionFaculty)
+      );
     });
     return this.sortByRatings(result);
   }
@@ -115,15 +157,20 @@ export class SearchComponent implements OnInit, OnDestroy {
     const dataWithFaculties = [];
     this.mastersData.forEach(master => {
       if (master.facultyId) {
-        const facultyData = this.facultiesData.filter(faculty => faculty.facultyId === master.facultyId);
+        const facultyData = this.facultiesData.filter(
+          faculty => faculty.facultyId === master.facultyId
+        );
         dataWithFaculties.push(Object.assign({}, master, facultyData[0]));
       } else {
         dataWithFaculties.push(master);
       }
     });
     const result = dataWithFaculties.filter(master => {
-      return this.matchingNames(master.name) && this.matchingLocations(master.locationFaculty)
-        && this.matchingDescription(master.descriptionFaculty);
+      return (
+        this.matchingNames(master.name) &&
+        this.matchingLocations(master.locationFaculty) &&
+        this.matchingDescription(master.descriptionFaculty)
+      );
     });
     return this.sortByRatings(result);
   }
@@ -132,15 +179,20 @@ export class SearchComponent implements OnInit, OnDestroy {
     const dataWithFaculties = [];
     this.doctoralData.forEach(doctoral => {
       if (doctoral.facultyId) {
-        const facultyData = this.facultiesData.filter(faculty => faculty.facultyId === doctoral.facultyId);
+        const facultyData = this.facultiesData.filter(
+          faculty => faculty.facultyId === doctoral.facultyId
+        );
         dataWithFaculties.push(Object.assign({}, doctoral, facultyData[0]));
       } else {
         dataWithFaculties.push(doctoral);
       }
     });
     const result = dataWithFaculties.filter(doctoral => {
-      return this.matchingNames(doctoral.name) && this.matchingLocations(doctoral.locationFaculty)
-        && this.matchingDescription(doctoral.descriptionFaculty);
+      return (
+        this.matchingNames(doctoral.name) &&
+        this.matchingLocations(doctoral.locationFaculty) &&
+        this.matchingDescription(doctoral.descriptionFaculty)
+      );
     });
     return this.sortByRatings(result);
   }
@@ -154,18 +206,26 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   private matchingNames(name: string) {
-    return this.keywordsSearch.value ? name.toLowerCase().includes(this.keywordsSearch.value.toLowerCase()) : true;
+    return this.keywordsSearch.value
+      ? name.toLowerCase().includes(this.keywordsSearch.value.toLowerCase())
+      : true;
   }
 
   private matchingLocations(location: string) {
-    return this.locations.value ? this.locations.value.search(location) !== -1 || this.locations.value.includes('all_locations') : true;
+    return this.locations.value
+      ? this.locations.value.search(location) !== -1 ||
+          this.locations.value.includes("all_locations")
+      : true;
   }
 
   private matchingType(type: string) {
-    if (this.institutionTypeSelection.length > 0 && this.institutionTypeSelection.includes(type.toLowerCase())) {
+    if (
+      this.institutionTypeSelection.length > 0 &&
+      this.institutionTypeSelection.includes(type.toLowerCase())
+    ) {
       return true;
     } else if (this.institutionTypeSelection.length === 0) {
-      return true
+      return true;
     } else {
       return false;
     }
@@ -176,8 +236,8 @@ export class SearchComponent implements OnInit, OnDestroy {
       if (facilities) {
         return this.facilities.value
           ? facilities.filter(elem => {
-            return this.facilities.value.indexOf(elem) > -1;
-          }).length === this.facilities.value.length
+              return this.facilities.value.indexOf(elem) > -1;
+            }).length === this.facilities.value.length
           : true;
       } else {
         return false;
@@ -191,23 +251,25 @@ export class SearchComponent implements OnInit, OnDestroy {
     const geocoder = new google.maps.Geocoder();
     let city: any;
     return geocoder.geocode({ address: value }, (results, status) => {
-      if (status === 'OK') {
+      if (status === "OK") {
         const addressComponents = results[0].address_components;
         city = addressComponents[addressComponents.length - 4].long_name;
         return city;
       } else {
-        console.log('Geocode was not successful for the following reason: ' + status);
+        console.log(
+          "Geocode was not successful for the following reason: " + status
+        );
       }
     });
   }
 
   private matchingDescription(description: string) {
     if (this.descriptionSearch.value) {
-      const splittedDescription = this.descriptionSearch.value.split(' ');
+      const splittedDescription = this.descriptionSearch.value.split(" ");
       const splittedDescriptionLength = splittedDescription.length;
       const results = [];
       let counter = 0;
-      if (this.descriptionSearch.value && this.descriptionSearch.value !== '') {
+      if (this.descriptionSearch.value && this.descriptionSearch.value !== "") {
         splittedDescription.forEach(item => {
           results.push(
             item ? description.toLowerCase().includes(item.toLowerCase()) : true
@@ -234,15 +296,16 @@ export class SearchComponent implements OnInit, OnDestroy {
   sortByRatings(data) {
     let sortedData = data;
     switch (this.ratingType) {
-      case 'Ascending':
+      case "Ascending":
         sortedData.sort((a: any, b: any) => a.rating - b.rating);
         break;
-      case 'Descending':
+      case "Descending":
         sortedData.sort((a: any, b: any) => {
           return b.rating - a.rating;
         });
         break;
-      case 'NoSorting': sortedData = data;
+      case "NoSorting":
+        sortedData = data;
     }
     return sortedData;
   }
@@ -272,5 +335,4 @@ export class SearchComponent implements OnInit, OnDestroy {
       this.universitiesSubscription.unsubscribe();
     }
   }
-
 }
