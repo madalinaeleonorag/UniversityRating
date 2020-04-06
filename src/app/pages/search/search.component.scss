@@ -39,28 +39,22 @@ app-search {
     mat-card.custom-card {
       width: 17.8vw;
       height: 50vh;
-      padding: 5px;
+      padding: 15px;
       margin-right: 20px;
+      display: flex;
       margin-bottom: 20px;
-  
-      .mat-button {
-        background-color: $gradient2;
-        color: $white;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      text-align: center;
+
+      img {
+        width: inherit;
       }
-  
-      .mat-card-content {
-        text-align: center;
-        padding: 16px;
-        margin-bottom: 0px;
-        display: flex;
-        flex-flow: column;
-        align-items: center;
-      }
-  
+
       .mat-card-image {
         filter: grayscale(100%);
-        width: 160px;
-      height: 160px;
+        margin-top: unset;
       }
   
     }
