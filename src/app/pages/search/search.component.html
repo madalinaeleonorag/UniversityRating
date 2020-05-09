@@ -177,9 +177,12 @@
               >
               </app-editable-star-rating>
             </mat-card-content>
-            <button mat-stroked-button (click)="goToFaculty(result.facultyId)">
-              {{ "buttons.more_details" | translate | uppercase }}
-            </button>
+            <mat-card-content>
+              <app-wave-button
+                text="{{ 'buttons.more_details' | translate | uppercase }}"
+                (click)="goToUniversity(result.facultyId)"
+              ></app-wave-button>
+            </mat-card-content>
           </mat-card>
           <!-- bachelor results -->
           <mat-card
@@ -207,9 +210,12 @@
               <!-- <app-editable-star-rating *ngIf="result.facultyId" [id]="result.facultyId" [editable]="false" type="faculty" showNumberOfRatings="true">
               </app-editable-star-rating> -->
             </mat-card-content>
-            <button mat-stroked-button (click)="goToFaculty(result.facultyId)">
-              {{ "buttons.more_details" | translate | uppercase }}
-            </button>
+            <mat-card-content>
+              <app-wave-button
+                text="{{ 'buttons.more_details' | translate | uppercase }}"
+                (click)="goToUniversity(result.facultyId)"
+              ></app-wave-button>
+            </mat-card-content>
             <!-- TODO verify why this buttons are not working -->
           </mat-card>
           <!-- masters results -->
@@ -237,9 +243,12 @@
               <!-- <app-editable-star-rating *ngIf="result.facultyId" [id]="result.facultyId" [editable]="false" type="faculty" showNumberOfRatings="true">
               </app-editable-star-rating> -->
             </mat-card-content>
-            <button mat-stroked-button (click)="goToFaculty(result.facultyId)">
-              {{ "buttons.more_details" | translate | uppercase }}
-            </button>
+            <mat-card-content>
+              <app-wave-button
+                text="{{ 'buttons.more_details' | translate | uppercase }}"
+                (click)="goToUniversity(result.facultyId)"
+              ></app-wave-button>
+            </mat-card-content>
           </mat-card>
           <!-- doctorals results -->
           <mat-card
@@ -270,9 +279,12 @@
                 {{ result.years }} {{ 'filters.counter_years' | translate }}
               </p> -->
             </mat-card-content>
-            <button mat-stroked-button (click)="goToFaculty(result.facultyId)">
-              {{ "buttons.more_details" | translate | uppercase }}
-            </button>
+            <mat-card-content>
+              <app-wave-button
+                text="{{ 'buttons.more_details' | translate | uppercase }}"
+                (click)="goToUniversity(result.facultyId)"
+              ></app-wave-button>
+            </mat-card-content>
           </mat-card>
         </div>
       </div>

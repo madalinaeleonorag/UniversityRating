@@ -31,7 +31,6 @@ export class FirebaseService {
   }
 
   editUserDetails(userId: string, details: object) {
-    // TODO
     Object.keys(details).forEach((key) => (details[key] == null) && delete details[key]);
     return this.fb.collection('Users').doc(userId).update(Object.assign({}, details));
   }

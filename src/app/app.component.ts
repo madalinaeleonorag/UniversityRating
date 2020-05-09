@@ -11,7 +11,7 @@ import { AzureAiTextAnalysisService } from './services/azure-ai-text-analysis.se
   encapsulation: ViewEncapsulation.None
 })
 export class AppComponent implements OnInit {
-  title = 'UniversityRating';
+  title = 'UniView';
   firstPage: boolean;
   searchPage: boolean;
 
