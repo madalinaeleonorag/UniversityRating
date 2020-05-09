@@ -22,30 +22,30 @@
     <mat-form-field class="example-full-width">
       <input matInput placeholder="{{ 'signup_dialog.surname' | translate }}" formControlName="surname" type="text">
     </mat-form-field>
-    <mat-form-field class="example-full-width">
+    <!-- <mat-form-field class="example-full-width">
       <input matInput placeholder="{{ 'signup_dialog.birthday' | translate }}" formControlName="birthday" type="date">
-    </mat-form-field>
-    <mat-form-field>
+    </mat-form-field> -->
+    <!-- <mat-form-field>
       <mat-label>{{ 'signup_dialog.sex' | translate }}</mat-label>
       <select matNativeControl formControlName="sex">
         <option value="M">{{ 'signup_dialog.male' | translate }}</option>
         <option value="F">{{ 'signup_dialog.female' | translate }}</option>
       </select>
-    </mat-form-field>
-      <AutocompleteAddressComponent (setAddress)="getAddress($event)" adressType="geocode"></AutocompleteAddressComponent>
-    <mat-form-field>
+    </mat-form-field> -->
+      <!-- <AutocompleteAddressComponent (setAddress)="getAddress($event)" adressType="geocode"></AutocompleteAddressComponent> -->
+    <!-- <mat-form-field>
       <mat-label>{{ 'signup_dialog.school_level' | translate }}</mat-label>
       <select matNativeControl formControlName="schoolLevel">
         <option *ngFor="let level of schoolLevelValues" [value]="level">{{ level }}</option>
       </select>
-    </mat-form-field>
-    <mat-form-field>
+    </mat-form-field> -->
+    <!-- <mat-form-field>
       <mat-label>{{ 'signup_dialog.class_level' | translate }}</mat-label>
       <select matNativeControl formControlName="classLevel">
         <option *ngFor="let level of classLevelValues(signUpForm.value.schoolLevel)" [value]="level">{{ level }}
         </option>
       </select>
-    </mat-form-field>
+    </mat-form-field> -->
     <div class="gdpr-checkbox">
       <mat-checkbox formControlName="gdpr">
         {{ 'signup_dialog.gdpr' | translate }}
@@ -61,5 +61,3 @@
   <button mat-stroked-button [disabled]="signUpForm.status === 'INVALID'"
     (click)="signUpWithEmail()" class="gradient-button-without-hover">{{ 'signup_dialog.signup' | translate }}</button>
 </div>
-
-<!-- TODO add translate for dropdowns -->

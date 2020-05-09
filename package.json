@@ -41,6 +41,7 @@
     "minimist": "^1.2.3",
     "moment": "^2.24.0",
     "rxjs": "^6.5.3",
+    "sendmail": "^1.6.1",
     "tslib": "^1.10.0",
     "underscore": "^1.9.1",
     "zone.js": "~0.9.1"
@@ -53,6 +54,7 @@
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
+    "@types/sendmail": "^1.4.2",
     "codelyzer": "^5.0.0",
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
