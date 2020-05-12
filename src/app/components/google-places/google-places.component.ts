@@ -9,6 +9,7 @@ import { } from 'googlemaps';
 })
 export class AutocompleteAddressComponent implements OnInit, AfterViewInit {
     @Input() adressType: string;
+    @Input() disabled: boolean;
     @Output() setAddress: EventEmitter<any> = new EventEmitter();
     @ViewChild('addresstext', { static: false }) addresstext: any;
 
