@@ -22,8 +22,6 @@ export class SignUpDialogComponent implements OnInit {
   signUpForm: FormGroup;
   error: string;
   matcher = new MyErrorStateMatcher();
-  schoolLevelValues = ['primary', 'highschool', 'licence', 'master', 'doctoral', 'finished'];
-  locations = [];
 
   constructor(private dialogRef: MatDialogRef<SignUpDialogComponent>,
               private authService: AuthService,
@@ -33,12 +31,6 @@ export class SignUpDialogComponent implements OnInit {
   }
 
   ngOnInit() {
-  }
-
-  getAddress(place: object) {
-    const address = 'address_components';
-    const addressComponents = place[address];
-    this.signUpForm.get('location').setValue(addressComponents[addressComponents.length - 4].long_name)
   }
 
   buildForm() {
@@ -59,36 +51,10 @@ export class SignUpDialogComponent implements OnInit {
       surname: new FormControl('', [
         Validators.required
       ]),
-      birthday: new FormControl('', [
-        Validators.required
-      ]),
-      sex: new FormControl('', [
-        Validators.required
-      ]),
-      schoolLevel: new FormControl('', [
-        Validators.required
-      ]),
-      classLevel: new FormControl('', [
-        Validators.required
-      ]),
-      location: new FormControl('', [
-        Validators.required
-      ]),
       gdpr: new FormControl('', [
         Validators.required
       ])
     });
-  }
-
-  classLevelValues(schoolLevel: string) {
-    switch (schoolLevel) {
-      case 'primary': return ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'];
-      case 'highschool': return ['IX', 'X', 'XI', 'XII'];
-      case 'licence': return ['1', '2', '3', '4', '5', '6'];
-      case 'master': return ['1', '2', '3'];
-      case 'doctoral': return ['1', '2'];
-      default: return '';
-    }
   }
 
   signUpWithEmail() {
@@ -100,11 +66,11 @@ export class SignUpDialogComponent implements OnInit {
           email: this.signUpForm.value.email,
           name: this.signUpForm.value.name,
           surname: this.signUpForm.value.surname,
-          birthday: this.signUpForm.value.birthday,
-          sex: this.signUpForm.value.sex,
-          schoolLevel: this.signUpForm.value.schoolLevel,
-          classLevel: this.signUpForm.value.classLevel,
-          location: this.signUpForm.value.location,
+          birthday: null,
+          sex: null,
+          schoolLevel: null,
+          classLevel: null,
+          location: null,
           gdpr: this.signUpForm.value.gdpr,
           requestId: null,
           type: 'user',

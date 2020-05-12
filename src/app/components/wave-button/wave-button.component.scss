@@ -5,14 +5,20 @@ app-wave-button {
   .button {
     position: relative;
     padding: 0.5rem 1rem;
-    font-weight: bold;
     text-decoration: none;
     display: inline-block;
     text-align: center;
+    font-weight: bold;
     color: #ffffff;
     overflow: hidden;
     border-radius: 10px;
-
+    min-width: 70px;
+    height: 30px;
+    max-width: 100px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    text-transform: uppercase;
     background-color: white; /* Light */
     background-color: #3d639f; /* Dark */
   }

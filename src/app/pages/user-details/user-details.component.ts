@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { FirebaseService } from 'src/app/services/firebase-service.service';
@@ -9,7 +9,8 @@ import { RequestData } from 'src/app/models/RequestData';
 @Component({
   selector: 'app-user-details',
   templateUrl: './user-details.component.html',
-  styleUrls: ['./user-details.component.scss']
+  styleUrls: ['./user-details.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class UserDetailsComponent implements OnInit {
 
@@ -25,6 +26,7 @@ export class UserDetailsComponent implements OnInit {
   requestActive: boolean;
   requestStatus: string;
   requestMessage: string;
+  schoolLevelValues = ['primary', 'highschool', 'licence', 'master', 'doctoral', 'finished'];
 
   constructor(private authService: AuthService, private firebaseService: FirebaseService, private router: Router) {
   }
@@ -32,11 +34,6 @@ export class UserDetailsComponent implements OnInit {
   ngOnInit() {
     this.isUserSubscription = this.authService.isUserAuthenticatedObservable.subscribe(result => {
       this.user = result;
-      this.name = result ? result.name : '';
-      this.surname = result ? result.surname : '';
-      this.birthday = result ? result.birthday : '';
-      this.sex = result ? result.sex : '';
-      this.location = result ? result.locality : '';
       this.requestActive = result ? (result.requestId ? true : (result.type !== 'university') && (result.type !== 'admin')) : false;
       if (result) {
         this.firebaseService.getRequestById(result.requestId).subscribe(response => {
@@ -48,8 +45,25 @@ export class UserDetailsComponent implements OnInit {
     });
   }
 
+  getAddress(place: object) {
+    const address = 'address_components';
+    const addressComponents = place[address];
+    this.location = addressComponents[addressComponents.length - 4].long_name;
+  }
+
+  classLevelValues(schoolLevel: string) {
+    switch (schoolLevel) {
+      case 'primary': return ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'];
+      case 'highschool': return ['IX', 'X', 'XI', 'XII'];
+      case 'licence': return ['1', '2', '3', '4', '5', '6'];
+      case 'master': return ['1', '2', '3'];
+      case 'doctoral': return ['1', '2'];
+      default: return '';
+    }
+  }
+
   saveNewDetails() {
-    return this.firebaseService.editUserDetails(this.user.id, this.user).then(result => {
+    return this.firebaseService.editUserDetails(this.user.id, new UserData(this.user)).then(result => {
       this.canEdit = !this.canEdit;
     });
   }
