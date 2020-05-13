@@ -47,6 +47,13 @@ app-search {
       align-items: center;
       text-align: center;
 
+      .mat-card-content {
+        display: flex;
+        margin-bottom: 16px;
+        flex-flow: column;
+        align-items: center;
+      }
+
       img {
         width: inherit;
       }
