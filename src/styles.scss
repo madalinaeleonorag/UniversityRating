@@ -23,7 +23,7 @@ body {
 .mat-form-field-flex {
   padding: 5px;
   border: 1px solid #17005b12;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .mat-form-field-underline {
@@ -201,13 +201,13 @@ button {
   color: $black;
 }
 
-.custom-text:hover {
-  color: $gradient2;
+.disabled-pointer-event {
+  pointer-events: none;
+  filter: grayscale(100%);
 }
 
-.custom-card-with-hover:hover {
-  border: 1px solid rgba(0,0,0,.12);
-  border-radius: 4px !important;
+.custom-text:hover {
+  color: $gradient2;
 }
 
 .mat-chip.mat-standard-chip::after {
