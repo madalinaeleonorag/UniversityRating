@@ -1,16 +1,15 @@
 @import "../../variables.scss";
 
 app-search {
+  .is-hidden {
+    display: none;
+  }
+
   .custom-flex-filters {
-    top: 76px;
-    position: fixed;
-    z-index: 999;
     display: flex;
     flex-flow: wrap;
     justify-content: space-evenly;
-    background-color: $white;
-    box-shadow: 0 4px 6px 0px $shadow;
-    width: 100%;
+    padding: 0px 20px;
   }
 
   mat-card.custom-filters {
@@ -26,53 +25,56 @@ app-search {
   .results-cards {
     display: flex;
     flex-flow: wrap;
-    margin-right: 20px;
-    margin-left: 20px;
+    margin: 0px 60px;
 
-    mat-card.custom-card:hover {
-      .mat-card-image {
-        filter: none;
+    .mat-card:hover {
+      .mat-card-content {
+        .logo-image {
+          img {
+            filter: none;
+          }
+        }
       }
     }
 
-    mat-card.custom-card {
-      width: 220px;
-      height: 40vh;
-      padding: 15px;
-      margin: 10px;
+    .mat-card {
+      width: 209px;
       display: flex;
-      margin-bottom: 20px;
-      flex-direction: column;
-      justify-content: space-between;
+      margin: 10px;
+      flex-flow: column;
       align-items: center;
-      text-align: center;
 
       .mat-card-content {
         display: flex;
-        margin-bottom: 16px;
         flex-flow: column;
-        align-items: center;
-      }
+        text-align: -webkit-center;
+        align-content: center;
 
-      img {
-        width: inherit;
-      }
+        .logo-image {
+          height: 160px;
 
-      .text-cut {
-        display: block;
-        width: 10vw;
-        overflow: hidden;
-        white-space: normal;
-        text-overflow: ellipsis;
-      }
+          img {
+            max-width: 70%;
+            max-height: 100%;
+            filter: grayscale(100%);
+          }
 
-      .mat-card-image {
-        max-height: 40%;
-        width: auto;
-        height: auto;
-        max-width: 100%;
-        filter: grayscale(100%);
-        margin-top: unset;
+          img:first-child {
+            margin-top: unset;
+          }
+        }
+
+        .bottom-items {
+          display: flex;
+          flex-flow: column;
+          align-self: center;
+          height: 100%;
+
+          app-editable-star-rating {
+            align-self: center;
+            margin-bottom: 15px;
+          }
+        }
       }
     }
   }

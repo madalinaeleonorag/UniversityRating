@@ -13,14 +13,12 @@ import { AzureAiTextAnalysisService } from './services/azure-ai-text-analysis.se
 export class AppComponent implements OnInit {
   title = 'UniView';
   firstPage: boolean;
-  searchPage: boolean;
 
   constructor(private translate: TranslateService, private router: Router, private authService: AuthService, private textAnalysisService: AzureAiTextAnalysisService) {
     this.translate.setDefaultLang('ro');
     this.translate.use('en');
     this.router.events.subscribe(value => {
       router.url.toString() === '/' ? this.firstPage = true : this.firstPage = false;
-      router.url.toString() === '/search' ? this.searchPage = true : this.searchPage = false;
     });
     this.authService.verifyIfUserAlreadySignedIn();
   }

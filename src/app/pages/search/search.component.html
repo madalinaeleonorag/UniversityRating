@@ -1,6 +1,13 @@
 <div class="container">
   <div fxLayout="column">
-    <div class="custom-flex-filters" #filters>
+    <div class="custom-flex-filters">
+      <app-wave-button
+      *ngIf="!showFilters"
+      text="Show filters"
+      (click)="setShowFilters(true)"
+    ></app-wave-button>
+    </div>
+    <div class="custom-flex-filters" *ngIf="showFilters">
       <!-- study level -->
       <mat-form-field>
         <mat-label>{{ "filters.study_level" | translate }}</mat-label>
@@ -99,193 +106,186 @@
         </mat-select>
       </mat-form-field>
     </div>
+    <div class="custom-flex-filters">
+    <app-wave-button
+    *ngIf="showFilters"
+    text="Hide filters"
+    (click)="setShowFilters(false)"
+  ></app-wave-button>
+    </div>
 
     <div #results id="resultsId">
-      <div class="grey-text" style="padding: 20px;">
+      <div class="grey-text" style="padding: 10px 70px;">
         {{ getData().length }} {{ "filters.result_counter" | translate }}
       </div>
       <div class="results-cards">
         <div *ngFor="let result of getData()">
           <!-- university results -->
-          <mat-card
-            class="custom-card"
-            *ngIf="studyLevel === 'University'"
-          >
-            <img
-              mat-card-image
-              src="{{ result.logoUniversity }}"
-              *ngIf="result.logoUniversity"
-            />
-            <img
-              mat-card-image
-              src="assets/university.png"
-              *ngIf="!result.logoUniversity"
-            />
+          <mat-card *ngIf="studyLevel === 'University'">
             <mat-card-content>
+              <div class="logo-image">
+                <img
+                  mat-card-image
+                  src="{{ result.logoUniversity }}"
+                  *ngIf="result.logoUniversity"
+                />
+                <img
+                  mat-card-image
+                  src="assets/university.png"
+                  *ngIf="!result.logoUniversity"
+                />
+              </div>
               <p class="dark-blue-bold-text">
                 {{ result.nameUniversity | uppercase }}
               </p>
               <p class="grey-text" *ngIf="result.locality">
                 {{ result.locality }}
               </p>
-              <app-editable-star-rating
-                *ngIf="result.universityId"
-                [id]="result.universityId"
-                [editable]="false"
-                type="university"
-                showNumberOfRatings="true"
-              >
-              </app-editable-star-rating>
-            </mat-card-content>
-            <mat-card-content>
-              <app-wave-button
-                text="{{ 'buttons.more_details' | translate | uppercase }}"
-                (click)="goToUniversity(result.universityId)"
-              ></app-wave-button>
+              <div class="bottom-items">
+                <app-editable-star-rating
+                  *ngIf="result.universityId"
+                  [id]="result.universityId"
+                  [editable]="false"
+                  type="university"
+                  showNumberOfRatings="true"
+                >
+                </app-editable-star-rating>
+                <app-wave-button
+                  text="{{ 'buttons.more_details' | translate | uppercase }}"
+                  (click)="goToFaculty(result.universityId)"
+                ></app-wave-button>
+              </div>
             </mat-card-content>
           </mat-card>
+
           <!-- faculty results -->
-          <mat-card
-            class="custom-card"
-            fxLayout="column"
-            fxLayoutAlign="center center"
-            *ngIf="studyLevel === 'Faculty'"
-          >
-            <img
-              mat-card-image
-              src="{{ result.logoFaculty }}"
-              *ngIf="result.logoFaculty"
-            />
-            <img
-              mat-card-image
-              src="assets/university.png"
-              *ngIf="!result.logoFaculty"
-            />
+          <mat-card *ngIf="studyLevel === 'Faculty'">
             <mat-card-content>
+              <div class="logo-image">
+                <img
+                  mat-card-image
+                  src="{{ result.logoFaculty }}"
+                  *ngIf="result.logoFaculty"
+                />
+                <img
+                  mat-card-image
+                  src="assets/university.png"
+                  *ngIf="!result.logoFaculty"
+                />
+              </div>
               <p class="dark-blue-bold-text">
                 {{ result.nameFaculty | uppercase }}
               </p>
               <p class="grey-text" *ngIf="result.locationFaculty">
-                {{ result.locationFaculty | location }}
+                {{ result.locationFaculty }}
               </p>
-              <app-editable-star-rating
-                *ngIf="result.facultyId"
-                [id]="result.facultyId"
-                [editable]="false"
-                type="faculty"
-                showNumberOfRatings="true"
-              >
-              </app-editable-star-rating>
-            </mat-card-content>
-            <mat-card-content>
-              <app-wave-button
-                text="{{ 'buttons.more_details' | translate | uppercase }}"
-                (click)="goToUniversity(result.facultyId)"
-              ></app-wave-button>
+              <div class="bottom-items">
+                <app-editable-star-rating
+                  *ngIf="result.facultyId"
+                  [id]="result.facultyId"
+                  [editable]="false"
+                  type="faculty"
+                  showNumberOfRatings="true"
+                >
+                </app-editable-star-rating>
+                <app-wave-button
+                  text="{{ 'buttons.more_details' | translate | uppercase }}"
+                  (click)="goToUniversity(result.facultyId)"
+                ></app-wave-button>
+              </div>
             </mat-card-content>
           </mat-card>
+
           <!-- bachelor results -->
-          <mat-card
-            class="custom-card"
-            fxLayout="column"
-            fxLayoutAlign="center center"
-            *ngIf="studyLevel === 'Bachelor'"
-          >
-            <img
-              mat-card-image
-              src="{{ result.logoFaculty }}"
-              *ngIf="result.logoFaculty"
-            />
-            <img
-              mat-card-image
-              src="assets/university.png"
-              *ngIf="!result.logoFaculty"
-            />
+          <mat-card *ngIf="studyLevel === 'Bachelor'">
             <mat-card-content>
-              <p class="dark-blue-bold-text">{{ result.name | uppercase }}</p>
-              <p class="grey-text" *ngIf="result.locationFaculty">
-                {{ result.locationFaculty | location }}
+              <div class="logo-image">
+                <img
+                  mat-card-image
+                  src="{{ result.logoFaculty }}"
+                  *ngIf="result.logoFaculty"
+                />
+                <img
+                  mat-card-image
+                  src="assets/university.png"
+                  *ngIf="!result.logoFaculty"
+                />
+              </div>
+              <p class="dark-blue-bold-text">
+                {{ result.name | uppercase }}
               </p>
-              <!-- TODO those ratings -->
-              <!-- <app-editable-star-rating *ngIf="result.facultyId" [id]="result.facultyId" [editable]="false" type="faculty" showNumberOfRatings="true">
-              </app-editable-star-rating> -->
+              <p class="grey-text" *ngIf="result.locationFaculty">
+                {{ result.locationFaculty }}
+              </p>
+              <div class="bottom-items">
+                <app-wave-button
+                  text="{{ 'buttons.more_details' | translate | uppercase }}"
+                  (click)="goToFaculty(result.facultyId)"
+                ></app-wave-button>
+              </div>
             </mat-card-content>
-            <mat-card-content>
-              <app-wave-button
-                text="{{ 'buttons.more_details' | translate | uppercase }}"
-                (click)="goToUniversity(result.facultyId)"
-              ></app-wave-button>
-            </mat-card-content>
-            <!-- TODO verify why this buttons are not working -->
           </mat-card>
+
           <!-- masters results -->
-          <mat-card
-            class="custom-card"
-            fxLayout="column"
-            fxLayoutAlign="center center"
-            *ngIf="studyLevel === 'Master'"
-          >
-            <img
-              mat-card-image
-              src="{{ result.logoFaculty }}"
-              *ngIf="result.logoFaculty"
-            />
-            <img
-              mat-card-image
-              src="assets/university.png"
-              *ngIf="!result.logoFaculty"
-            />
+          <mat-card *ngIf="studyLevel === 'Master'">
             <mat-card-content>
-              <p class="dark-blue-bold-text">{{ result.name | uppercase }}</p>
-              <p class="grey-text" *ngIf="result.locationFaculty">
-                {{ result.locationFaculty | location }}
+              <div class="logo-image">
+                <img
+                  mat-card-image
+                  src="{{ result.logoFaculty }}"
+                  *ngIf="result.logoFaculty"
+                />
+                <img
+                  mat-card-image
+                  src="assets/university.png"
+                  *ngIf="!result.logoFaculty"
+                />
+              </div>
+              <p class="dark-blue-bold-text">
+                {{ result.name | uppercase }}
               </p>
-              <!-- <app-editable-star-rating *ngIf="result.facultyId" [id]="result.facultyId" [editable]="false" type="faculty" showNumberOfRatings="true">
-              </app-editable-star-rating> -->
-            </mat-card-content>
-            <mat-card-content>
-              <app-wave-button
-                text="{{ 'buttons.more_details' | translate | uppercase }}"
-                (click)="goToUniversity(result.facultyId)"
-              ></app-wave-button>
+              <p class="grey-text" *ngIf="result.locationFaculty">
+                {{ result.locationFaculty }}
+              </p>
+              <div class="bottom-items">
+                <app-wave-button
+                  text="{{ 'buttons.more_details' | translate | uppercase }}"
+                  (click)="goToFaculty(result.facultyId)"
+                ></app-wave-button>
+              </div>
             </mat-card-content>
           </mat-card>
+
           <!-- doctorals results -->
-          <mat-card
-            class="custom-card"
-            fxLayout="column"
-            fxLayoutAlign="center center"
-            *ngIf="studyLevel === 'Doctoral'"
-          >
-            <img
-              mat-card-image
-              src="{{ result.logoFaculty }}"
-              *ngIf="result.logoFaculty"
-            />
-            <img
-              mat-card-image
-              src="assets/university.png"
-              *ngIf="!result.logoFaculty"
-            />
+          <mat-card *ngIf="studyLevel === 'Doctoral'">
             <mat-card-content>
-              <p class="dark-blue-bold-text">{{ result.name | uppercase }}</p>
+              <div class="logo-image">
+                <img
+                  mat-card-image
+                  src="{{ result.logoFaculty }}"
+                  *ngIf="result.logoFaculty"
+                />
+                <img
+                  mat-card-image
+                  src="assets/university.png"
+                  *ngIf="!result.logoFaculty"
+                />
+              </div>
+              <p class="dark-blue-bold-text">
+                {{ result.name | uppercase }}
+              </p>
               <p class="grey-text" *ngIf="result.locationFaculty">
-                {{ result.locationFaculty | location }}
+                {{ result.locationFaculty }}
               </p>
-              <!-- <p *ngIf="result.semesters">
-                {{ result.semesters }} {{ 'filters.counter_semesters' | translate }}
-              </p>
-              <p *ngIf="result.years">
-                {{ result.years }} {{ 'filters.counter_years' | translate }}
-              </p> -->
-            </mat-card-content>
-            <mat-card-content>
-              <app-wave-button
-                text="{{ 'buttons.more_details' | translate | uppercase }}"
-                (click)="goToUniversity(result.facultyId)"
-              ></app-wave-button>
+              <div class="bottom-items">
+                <app-wave-button
+                  text="{{ 'buttons.more_details' | translate | uppercase }}"
+                  (click)="goToFaculty(result.facultyId)"
+                ></app-wave-button>
+              </div>
             </mat-card-content>
           </mat-card>
+
         </div>
       </div>
     </div>

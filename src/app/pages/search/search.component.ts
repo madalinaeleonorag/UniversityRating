@@ -2,9 +2,7 @@ import {
   Component,
   OnInit,
   ViewEncapsulation,
-  OnDestroy,
-  ElementRef,
-  ViewChild
+  OnDestroy
 } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { FirebaseService } from "src/app/services/firebase-service.service";
@@ -16,7 +14,6 @@ import { Subscription } from "rxjs";
 import * as _ from "underscore";
 import { Router } from "@angular/router";
 import { UniversityData } from "src/app/models/UniversityData";
-import { FunctionsService } from "src/app/services/functions.service";
 
 @Component({
   selector: "app-search",
@@ -25,8 +22,6 @@ import { FunctionsService } from "src/app/services/functions.service";
   encapsulation: ViewEncapsulation.None
 })
 export class SearchComponent implements OnInit, OnDestroy {
-  @ViewChild("filters", { static: true }) filtersView: ElementRef;
-  @ViewChild("results", { static: true }) resultsView: ElementRef;
   categories: string[] = [];
   sortTypes: string[] = [];
   typeOfInstitution: string[] = [];
@@ -49,6 +44,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   mastersData = [];
   universitiesSubscription: Subscription;
   universitiesData: UniversityData[] = [];
+  showFilters: boolean;
 
   constructor(
     private firebaseService: FirebaseService,
@@ -61,12 +57,6 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    document
-      .getElementById("resultsId")
-      .setAttribute(
-        "style",
-        `margin-top: ${this.filtersView.nativeElement.offsetHeight}px;`
-      );
     this.bachelorSubscription = this.firebaseService
       .getBachelorsData()
       .subscribe(result => (this.bachelorData = result));
@@ -203,6 +193,10 @@ export class SearchComponent implements OnInit, OnDestroy {
       locations.push(university.locality);
     });
     this.locationsList = _.uniq(locations);
+  }
+
+  setShowFilters(value: boolean) {
+    this.showFilters = value;
   }
 
   private matchingNames(name: string) {

@@ -15,7 +15,6 @@ import { SignUpDialogComponent } from '../sign-up-dialog/sign-up-dialog.componen
 export class HeaderComponent implements OnInit {
 
   @Input() firstPage: boolean;
-  @Input() searchPage: boolean;
   user: any;
   isSticky: boolean;
   isUserSubscription: Subscription;
