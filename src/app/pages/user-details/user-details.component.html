@@ -1,23 +1,26 @@
-<div class="custom-div" *ngIf="requestActive">
-  <mat-card-title>
-    {{ requestStatus }}
-  </mat-card-title>
+<div class="request-status">
+  {{ requestStatus }}
+</div>
+<div class="request-status-declined" *ngIf="requestActive">
   <mat-card-subtitle *ngIf="requestStatus === 'declined'">
     {{ requestMessage }}
   </mat-card-subtitle>
-  <mat-card-actions *ngIf="requestStatus === 'declined'">
-    <button mat-stroked-button (click)="goToRequestPage('new')">
-      Send new request
-    </button>
-    <button mat-stroked-button (click)="goToRequestPage('draft')">
+  <div *ngIf="requestStatus === 'declined'" class="declined-request">
+    <div class="button-custom">
+      <app-wave-button
+      text="Send new request"
+      (click)="goToRequestPage('new')"
+    ></app-wave-button>
+    </div>
+    <button mat-stroked-button (click)="goToRequestPage('draft')" class="modify-button">
       Modify and resend the last request
     </button>
-  </mat-card-actions>
-  <mat-card-actions *ngIf="requestStatus === 'approved'">
-    <button mat-stroked-button (click)="goToUniversityPage()">
+  </div>
+  <div *ngIf="requestStatus === 'approved'">
+    <button mat-stroked-button (click)="goToUniversityPage()" class="view-button">
       View and edit your university
     </button>
-  </mat-card-actions>
+  </div>
 </div>
 <div class="custom-div" *ngIf="user">
   <div class="custom-header-text">
