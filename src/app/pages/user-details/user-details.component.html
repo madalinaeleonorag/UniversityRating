@@ -1,4 +1,3 @@
-<button mat-stroked-button (click)="goToRequestPage('new')" *ngIf="!requestActive">Activeaza cont universitar</button>
 <div class="custom-div" *ngIf="requestActive">
   <mat-card-title>
     {{ requestStatus }}
@@ -7,63 +6,120 @@
     {{ requestMessage }}
   </mat-card-subtitle>
   <mat-card-actions *ngIf="requestStatus === 'declined'">
-    <button mat-stroked-button (click)="goToRequestPage('new')">Send new request</button>
-    <button mat-stroked-button (click)="goToRequestPage('draft')">Modify and resend the last request</button>
+    <button mat-stroked-button (click)="goToRequestPage('new')">
+      Send new request
+    </button>
+    <button mat-stroked-button (click)="goToRequestPage('draft')">
+      Modify and resend the last request
+    </button>
   </mat-card-actions>
   <mat-card-actions *ngIf="requestStatus === 'approved'">
-    <button mat-stroked-button (click)="goToUniversityPage()">View and edit your university</button>
+    <button mat-stroked-button (click)="goToUniversityPage()">
+      View and edit your university
+    </button>
   </mat-card-actions>
 </div>
 <div class="custom-div" *ngIf="user">
   <div class="custom-header-text">
-      Profile details
+    Profile details
   </div>
   <mat-card-content fxLayout="column">
     <mat-form-field class="example-full-width">
-      <input matInput placeholder="{{ 'signup_dialog.name' | translate }}" [(ngModel)]="user.name" type="text"
-        [disabled]="!canEdit">
+      <input
+        matInput
+        placeholder="{{ 'signup_dialog.name' | translate }}"
+        [(ngModel)]="user.name"
+        type="text"
+        [disabled]="!canEdit"
+      />
     </mat-form-field>
     <mat-form-field class="example-full-width">
-      <input matInput placeholder="{{ 'signup_dialog.surname' | translate }}" [(ngModel)]="user.surname" type="text"
-        [disabled]="!canEdit">
+      <input
+        matInput
+        placeholder="{{ 'signup_dialog.surname' | translate }}"
+        [(ngModel)]="user.surname"
+        type="text"
+        [disabled]="!canEdit"
+      />
     </mat-form-field>
     <mat-form-field class="example-full-width">
-      <input matInput placeholder="{{ 'signup_dialog.birthday' | translate }}" [(ngModel)]="user.birthday" type="date"
-        [disabled]="!canEdit">
+      <input
+        matInput
+        placeholder="{{ 'signup_dialog.birthday' | translate }}"
+        [(ngModel)]="user.birthday"
+        type="date"
+        [disabled]="!canEdit"
+      />
     </mat-form-field>
     <mat-form-field>
-      <mat-label>{{ 'signup_dialog.sex' | translate }}</mat-label>
+      <mat-label>{{ "signup_dialog.sex" | translate }}</mat-label>
       <select matNativeControl [(ngModel)]="user.sex" [disabled]="!canEdit">
-        <option value="M">{{ 'signup_dialog.male' | translate }}</option>
-        <option value="F">{{ 'signup_dialog.female' | translate }}</option>
+        <option value="M">{{ "signup_dialog.male" | translate }}</option>
+        <option value="F">{{ "signup_dialog.female" | translate }}</option>
       </select>
     </mat-form-field>
-        <mat-form-field class="example-full-width">
-      <input matInput placeholder="{{ 'signup_dialog.birthday' | translate }}" [(ngModel)]="user.birthday" type="date" [disabled]="!canEdit">
+    <mat-form-field class="example-full-width">
+      <input
+        matInput
+        placeholder="{{ 'signup_dialog.birthday' | translate }}"
+        [(ngModel)]="user.birthday"
+        type="date"
+        [disabled]="!canEdit"
+      />
     </mat-form-field>
-      <AutocompleteAddressComponent (setAddress)="getAddress($event)" adressType="geocode" [disabled]="!canEdit"></AutocompleteAddressComponent>
+    <AutocompleteAddressComponent
+      (setAddress)="getAddress($event)"
+      adressType="geocode"
+      [disabled]="!canEdit"
+    ></AutocompleteAddressComponent>
     <mat-form-field>
-      <mat-label>{{ 'signup_dialog.school_level' | translate }}</mat-label>
-      <select matNativeControl [(ngModel)]="user.schoolLevel" [disabled]="!canEdit">
-        <option *ngFor="let level of schoolLevelValues" [value]="level">{{ level }}</option>
+      <mat-label>{{ "signup_dialog.school_level" | translate }}</mat-label>
+      <select
+        matNativeControl
+        [(ngModel)]="user.schoolLevel"
+        [disabled]="!canEdit"
+      >
+        <option *ngFor="let level of schoolLevelValues" [value]="level">{{
+          level
+        }}</option>
       </select>
     </mat-form-field>
     <mat-form-field>
-      <mat-label>{{ 'signup_dialog.class_level' | translate }}</mat-label>
-      <select matNativeControl [(ngModel)]="user.classLevel" [disabled]="!canEdit">
-        <option *ngFor="let level of classLevelValues(schoolLevel)" [value]="level">{{ level }}
+      <mat-label>{{ "signup_dialog.class_level" | translate }}</mat-label>
+      <select
+        matNativeControl
+        [(ngModel)]="user.classLevel"
+        [disabled]="!canEdit"
+      >
+        <option
+          *ngFor="let level of classLevelValues(schoolLevel)"
+          [value]="level"
+          >{{ level }}
         </option>
       </select>
     </mat-form-field>
- 
 
+    <div class="button-custom-on-center">
       <app-wave-button
         text="Edit details"
-        (click)="canEdit = !canEdit" *ngIf="!canEdit"
+        (click)="canEdit = !canEdit"
+        *ngIf="!canEdit"
       ></app-wave-button>
       <app-wave-button
         text="Save"
-        (click)="saveNewDetails()" *ngIf="canEdit"
+        (click)="saveNewDetails()"
+        *ngIf="canEdit"
       ></app-wave-button>
-    </mat-card-content>
+    </div>
+    <div class="button-custom-on-center">
+      <button
+        style="margin-top: 10px;"
+        mat-stroked-button
+        (click)="goToRequestPage('new')"
+        *ngIf="!requestActive"
+      >
+        Activeaza cont universitar
+    </button>
+    </div>
+  </mat-card-content>
 </div>

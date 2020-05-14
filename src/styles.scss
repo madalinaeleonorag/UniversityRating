@@ -206,6 +206,12 @@ button {
   filter: grayscale(100%);
 }
 
+.button-custom-on-center {
+  display: flex;
+  justify-content: center;
+  flex-flow: row;
+}
+
 .custom-text:hover {
   color: $gradient2;
 }

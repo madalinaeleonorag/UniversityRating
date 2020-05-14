@@ -43,7 +43,6 @@ export class RequestUniversityComponent implements OnInit {
         this.firebaseService.getRequestById(this.user.requestId).subscribe(response => {
           const data = new RequestData(response);
           this.form.patchValue({
-            addressFormControl: data.address,
             descriptionUniversityFormControl: data.descriptionUniversity,
             facilitiesFormControl: data.facilitiesUniversity,
             logoFormControl: data.logoUniversity,
@@ -60,7 +59,6 @@ export class RequestUniversityComponent implements OnInit {
 
   private buildForm() {
     this.form = new FormGroup({
-      addressFormControl: new FormControl(this.universityDetails.address, [Validators.required]),
       descriptionUniversityFormControl: new FormControl(this.universityDetails.descriptionUniversity, [Validators.required]),
       nameFormControl: new FormControl(this.universityDetails.nameUniversity, [Validators.required]),
       phoneFormControl: new FormControl(this.universityDetails.phone, [Validators.required]),
@@ -71,7 +69,6 @@ export class RequestUniversityComponent implements OnInit {
 
   send() {
     const details = {
-      address: this.form.value.addressFormControl,
       descriptionUniversity: this.form.value.descriptionUniversityFormControl,
       nameUniversity: this.form.value.nameFormControl,
       phone: this.form.value.phoneFormControl,
@@ -86,12 +83,4 @@ export class RequestUniversityComponent implements OnInit {
       duration: 2000,
     });
   }
-  getAddress(place: object) {
-    const formatted = 'formatted_address';
-    const components = 'address_components';
-    this.universityDetails.address = place[formatted];
-    const addressComponents = place[components];
-    this.form.value.locationFormControl = addressComponents[addressComponents.length - 4].long_name;
-  }
-
 }

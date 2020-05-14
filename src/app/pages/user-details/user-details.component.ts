@@ -34,8 +34,8 @@ export class UserDetailsComponent implements OnInit {
   ngOnInit() {
     this.isUserSubscription = this.authService.isUserAuthenticatedObservable.subscribe(result => {
       this.user = result;
-      this.requestActive = result ? (result.requestId ? true : (result.type !== 'university') && (result.type !== 'admin')) : false;
-      if (result) {
+      this.requestActive = result ? (result.requestId ? true : result.type !== 'user') : false;
+      if (result && result.requestId) {
         this.firebaseService.getRequestById(result.requestId).subscribe(response => {
           const data = new RequestData(response);
           this.requestStatus = data.status;
