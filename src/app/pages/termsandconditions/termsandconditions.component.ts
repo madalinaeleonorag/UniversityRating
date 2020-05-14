@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-termsandconditions',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TermsandconditionsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
+  }
+
+  goToHomepage() {
+    this.router.navigateByUrl('/');
   }
 
 }

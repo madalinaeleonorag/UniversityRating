@@ -152,7 +152,7 @@
                 </app-editable-star-rating>
                 <app-wave-button
                   text="{{ 'buttons.more_details' | translate | uppercase }}"
-                  (click)="goToFaculty(result.universityId)"
+                  (click)="goToUniversity(result.universityId)"
                 ></app-wave-button>
               </div>
             </mat-card-content>
@@ -190,7 +190,7 @@
                 </app-editable-star-rating>
                 <app-wave-button
                   text="{{ 'buttons.more_details' | translate | uppercase }}"
-                  (click)="goToUniversity(result.facultyId)"
+                  (click)="goToFaculty(result.facultyId)"
                 ></app-wave-button>
               </div>
             </mat-card-content>
