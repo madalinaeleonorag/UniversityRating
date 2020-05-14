@@ -11,4 +11,11 @@ app-user-details {
         justify-content: center;
         font-size: 1.3rem;
     }
+
+    .button-custom {
+        display: flex;
+        justify-content: center;
+        padding: 5px 0px;
+        flex-flow: row;
+    }
 }
