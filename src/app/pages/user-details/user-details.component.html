@@ -1,7 +1,7 @@
-<div class="request-status">
+<div class="request-status" *ngIf="requestStatus">
   {{ requestStatus }}
 </div>
-<div class="request-status-declined" *ngIf="requestActive">
+<div class="request-status-declined" *ngIf="requestActive && requestStatus">
   <mat-card-subtitle *ngIf="requestStatus === 'declined'">
     {{ requestMessage }}
   </mat-card-subtitle>

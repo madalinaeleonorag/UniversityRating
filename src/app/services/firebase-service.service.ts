@@ -117,26 +117,21 @@ export class FirebaseService {
 
   approveRequest(request: any) {
     const universityData = {
-      address: request.address ? request.address : null,
       descriptionUniversity: request.descriptionUniversity ? request.descriptionUniversity : null,
       facilitiesUniversity: request.facilitiesUniversity ? request.facilitiesUniversity : null,
-      logoUniversity: request.logoUniversity ? request.logoUniversity : null,
       nameUniversity: request.nameUniversity ? request.nameUniversity : null,
       phone: request.phone ? request.phone : null,
-      photosUniversity: request.photosUniversity ? request.photosUniversity : null,
       typeUniversity: request.typeUniversity ? request.typeUniversity : null,
       websiteUniversity: request.websiteUniversity ? request.websiteUniversity : null,
-      rating: 0,
       universityId: request.requestId,
       adminAnswer: request.adminAnswer ? request.adminAnswer : null,
-      locationUniversity: [request.locationUniversity, request.latitude, request.longitude]
     };
     // approved in requests
     firebase.firestore().collection('Requests/').doc(request.requestId).update({
       status: 'approved'
     });
     // add in university
-    firebase.firestore().collection('University').doc(request.requestId).set(universityData);
+    firebase.firestore().collection('University').doc(request.requestId).set(universityData).then(res => console.log(res)).catch(err => console.log(err));
     // add universityId in user profile
     firebase.firestore().collection('Users/').doc(request.userId).update({
       universityId: request.requestId,
