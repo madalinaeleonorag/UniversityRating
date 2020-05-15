@@ -23,11 +23,11 @@ export class RequestsComponent implements OnInit {
     });
   }
 
-  approve(item) {
+  approve(item: any) {
     this.firebaseService.approveRequest(item);
   }
 
-  decline(item) {
+  decline(item: any) {
     const dialogRef = this.dialog.open(ReviewResponseComponent, {
       disableClose: true
     });
