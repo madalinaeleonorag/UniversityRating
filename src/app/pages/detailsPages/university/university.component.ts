@@ -14,6 +14,7 @@ import { MatDialog } from '@angular/material';
 import { AddFacultyDialogComponent } from 'src/app/components/add-faculty-dialog/add-faculty-dialog.component';
 import { ReviewData } from 'src/app/models/ReviewData';
 import { UserData } from 'src/app/models/UserData';
+// import * as Vibrant from 'node-vibrant';
 
 @Component({
   selector: 'app-university',
@@ -59,6 +60,10 @@ export class UniversityComponent implements OnInit, OnDestroy {
     });
   }
 
+  goToWebsite(url: string) {
+    window.open(url, "_blank");
+  }
+
   private buildForm() {
     this.form = new FormGroup({
       nameUniversity: new FormControl(this.universityDetails.nameUniversity, [Validators.required]),
@@ -76,7 +81,7 @@ export class UniversityComponent implements OnInit, OnDestroy {
       facilitiesUniversity: new FormControl(this.universityDetails.facilitiesUniversity, [Validators.required])
     });
   }
-
+  
   getAddress(place: any) {
     this.form.value.address = place.formatted_address;
     const addressComponents = place.address_components;
@@ -104,6 +109,8 @@ export class UniversityComponent implements OnInit, OnDestroy {
       if (this.universityId) {
         this.firebaseService.getUniversityById(this.universityId).subscribe(data => {
           this.universityDetails = new UniversityData(data);
+          // Vibrant.from('path/to/image').getPalette().then((palette) => console.log(palette))
+          console.log(this.universityDetails)
           this.buildForm();
           if (this.universityDetails.address) {
             this.getLatLng(this.universityDetails.address);
