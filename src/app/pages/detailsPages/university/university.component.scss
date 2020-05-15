@@ -1,48 +1,135 @@
 @import "../../../variables.scss";
 
 app-university {
-
-  agm-map {
-    width: 100%;
-    height: 500px;
+  .mat-card-image {
+    margin: unset;
   }
 
-  .custom-university-header {
-    padding-top: 30px;
+  .header {
+    height: 300px;
+    // background-color: aqua;
+    display: flex;
+    justify-content: center;
+    flex-flow: column;
+    position: relative;
+    text-align: center;
 
-    .mat-card-image {
-      width: 200px;
+    .edit-button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
     }
 
-    .name-and-logo {
-      text-align: center;
+    .header-background-image {
+      opacity: 0.05;
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    .header-content {
       display: flex;
-      flex-flow: column;
+      flex-flow: row;
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      .logo {
+        width: 40%;
+        height: 200px;
+        display: flex;
+        flex-flow: row;
+        justify-content: flex-end;
+
+        .mat-card-image:first-child {
+          margin-top: unset;
+        }
+
+        .mat-card-image {
+          width: auto;
+          height: 100%;
+          margin-right: 20px;
+        }
+      }
+
+      .main-informations {
+        display: flex;
+        justify-content: flex-start;
+        text-align: left;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        flex-flow: column;
+        width: 40%;
+        justify-content: center;
+        align-items: flex-start;
+
+        .type {
+          text-transform: uppercase;
+          color: #2b1c74;
+          font-weight: 500;
+        }
+
+        .name {
+          font-weight: bold;
+          font-size: 1.2rem;
+        }
+      }
+    }
+
+    .visit-website-button {
+      position: absolute;
+      bottom: 20px;
+      background-color: white;
+      right: 20px;
     }
   }
-
-  .mat-tab-body {
-    margin: 20px;
-  }
-
-  table {
-    width: 100%;
-
-    th.mat-header-cell {
-      padding: 10px;
-    }
-
-    td.mat-cell {
-      text-align: center;
-    }
-
-    td.mat-cell:first-of-type {
-      text-align: left;
-    }
-  }
-
-  #map {
-    height: 100vh !important;
-  }
-
 }
+
+// app-university {
+
+//   agm-map {
+//     width: 100%;
+//     height: 500px;
+//   }
+
+//   .custom-university-header {
+//     padding-top: 30px;
+
+//     .mat-card-image {
+//       width: 200px;
+//     }
+
+//     .name-and-logo {
+//       text-align: center;
+//       display: flex;
+//       flex-flow: column;
+//     }
+//   }
+
+//   .mat-tab-body {
+//     margin: 20px;
+//   }
+
+//   table {
+//     width: 100%;
+
+//     th.mat-header-cell {
+//       padding: 10px;
+//     }
+
+//     td.mat-cell {
+//       text-align: center;
+//     }
+
+//     td.mat-cell:first-of-type {
+//       text-align: left;
+//     }
+//   }
+
+//   #map {
+//     height: 100vh !important;
+//   }
+
+// }

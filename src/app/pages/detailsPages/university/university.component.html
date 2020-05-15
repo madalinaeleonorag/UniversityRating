@@ -1,35 +1,70 @@
-<form fxLayout="column" [formGroup]="form">
-  <div fxLayout="column" fxLayoutAlign="center center" class="custom-university-header">
-    <div *ngIf="!editEnabled" class="name-and-logo">
-      <img mat-card-image src="{{ universityDetails.logoUniversity }}" *ngIf="universityDetails.logoUniversity">
-      <img mat-card-image src="assets/university.png" *ngIf="!universityDetails.logoUniversity">
-      <div>
+<div class="header">
+  <img
+    mat-card-image
+    class="header-background-image"
+    src="{{
+      universityDetails.logoUniversity
+        ? universityDetails.logoUniversity
+        : 'assets/university.png'
+    }}"
+  />
+  <div class="edit-button">
+    <app-wave-button
+      text="Edit university"
+      (click)="editDetails()"
+      *ngIf="userCanEdit && !editEnabled"
+    ></app-wave-button>
+    <app-wave-button
+      text="Save data"
+      (click)="saveDetails()"
+      *ngIf="userCanEdit && editEnabled"
+    ></app-wave-button>
+  </div>
+  <div class="header-content">
+    <div class="logo">
+      <img
+        mat-card-image
+        src="{{
+          universityDetails.logoUniversity
+            ? universityDetails.logoUniversity
+            : 'assets/university.png'
+        }}"
+      />
+    </div>
+    <div class="main-informations">
+      <div class="type">
+        {{ universityDetails.typeUniversity }}
+      </div>
+      <div class="name">
         {{ universityDetails.nameUniversity | uppercase }}
       </div>
+      <app-editable-star-rating
+        *ngIf="reviewsData"
+        [reviews]="reviewsData"
+        [editable]="false"
+        [type]="university"
+        showNumberOfRatings="true"
+      ></app-editable-star-rating>
     </div>
+  </div>
+  <div class="visit-website-button">
+    <button mat-stroked-button (click)="goToWebsite(universityDetails.website)">
+      Visit website
+    </button>
+  </div>
+</div>
+
+<!-- <form fxLayout="column" [formGroup]="form">
+  <div fxLayout="column" fxLayoutAlign="center center" class="custom-university-header">
     <div *ngIf="editEnabled" class="name-and-logo">
       <app-file-uploader type="logoUniversity" [id]="universityDetails.universityId"></app-file-uploader>
       <mat-form-field>
         <input matInput required placeholder="name" formControlName="nameUniversity" type="text">
       </mat-form-field>
     </div>
-    <button mat-stroked-button class="custom-gradient white-text-button" (click)="editDetails()"
-      *ngIf="userCanEdit && !editEnabled">Edit data</button>
-    <button mat-stroked-button class="custom-gradient white-text-button" (click)="saveDetails()"
-      *ngIf="userCanEdit && editEnabled">Save data</button>
-    <a href="{{ universityDetails.websiteUniversity }}">{{ 'university_page.header.website' | translate }}</a>
-    <app-editable-star-rating *ngIf="reviewsData" [reviews]="reviewsData" [editable]="false" [type]="university"
-      showNumberOfRatings="true">
-    </app-editable-star-rating>
   </div>
   <mat-tab-group mat-align-tabs="center">
     <mat-tab label="{{ 'university_page.tab_labels.details' | translate }}">
-      <div class="custom-detail-field" *ngIf="universityDetails.typeUniversity && !editEnabled">
-        <div class="custom-detail-field-title">
-          {{ 'university_page.details.type' | translate }}
-        </div>
-        {{ universityDetails.typeUniversity }}
-      </div>
       <div *ngIf="editEnabled">
         <mat-form-field>
           <mat-label>Institution type</mat-label>
@@ -204,4 +239,4 @@
     </mat-tab>
 
   </mat-tab-group>
-</form>
+</form> -->
