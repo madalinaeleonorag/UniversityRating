@@ -84,6 +84,7 @@ import { AddProgramDialogComponent } from './components/add-program-dialog/add-p
 import { EditableExpansionPanelComponent } from './components/editable-expansion-panel/editable-expansion-panel.component';
 import { EditableChipsListComponent } from './components/editable-chips-list/editable-chips-list.component';
 import { WaveButtonComponent } from './components/wave-button/wave-button.component';
+import { LimitCharactersInDivPipe } from './pipes/limit-characters-in-div.pipe';
 
 // Firestore config
 const config = {
@@ -142,7 +143,8 @@ export function createTranslateLoader(http: HttpClient) {
     AddProgramDialogComponent,
     EditableExpansionPanelComponent,
     EditableChipsListComponent,
-    WaveButtonComponent
+    WaveButtonComponent,
+    LimitCharactersInDivPipe
   ],
   entryComponents: [
     LoginDialogComponent,

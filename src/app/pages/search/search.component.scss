@@ -47,6 +47,7 @@ app-search {
       .mat-card-content {
         display: flex;
         flex-flow: column;
+        height: 100%;
         text-align: -webkit-center;
         align-content: center;
 
@@ -67,6 +68,7 @@ app-search {
         .bottom-items {
           display: flex;
           flex-flow: column;
+          justify-content: flex-end;
           align-self: center;
           height: 100%;
 

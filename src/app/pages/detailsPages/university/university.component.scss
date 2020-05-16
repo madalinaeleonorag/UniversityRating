@@ -85,6 +85,98 @@ app-university {
       right: 20px;
     }
   }
+
+  .description {
+    padding: 20px 60px;
+    text-align: center;
+  }
+
+  .strategicPrograms {
+    padding: 20px 60px;
+    text-align: center;
+
+    .title {
+      font-weight: bold;
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      padding-bottom: 20px;
+    }
+
+    ul {
+      column-count: 2;
+      list-style-type: none;
+      text-align: start;
+      margin-block-start: unset;
+      margin-block-end: unset;
+      padding-inline-start: unset;
+
+      li {
+        color: #3d639f;
+        margin-bottom: 20px;
+      }
+    }
+  }
+
+  .faculties {
+    display: flex;
+    flex-flow: wrap;
+    justify-content: center;
+    margin: 0px 60px;
+
+    .mat-card:hover {
+      .mat-card-content {
+        .logo-image {
+          img {
+            filter: none;
+          }
+        }
+      }
+    }
+
+    .mat-card {
+      width: 209px;
+      display: flex;
+      margin: 10px;
+      flex-flow: column;
+      align-items: center;
+
+      .mat-card-content {
+        display: flex;
+        flex-flow: column;
+        height: 100%;
+        text-align: -webkit-center;
+        align-content: center;
+
+        .logo-image {
+          height: 160px;
+          min-height: 160px;
+
+          img {
+            max-width: 70%;
+            max-height: 100%;
+            filter: grayscale(100%);
+          }
+
+          img:first-child {
+            margin-top: unset;
+          }
+        }
+
+        .bottom-items {
+          display: flex;
+          flex-flow: column;
+          align-self: center;
+          height: 100%;
+          justify-content: flex-end;
+
+          app-editable-star-rating {
+            align-self: center;
+            margin-bottom: 15px;
+          }
+        }
+      }
+    }
+  }
 }
 
 // app-university {
