@@ -53,6 +53,47 @@
     </button>
   </div>
 </div>
+<div class="description">
+    {{ universityDetails.descriptionUniversity | limitCharactersInDiv:650 }}
+    <!-- TODO: add read more button -->
+</div>
+<div class="faculties" *ngIf="facultiesData.length > 0">
+  <mat-card *ngFor="let result of facultiesData">
+    <mat-card-content>
+      <div class="logo-image">
+        <img
+          mat-card-image
+          src="{{ result.logoFaculty }}"
+          *ngIf="result.logoFaculty"
+        />
+        <img
+          mat-card-image
+          src="assets/university.png"
+          *ngIf="!result.logoFaculty"
+        />
+      </div>
+      <p class="dark-blue-bold-text">
+        {{ result.nameFaculty | uppercase | limitCharactersInDiv:50}}
+      </p>
+      <div class="bottom-items">
+        <app-wave-button
+          text="{{ 'buttons.more_details' | translate | uppercase }}"
+          (click)="onNavigate(result.facultyId)"
+        ></app-wave-button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+<div class="strategicPrograms" *ngIf="universityDetails.strategicProgram.length > 0">
+  <div class="title">
+    Programe strategice
+  </div>
+  <ul>
+    <li *ngFor="let program of universityDetails.strategicProgram">
+      {{ program }}
+      </li>
+  </ul>
+</div>
 
 <!-- <form fxLayout="column" [formGroup]="form">
   <div fxLayout="column" fxLayoutAlign="center center" class="custom-university-header">
