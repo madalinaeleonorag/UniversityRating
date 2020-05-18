@@ -2,9 +2,9 @@ app-editable-facilities {
     .facilities-cards {
         display: flex;
         flex-flow: wrap;
+        justify-content: center;
     
         mat-card {
-          height: 150px;
           text-align: center;
           box-shadow: none !important;
           background-color: transparent; 
