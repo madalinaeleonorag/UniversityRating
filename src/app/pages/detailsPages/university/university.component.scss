@@ -95,17 +95,38 @@ app-university {
     padding: 20px 60px;
     text-align: center;
 
-    .title {
-      font-weight: bold;
-      font-size: 1.2rem;
-      text-transform: uppercase;
-      padding-bottom: 20px;
-    }
-
     ul {
       column-count: 2;
       list-style-type: none;
       text-align: start;
+      margin-block-start: unset;
+      margin-block-end: unset;
+      padding-inline-start: unset;
+
+      li {
+        color: #3d639f;
+        margin-bottom: 20px;
+      }
+    }
+  }
+  
+  .vision {
+    padding: 20px 60px;
+    text-align: center;
+
+    .content {
+      color: #3d639f;
+    }
+  }
+
+  .values {
+    padding: 20px 60px;
+    text-align: center;
+
+    ul {
+      column-count: 2;
+      list-style-type: none;
+      text-align: center;
       margin-block-start: unset;
       margin-block-end: unset;
       padding-inline-start: unset;
@@ -176,6 +197,20 @@ app-university {
         }
       }
     }
+  }
+
+  .facilities {
+    display: flex;
+    flex-flow: wrap;
+    justify-content: center;
+    margin: 0px 60px;
+  }
+
+  .title {
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    padding-bottom: 20px;
   }
 }
 

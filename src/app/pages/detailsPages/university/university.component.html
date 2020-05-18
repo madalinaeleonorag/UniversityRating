@@ -84,6 +84,25 @@
     </mat-card-content>
   </mat-card>
 </div>
+<div class="vision" *ngIf="universityDetails.vision">
+  <div class="title">
+    Viziune
+  </div>
+  <div class="content">
+    {{ universityDetails.vision }}
+  </div>
+</div>
+<div class="values" *ngIf="universityDetails.values.length > 0">
+  <div class="title">
+    Valori
+  </div>
+  <ul>
+    <li *ngFor="let program of universityDetails.values">
+      {{ program }}
+      </li>
+  </ul>
+</div>
+<!-- TODO photos -->
 <div class="strategicPrograms" *ngIf="universityDetails.strategicProgram.length > 0">
   <div class="title">
     Programe strategice
@@ -93,6 +112,15 @@
       {{ program }}
       </li>
   </ul>
+</div>
+<div class="facilities">
+  <div class="title">
+    Facilitati
+  </div>
+  <app-editable-facilities [facilitiesList]="facilitiesList"
+  [selectedFacilities]="universityDetails.facilitiesUniversity" [editEnabled]="editEnabled"
+  (listEdited)="facilitiesListEdited($event)">
+</app-editable-facilities>
 </div>
 
 <!-- <form fxLayout="column" [formGroup]="form">

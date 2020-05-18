@@ -1,21 +1,15 @@
 <div class="facilities-cards" *ngIf="!editEnabled">
     <div *ngFor="let facility of selectedFacilities">
         <mat-card fxLayout="column" fxLayoutAlign="center center">
-            <svg-icon src="{{ facility | facilityIcons }}" [svgStyle]="{ 'width.px':50, 'height.px':50 }"></svg-icon>
-            <mat-card-subtitle>
-                {{ facility | instantFacilityTranslate }}
-            </mat-card-subtitle>
+            <svg-icon src="{{ facility | facilityIcons }}" matTooltip="{{ facility | instantFacilityTranslate }}" [svgStyle]="{ 'width.px':50, 'height.px':50 }"></svg-icon>
         </mat-card>
     </div>
 </div>
 <div class="facilities-cards" *ngIf="editEnabled">
     <div *ngFor="let facility of facilitiesList">
         <mat-card fxLayout="column" fxLayoutAlign="center center">
-            <svg-icon src="{{ facility | facilityIcons }}" [svgStyle]="{ 'width.px':50, 'height.px':50 }">
+            <svg-icon src="{{ facility | facilityIcons }}" matTooltip="{{ facility | instantFacilityTranslate }}" [svgStyle]="{ 'width.px':50, 'height.px':50 }">
             </svg-icon>
-            <mat-card-subtitle>
-                {{ facility | instantFacilityTranslate }}
-            </mat-card-subtitle>
             <svg-icon src="assets/icons/delete.svg" class="custom-top-right-icon"
                 [svgStyle]="{ 'width.px':20, 'height.px':20, 'fill':'red' }" *ngIf="findFacility(facility)"
                 (click)="removeFacility(facility)"></svg-icon>
