@@ -109,7 +109,7 @@ app-university {
       }
     }
   }
-  
+
   .vision {
     padding: 20px 60px;
     text-align: center;
@@ -201,7 +201,7 @@ app-university {
 
   .facilities {
     display: flex;
-    flex-flow: wrap;
+    flex-flow: column;
     justify-content: center;
     margin: 0px 60px;
   }
@@ -211,6 +211,34 @@ app-university {
     font-size: 1.2rem;
     text-transform: uppercase;
     padding-bottom: 20px;
+    padding-top: 20px;
+    text-align: center;
+  }
+
+  .contact {
+    margin: 0px 60px;
+
+    .content {
+      display: flex;
+      flex-flow: row;
+
+      agm-map {
+        width: 100%;
+        height: 300px;
+      }
+
+      .contact-informations {
+        display: flex;
+        justify-content: center;
+        margin-left: 20px;
+        flex-flow: column;
+      }
+    }
+  }
+
+  .reviews {
+    margin: 0px 60px;
+    margin-bottom: 20px;
   }
 }
 
