@@ -5,7 +5,7 @@ import { FirebaseService } from 'src/app/services/firebase-service.service';
 import { UniversityData } from 'src/app/models/UniversityData';
 import { FacultyData } from 'src/app/models/FacultyData';
 import { SpecialisationData } from 'src/app/models/SpecialisationData';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { ReviewData } from 'src/app/models/ReviewData';
 import { UserData } from 'src/app/models/UserData';
 import { AuthService } from 'src/app/services/auth.service';

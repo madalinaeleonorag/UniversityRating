@@ -10,7 +10,7 @@ import { FunctionsService } from 'src/app/services/functions.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Facilities } from 'src/app/enums/Facilities';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { AddFacultyDialogComponent } from 'src/app/components/add-faculty-dialog/add-faculty-dialog.component';
 import { ReviewData } from 'src/app/models/ReviewData';
 import { UserData } from 'src/app/models/UserData';

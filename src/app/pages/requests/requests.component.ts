@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FirebaseService } from 'src/app/services/firebase-service.service';
 import { RequestData } from 'src/app/models/RequestData';
 import { ReviewResponseComponent } from 'src/app/components/review-response/review-response.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-requests',
