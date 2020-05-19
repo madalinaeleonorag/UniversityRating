@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { ErrorStateMatcher } from '@angular/material/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, ErrorStateMatcher } from '@angular/material';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 

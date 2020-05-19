@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { CourseData } from 'src/app/models/CourseData';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material';
 import { CourseDetailsDialogComponent } from '../course-details-dialog/course-details-dialog.component';
 
 @Component({

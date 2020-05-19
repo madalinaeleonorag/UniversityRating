@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { CourseData } from 'src/app/models/CourseData';
 import { FirebaseService } from 'src/app/services/firebase-service.service';
 

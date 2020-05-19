@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { FirebaseService } from 'src/app/services/firebase-service.service';
 import { CourseData } from 'src/app/models/CourseData';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material';
 import { CourseDetailsDialogComponent } from '../course-details-dialog/course-details-dialog.component';
 import { SpecialisationData } from 'src/app/models/SpecialisationData';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
