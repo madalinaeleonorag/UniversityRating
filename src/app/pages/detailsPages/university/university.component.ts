@@ -30,7 +30,7 @@ export class UniversityComponent implements OnInit, OnDestroy {
   universityDetails: UniversityData = new UniversityData(undefined);
   facultiesData: FacultyData[] = [];
   reviewsData: ReviewData[] = [];
-  displayedColumns: string[] = ['name', 'bachelors', 'masters', 'doctorals', 'button', 'remove'];
+  displayedColumns: string[] = ['name', 'bachelors', 'masters', 'doctorals', 'button'];
   origin: ILatLng;
   destination: any;
   displayDirections = false;
@@ -78,7 +78,6 @@ export class UniversityComponent implements OnInit, OnDestroy {
       address: new FormControl(this.universityDetails.address, [Validators.required]),
       fax: new FormControl(this.universityDetails.fax, [Validators.required]),
       locality: new FormControl(this.universityDetails.locality, [Validators.required]),
-      websiteUniversity: new FormControl(this.universityDetails.websiteUniversity, [Validators.required]),
       facilitiesUniversity: new FormControl(this.universityDetails.facilitiesUniversity, [Validators.required])
     });
   }
@@ -99,7 +98,7 @@ export class UniversityComponent implements OnInit, OnDestroy {
           longitude: pos.lng
         };
       });
-      if (this.user.id) {
+      if (result) {
         this.showAddNewComment(this.reviewsData);
       }
     });
@@ -111,6 +110,7 @@ export class UniversityComponent implements OnInit, OnDestroy {
         this.firebaseService.getUniversityById(this.universityId).subscribe(data => {
           this.universityDetails = new UniversityData(data);
           // Vibrant.from('path/to/image').getPalette().then((palette) => console.log(palette))
+          console.log(this.universityDetails)
           this.buildForm();
           if (this.universityDetails.address) {
             this.getLatLng(this.universityDetails.address);
@@ -179,12 +179,15 @@ export class UniversityComponent implements OnInit, OnDestroy {
 
   editDetails() {
     this.editEnabled = !this.editEnabled;
+    this.displayedColumns.push('remove');
     this.userEditable();
   }
 
   saveDetails() {
     this.editEnabled = !this.editEnabled;
     this.firebaseService.saveUniversityDetails(this.form.value);
+    const index = this.displayedColumns.indexOf('remove');
+    this.displayedColumns.splice(index, 1);
   }
 
   removeFaculty(data: any) {
