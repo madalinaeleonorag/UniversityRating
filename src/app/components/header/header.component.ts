@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation, Input, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { LoginDialogComponent } from '../login-dialog/login-dialog.component';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
