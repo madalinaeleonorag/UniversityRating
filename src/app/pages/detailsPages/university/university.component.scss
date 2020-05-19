@@ -5,6 +5,12 @@ app-university {
     margin: unset;
   }
 
+  .faculties-table {
+    display:flex;
+    flex-flow: column;
+    margin: 10px 60px;
+  }
+
   .header {
     height: 300px;
     // background-color: aqua;
@@ -21,7 +27,7 @@ app-university {
     }
 
     .header-background-image {
-      opacity: 0.05;
+      opacity: 0.1  ;
       height: 100%;
       width: 100%;
       object-fit: cover;
@@ -83,6 +89,10 @@ app-university {
       bottom: 20px;
       background-color: white;
       right: 20px;
+
+      .mat-form-field-wrapper {
+        padding-bottom: 0;
+    }
     }
   }
 
