@@ -1,11 +1,12 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-add-program-dialog',
   templateUrl: './add-program-dialog.component.html',
-  styleUrls: ['./add-program-dialog.component.scss']
+  styleUrls: ['./add-program-dialog.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AddProgramDialogComponent implements OnInit {
   form: FormGroup;

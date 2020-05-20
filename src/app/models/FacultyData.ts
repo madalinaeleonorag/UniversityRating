@@ -11,7 +11,7 @@ export class FacultyData {
     @JsonProperty('doctorals')
     doctorals: string[] = [];
     @JsonProperty('locationFaculty')
-    locationFaculty: any = undefined;
+    locationFaculty: string = undefined;
     @JsonProperty('logoFaculty')
     logoFaculty: string = undefined;
     @JsonProperty('nameFaculty')

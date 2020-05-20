@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewEncapsulation } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { CourseData } from 'src/app/models/CourseData';
 import { FirebaseService } from 'src/app/services/firebase-service.service';
@@ -6,7 +6,8 @@ import { FirebaseService } from 'src/app/services/firebase-service.service';
 @Component({
   selector: 'app-course-details-dialog',
   templateUrl: './course-details-dialog.component.html',
-  styleUrls: ['./course-details-dialog.component.scss']
+  styleUrls: ['./course-details-dialog.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class CourseDetailsDialogComponent implements OnInit {
 

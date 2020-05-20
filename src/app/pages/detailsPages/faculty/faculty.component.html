@@ -1,125 +1,209 @@
-<form fxLayout="column" [formGroup]="form" *ngIf="form">
-  <div fxLayout="column" fxLayoutAlign="center center" class="custom-faculty-header">
-    <div *ngIf="!editEnabled" class="name-and-logo">
-      <img mat-card-image src="{{ facultyDetails.logoFaculty }}" *ngIf="facultyDetails?.logoFaculty">
-      <img mat-card-image src="assets/university.png" *ngIf="!facultyDetails?.logoFaculty">
-      <div>
-        {{ facultyDetails?.nameFaculty | uppercase }}
+<form fxLayout="column" [formGroup]="form" *ngIf="form && facultyDetails">
+  <div class="university-header" *ngIf="universityDetails">
+    <img
+      mat-card-image
+      class="header-background-image"
+      src="{{
+        universityDetails.logoUniversity
+          ? universityDetails.logoUniversity
+          : 'assets/university.png'
+      }}"
+    />
+    <div class="visit-university-button">
+      <button
+        mat-stroked-button
+        (click)="goToUniversity(facultyDetails.universityId)"
+      >
+        Visit university
+      </button>
+    </div>
+    <div class="header-content">
+      <div class="name">
+        {{ universityDetails.nameUniversity | uppercase }}
       </div>
-      <a href="{{ facultyDetails?.studyGuide }}"
-        *ngIf="facultyDetails?.studyGuide">{{ 'faculty_page.header.studyGuide' | translate }}</a>
+      <div class="type">
+        {{ universityDetails.typeUniversity }}
+      </div>
     </div>
-    <div *ngIf="editEnabled" class="name-and-logo">
-      <app-file-uploader type="logoFaculty" [id]="facultyDetails.facultyId"></app-file-uploader>
-      <mat-form-field>
-        <input matInput required placeholder="name" formControlName="nameFaculty" type="text">
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput required placeholder="studyGuide" formControlName="studyGuide" type="text">
-      </mat-form-field>
-    </div>
-
-    <button mat-stroked-button class="custom-gradient white-text-button"
-      (click)="onNavigate(facultyDetails.universityId)">{{ 'faculty_page.go_university' | translate }}</button>
-    <app-editable-star-rating *ngIf="reviewsData" [reviews]="reviewsData" [editable]="false" [type]="faculty"
-      showNumberOfRatings="true">
-    </app-editable-star-rating>
-    <button mat-stroked-button class="custom-gradient white-text-button" (click)="editDetails()"
-      *ngIf="userCanEditBoolean && !editEnabled">Edit data</button>
-    <button mat-stroked-button class="custom-gradient white-text-button" (click)="saveDetails()"
-      *ngIf="userCanEditBoolean && editEnabled">Save data</button>
   </div>
-  <mat-tab-group mat-align-tabs="center">
-
-    <mat-tab label="{{ 'faculty_page.tab_labels.details' | translate }}">
-      <div class="custom-detail-field" *ngIf="universityDetails?.typeUniversity">
-        <div class="custom-detail-field-title">
-          {{ 'faculty_page.details.type' | translate }}
-        </div>
-        {{ universityDetails?.typeUniversity }}
+  <div class="header">
+    <div class="edit-button">
+      <app-wave-button
+        text="Edit faculty"
+        (click)="editDetails()"
+        *ngIf="userCanEditBoolean && !editEnabled"
+      ></app-wave-button>
+      <app-wave-button
+        text="Save data"
+        (click)="saveDetails()"
+        *ngIf="userCanEditBoolean && editEnabled"
+      ></app-wave-button>
+    </div>
+    <div class="header-content">
+      <div class="logo" *ngIf="!editEnabled">
+        <img
+          mat-card-image
+          src="{{
+            facultyDetails.logoFaculty
+              ? facultyDetails.logoFaculty
+              : 'assets/university.png'
+          }}"
+        />
       </div>
-      <div class="custom-detail-field" *ngIf="facultyDetails?.descriptionFaculty && !editEnabled">
-        <div class="custom-detail-field-title">
-          {{ 'faculty_page.details.description' | translate }}
-        </div>
-        {{ facultyDetails?.descriptionFaculty }}
+      <div class="logo" *ngIf="editEnabled">
+        <app-file-uploader
+          type="logoFaculty"
+          [id]="facultyDetails.facultyId"
+        ></app-file-uploader>
       </div>
+      <div class="main-informations">
+        <div class="name" *ngIf="!editEnabled">
+          {{ facultyDetails.nameFaculty | uppercase }}
+        </div>
+        <div *ngIf="editEnabled">
+          <mat-form-field>
+            <input
+              matInput
+              required
+              placeholder="name"
+              formControlName="nameFaculty"
+              type="text"
+            />
+          </mat-form-field>
+        </div>
+        <div class="location" *ngIf="!editEnabled">
+          {{ facultyDetails.locationFaculty }}
+        </div>
+        <div *ngIf="editEnabled">
+          <AutocompleteAddressComponent
+            (setAddress)="getAddress($event)"
+            adressType="geocode"
+          >
+          </AutocompleteAddressComponent>
+        </div>
+        <app-editable-star-rating
+          *ngIf="reviewsData && !editEnabled"
+          [reviews]="reviewsData"
+          [editable]="false"
+          [type]="faculty"
+          showNumberOfRatings="true"
+        ></app-editable-star-rating>
+      </div>
+    </div>
+    <div class="visit-website-button">
+      <button
+        mat-stroked-button
+        (click)="goToWebsite(facultyDetails.studyGuide)"
+        *ngIf="!editEnabled"
+      >
+        Visit study guide
+      </button>
       <div *ngIf="editEnabled">
         <mat-form-field>
-          <input matInput required placeholder="description" formControlName="descriptionFaculty" type="text">
+          <input
+            matInput
+            required
+            placeholder="Study guide"
+            formControlName="studyGuide"
+            type="text"
+          />
         </mat-form-field>
       </div>
-      <div class="custom-detail-field" *ngIf="universityDetails?.mission">
-        <div class="custom-detail-field-title">
-          {{ 'faculty_page.details.mission' | translate }}
-        </div>
-        {{ universityDetails?.mission }}
-      </div>
-      <div class="custom-detail-field" *ngIf="universityDetails?.strategicProgram.length > 0">
-        <div class="custom-detail-field-title">
-          {{ 'faculty_page.details.strategic_programs' | translate }}
-        </div>
-        <ul>
-          <li *ngFor="let item of universityDetails?.strategicProgram">
-            - {{ item }}
-          </li>
-        </ul>
-      </div>
-      <div class="custom-detail-field" *ngIf="universityDetails?.values.length > 0">
-        <div class="custom-detail-field-title">
-          {{ 'faculty_page.details.values' | translate }}
-        </div>
-        <ul>
-          <li *ngFor="let item of universityDetails?.values">
-            - {{ item }}
-          </li>
-        </ul>
-      </div>
-      <div class="custom-detail-field" *ngIf="universityDetails?.vision">
-        <div class="custom-detail-field-title">
-          {{ 'faculty_page.details.vision' | translate }}
-        </div>
-        <ul>
-          {{ universityDetails?.vision }}
-        </ul>
-      </div>
+    </div>
+  </div>
+  <div class="description" *ngIf="facultyDetails.descriptionFaculty">
+    <div *ngIf="!editEnabled">
+      {{ facultyDetails.descriptionFaculty | limitCharactersInDiv: 650 }}
+    </div>
+    <div *ngIf="editEnabled">
+      <mat-form-field>
+        <input
+          matInput
+          required
+          placeholder="description"
+          formControlName="descriptionFaculty"
+          type="text"
+        />
+      </mat-form-field>
+    </div>
+    <!-- TODO: add read more button -->
+  </div>
 
-    </mat-tab>
+  <div class="tabs">
+    <mat-tab-group>
+      <mat-tab
+        label="{{ 'faculty_page.tab_labels.bachelors' | translate }}"
+        *ngIf="(bachelorsData && bachelorsData.length > 0) || editEnabled"
+      >
+        <button
+          mat-stroked-button
+          class="add-button"
+          (click)="addProgramDialog('bachelor')"
+          *ngIf="editEnabled"
+        >
+          Add bachelor
+        </button>
 
-    <mat-tab label="{{ 'faculty_page.tab_labels.bachelors' | translate }}"
-      *ngIf="bachelorsData && bachelorsData.length > 0 || editEnabled">
-
-      <button mat-stroked-button class="custom-gradient white-text-button" (click)="addProgramDialog('bachelor')"
-        *ngIf="userCanEditBoolean && editEnabled">Add bachelor</button>
-
-      <app-editable-expansion-panel *ngFor="let bachelor of bachelorsData" [data]="bachelor" type="bachelor" [editable]="userCanEditBoolean && editEnabled">
-      </app-editable-expansion-panel>
-
-    </mat-tab>
-
-    <mat-tab label="{{ 'faculty_page.tab_labels.masters' | translate }}"
-      *ngIf="mastersData && mastersData.length > 0 || editEnabled">
-      <button mat-stroked-button class="custom-gradient white-text-button" (click)="addProgramDialog('master')"
-        *ngIf="userCanEditBoolean && editEnabled">Add master</button>
-        <app-editable-expansion-panel *ngFor="let master of mastersData" [data]="master" type="master" [editable]="userCanEditBoolean && editEnabled">
+        <app-editable-expansion-panel
+          *ngFor="let bachelor of bachelorsData"
+          [data]="bachelor"
+          type="bachelor"
+          [editable]="editEnabled"
+        >
         </app-editable-expansion-panel>
+      </mat-tab>
 
-    </mat-tab>
-
-    <mat-tab label="{{ 'faculty_page.tab_labels.doctorals' | translate }}"
-      *ngIf="doctoralsData && doctoralsData.length > 0 || editEnabled">
-      <button mat-stroked-button class="custom-gradient white-text-button" (click)="addProgramDialog('doctoral')"
-        *ngIf="userCanEditBoolean && editEnabled">Add doctoral</button>
-        <app-editable-expansion-panel *ngFor="let doctoral of doctoralsData" [data]="doctoral" type="doctoral" [editable]="userCanEditBoolean && editEnabled">
+      <mat-tab
+        label="{{ 'faculty_page.tab_labels.masters' | translate }}"
+        *ngIf="(mastersData && mastersData.length > 0) || editEnabled"
+      >
+        <button
+          mat-stroked-button
+          class="add-button"
+          (click)="addProgramDialog('master')"
+          *ngIf="editEnabled"
+        >
+          Add master
+        </button>
+        <app-editable-expansion-panel
+          *ngFor="let master of mastersData"
+          [data]="master"
+          type="master"
+          [editable]="editEnabled"
+        >
         </app-editable-expansion-panel>
-    </mat-tab>
+      </mat-tab>
 
-    <mat-tab *ngIf="reviewsData && reviewsData.length > 0" label="Reviews">
-      <div fxLayout="column">
-        <app-editable-comments *ngFor="let review of reviewsData" [review]="review"
-          [editable]="user.id === review.userId && !review.comment"></app-editable-comments>
-      </div>
-    </mat-tab>
-
-  </mat-tab-group>
+      <mat-tab
+        label="{{ 'faculty_page.tab_labels.doctorals' | translate }}"
+        *ngIf="(doctoralsData && doctoralsData.length > 0) || editEnabled"
+      >
+        <button
+          mat-stroked-button
+          class="add-button"
+          (click)="addProgramDialog('doctoral')"
+          *ngIf="editEnabled"
+        >
+          Add doctoral
+        </button>
+        <app-editable-expansion-panel
+          *ngFor="let doctoral of doctoralsData"
+          [data]="doctoral"
+          type="doctoral"
+          [editable]="editEnabled"
+        >
+        </app-editable-expansion-panel>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+  <div class="reviews" *ngIf="!editEnabled">
+    <div class="title">
+      Reviews
+    </div>
+    <app-editable-comments
+      *ngFor="let review of reviewsData"
+      [review]="review"
+      [editable]="user.id === review.userId && !review.comment"
+    ></app-editable-comments>
+  </div>
 </form>
