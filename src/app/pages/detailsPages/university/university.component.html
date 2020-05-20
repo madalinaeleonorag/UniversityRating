@@ -355,7 +355,7 @@
       </div>
     </div>
   </div>
-  <div class="reviews">
+  <div class="reviews" *ngIf="!editEnabled">
     <div class="title">
       Reviews
     </div>
@@ -366,41 +366,8 @@
     ></app-editable-comments>
   </div>
 </form>
+
 <!-- 
-
-  <mat-tab-group mat-align-tabs="center">
-    <mat-tab label="{{ 'university_page.tab_labels.details' | translate }}">
-      
-      <div class="custom-detail-field" *ngIf="universityDetails.strategicProgram.length > 0 || editEnabled">
-        <div class="custom-detail-field-title">
-          {{ 'university_page.details.strategic_programs' | translate }}
-        </div>
-        <app-editable-list [editable]="editEnabled" [list]="universityDetails.strategicProgram"
-          (listEdited)="modifyValuesFromList($event, 'strategicPrograms')"></app-editable-list>
-      </div>
-      <div class="custom-detail-field" *ngIf="universityDetails.values.length > 0 || editEnabled">
-        <div class="custom-detail-field-title">
-          {{ 'university_page.details.values' | translate }}
-        </div>
-        <app-editable-list [editable]="editEnabled" [list]="universityDetails.values"
-          (listEdited)="modifyValuesFromList($event, 'values')"></app-editable-list>
-      </div>
-      <div class="custom-detail-field" *ngIf="universityDetails.vision && !editEnabled">
-        <div class="custom-detail-field-title">
-          {{ 'university_page.details.vision' | translate }}
-        </div>
-        <ul>
-          {{ universityDetails.vision }}
-        </ul>
-      </div>
-      <div *ngIf="editEnabled">
-        <mat-form-field>
-          <input matInput required placeholder="vision" formControlName="vision" type="text">
-        </mat-form-field>
-      </div>
-
-    </mat-tab>
-
     <mat-tab label="{{ 'university_page.tab_labels.map' | translate }}" *ngIf="displayDirections || editEnabled">
       <agm-map appDirectionsMap [showDirection]="this.displayDirections" [origin]="origin" [destination]="destination"
         [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false" *ngIf="displayDirections">
@@ -408,6 +375,4 @@
         </agm-marker>
       </agm-map>
     </mat-tab>
-
-  </mat-tab-group>
-</form> -->
+-->
