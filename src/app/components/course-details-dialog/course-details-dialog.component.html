@@ -1,14 +1,4 @@
-<div *ngIf="!new && editable">
-  <mat-icon class="custom-icon" (click)="removeCourse()">clear </mat-icon>
-  Delete
-</div>
-<div *ngIf="!new && editable">
-  <mat-icon class="custom-icon" (click)="editCourse()">create </mat-icon> Edit
-</div>
-<div *ngIf="new && editable">
-  <mat-icon class="custom-icon" (click)="addCourse()">add </mat-icon> Add
-</div>
-<div class="custom-detail-field" *ngIf="course?.name">
+<div class="custom-detail-field" *ngIf="!editable && course?.name">
   <div class="custom-detail-field-title">
     {{ "course_data.name" | translate }}
   </div>
@@ -23,7 +13,7 @@
     type="text"
   />
 </mat-form-field>
-<div class="custom-detail-field" *ngIf="course?.creditGrantedByPromotion">
+<div class="custom-detail-field" *ngIf="!editable && course?.creditGrantedByPromotion">
   <div class="custom-detail-field-title">
     {{ "course_data.credit_granted" | translate }}
   </div>
@@ -41,7 +31,7 @@
   />
 </mat-form-field>
 <div>
-  <div class="custom-detail-field" *ngIf="course?.evaluationProcedure">
+  <div class="custom-detail-field" *ngIf="!editable && course?.evaluationProcedure">
     <div class="custom-detail-field-title">
       {{ "course_data.evaluation_procedure" | translate }}
     </div>
@@ -58,7 +48,7 @@
   />
 </mat-form-field>
 <div>
-  <div class="custom-detail-field" *ngIf="course?.hours">
+  <div class="custom-detail-field" *ngIf="!editable && course?.hours">
     <div class="custom-detail-field-title">
       {{ "course_data.hours" | translate }}
     </div>
@@ -75,7 +65,7 @@
   />
 </mat-form-field>
 <div>
-  <div class="custom-detail-field" *ngIf="course?.semester">
+  <div class="custom-detail-field" *ngIf="!editable && course?.semester">
     <div class="custom-detail-field-title">
       {{ "course_data.semester" | translate }}
     </div>
@@ -92,7 +82,7 @@
   />
 </mat-form-field>
 <div>
-  <div class="custom-detail-field" *ngIf="course?.courseObjectives">
+  <div class="custom-detail-field" *ngIf="!editable && course?.courseObjectives">
     <div class="custom-detail-field-title">
       {{ "course_data.course_objectives" | translate }}
     </div>
@@ -108,3 +98,14 @@
     type="text"
   />
 </mat-form-field>
+<div class="actions">
+  <button *ngIf="!new && editable" mat-stroked-button (click)="removeCourse()">
+    Delete
+  </button>
+  <button *ngIf="!new && editable" mat-stroked-button (click)="removeCourse()">
+    Edit
+  </button>
+  <button *ngIf="new && editable" mat-stroked-button (click)="addCourse()">
+    Add
+  </button>
+</div>

@@ -51,6 +51,7 @@ export class FacultyComponent implements OnInit, OnDestroy {
       if (this.facultyId) {
         this.firebaseService.getFacultyById(this.facultyId).subscribe(data => {
           this.facultyDetails = new FacultyData(data);
+          console.log(this.facultyDetails)
           this.buildForm();
           if (this.facultyDetails.universityId) {
             this.firebaseService.getUniversityById(this.facultyDetails.universityId).subscribe(university => {
@@ -76,12 +77,21 @@ export class FacultyComponent implements OnInit, OnDestroy {
     });
   }
 
+  goToWebsite(url: string) {
+    window.open(url, "_blank");
+  }
+
+  goToUniversity(id: string) {
+    this.router.navigateByUrl(`/university/${id}`);
+  }
+
   private buildForm() {
     this.form = new FormGroup({
       nameFaculty: new FormControl(this.facultyDetails.nameFaculty, [Validators.required]),
       studyGuide: new FormControl(this.facultyDetails.studyGuide, [Validators.required]),
       facultyId: new FormControl(this.facultyDetails.facultyId, [Validators.required]),
       descriptionFaculty: new FormControl(this.facultyDetails.descriptionFaculty, [Validators.required]),
+      locationFaculty: new FormControl(this.facultyDetails.locationFaculty, [Validators.required]),
     });
   }
 
@@ -130,8 +140,10 @@ export class FacultyComponent implements OnInit, OnDestroy {
       data: type
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.firebaseService.setNewProgramForUniversity(this.facultyDetails,
-        result.name, type);
+      if(result && result.name) {
+        this.firebaseService.setNewProgramForUniversity(this.facultyDetails,
+          result.name, type);
+      }
     });
   }
 
@@ -144,6 +156,11 @@ export class FacultyComponent implements OnInit, OnDestroy {
         });
       });
     }
+  }
+
+  getAddress(place: any) {
+    const addressComponents = place.address_components;
+    this.form.value.locationFaculty = addressComponents[addressComponents.length - 4].long_name;
   }
 
   getDoctorals() {
