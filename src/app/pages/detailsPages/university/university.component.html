@@ -73,7 +73,7 @@
           *ngIf="reviewsData"
           [reviews]="reviewsData"
           [editable]="false"
-          [type]="university"
+          type="university"
           showNumberOfRatings="true"
         ></app-editable-star-rating>
       </div>
@@ -81,7 +81,7 @@
     <div class="visit-website-button">
       <button
         mat-stroked-button
-        (click)="goToWebsite(universityDetails.website)"
+        (click)="goToWebsite(universityDetails.websiteUniversity)"
         *ngIf="!editEnabled"
       >
         Visit website
@@ -276,7 +276,7 @@
       (listEdited)="modifyValuesFromList($event, 'strategicPrograms')"
     ></app-editable-list>
   </div>
-  <div class="facilities">
+  <div class="facilities" *ngIf="universityDetails.facilitiesUniversity && universityDetails.facilitiesUniversity.length > 0">
     <div class="title">
       Facilitati
     </div>
@@ -293,16 +293,15 @@
       Contact
     </div>
     <div class="content">
-      <!-- TODO debug this shit whi is not working anymore -->
       <agm-map
         appDirectionsMap
-        [showDirection]="this.displayDirections"
+        [showDirection]="displayDirections"
         [origin]="origin"
         [destination]="destination"
         [zoom]="zoom"
         [disableDefaultUI]="false"
         [zoomControl]="false"
-        *ngIf="displayDirections"
+        *ngIf="destination && displayDirections"
       >
         <agm-marker
           [latitude]="destination?.lat"
@@ -358,21 +357,14 @@
   <div class="reviews" *ngIf="!editEnabled">
     <div class="title">
       Reviews
+      {{ reviewsData | json }}
     </div>
-    <app-editable-comments
+    <div *ngIf="reviewsData.length > 0">
+      <app-editable-comments
       *ngFor="let review of reviewsData"
       [review]="review"
       [editable]="user.id === review.userId && !review.comment"
     ></app-editable-comments>
+    </div>
   </div>
 </form>
-
-<!-- 
-    <mat-tab label="{{ 'university_page.tab_labels.map' | translate }}" *ngIf="displayDirections || editEnabled">
-      <agm-map appDirectionsMap [showDirection]="this.displayDirections" [origin]="origin" [destination]="destination"
-        [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false" *ngIf="displayDirections">
-        <agm-marker [latitude]="destination?.lat" [longitude]="destination?.lng">
-        </agm-marker>
-      </agm-map>
-    </mat-tab>
--->

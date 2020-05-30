@@ -11,7 +11,7 @@ export class DoughnutWidgetComponent implements OnInit, OnChanges {
   @Input() data: DoughnutData;
   chartData;
   myOptions = {
-    colors: ['#e0440e', '#e6693e', '#ec8f6e', '#f3b49f', '#f6c7b6'],
+    colors: ['#4fa7c9', '#3d639f', '#2b1c74'],
     is3D: false,
     title: ''
   };

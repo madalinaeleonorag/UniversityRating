@@ -4,7 +4,12 @@ import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { FirebaseService } from 'src/app/services/firebase-service.service';
 import { UserData } from 'src/app/models/UserData';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import {
+  FormGroup,
+  FormBuilder,
+  FormControl,
+  Validators,
+} from '@angular/forms';
 import { AzureAiTextAnalysisService } from 'src/app/services/azure-ai-text-analysis.service';
 import { TextAnalyticData } from 'src/app/models/TextAnalyticData';
 
@@ -12,10 +17,9 @@ import { TextAnalyticData } from 'src/app/models/TextAnalyticData';
   selector: 'app-editable-comments',
   templateUrl: './editable-comments.component.html',
   styleUrls: ['./editable-comments.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class EditableCommentsComponent implements OnInit {
-
   @Input() review: ReviewData;
   userData: UserData;
   isUserSubscription: Subscription;
@@ -27,28 +31,31 @@ export class EditableCommentsComponent implements OnInit {
   negativeSentimentWarning: boolean;
   // editCommentCheck: boolean;
 
-  constructor(private authService: AuthService, private firebaseService: FirebaseService, private formBuilder: FormBuilder, private azureService: AzureAiTextAnalysisService) { }
+  constructor(
+    private authService: AuthService,
+    private firebaseService: FirebaseService,
+    private formBuilder: FormBuilder,
+    private azureService: AzureAiTextAnalysisService
+  ) {}
 
   ngOnInit() {
-    this.isUserSubscription = this.authService.isUserAuthenticatedObservable.subscribe(result => {
-      this.user = new UserData(result);
-    });
+    this.isUserSubscription = this.authService.isUserAuthenticatedObservable.subscribe(
+      (result) => {
+        this.user = new UserData(result);
+      }
+    );
     // if (!this.review.comment) {
     //   this.editCommentCheck = true;
     // }
     this.getUserDetailById(this.review.userId);
     this.form = this.formBuilder.group({
-      stars: new FormControl('', [
-        Validators.required
-      ]),
-      comment: new FormControl('', [
-        Validators.required
-      ])
+      stars: new FormControl('', [Validators.required]),
+      comment: new FormControl('', [Validators.required]),
     });
   }
 
   getUserDetailById(id: string) {
-    this.firebaseService.getUserById(id).subscribe(details => {
+    this.firebaseService.getUserById(id).subscribe((details) => {
       this.userData = new UserData(details);
     });
   }
@@ -60,21 +67,19 @@ export class EditableCommentsComponent implements OnInit {
 
   addComment() {
     this.review.comment = this.commentText;
-    this.azureService.sentimentAnalysis(this.review.comment)
-      .then(res => {
-        const data = new TextAnalyticData(res[0]);
-        if (data.sentiment !== 'negative') {
-          this.review.status = 'approved';
-        } else {
-          this.review.status = 'pending';
-          this.negativeSentimentWarning = true;
-        }
-        this.firebaseService.addComment(this.review);
-      })
+    this.azureService.sentimentAnalysis(this.review.comment).then((res) => {
+      const data = new TextAnalyticData(res[0]);
+      if (data.sentiment !== 'negative') {
+        this.review.status = 'approved';
+      } else {
+        this.review.status = 'pending';
+        this.negativeSentimentWarning = true;
+      }
+      this.firebaseService.addComment(this.review);
+    });
   }
 
   setStarsForEditableComment(event: number) {
     this.review.stars = event;
   }
-
 }

@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { BehaviorSubject } from 'rxjs';
 import { FirebaseService } from './firebase-service.service';
 import { UserData } from '../models/UserData';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class AuthService {
   private isUserAuthenticatedSubject = new BehaviorSubject<any>(null);
   isUserAuthenticatedObservable = this.isUserAuthenticatedSubject.asObservable();
 
-  constructor(private firebaseAuth: AngularFireAuth, private firebaseService: FirebaseService) { }
+  constructor(private firebaseAuth: AngularFireAuth, private firebaseService: FirebaseService, private router: Router) { }
 
   signInRegular(email: string, password: string) {
     return this.firebaseAuth.auth.signInWithEmailAndPassword(email, password);
@@ -42,7 +43,9 @@ export class AuthService {
 
   logOut() {
     this.setUser(null);
-    return this.firebaseAuth.auth.signOut();
+    return this.firebaseAuth.auth.signOut().then(res => {
+      this.router.navigateByUrl(`/`);
+    });
   }
 
 }

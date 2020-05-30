@@ -45,7 +45,7 @@ export class UniversityComponent implements OnInit, OnDestroy {
   image: string;
 
   constructor(private route: ActivatedRoute, private firebaseService: FirebaseService, private router: Router,
-    private functionsService: FunctionsService, private authService: AuthService, private dialog: MatDialog) {
+              private functionsService: FunctionsService, private authService: AuthService, private dialog: MatDialog) {
     this.buildForm();
   }
 
@@ -61,7 +61,7 @@ export class UniversityComponent implements OnInit, OnDestroy {
   }
 
   goToWebsite(url: string) {
-    window.open(url, "_blank");
+    window.open(url, '_blank');
   }
 
   private buildForm() {
@@ -82,7 +82,7 @@ export class UniversityComponent implements OnInit, OnDestroy {
       facilitiesUniversity: new FormControl(this.universityDetails.facilitiesUniversity, [Validators.required])
     });
   }
-  
+
   getAddress(place: any) {
     this.form.value.address = place.formatted_address;
     const addressComponents = place.address_components;
@@ -146,7 +146,7 @@ export class UniversityComponent implements OnInit, OnDestroy {
         date: new Date(),
         status: 'approved',
         stars: 5
-      }
+      };
       this.reviewsData.push(new ReviewData(newCommentForPresentLoggedInUser));
     }
   }
