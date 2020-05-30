@@ -2,6 +2,8 @@ app-admin-dashboard {
   .custom-statistics {
     display: flex;
     flex-flow: wrap;
+    margin: 0px 60px;
+    justify-content: center;
   }
 
   td,
@@ -13,7 +15,16 @@ app-admin-dashboard {
     text-align: center;
   }
 
+  .mat-tab-body {
+    display: flex;
+    justify-content: center;
+  }
+
   .mat-tab-body-content {
     overflow: hidden;
+  }
+
+  .mat-tab-label {
+    color: #2b1c74;
   }
 }
