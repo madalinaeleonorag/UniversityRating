@@ -51,7 +51,9 @@ export class FacultyComponent implements OnInit, OnDestroy {
       if (this.facultyId) {
         this.firebaseService.getFacultyById(this.facultyId).subscribe(data => {
           this.facultyDetails = new FacultyData(data);
-          console.log(this.facultyDetails)
+          this.bachelorsData = [];
+          this.mastersData = [];
+          this.doctoralsData = [];
           this.buildForm();
           if (this.facultyDetails.universityId) {
             this.firebaseService.getUniversityById(this.facultyDetails.universityId).subscribe(university => {
@@ -78,7 +80,7 @@ export class FacultyComponent implements OnInit, OnDestroy {
   }
 
   goToWebsite(url: string) {
-    window.open(url, "_blank");
+    window.open(url, '_blank');
   }
 
   goToUniversity(id: string) {
@@ -114,7 +116,13 @@ export class FacultyComponent implements OnInit, OnDestroy {
     if (this.facultyDetails.bachelors.length > 0) {
       this.facultyDetails.bachelors.forEach(id => {
         this.firebaseService.getBacheloryById(id).subscribe(bachelor => {
-          this.bachelorsData.push(new SpecialisationData(bachelor));
+          const data = new SpecialisationData(bachelor);
+          const exists = this.bachelorsData.findIndex(item => item.id === data.id);
+          if (exists === -1) {
+            this.bachelorsData.push(data);
+          } else {
+            this.bachelorsData[exists] = data;
+          }
         });
       });
     }
@@ -140,7 +148,7 @@ export class FacultyComponent implements OnInit, OnDestroy {
       data: type
     });
     dialogRef.afterClosed().subscribe(result => {
-      if(result && result.name) {
+      if (result && result.name) {
         this.firebaseService.setNewProgramForUniversity(this.facultyDetails,
           result.name, type);
       }
@@ -152,7 +160,13 @@ export class FacultyComponent implements OnInit, OnDestroy {
     if (this.facultyDetails.masters.length > 0) {
       this.facultyDetails.masters.forEach(id => {
         this.firebaseService.getMasterById(id).subscribe(master => {
-          this.mastersData.push(new SpecialisationData(master));
+          const data = new SpecialisationData(master);
+          const exists = this.mastersData.findIndex(item => item.id === data.id);
+          if (exists === -1) {
+            this.mastersData.push(data);
+          } else {
+            this.mastersData[exists] = data;
+          }
         });
       });
     }
@@ -168,7 +182,13 @@ export class FacultyComponent implements OnInit, OnDestroy {
     if (this.facultyDetails.doctorals.length > 0) {
       this.facultyDetails.doctorals.forEach(id => {
         this.firebaseService.getDoctoralById(id).subscribe(doctoral => {
-          this.doctoralsData.push(new SpecialisationData(doctoral));
+          const data = new SpecialisationData(doctoral);
+          const exists = this.doctoralsData.findIndex(item => item.id === data.id);
+          if (exists === -1) {
+            this.doctoralsData.push(data);
+          } else {
+            this.doctoralsData[exists] = data;
+          }
         });
       });
     }
@@ -182,7 +202,7 @@ export class FacultyComponent implements OnInit, OnDestroy {
         date: new Date(),
         status: 'approved',
         stars: 5
-      }
+      };
       this.reviewsData.push(new ReviewData(newCommentForPresentLoggedInUser));
     }
   }
