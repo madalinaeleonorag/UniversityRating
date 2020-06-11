@@ -29,4 +29,8 @@ export class CourseDetailsDialogComponent implements OnInit {
     this.firebaseService.removeCourse(course);
   }
 
+  addCourse() {
+    this.firebaseService.addCourse(this.course);
+  }
+
 }
