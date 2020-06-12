@@ -1,8 +1,6 @@
 import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { FirebaseService } from 'src/app/services/firebase-service.service';
 import { CourseData } from 'src/app/models/CourseData';
-import { MatDialog } from '@angular/material';
-import { CourseDetailsDialogComponent } from '../course-details-dialog/course-details-dialog.component';
 import { SpecialisationData } from 'src/app/models/SpecialisationData';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
@@ -36,8 +34,10 @@ export class EditableExpansionPanelComponent implements OnInit {
       id: new FormControl(this.data.id, [Validators.required]),
       facultyId: new FormControl(this.data.facultyId, [Validators.required]),
       years: new FormControl(this.data.years, [Validators.required]),
-      semesters: new FormControl(this.data.semesters, [Validators.required])
-    })
+      semesters: new FormControl(this.data.semesters, [Validators.required]),
+      professionalPerspectives: new FormControl(this.data.professionalPerspectives, [Validators.required]),
+      generalSkills: new FormControl(this.data.generalSkills, [Validators.required])
+    });
   }
 
   getCourses(coursesIds: string[]) {
@@ -48,9 +48,9 @@ export class EditableExpansionPanelComponent implements OnInit {
     });
   }
 
-
   modifyValuesFromList(event: Array<any>, type: string) {
     this.data[type] = event;
+    this.form.value[type] = event;
   }
 
   editProgram() {
@@ -64,7 +64,7 @@ export class EditableExpansionPanelComponent implements OnInit {
 
   saveProgram() {
     this.editProgram();
-    this.firebaseService.programEdit(this.data, this.type);
+    this.firebaseService.programEdit(new SpecialisationData(this.form.value), this.type);
   }
 
   getCoursesForSpecialisation(specialisationId: string) {
