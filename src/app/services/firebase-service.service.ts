@@ -402,7 +402,6 @@ export class FirebaseService {
   }
 
   addCourse(course: CourseData) {
-    console.log(course);
     const dataCourse = {
       courseObjectives: course.courseObjectives
         ? course.courseObjectives
@@ -624,7 +623,49 @@ export class FirebaseService {
       });
   }
 
-  programEdit(item: SpecialisationData, type: string) {}
+  programEdit(item: SpecialisationData, type: string) {
+    console.log('item', item)
+    const data: SpecialisationData = {
+      facultyId: item.facultyId ? item.facultyId : '',
+        generalSkills: item.generalSkills ? item.generalSkills : [],
+        name: item.name ? item.name : '',
+        professionalPerspectives: item.professionalPerspectives ? item.professionalPerspectives : [],
+        courses: item.courses ? item.courses : [],
+        semesters: item.semesters ? item.semesters : 0,
+        years: item.years ? item.years : 0,
+        id: item.id ? item.id : ''
+    };
+    console.log('data', data)
+    switch (type) {
+      case 'bachelor':
+        {
+          firebase
+            .firestore()
+            .collection('Bachelors')
+            .doc(item.id)
+            .update(data);
+        }
+        break;
+      case 'master':
+        {
+          firebase
+            .firestore()
+            .collection('Masters')
+            .doc(item.id)
+            .update(data);
+        }
+        break;
+      case 'doctoral':
+        {
+          firebase
+            .firestore()
+            .collection('Doctorals')
+            .doc(item.id)
+            .update(data);
+        }
+        break;
+    }
+  }
 
   addComment(item: ReviewData) {
     const dayString = moment(new Date()).format('DD-MM-YYYY');
