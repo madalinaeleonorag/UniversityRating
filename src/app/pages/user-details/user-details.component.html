@@ -13,18 +13,18 @@
     ></app-wave-button>
     </div>
     <button mat-stroked-button (click)="goToRequestPage('draft')" class="modify-button">
-      Modify and resend the last request
+      Modifica si retrimite ultima cerere
     </button>
   </div>
   <div *ngIf="requestStatus === 'approved'">
     <button mat-stroked-button (click)="goToUniversityPage()" class="view-button">
-      View and edit your university
+      Vizioneaza si editeaza universitatea
     </button>
   </div>
 </div>
 <div class="custom-div" *ngIf="user">
   <div class="custom-header-text">
-    Profile details
+    Detalii profil
   </div>
   <mat-card-content fxLayout="column">
     <mat-form-field class="example-full-width">
@@ -95,7 +95,7 @@
         [disabled]="!canEdit"
       >
         <option
-          *ngFor="let level of classLevelValues(schoolLevel)"
+          *ngFor="let level of classLevelValues(schoolLevelValues)"
           [value]="level"
           >{{ level }}
         </option>

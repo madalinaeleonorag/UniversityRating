@@ -47,7 +47,7 @@
             <mat-label>Institution type</mat-label>
             <mat-select formControlName="typeUniversity">
               <mat-option value="privat">
-                Private
+                Privat
               </mat-option>
               <mat-option value="stat">
                 Stat
@@ -84,7 +84,7 @@
         (click)="goToWebsite(universityDetails.websiteUniversity)"
         *ngIf="!editEnabled"
       >
-        Visit website
+        Viziteaza website
       </button>
       <div *ngIf="editEnabled">
         <mat-form-field>
@@ -148,7 +148,7 @@
       mat-stroked-button
       (click)="addFacultyDialog()"
     >
-      Add faculty
+      Adauga facultate
     </button>
     <table
       mat-table
@@ -197,7 +197,7 @@
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let element">
           <button mat-stroked-button (click)="removeFaculty(element)">
-            Remove
+            Sterge
           </button>
         </td>
       </ng-container>
@@ -311,10 +311,10 @@
       </agm-map>
       <div class="contact-informations">
         <div *ngIf="universityDetails.phone">
-          Phone: {{ universityDetails.phone }}
+          Telefon: {{ universityDetails.phone }}
         </div>
         <div *ngIf="universityDetails.address">
-          Address: {{ universityDetails.address }}
+          Adresa: {{ universityDetails.address }}
         </div>
         <div *ngIf="universityDetails.fax">
           Fax: {{ universityDetails.fax }}
@@ -356,7 +356,7 @@
   </div>
   <div class="reviews" *ngIf="!editEnabled">
     <div class="title">
-      Reviews
+      Recenzii
     </div>
     <div *ngIf="reviewsData.length > 0">
       <app-editable-comments

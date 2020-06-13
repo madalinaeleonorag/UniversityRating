@@ -6,9 +6,9 @@
             </mat-panel-title>
         </mat-expansion-panel-header>
         <div class="actions">
-            <button mat-stroked-button *ngIf="editable && !userChooseToEdit" (click)="editProgram()">Edit</button>
-            <button mat-stroked-button *ngIf="userChooseToEdit" (click)="removeProgram()">Remove</button>
-            <button mat-stroked-button *ngIf="userChooseToEdit" (click)="saveProgram()">Save</button>
+            <button mat-stroked-button *ngIf="editable && !userChooseToEdit" (click)="editProgram()">Editeaza</button>
+            <button mat-stroked-button *ngIf="userChooseToEdit" (click)="removeProgram()">Sterge</button>
+            <button mat-stroked-button *ngIf="userChooseToEdit" (click)="saveProgram()">Salveaza</button>
         </div>
         <div *ngIf="userChooseToEdit" class="custom-detail-field">
             <mat-form-field>

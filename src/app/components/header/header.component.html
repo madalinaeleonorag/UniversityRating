@@ -71,10 +71,10 @@
             (click)="goToRequests()"
             *ngIf="user && user.type === 'admin'"
           >
-            University requests
+            Cereri universitati
           </button>
           <button mat-menu-item (click)="goToUserDetails()" *ngIf="user">
-            Account
+            Cont
           </button>
           <button mat-menu-item (click)="logOutUser()" *ngIf="user">
             {{ "buttons.logout" | translate | uppercase }}
