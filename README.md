@@ -12,6 +12,33 @@ To run the project on your machine use `ng serve` for a dev server. Navigate to 
 
 
 ## Screenshots
-* Admin
+* General access
+    * Homepage
+    ![''](./src/assets/presentation/homepage.png)
+    * Login
+    ![''](./src/assets/presentation/login.png)
+    * University details
+    ![''](./src/assets/presentation/university.png)
+    * Faculty details
+    ![''](./src/assets/presentation/faculty.png)
+    * Course details
+    ![''](./src/assets/presentation/course.png)
+* Users with general account access
+    * User details
+    ![''](./src/assets/presentation/user-details.png)
+* Users with university account access
+    * University edit
+    ![''](./src/assets/presentation/university-edit.png)
+    * Faculty edit
+    ![''](./src/assets/presentation/faculty-edit.png)
+* Administrators access
     * Barchart statistics 
-    ![alt text](./src/assets/presentation/barcharts.png)
+    ![''](./src/assets/presentation/barcharts.png)
+    * Piechart statistics
+    ![''](./src/assets/presentation/piecharts.png)
+    * Raports
+    ![''](./src/assets/presentation/raports.png)
+    * Requests
+    ![''](./src/assets/presentation/requests.png)
+* Database 
+    * ![''](./src/assets/presentation/database.png)
