@@ -13,32 +13,32 @@ To run the project on your machine use `ng serve` for a dev server. Navigate to 
 
 ## Screenshots
 * General access
-    * Homepage
+    * Homepage<br>
     ![''](./src/assets/presentation/homepage.png)
-    * Login
+    * Login<br>
     ![''](./src/assets/presentation/login.png)
-    * University details
+    * University details<br>
     ![''](./src/assets/presentation/university.png)
-    * Faculty details
+    * Faculty details<br>
     ![''](./src/assets/presentation/faculty.png)
-    * Course details
+    * Course details<br>
     ![''](./src/assets/presentation/course.png)
 * Users with general account access
-    * User details
+    * User details<br>
     ![''](./src/assets/presentation/user-details.png)
 * Users with university account access
-    * University edit
+    * University edit<br>
     ![''](./src/assets/presentation/university-edit.png)
-    * Faculty edit
+    * Faculty edit<br>
     ![''](./src/assets/presentation/faculty-edit.png)
 * Administrators access
-    * Barchart statistics 
+    * Barchart statistics <br>
     ![''](./src/assets/presentation/barcharts.png)
-    * Piechart statistics
+    * Piechart statistics<br>
     ![''](./src/assets/presentation/piecharts.png)
-    * Raports
+    * Raports<br>
     ![''](./src/assets/presentation/raports.png)
-    * Requests
+    * Requests<br>
     ![''](./src/assets/presentation/requests.png)
-* Database 
-    * ![''](./src/assets/presentation/database.png)
+* Database <br>
+![''](./src/assets/presentation/database.png)
