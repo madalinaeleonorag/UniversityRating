@@ -10,11 +10,11 @@
   },
   "buttons": {
     "search": "Cauta",
-    "login": "Login",
-    "signup": "Signup",
-    "logout": "Logout",
+    "login": "Autentificare",
+    "signup": "Creare cont",
+    "logout": "Iesire cont",
     "more_details": "Vezi detalii",
-    "dashboard": "Dashboard"
+    "dashboard": "Panou control"
   },
   "filters": {
     "keywords": {
@@ -47,48 +47,48 @@
     "study_level": "Cauta dupa nivelul de studii",
     "sort_rating": "Sort by rating",
     "institution_type": {
-      "label": "Institution type",
+      "label": "Tip institutie",
       "state": "Stat",
-      "private": "Private"
+      "private": "Privat"
     },
-    "result_counter": "results",
-    "faculties_counter": "faculties",
-    "counter_bachelors": "bachelors",
-    "counter_masters": "masters",
-    "counter_doctorals": "doctorals",
-    "counter_semesters": "semesters",
-    "counter_years": "years"
+    "result_counter": "rezultate",
+    "faculties_counter": "facultati",
+    "counter_bachelors": "licente",
+    "counter_masters": "masterate",
+    "counter_doctorals": "doctorate",
+    "counter_semesters": "semestre",
+    "counter_years": "ani"
   },
   "university_page": {
     "tab_labels": {
-      "facilities": "Facilities",
-      "details": "Details",
-      "photos": "Photos",
-      "faculties": "Faculties",
+      "facilities": "Facilitati",
+      "details": "Detalii",
+      "photos": "Poze",
+      "faculties": "Facultati",
       "contact": "Contact",
-      "map": "Directions"
+      "map": "Directii"
     },
     "header": {
-      "website": "University website"
+      "website": "Website"
     },
     "details": {
-      "type": "Institution type",
-      "description": "Description",
-      "mission": "Mission",
-      "strategic_programs": "Strategic programs",
-      "values": "Values",
-      "vision": "Vision"
+      "type": "Tip institutie",
+      "description": "Descriere",
+      "mission": "Misiune",
+      "strategic_programs": "Programe strategice",
+      "values": "Valori",
+      "vision": "Viziune"
     },
     "faculties": {
-      "name": "Name",
-      "bachelors": "Bachelors",
-      "masters": "Masters",
-      "doctorals": "Doctorals",
-      "details": "Go to faculty page"
+      "name": "Nume",
+      "bachelors": "Licente",
+      "masters": "Masterat",
+      "doctorals": "Doctorat",
+      "details": "Catre pagina facultatii"
     },
     "contact": {
-      "phone": "Phone",
-      "address": "Address",
+      "phone": "Telefon",
+      "address": "Adresa",
       "fax": "Fax"
     }
   },
@@ -103,55 +103,55 @@
       "studyGuide": "Viziteaza ghidul facultatii"
     },
     "details": {
-      "type": "Institution type",
-      "description": "Description",
-      "mission": "Mission",
-      "strategic_programs": "Strategic programs",
-      "values": "Values",
-      "vision": "Vision",
-      "courses": "Courses"
+      "type": "Tip institutie",
+      "description": "Descriere",
+      "mission": "Misiune",
+      "strategic_programs": "Programe srategice",
+      "values": "Valori",
+      "vision": "Viziune",
+      "courses": "Cursuri"
     },
     "bachelors": {
-      "years": "Years",
-      "semesters": "Semesters",
+      "years": "Ani",
+      "semesters": "Semestre",
       "general_skills": "Abilitati generale",
-      "professional_perspectives": "Professional perpectives"
+      "professional_perspectives": "Perspective profesionale"
     },
-    "go_university": "Go to university page"
+    "go_university": "Catre pagina universitatii"
   },
   "login_dialog": {
-    "title": "Login",
+    "title": "Autentificare",
     "email": "Email",
-    "password": "Password",
-    "error_invalid_email": "Please enter a valid email address",
-    "error_required_email": "Email is required",
-    "cancel": "Cancel",
-    "login": "Login"
+    "password": "Parola",
+    "error_invalid_email": "Va rugam introduceti un email valid",
+    "error_required_email": "Emailul este obligatoriu",
+    "cancel": "Inapoi",
+    "login": "Autentificare"
   },
   "signup_dialog": {
-    "title": "Signup",
+    "title": "Creare cont",
     "email": "Email",
-    "password": "Password",
-    "cancel": "Cancel",
-    "signup": "Create account",
-    "gdpr": "I accept the processing of personal data in order to obtain statistics regarding user satisfaction",
-    "university_administration": "* The administration of a university using the account will be done after activating the functionality from the account settings menu.",
-    "name": "Name",
-    "surname": "Surname",
-    "birthday": "Birthday",
+    "password": "Parola",
+    "cancel": "Inapoi",
+    "signup": "Creaza cont",
+    "gdpr": "Accept prelucrarea datelor cu caracter personal pentru a obtine statistici privind satisfactia utilizatorului",
+    "university_administration": "* Administrarea unei universitati cu ajutorul contului se va face dupa activarea functionalitatii din meniul setarilor contului.",
+    "name": "Nume",
+    "surname": "Prenume",
+    "birthday": "Data nasterii",
     "sex": "Sex",
-    "male": "Male",
-    "female": "Female",
-    "location": "Location",
-    "school_level": "School level",
-    "class_level": "Class level"
+    "male": "Masculin",
+    "female": "Feminin",
+    "location": "Locatie",
+    "school_level": "Nivel educatie",
+    "class_level": "Clasa/An"
   },
   "course_data": {
-    "course_objectives": "Course objectives",
-    "credit_granted": "Credic granted by promotion",
-    "evaluation_procedure": "Evaluation procedure",
-    "hours": "Hours",
-    "name": "Name",
-    "semester": "Semester"
+    "course_objectives": "Obiectivele cursului",
+    "credit_granted": "Credite obtinute prin promovare",
+    "evaluation_procedure": "Procedura de evaluare",
+    "hours": "Ore",
+    "name": "Nume",
+    "semester": "Semestru"
   }
 }

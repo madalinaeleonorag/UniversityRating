@@ -14,7 +14,7 @@
         mat-stroked-button
         (click)="goToUniversity(facultyDetails.universityId)"
       >
-        Visit university
+        Viziteaza website oficial
       </button>
     </div>
     <div class="header-content">
@@ -96,7 +96,7 @@
         (click)="goToWebsite(facultyDetails.studyGuide)"
         *ngIf="!editEnabled"
       >
-        Visit study guide
+        Viziteada ghidul de studii
       </button>
       <div *ngIf="editEnabled">
         <mat-form-field>
@@ -141,7 +141,7 @@
           (click)="addProgramDialog('bachelor')"
           *ngIf="editEnabled"
         >
-          Add bachelor
+          Adauga program de licenta
         </button>
 
         <app-editable-expansion-panel
@@ -163,7 +163,7 @@
           (click)="addProgramDialog('master')"
           *ngIf="editEnabled"
         >
-          Add master
+          Adauga program de master
         </button>
         <app-editable-expansion-panel
           *ngFor="let master of mastersData"
@@ -184,7 +184,7 @@
           (click)="addProgramDialog('doctoral')"
           *ngIf="editEnabled"
         >
-          Add doctoral
+          Adauga program de doctorat
         </button>
         <app-editable-expansion-panel
           *ngFor="let doctoral of doctoralsData"
@@ -198,7 +198,7 @@
   </div>
   <div class="reviews" *ngIf="!editEnabled && reviewsData && reviewsData.length > 0">
     <div class="title">
-      Reviews
+      Recenzii
     </div>
     <app-editable-comments
       *ngFor="let review of reviewsData"
