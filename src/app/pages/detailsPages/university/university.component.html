@@ -11,12 +11,12 @@
     />
     <div class="edit-button">
       <app-wave-button
-        text="Edit university"
+        text="Editeaza universitate"
         (click)="editDetails()"
         *ngIf="userCanEdit && !editEnabled"
       ></app-wave-button>
       <app-wave-button
-        text="Save data"
+        text="Salveaza"
         (click)="saveDetails()"
         *ngIf="userCanEdit && editEnabled"
       ></app-wave-button>
