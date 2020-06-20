@@ -8,7 +8,7 @@
   <div *ngIf="requestStatus === 'declined'" class="declined-request">
     <div class="button-custom">
       <app-wave-button
-      text="Send new request"
+      text="Trimite o noua cerere"
       (click)="goToRequestPage('new')"
     ></app-wave-button>
     </div>
@@ -104,12 +104,12 @@
 
     <div class="button-custom-on-center">
       <app-wave-button
-        text="Edit details"
+        text="Editeaza detaliile"
         (click)="canEdit = !canEdit"
         *ngIf="!canEdit"
       ></app-wave-button>
       <app-wave-button
-        text="Save"
+        text="Salveaza"
         (click)="saveNewDetails()"
         *ngIf="canEdit"
       ></app-wave-button>

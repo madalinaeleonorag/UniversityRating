@@ -29,12 +29,12 @@
   <div class="header">
     <div class="edit-button">
       <app-wave-button
-        text="Edit faculty"
+        text="Editeaza facultate"
         (click)="editDetails()"
         *ngIf="userCanEditBoolean && !editEnabled"
       ></app-wave-button>
       <app-wave-button
-        text="Save data"
+        text="Salveaza"
         (click)="saveDetails()"
         *ngIf="userCanEditBoolean && editEnabled"
       ></app-wave-button>
