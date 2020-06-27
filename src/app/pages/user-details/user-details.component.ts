@@ -49,6 +49,7 @@ export class UserDetailsComponent implements OnInit {
     const address = 'address_components';
     const addressComponents = place[address];
     this.location = addressComponents[addressComponents.length - 4].long_name;
+    this.user.locality = this.location;
   }
 
   classLevelValues(schoolLevel: string) {
@@ -58,7 +59,7 @@ export class UserDetailsComponent implements OnInit {
       case 'licence': return ['1', '2', '3', '4', '5', '6'];
       case 'master': return ['1', '2', '3'];
       case 'doctoral': return ['1', '2'];
-      default: return '';
+      default: return [''];
     }
   }
 
