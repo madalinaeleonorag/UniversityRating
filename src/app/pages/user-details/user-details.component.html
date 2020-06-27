@@ -61,19 +61,19 @@
         <option value="F">{{ "signup_dialog.female" | translate }}</option>
       </select>
     </mat-form-field>
-    <mat-form-field class="example-full-width">
+    <mat-form-field class="example-full-width" *ngIf="!canEdit && user && user.locality">
       <input
         matInput
-        placeholder="{{ 'signup_dialog.birthday' | translate }}"
-        [(ngModel)]="user.birthday"
-        type="date"
-        [disabled]="!canEdit"
+        placeholder="Location"
+        [(ngModel)]="user.locality"
+        type="text"
+        disabled="true"
       />
     </mat-form-field>
     <AutocompleteAddressComponent
       (setAddress)="getAddress($event)"
       adressType="geocode"
-      [disabled]="!canEdit"
+      *ngIf="canEdit"
     ></AutocompleteAddressComponent>
     <mat-form-field>
       <mat-label>{{ "signup_dialog.school_level" | translate }}</mat-label>
@@ -82,9 +82,9 @@
         [(ngModel)]="user.schoolLevel"
         [disabled]="!canEdit"
       >
-        <option *ngFor="let level of schoolLevelValues" [value]="level">{{
-          level
-        }}</option>
+        <option *ngFor="let level of schoolLevelValues" [value]="level">
+          {{ level | instantSchoolLevelTranslate }}
+        </option>
       </select>
     </mat-form-field>
     <mat-form-field>
@@ -95,7 +95,7 @@
         [disabled]="!canEdit"
       >
         <option
-          *ngFor="let level of classLevelValues(schoolLevelValues)"
+          *ngFor="let level of classLevelValues(user.schoolLevel)"
           [value]="level"
           >{{ level }}
         </option>

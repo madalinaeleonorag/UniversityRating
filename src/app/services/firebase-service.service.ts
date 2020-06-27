@@ -217,9 +217,7 @@ export class FirebaseService {
           console.error('Error writing document: ', error);
         });
     } else if (state === 'draft') {
-      firebase.firestore().collection('Requests').doc(requestId).update({
-        status: 'pending',
-      });
+      firebase.firestore().collection('Requests').doc(requestId).update(requestData);
     }
   }
 

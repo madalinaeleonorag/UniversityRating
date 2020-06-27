@@ -25,7 +25,7 @@
         "label": "Locatie",
         "all_locations": "Toate locatiile"
       },
-      "facilities": { 
+      "facilities": {
         "label": "Facilitati",
         "copy_center": "Copy-center",
         "cafe": "Cafenea",
@@ -42,6 +42,14 @@
         "places_without_tax": "Locuri fara taxa",
         "career_counseling_and_guidance_center": "Centru de consiliere si orientare in cariera",
         "courses_in_foreign_languages": "Cursuri in limbi straine"
+      },
+      "schoolLevel": {
+        "primary": "Primara",
+        "highschool": "Generala",
+        "licence": "Licenta",
+        "master": "Masterat",
+        "doctoral": "Doctorat",
+        "finished": "Am terminat"
       }
     },
     "study_level": "Cauta dupa nivelul de studii",

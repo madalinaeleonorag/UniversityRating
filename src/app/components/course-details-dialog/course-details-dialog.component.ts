@@ -27,10 +27,12 @@ export class CourseDetailsDialogComponent implements OnInit {
 
   removeCourse(course: CourseData) {
     this.firebaseService.removeCourse(course);
+    this.dialogRef.close();
   }
 
   addCourse() {
     this.firebaseService.addCourse(this.course);
+    this.dialogRef.close();
   }
 
 }
