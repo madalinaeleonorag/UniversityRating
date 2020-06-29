@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-  private isUserAuthenticatedSubject = new BehaviorSubject<any>(null);
+  private isUserAuthenticatedSubject = new BehaviorSubject<any>(undefined);
   isUserAuthenticatedObservable = this.isUserAuthenticatedSubject.asObservable();
 
   constructor(private firebaseAuth: AngularFireAuth, private firebaseService: FirebaseService, private router: Router) { }
