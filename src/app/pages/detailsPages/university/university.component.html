@@ -354,9 +354,10 @@
       </div>
     </div>
   </div>
-  <div class="reviews" *ngIf="!editEnabled">
+  {{ reviewsData | json }} 
+  <div class="reviews" *ngIf="!editEnabled && reviewsData && reviewsData.length > 0">
     <div class="title">
-      Recenzii
+      {{ reviewsData[0] | json }} 
     </div>
     <div *ngIf="reviewsData.length > 0">
       <app-editable-comments

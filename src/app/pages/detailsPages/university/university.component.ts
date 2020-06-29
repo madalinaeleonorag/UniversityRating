@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewEncapsulation, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FirebaseService } from 'src/app/services/firebase-service.service';
@@ -45,7 +45,8 @@ export class UniversityComponent implements OnInit, OnDestroy {
   image: string;
 
   constructor(private route: ActivatedRoute, private firebaseService: FirebaseService, private router: Router,
-              private functionsService: FunctionsService, private authService: AuthService, private dialog: MatDialog) {
+              private functionsService: FunctionsService, private authService: AuthService, private dialog: MatDialog,
+              private changeDetectorRef: ChangeDetectorRef) {
     this.buildForm();
   }
 
@@ -99,8 +100,9 @@ export class UniversityComponent implements OnInit, OnDestroy {
           longitude: pos.lng
         };
       });
-      if (this.user.id) {
-        this.showAddNewComment(this.reviewsData);
+      if (this.user.id && this.universityId) {
+        this.showAddNewComment();
+        this.changeDetectorRef.markForCheck();
       }
     });
 
@@ -134,12 +136,16 @@ export class UniversityComponent implements OnInit, OnDestroy {
             }
           });
         });
+        if (this.user.id && this.universityId) {
+          this.showAddNewComment();
+          this.changeDetectorRef.markForCheck();
+        }
       }
     });
   }
 
-  showAddNewComment(data: any) {
-    if (data.filter((item: ReviewData) => item.userId === this.user.id).length === 0) {
+  showAddNewComment() {
+    if (this.reviewsData.filter((item: ReviewData) => item.userId === this.user.id).length === 0) {
       const newCommentForPresentLoggedInUser = {
         universityId: this.universityId,
         userId: this.user.id,
