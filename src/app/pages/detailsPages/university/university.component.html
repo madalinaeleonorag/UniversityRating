@@ -117,31 +117,9 @@
     <!-- TODO: add read more button -->
   </div>
   <div class="faculties" *ngIf="facultiesData.length > 0 && !editEnabled">
-    <mat-card *ngFor="let result of facultiesData">
-      <mat-card-content>
-        <div class="logo-image">
-          <img
-            mat-card-image
-            src="{{ result.logoFaculty }}"
-            *ngIf="result.logoFaculty"
-          />
-          <img
-            mat-card-image
-            src="assets/university.png"
-            *ngIf="!result.logoFaculty"
-          />
-        </div>
-        <p class="dark-blue-bold-text">
-          {{ result.nameFaculty | uppercase | limitCharactersInDiv: 50 }}
-        </p>
-        <div class="bottom-items">
-          <app-wave-button
-            text="{{ 'buttons.more_details' | translate | uppercase }}"
-            (click)="onNavigate(result.facultyId)"
-          ></app-wave-button>
-        </div>
-      </mat-card-content>
-    </mat-card>
+    <div *ngFor="let result of facultiesData">
+      <app-presentation-card [data]="result" type="Faculty"></app-presentation-card>
+    </div>
   </div>
   <div class="faculties-table" *ngIf="editEnabled">
     <button
@@ -276,7 +254,7 @@
       (listEdited)="modifyValuesFromList($event, 'strategicPrograms')"
     ></app-editable-list>
   </div>
-  <div class="facilities" *ngIf="universityDetails.facilitiesUniversity && universityDetails.facilitiesUniversity.length > 0">
+  <div class="facilities" *ngIf="editEnabled || ( universityDetails.facilitiesUniversity && universityDetails.facilitiesUniversity.length > 0 )">
     <div class="title">
       Facilitati
     </div>
@@ -354,10 +332,9 @@
       </div>
     </div>
   </div>
-  {{ reviewsData | json }} 
   <div class="reviews" *ngIf="!editEnabled && reviewsData && reviewsData.length > 0">
     <div class="title">
-      {{ reviewsData[0] | json }} 
+      Recenzii 
     </div>
     <div *ngIf="reviewsData.length > 0">
       <app-editable-comments
