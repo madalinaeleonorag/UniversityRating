@@ -231,6 +231,7 @@ app-university {
     .content {
       display: flex;
       flex-flow: row;
+      margin-bottom: 20px;
 
       agm-map {
         width: 100%;

@@ -86,6 +86,7 @@ import { EditableChipsListComponent } from './components/editable-chips-list/edi
 import { WaveButtonComponent } from './components/wave-button/wave-button.component';
 import { LimitCharactersInDivPipe } from './pipes/limit-characters-in-div.pipe';
 import { InstantSchoolLevelTranslatePipe } from './pipes/instant-school-level-translate.pipe';
+import { PresentationCardComponent } from './components/presentation-card/presentation-card.component';
 
 // Firestore config
 const config = {
@@ -146,7 +147,8 @@ export function createTranslateLoader(http: HttpClient) {
     EditableChipsListComponent,
     WaveButtonComponent,
     LimitCharactersInDivPipe,
-    InstantSchoolLevelTranslatePipe
+    InstantSchoolLevelTranslatePipe,
+    PresentationCardComponent
   ],
   entryComponents: [
     LoginDialogComponent,

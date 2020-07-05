@@ -217,7 +217,11 @@ export class FirebaseService {
           console.error('Error writing document: ', error);
         });
     } else if (state === 'draft') {
-      firebase.firestore().collection('Requests').doc(requestId).update(requestData);
+      firebase
+        .firestore()
+        .collection('Requests')
+        .doc(requestId)
+        .update(requestData);
     }
   }
 
@@ -368,6 +372,78 @@ export class FirebaseService {
               console.log(err);
             });
         }
+        break;
+    }
+  }
+
+  removeFavourite(
+    itemId: any,
+    type: string,
+    userId: string,
+    userFavourites: string[]
+  ) {
+    userFavourites.splice(userFavourites.indexOf(itemId), 1);
+    switch (type) {
+      case 'University':
+        firebase.firestore().collection('Users').doc(userId).update({
+          favouritesUniversities: userFavourites,
+        });
+        break;
+      case 'Faculty':
+        firebase.firestore().collection('Users').doc(userId).update({
+          favouritesFaculties: userFavourites,
+        });
+        break;
+      case 'Bachelor':
+        firebase.firestore().collection('Users').doc(userId).update({
+          favouritesBachelors: userFavourites,
+        });
+        break;
+      case 'Master':
+        firebase.firestore().collection('Users').doc(userId).update({
+          favouritesMasters: userFavourites,
+        });
+        break;
+      case 'Doctoral':
+        firebase.firestore().collection('Users').doc(userId).update({
+          favouritesDoctorals: userFavourites,
+        });
+        break;
+    }
+  }
+
+  addToFavourite(
+    itemId: any,
+    type: string,
+    userId: string,
+    userFavourites: string[]
+  ) {
+    userFavourites.push(itemId);
+    switch (type) {
+      case 'University':
+        firebase.firestore().collection('Users').doc(userId).update({
+          favouritesUniversities: userFavourites,
+        });
+        break;
+      case 'Faculty':
+        firebase.firestore().collection('Users').doc(userId).update({
+          favouritesFaculties: userFavourites,
+        });
+        break;
+      case 'Bachelor':
+        firebase.firestore().collection('Users').doc(userId).update({
+          favouritesBachelors: userFavourites,
+        });
+        break;
+      case 'Master':
+        firebase.firestore().collection('Users').doc(userId).update({
+          favouritesMasters: userFavourites,
+        });
+        break;
+      case 'Doctoral':
+        firebase.firestore().collection('Users').doc(userId).update({
+          favouritesDoctorals: userFavourites,
+        });
         break;
     }
   }
@@ -622,18 +698,20 @@ export class FirebaseService {
   }
 
   programEdit(item: SpecialisationData, type: string) {
-    console.log('item', item)
+    console.log('item', item);
     const data: SpecialisationData = {
       facultyId: item.facultyId ? item.facultyId : '',
-        generalSkills: item.generalSkills ? item.generalSkills : [],
-        name: item.name ? item.name : '',
-        professionalPerspectives: item.professionalPerspectives ? item.professionalPerspectives : [],
-        courses: item.courses ? item.courses : [],
-        semesters: item.semesters ? item.semesters : 0,
-        years: item.years ? item.years : 0,
-        id: item.id ? item.id : ''
+      generalSkills: item.generalSkills ? item.generalSkills : [],
+      name: item.name ? item.name : '',
+      professionalPerspectives: item.professionalPerspectives
+        ? item.professionalPerspectives
+        : [],
+      courses: item.courses ? item.courses : [],
+      semesters: item.semesters ? item.semesters : 0,
+      years: item.years ? item.years : 0,
+      id: item.id ? item.id : '',
     };
-    console.log('data', data)
+    console.log('data', data);
     switch (type) {
       case 'bachelor':
         {
@@ -646,11 +724,7 @@ export class FirebaseService {
         break;
       case 'master':
         {
-          firebase
-            .firestore()
-            .collection('Masters')
-            .doc(item.id)
-            .update(data);
+          firebase.firestore().collection('Masters').doc(item.id).update(data);
         }
         break;
       case 'doctoral':

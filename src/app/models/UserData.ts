@@ -30,6 +30,16 @@ export class UserData {
     type: string = undefined;
     @JsonProperty('universityId')
     universityId: string = undefined;
+    @JsonProperty('favouritesUniversities')
+    favouritesUniversities: string[] = [];
+    @JsonProperty('favouritesFaculties')
+    favouritesFaculties: string[] = [];
+    @JsonProperty('favouritesBachelors')
+    favouritesBachelors: string[] = [];
+    @JsonProperty('favouritesMasters')
+    favouritesMasters: string[] = [];
+    @JsonProperty('favouritesDoctorals')
+    favouritesDoctorals: string[] = [];
 
     constructor(obj: any) {
         this.birthday = obj ? (obj.birthday ? obj.birthday : undefined) : undefined;
@@ -46,5 +56,10 @@ export class UserData {
         this.surname = obj ? (obj.surname ? obj.surname : undefined) : undefined;
         this.type = obj ? (obj.type ? obj.type : undefined) : undefined;
         this.universityId = obj ? (obj.universityId ? obj.universityId : undefined) : undefined;
+        this.favouritesUniversities = obj ? (obj.favouritesUniversities ? obj.favouritesUniversities : []) : [];
+        this.favouritesFaculties = obj ? (obj.favouritesFaculties ? obj.favouritesFaculties : []) : [];
+        this.favouritesBachelors = obj ? (obj.favouritesBachelors ? obj.favouritesBachelors : []) : [];
+        this.favouritesMasters = obj ? (obj.favouritesMasters ? obj.favouritesMasters : []) : [];
+        this.favouritesDoctorals = obj ? (obj.favouritesDoctorals ? obj.favouritesDoctorals : []) : [];
     }
 }
