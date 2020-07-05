@@ -69,12 +69,12 @@ export class UserDetailsComponent implements OnInit {
     });
   }
 
-  goToUniversityPage() {
-    this.router.navigateByUrl(`/university/${this.user.universityId}`);
-  }
-
   goToRequestPage(state) {
     this.router.navigateByUrl(`/requestUniversity/${state}`);
+  }
+
+  goToUniversityPage() {
+    this.router.navigateByUrl(`/university/${this.user.universityId}`);
   }
 
 }

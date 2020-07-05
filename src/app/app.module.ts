@@ -87,6 +87,7 @@ import { WaveButtonComponent } from './components/wave-button/wave-button.compon
 import { LimitCharactersInDivPipe } from './pipes/limit-characters-in-div.pipe';
 import { InstantSchoolLevelTranslatePipe } from './pipes/instant-school-level-translate.pipe';
 import { PresentationCardComponent } from './components/presentation-card/presentation-card.component';
+import { FavouritesComponent } from './pages/favourites/favourites.component';
 
 // Firestore config
 const config = {
@@ -148,7 +149,8 @@ export function createTranslateLoader(http: HttpClient) {
     WaveButtonComponent,
     LimitCharactersInDivPipe,
     InstantSchoolLevelTranslatePipe,
-    PresentationCardComponent
+    PresentationCardComponent,
+    FavouritesComponent
   ],
   entryComponents: [
     LoginDialogComponent,

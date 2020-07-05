@@ -74,7 +74,10 @@
             Cereri universitati
           </button>
           <button mat-menu-item (click)="goToUserDetails()" *ngIf="user">
-            Cont
+            Detalii cont
+          </button>
+          <button mat-menu-item (click)="goToFavourites()" *ngIf="user">
+            Favorite
           </button>
           <button mat-menu-item (click)="logOutUser()" *ngIf="user">
             {{ "buttons.logout" | translate | uppercase }}

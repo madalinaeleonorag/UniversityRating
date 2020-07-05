@@ -11,6 +11,7 @@ import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard
 import { UserDetailsComponent } from './pages/user-details/user-details.component';
 import { RequestUniversityComponent } from './pages/request-university/request-university.component';
 import { RequestsComponent } from './pages/requests/requests.component';
+import { FavouritesComponent } from './pages/favourites/favourites.component';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent },
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'confidentiality', component: ConfidentialityComponent },
   { path: 'dashboard', component: AdminDashboardComponent },
   { path: 'userdetails', component: UserDetailsComponent },
+  { path: 'favourites', component: FavouritesComponent },
   { path: 'requestUniversity/:state', component: RequestUniversityComponent },
   { path: 'universityRequests', component: RequestsComponent }
 ];
