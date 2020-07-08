@@ -173,6 +173,18 @@ export class FirebaseService {
     });
   }
 
+  approveReview(review: any) {
+    firebase.firestore().collection('Reviews/').doc(review.reviewId).update({
+      status: 'approved',
+    });
+  }
+
+  declineReview(review: ReviewData) {
+    firebase.firestore().collection('Reviews/').doc(review.reviewId).update({
+      status: 'declined'
+    });
+  }
+
   sendRequest(request: any, state: string, requestId: string) {
     const requestData = {
       address: request.address ? request.address : '',

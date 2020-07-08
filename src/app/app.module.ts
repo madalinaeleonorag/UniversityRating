@@ -88,6 +88,7 @@ import { LimitCharactersInDivPipe } from './pipes/limit-characters-in-div.pipe';
 import { InstantSchoolLevelTranslatePipe } from './pipes/instant-school-level-translate.pipe';
 import { PresentationCardComponent } from './components/presentation-card/presentation-card.component';
 import { FavouritesComponent } from './pages/favourites/favourites.component';
+import { BadReviewRequestsComponent } from './pages/bad-review-requests/bad-review-requests.component';
 
 // Firestore config
 const config = {
@@ -150,7 +151,8 @@ export function createTranslateLoader(http: HttpClient) {
     LimitCharactersInDivPipe,
     InstantSchoolLevelTranslatePipe,
     PresentationCardComponent,
-    FavouritesComponent
+    FavouritesComponent,
+    BadReviewRequestsComponent
   ],
   entryComponents: [
     LoginDialogComponent,
