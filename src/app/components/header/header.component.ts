@@ -56,6 +56,11 @@ export class HeaderComponent implements OnInit {
   goToRequests() {
     this.router.navigateByUrl('/universityRequests');
   }
+
+  goToReviewRequests() {
+    this.router.navigateByUrl('/reviewRequests');
+  }
+
   logOutUser() {
     this.authService.logOut();
   }

@@ -73,6 +73,13 @@
           >
             Cereri universitati
           </button>
+          <button
+            mat-menu-item
+            (click)="goToReviewRequests()"
+            *ngIf="user && user.type === 'admin'"
+          >
+            Cereri recenzii
+          </button>
           <button mat-menu-item (click)="goToUserDetails()" *ngIf="user">
             Detalii cont
           </button>

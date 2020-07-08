@@ -12,6 +12,7 @@ import { UserDetailsComponent } from './pages/user-details/user-details.componen
 import { RequestUniversityComponent } from './pages/request-university/request-university.component';
 import { RequestsComponent } from './pages/requests/requests.component';
 import { FavouritesComponent } from './pages/favourites/favourites.component';
+import { BadReviewRequestsComponent } from './pages/bad-review-requests/bad-review-requests.component';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent },
@@ -25,7 +26,8 @@ const routes: Routes = [
   { path: 'userdetails', component: UserDetailsComponent },
   { path: 'favourites', component: FavouritesComponent },
   { path: 'requestUniversity/:state', component: RequestUniversityComponent },
-  { path: 'universityRequests', component: RequestsComponent }
+  { path: 'universityRequests', component: RequestsComponent },
+  { path: 'reviewRequests', component: BadReviewRequestsComponent }
 ];
 
 @NgModule({
