@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewEncapsulation, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FirebaseService } from 'src/app/services/firebase-service.service';
@@ -45,8 +45,7 @@ export class UniversityComponent implements OnInit, OnDestroy {
   image: string;
 
   constructor(private route: ActivatedRoute, private firebaseService: FirebaseService, private router: Router,
-              private functionsService: FunctionsService, private authService: AuthService, private dialog: MatDialog,
-              private changeDetectorRef: ChangeDetectorRef) {
+              private functionsService: FunctionsService, private authService: AuthService, private dialog: MatDialog) {
     this.buildForm();
   }
 
@@ -102,7 +101,6 @@ export class UniversityComponent implements OnInit, OnDestroy {
       });
       if (this.user.id && this.universityId) {
         this.showAddNewComment();
-        this.changeDetectorRef.markForCheck();
       }
     });
 
@@ -135,11 +133,10 @@ export class UniversityComponent implements OnInit, OnDestroy {
               this.reviewsData.push(reviewDetails);
             }
           });
+          if (this.user.id && this.universityId) {
+            this.showAddNewComment();
+          }
         });
-        if (this.user.id && this.universityId) {
-          this.showAddNewComment();
-          this.changeDetectorRef.markForCheck();
-        }
       }
     });
   }
