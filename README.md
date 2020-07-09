@@ -17,6 +17,8 @@ To run the project on your machine use `ng serve` for a dev server. Navigate to 
     ![''](./src/assets/presentation/homepage.png)
     * Login<br>
     ![''](./src/assets/presentation/login.png)
+    * Search page<br>
+    ![''](./src/assets/presentation/search.png)
     * University details<br>
     ![''](./src/assets/presentation/university.png)
     * Faculty details<br>
