@@ -46,7 +46,7 @@
     "rxjs": "^6.5.3",
     "sendmail": "^1.6.1",
     "tslib": "^1.10.0",
-    "underscore": "^1.9.1",
+    "underscore": "^1.12.1",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
